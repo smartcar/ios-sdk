@@ -12,6 +12,13 @@
 		F8F6AB9F1E206D0A00643B7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8F6AB9D1E206D0A00643B7F /* Main.storyboard */; };
 		F8F6ABA11E206D0A00643B7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8F6ABA01E206D0A00643B7F /* Assets.xcassets */; };
 		F8F6ABA41E206D0A00643B7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8F6ABA21E206D0A00643B7F /* LaunchScreen.storyboard */; };
+		F8F6ABAC1E2084AA00643B7F /* SmartCarOAuthSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABAB1E2084AA00643B7F /* SmartCarOAuthSDK.swift */; };
+		F8F6ABAE1E20855F00643B7F /* OEMName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABAD1E20855F00643B7F /* OEMName.swift */; };
+		F8F6ABB01E20856B00643B7F /* OEMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABAF1E20856B00643B7F /* OEMConfig.swift */; };
+		F8F6ABB21E20877700643B7F /* OEM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB11E20877700643B7F /* OEM.swift */; };
+		F8F6ABB41E20998A00643B7F /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB31E20998A00643B7F /* Utility.swift */; };
+		F8F6ABB61E2183AF00643B7F /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB51E2183AF00643B7F /* GrantType.swift */; };
+		F8F6ABB81E21841B00643B7F /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB71E21841B00643B7F /* ApprovalType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +29,13 @@
 		F8F6ABA01E206D0A00643B7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8F6ABA31E206D0A00643B7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8F6ABA51E206D0A00643B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8F6ABAB1E2084AA00643B7F /* SmartCarOAuthSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartCarOAuthSDK.swift; sourceTree = "<group>"; };
+		F8F6ABAD1E20855F00643B7F /* OEMName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEMName.swift; sourceTree = "<group>"; };
+		F8F6ABAF1E20856B00643B7F /* OEMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEMConfig.swift; sourceTree = "<group>"; };
+		F8F6ABB11E20877700643B7F /* OEM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEM.swift; sourceTree = "<group>"; };
+		F8F6ABB31E20998A00643B7F /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		F8F6ABB51E2183AF00643B7F /* GrantType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantType.swift; sourceTree = "<group>"; };
+		F8F6ABB71E21841B00643B7F /* ApprovalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApprovalType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +74,13 @@
 				F8F6ABA01E206D0A00643B7F /* Assets.xcassets */,
 				F8F6ABA21E206D0A00643B7F /* LaunchScreen.storyboard */,
 				F8F6ABA51E206D0A00643B7F /* Info.plist */,
+				F8F6ABAB1E2084AA00643B7F /* SmartCarOAuthSDK.swift */,
+				F8F6ABAD1E20855F00643B7F /* OEMName.swift */,
+				F8F6ABAF1E20856B00643B7F /* OEMConfig.swift */,
+				F8F6ABB11E20877700643B7F /* OEM.swift */,
+				F8F6ABB31E20998A00643B7F /* Utility.swift */,
+				F8F6ABB51E2183AF00643B7F /* GrantType.swift */,
+				F8F6ABB71E21841B00643B7F /* ApprovalType.swift */,
 			);
 			path = SmartCarOAuthSDK;
 			sourceTree = "<group>";
@@ -136,6 +157,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F6ABB61E2183AF00643B7F /* GrantType.swift in Sources */,
+				F8F6ABB41E20998A00643B7F /* Utility.swift in Sources */,
+				F8F6ABB81E21841B00643B7F /* ApprovalType.swift in Sources */,
+				F8F6ABAC1E2084AA00643B7F /* SmartCarOAuthSDK.swift in Sources */,
+				F8F6ABB01E20856B00643B7F /* OEMConfig.swift in Sources */,
+				F8F6ABAE1E20855F00643B7F /* OEMName.swift in Sources */,
+				F8F6ABB21E20877700643B7F /* OEM.swift in Sources */,
 				F8F6AB9C1E206D0A00643B7F /* ViewController.swift in Sources */,
 				F8F6AB9A1E206D0A00643B7F /* AppDelegate.swift in Sources */,
 			);
