@@ -21,9 +21,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: Any) {
+        let smartCarRequest = SmartCarOAuthRequest(clientID: "b4503a8c-5acc-41d3-a9b7-07fc6dfd4c76", redirectURI: "https://www.gmail.com", scope: ["read_vehicle_info", "read_odometer"], development: true)
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let sdk = appDelegate.sdk
-        let safariVC = sdk.initializeAuthorizationRequest(for: OEM(oemName: OEMName.acura))
+        var sdk = appDelegate.smartCarSDK
+        sdk = SmartCarOAuthSDK(request: smartCarRequest)
+        let safariVC = sdk!.initializeAuthorizationRequest(for: OEM(oemName: OEMName.mock))
         self.present(safariVC, animated: true, completion: nil)
     }
     

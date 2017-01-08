@@ -10,9 +10,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-    let sdk = SmartCarOAuthSDK(clientID: "ac_client", redirectURI: "com.pingidentity.developer.mobile_app", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+    let smartCarSDK: SmartCarOAuthSDK? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -42,8 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        
-        return true
+        if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
+            return true
+        }
+        return false
     }
 
 }

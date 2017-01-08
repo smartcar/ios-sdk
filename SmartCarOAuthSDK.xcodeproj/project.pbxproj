@@ -19,6 +19,7 @@
 		F8F6ABB41E20998A00643B7F /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB31E20998A00643B7F /* Utility.swift */; };
 		F8F6ABB61E2183AF00643B7F /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB51E2183AF00643B7F /* GrantType.swift */; };
 		F8F6ABB81E21841B00643B7F /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABB71E21841B00643B7F /* ApprovalType.swift */; };
+		F8F6ABBC1E21AE0200643B7F /* SmartCarOAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6ABBB1E21AE0200643B7F /* SmartCarOAuthRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F8F6ABB31E20998A00643B7F /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F8F6ABB51E2183AF00643B7F /* GrantType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantType.swift; sourceTree = "<group>"; };
 		F8F6ABB71E21841B00643B7F /* ApprovalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApprovalType.swift; sourceTree = "<group>"; };
+		F8F6ABBB1E21AE0200643B7F /* SmartCarOAuthRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartCarOAuthRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				F8F6ABB31E20998A00643B7F /* Utility.swift */,
 				F8F6ABB51E2183AF00643B7F /* GrantType.swift */,
 				F8F6ABB71E21841B00643B7F /* ApprovalType.swift */,
+				F8F6ABBB1E21AE0200643B7F /* SmartCarOAuthRequest.swift */,
 			);
 			path = SmartCarOAuthSDK;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F6ABBC1E21AE0200643B7F /* SmartCarOAuthRequest.swift in Sources */,
 				F8F6ABB61E2183AF00643B7F /* GrantType.swift in Sources */,
 				F8F6ABB41E20998A00643B7F /* Utility.swift in Sources */,
 				F8F6ABB81E21841B00643B7F /* ApprovalType.swift in Sources */,
