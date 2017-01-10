@@ -26,13 +26,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func buttonPressed(_ sender: Any) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let sdk = appDelegate.smartCarSDK
-        let safariVC = sdk!.initializeAuthorizationRequest(for: OEM(oemName: OEMName.mock))
-        self.present(safariVC, animated: true, completion: nil)
-    }
-    
 }
 

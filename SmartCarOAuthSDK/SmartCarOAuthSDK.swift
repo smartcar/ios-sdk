@@ -33,6 +33,10 @@ class SmartCarOAuthSDK: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     let viewController: UIViewController
     //Access code for the current request, is nil if request has not been completed
     var code: String?
+    var picker: UIPickerView?
+    var toolBar: UIToolbar?
+    var invisButton: UIButton?
+    var oemList = defaultOEM
     
     /**
         Constructor for the SmartCarOAuthSDK
@@ -65,9 +69,10 @@ class SmartCarOAuthSDK: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func generatePicker(for oems: [OEM] = defaultOEM, in view: UIView, with color: UIColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)) -> UIButton {
+        self.oemList = oems
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         button.backgroundColor = color
-        button.setTitle("CONNECT VEHICLES", for: .normal)
+        button.setTitle("CONNECT A VEHICLE", for: .normal)
         button.layer.cornerRadius = 5
         
         button.addTarget(self, action: #selector(pickerButtonPressed), for: .touchUpInside)
@@ -77,12 +82,65 @@ class SmartCarOAuthSDK: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     @objc func pickerButtonPressed() {
+        picker = UIPickerView()
+        picker!.dataSource = self
+        picker!.delegate = self
+        picker!.translatesAutoresizingMaskIntoConstraints = false
+        picker!.backgroundColor = UIColor(white: 0, alpha: 0.1)
         
-        let picker = UIPickerView(frame: CGRect(x: 0, y: (viewController.view.frame.maxY / 3)*2, width: viewController.view.frame.width, height: viewController.view.frame.maxY/3))
-        picker.dataSource = self
-        picker.delegate = self
+        viewController.view.addSubview(picker!)
         
-        viewController.view.addSubview(picker)
+        let pinBottom = NSLayoutConstraint(item: picker!, attribute: .bottom, relatedBy: .equal, toItem: viewController.view, attribute: .bottom, multiplier: 1.0, constant: 0)
+        let height = NSLayoutConstraint(item: picker!, attribute: .height, relatedBy: .equal, toItem: viewController.view, attribute: .height, multiplier: 0.33, constant: 0)
+        let width = NSLayoutConstraint(item: picker!, attribute: .width, relatedBy: .equal, toItem: viewController.view, attribute: .width, multiplier: 1, constant: 0)
+        
+        viewController.view.addConstraints([pinBottom, height, width])
+        
+        toolBar = UIToolbar()
+        toolBar!.backgroundColor = UIColor(white: 1, alpha: 1)
+        toolBar!.translatesAutoresizingMaskIntoConstraints = false
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar!.setItems([spaceButton, doneButton], animated: false)
+        toolBar!.isUserInteractionEnabled = true
+        
+        viewController.view.addSubview(toolBar!)
+        
+        let pinToPicker = NSLayoutConstraint(item: toolBar!, attribute: .bottom, relatedBy: .equal, toItem: picker, attribute: .top, multiplier: 1.0, constant: 0)
+        let widthToolBar = NSLayoutConstraint(item: toolBar!, attribute: .width, relatedBy: .equal, toItem: viewController.view, attribute: .width, multiplier: 1, constant: 0)
+        
+        viewController.view.addConstraints([pinToPicker, widthToolBar])
+        
+        invisButton = UIButton()
+        invisButton!.backgroundColor = UIColor(white: 0, alpha: 0)
+        invisButton!.addTarget(self, action: #selector(transparentButtonPressed), for: .touchUpInside)
+        invisButton!.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewController.view.addSubview(invisButton!)
+        
+        let pinTop = NSLayoutConstraint(item: invisButton!, attribute: .top, relatedBy: .equal, toItem: viewController.view, attribute: .top, multiplier: 1.0, constant: 0)
+        let bottomButton = NSLayoutConstraint(item: invisButton!, attribute: .bottom, relatedBy: .equal, toItem: toolBar, attribute: .top, multiplier: 1, constant: 0)
+        let widthButton = NSLayoutConstraint(item: invisButton!, attribute: .width, relatedBy: .equal, toItem: viewController.view, attribute: .width, multiplier: 1, constant: 0)
+        
+        viewController.view.addConstraints([pinTop, bottomButton, widthButton])
+    }
+    
+    @objc func donePicker() {
+        picker!.isHidden = true
+        invisButton!.isHidden = true
+        toolBar!.isHidden = true
+        let val = self.oemList[picker!.selectedRow(inComponent: 0)]
+        let name = val.oemName.rawValue
+        
+        let safariVC = self.initializeAuthorizationRequest(for: OEM(oemName: OEMName(rawValue: name.lowercased())!))
+        self.viewController.present(safariVC, animated: true, completion: nil)
+    }
+    
+    @objc func transparentButtonPressed() {
+        picker!.isHidden = true
+        invisButton!.isHidden = true
+        toolBar!.isHidden = true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -90,11 +148,11 @@ class SmartCarOAuthSDK: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return defaultOEM.count
+        return self.oemList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return defaultOEM[row].oemName.rawValue.uppercased()
+        return self.oemList[row].oemName.rawValue.uppercased()
     }
     
     /**
