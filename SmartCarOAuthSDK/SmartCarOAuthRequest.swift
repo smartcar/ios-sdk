@@ -6,6 +6,10 @@
 //  Copyright © 2017 Ziyu Zhang. All rights reserved.
 //
 
+/**
+    Class encapsulating the data required within a SmartCar OAuthorization Request
+ */
+
 class SmartCarOAuthRequest {
     let clientID: String // app client ID
     let redirectURI: String //app redirect URI

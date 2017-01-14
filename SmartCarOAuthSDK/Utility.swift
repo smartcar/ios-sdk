@@ -8,6 +8,17 @@
 
 import UIKit
 
+/**
+    Global utility functions for the SDK
+ */
+
+/**
+    Converts a hexString to the UIColor class
+ 
+    - parameters:
+        - hex: color in hexadecimal string
+ */
+
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
     

@@ -9,94 +9,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SmartCarOAuthSDK/SmartCarOAuthSDK.swift"
-            timestampString = "505771440.574209"
+            filePath = "SmartCarOAuthSDK/SmartCarOAuthUIGenerator.swift"
+            timestampString = "506114691.507372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "SmartCarOAuthSDK"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SmartCarOAuthSDK.SmartCarOAuthSDK.init (request : SmartCarOAuthSDK.SmartCarOAuthRequest) -&gt; SmartCarOAuthSDK.SmartCarOAuthSDK"
-                  moduleName = "SmartCarOAuthSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthSDK.swift"
-                  timestampString = "505636427.85939"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SmartCarOAuthSDK.SmartCarOAuthSDK.__allocating_init (request : SmartCarOAuthSDK.SmartCarOAuthRequest) -&gt; SmartCarOAuthSDK.SmartCarOAuthSDK"
-                  moduleName = "SmartCarOAuthSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthSDK.swift"
-                  timestampString = "505636427.863479"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SmartCarOAuthSDK/SmartCarOAuthSDK.swift"
-            timestampString = "505771440.574209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "oemButtonPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SmartCarOAuthSDK/SmartCarOAuthSDK.swift"
-            timestampString = "505771440.574209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "oemButtonPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SmartCarOAuthSDK/SmartCarOAuthSDK.swift"
-            timestampString = "505771503.963105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "SmartCarOAuthSDK"
-            landmarkType = "3">
+            startingLineNumber = "51"
+            endingLineNumber = "51">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

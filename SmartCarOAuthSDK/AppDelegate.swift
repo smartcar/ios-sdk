@@ -39,13 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    /**
+        Intercepts callback from OAuth Safari view determined by the custom URI
+    */
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
             return true
         }
         return false
     }
-
 }
 

@@ -6,10 +6,17 @@
 //  Copyright © 2017 Ziyu Zhang. All rights reserved.
 //
 
+/**
+    OEM class storing the name and the specific configurations for the OEM
+ */
+
 class OEM {
     let oemName: OEMName
     let oemConfig: OEMConfig
     
+    /**
+        Constructor taking the oemName as an input and setting the OEMConfig for the OEM
+    */
     init(oemName: OEMName) {
         self.oemName = oemName
         

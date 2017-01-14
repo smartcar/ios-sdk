@@ -6,31 +6,35 @@
 //  Copyright © 2017 Ziyu Zhang. All rights reserved.
 //
 
+/**
+    Enum for the list of currently avaliable OEM names
+*/
+
 enum OEMName: String {
-    case acura = "acura"
-    case audi = "audi"
-    case bmw = "bmw"
+    case acura
+    case audi
+    case bmw
     case bmwConnected = "bmw-connected"
-    case buick = "buick"
-    case cadillac = "cadillac"
-    case chevrolet = "chevrolet"
-    case chrysler = "chrysler"
-    case dodge = "dodge"
-    case ford = "ford"
-    case fiat = "fiat"
-    case gmc = "gmc"
-    case hyundai = "hyundai"
-    case infiniti = "infiniti"
-    case jeep = "jeef"
-    case kia = "kia"
-    case landrover = "landrover"
-    case lexus = "lexus"
-    case nissan = "nissan"
-    case nissanev = "nissanev"
-    case ram = "ram"
-    case tesla = "tesla"
-    case volkswagen = "volkswagen"
-    case volvo = "volvo"
-    case mercedes = "mercedes"
-    case mock = "mock"
+    case buick
+    case cadillac
+    case chevrolet
+    case chrysler
+    case dodge
+    case ford
+    case fiat
+    case gmc
+    case hyundai
+    case infiniti
+    case jeep
+    case kia
+    case landrover
+    case lexus
+    case nissan
+    case nissanev
+    case ram
+    case tesla
+    case volkswagen
+    case volvo
+    case mercedes
+    case mock
 }
