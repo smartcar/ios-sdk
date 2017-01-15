@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8F928191E2ACD2A009F07E5"
+               BuildableName = "SmartCarOAuthSDKTests.xctest"
+               BlueprintName = "SmartCarOAuthSDKTests"
+               ReferencedContainer = "container:SmartCarOAuthSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

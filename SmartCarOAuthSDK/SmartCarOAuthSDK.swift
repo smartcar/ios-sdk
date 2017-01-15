@@ -55,7 +55,11 @@ class SmartCarOAuthSDK {
             authorization request URL for the specific OEM
     */
     func generateLink(for oem: OEM) -> String {
-        let stateString = self.request.state
+        var stateString = ""
+        
+        if self.request.state.characters.count > 0 {
+            stateString = "&state=" + self.request.state
+        }
         
         let redirectString = self.request.redirectURI.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let scopeString = self.request.scope.joined(separator: " ")
@@ -79,7 +83,8 @@ class SmartCarOAuthSDK {
         let urlArray = urlString.components(separatedBy: "?")[1].components(separatedBy: "&")
         
         if urlArray.count > 1 {
-            if(urlArray[1].substring(from: urlArray[1].index(urlArray[1].startIndex, offsetBy: 6)) != self.request.state) {
+            let comp = urlArray[1].components(separatedBy: "=")
+            if(comp[1] != self.request.state) {
                 return false
             }
         }
