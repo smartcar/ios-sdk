@@ -23,19 +23,17 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         - parameters: 
             - for: the OEM that the button will open the authentication flow for
             - in: UIView object that the button will reside and fill
-        
-        - returns:
-            the button that was generated
     */
-    public func generateButton(for oem: OEM, in view: UIView) -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+    public func generateButton(frame: CGRect, for oem: OEM) -> UIButton {
+        let button = UIButton()
+        button.frame = frame
         button.backgroundColor = hexStringToUIColor(hex: oem.oemConfig.color)
         button.setTitle("LOGIN WITH " + oem.oemName.rawValue.uppercased(), for: .normal)
         button.layer.cornerRadius = 5
+        button.setTitleColor(.white, for: .normal)
         
         button.addTarget(self, action: #selector(oemButtonPressed(_:)), for: .touchUpInside)
         
-        view.addSubview(button)
         return button
     }
     

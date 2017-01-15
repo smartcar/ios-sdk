@@ -47,15 +47,16 @@ public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerVie
             - with: color of the initial button. Defaults to black
      */
     
-    public func generatePicker(in view: UIView, with color: UIColor = .black) -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+    public func generatePicker(frame: CGRect, with color: UIColor = .black) -> UIButton {
+        let button = UIButton()
+        button.frame = frame
         button.backgroundColor = color
         button.setTitle("CONNECT A VEHICLE", for: .normal)
         button.layer.cornerRadius = 5
+        button.setTitleColor(.white, for: .normal)
         
         button.addTarget(self, action: #selector(pickerButtonPressed), for: .touchUpInside)
         
-        view.addSubview(button)
         return button
     }
     
@@ -67,12 +68,12 @@ public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerVie
         self.picker.dataSource = self
         self.picker.delegate = self
         self.picker.translatesAutoresizingMaskIntoConstraints = false
-        self.picker.backgroundColor = UIColor(white: 0, alpha: 0.1)
+        self.picker.backgroundColor = UIColor(white: 1, alpha: 1)
         
         self.toolBar = UIToolbar()
         self.toolBar.backgroundColor = UIColor(white: 1, alpha: 1)
         self.toolBar.translatesAutoresizingMaskIntoConstraints = false
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
+        let doneButton = UIBarButtonItem(title: "Connect", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         self.toolBar.setItems([spaceButton, doneButton], animated: false)
         self.toolBar.isUserInteractionEnabled = true
