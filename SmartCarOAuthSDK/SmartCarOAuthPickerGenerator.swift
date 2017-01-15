@@ -2,8 +2,8 @@
 //  SmartCarOAuthPickerGenerator.swift
 //  SmartCarOAuthSDK
 //
-//  Created by Ziyu Zhang on 1/14/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/14/17.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ let defaultOEM = [OEM(oemName: OEMName.acura), OEM(oemName: OEMName.audi), OEM(o
     Class to generate pickers to automatically initialize authentication flow for multiple OEMs
  */
 
-class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelegate, UIPickerViewDataSource {
+public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelegate, UIPickerViewDataSource {
     // List of OEMs within the picker. Defaults to a list of all OEMs
     var oemList = defaultOEM
     // UIPickerView object
@@ -33,7 +33,7 @@ class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelega
     // Invisible button to signal that outside the picker has been clicked
     var invisButton = UIButton()
     
-    init(sdk: SmartCarOAuthSDK, viewController: UIViewController, oemList: [OEM] = defaultOEM) {
+    public init(sdk: SmartCarOAuthSDK, viewController: UIViewController, oemList: [OEM] = defaultOEM) {
         super.init(sdk: sdk, viewController: viewController)
         self.oemList = oemList
     }
@@ -47,7 +47,7 @@ class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelega
             - with: color of the initial button. Defaults to black
      */
     
-    func generatePicker(in view: UIView, with color: UIColor = .black) -> UIButton {
+    public func generatePicker(in view: UIView, with color: UIColor = .black) -> UIButton {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         button.backgroundColor = color
         button.setTitle("CONNECT A VEHICLE", for: .normal)
@@ -62,7 +62,7 @@ class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelega
     /**
         Action methods for the pressing of the initial picker button. Formats and sisplays the UIPickerView, UIToolbar, and the invisible button
     */
-    @objc private func pickerButtonPressed() {
+    @objc func pickerButtonPressed() {
         self.picker = UIPickerView()
         self.picker.dataSource = self
         self.picker.delegate = self
@@ -102,7 +102,7 @@ class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelega
     /**
         Initializes the authentication flow with the selected picker value
     */
-    @objc private func donePicker() {
+    @objc func donePicker() {
         hidePickerView()
         let val = self.oemList[picker.selectedRow(inComponent: 0)]
         let name = val.oemName.rawValue
@@ -113,21 +113,21 @@ class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelega
     /**
         Hides the picker, invisButton, and toolBar
     */
-    @objc private func hidePickerView() {
+    @objc func hidePickerView() {
         picker.isHidden = true
         invisButton.isHidden = true
         toolBar.isHidden = true
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.oemList.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return self.oemList[row].oemName.rawValue.uppercased()
     }
 }

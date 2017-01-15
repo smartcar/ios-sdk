@@ -2,12 +2,12 @@
 //  SmartCarOAuthSDKTests.swift
 //  SmartCarOAuthSDKTests
 //
-//  Created by Ziyu Zhang on 1/14/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/14/17.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 import XCTest
-@testable import SmartCarOAuthSDK
+import SmartCarOAuthSDK
 
 
 class SmartCarOAuthSDKTests: XCTestCase {

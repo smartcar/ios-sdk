@@ -3,10 +3,11 @@
 //  SmartCarOAuthSDK
 //
 //  Created by Ziyu Zhang on 1/6/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 import UIKit
+import SmartCarOAuthSDK
 
 class ViewController: UIViewController {
     
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
         let sdk = appDelegate.smartCarSDK
         ui = SmartCarOAuthButtonGenerator(sdk: sdk!, viewController: self)
         
-        ui!.generateButton(for: OEM(oemName: OEMName.mock), in: self.view.subviews[0])
+        let button = ui!.generateButton(for: OEM(oemName: OEMName.mock), in: self.view.subviews[0])
     }
     
     override func didReceiveMemoryWarning() {

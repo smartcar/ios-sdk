@@ -2,8 +2,8 @@
 //  SmartCarOAuthButtonGenerator.swift
 //  SmartCarOAuthSDK
 //
-//  Created by Ziyu Zhang on 1/14/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/14/17.
+//  Copyright © 2017 SmartCar Inc.. All rights reserved.
 //
 
 import UIKit
@@ -12,8 +12,8 @@ import UIKit
     Class for generating buttons to automatically initialize the authentication flow
  */
 
-class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
-    override init(sdk: SmartCarOAuthSDK, viewController: UIViewController) {
+public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
+    override public init(sdk: SmartCarOAuthSDK, viewController: UIViewController) {
         super.init(sdk: sdk, viewController: viewController)
     }
     
@@ -27,7 +27,7 @@ class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         - returns:
             the button that was generated
     */
-    func generateButton(for oem: OEM, in view: UIView) -> UIButton {
+    public func generateButton(for oem: OEM, in view: UIView) -> UIButton {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         button.backgroundColor = hexStringToUIColor(hex: oem.oemConfig.color)
         button.setTitle("LOGIN WITH " + oem.oemName.rawValue.uppercased(), for: .normal)
@@ -42,7 +42,7 @@ class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
     /**
         Action method for the generated OEM button that initiates the authentication flow
     */
-    @objc private func oemButtonPressed(_ sender: UIButton) {
+    @objc func oemButtonPressed(_ sender: UIButton) {
         let title = sender.titleLabel?.text
         let name = title!.substring(from: title!.index(title!.startIndex, offsetBy: 11))
         

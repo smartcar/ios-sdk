@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F8F928801E2B2F6A009F07E5"
-               BuildableName = "SmartCarOAuthSDK.framework"
-               BlueprintName = "SmartCarOAuthSDK"
+               BlueprintIdentifier = "F8F928BA1E2B30E5009F07E5"
+               BuildableName = "Example.app"
+               BlueprintName = "Example"
                ReferencedContainer = "container:SmartCarOAuthSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,23 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F8F928891E2B2F6B009F07E5"
-               BuildableName = "SmartCarOAuthSDKTests.xctest"
-               BlueprintName = "SmartCarOAuthSDKTests"
-               ReferencedContainer = "container:SmartCarOAuthSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F8F928801E2B2F6A009F07E5"
-            BuildableName = "SmartCarOAuthSDK.framework"
-            BlueprintName = "SmartCarOAuthSDK"
+            BlueprintIdentifier = "F8F928BA1E2B30E5009F07E5"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:SmartCarOAuthSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F8F928801E2B2F6A009F07E5"
-            BuildableName = "SmartCarOAuthSDK.framework"
-            BlueprintName = "SmartCarOAuthSDK"
+            BlueprintIdentifier = "F8F928BA1E2B30E5009F07E5"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:SmartCarOAuthSDK.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F8F928801E2B2F6A009F07E5"
-            BuildableName = "SmartCarOAuthSDK.framework"
-            BlueprintName = "SmartCarOAuthSDK"
+            BlueprintIdentifier = "F8F928BA1E2B30E5009F07E5"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:SmartCarOAuthSDK.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

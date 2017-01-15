@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Example.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>SmartCarOAuthSDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,12 +17,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>F8F6AB951E206D0A00643B7F</key>
+		<key>F8F928801E2B2F6A009F07E5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F8F928191E2ACD2A009F07E5</key>
+		<key>F8F928891E2B2F6B009F07E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F8F928BA1E2B30E5009F07E5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

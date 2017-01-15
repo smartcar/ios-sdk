@@ -2,8 +2,8 @@
 //  SmartCarOAuthSDK.swift
 //  SmartCarOAuthSDK
 //
-//  Created by Ziyu Zhang on 1/6/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/6/17.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ import SafariServices
             access token
 */
 
-class SmartCarOAuthSDK {
+public class SmartCarOAuthSDK {
     let request: SmartCarOAuthRequest
     //Access code for the current request, is nil if request has not been completed
     var code: String?
@@ -28,7 +28,7 @@ class SmartCarOAuthSDK {
         - parameters
             - request: SmartCarOAuthRequest object for SmartCar API
     */
-    init(request: SmartCarOAuthRequest) {
+    public init(request: SmartCarOAuthRequest) {
         self.request = request
     }
     
@@ -39,7 +39,7 @@ class SmartCarOAuthSDK {
         - parameters
             - oem: OEM object to identify the oem name within the authorization request URL
     */
-    func initializeAuthorizationRequest(for oem: OEM, viewController: UIViewController) {
+    public func initializeAuthorizationRequest(for oem: OEM, viewController: UIViewController) {
         let authorizationURL = generateLink(for: oem)
         let safariVC = SFSafariViewController(url: URL(string: authorizationURL)!)
         viewController.present(safariVC, animated: true, completion: nil)
@@ -54,7 +54,7 @@ class SmartCarOAuthSDK {
         - returns:
             authorization request URL for the specific OEM
     */
-    func generateLink(for oem: OEM) -> String {
+    public func generateLink(for oem: OEM) -> String {
         var stateString = ""
         
         if self.request.state.characters.count > 0 {
@@ -78,7 +78,7 @@ class SmartCarOAuthSDK {
         - returns:
             true if authorization code was successfully extracted
     */
-    func resumeAuthorizationFlowWithURL(url: URL) -> Bool {
+    public func resumeAuthorizationFlowWithURL(url: URL) -> Bool {
         let urlString = url.absoluteString
         let urlArray = urlString.components(separatedBy: "?")[1].components(separatedBy: "&")
         

@@ -2,15 +2,15 @@
 //  OEM.swift
 //  SmartCarOAuthSDK
 //
-//  Created by Ziyu Zhang on 1/6/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/6/17.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 /**
     Enum for the list of currently avaliable OEM names
 */
 
-enum OEMName: String {
+public enum OEMName: String {
     case acura
     case audi
     case bmw

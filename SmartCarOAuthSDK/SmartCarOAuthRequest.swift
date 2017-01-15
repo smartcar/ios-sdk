@@ -2,15 +2,15 @@
 //  SmartCarOAuthRequest.swift
 //  SmartCarOAuthSDK
 //
-//  Created by Ziyu Zhang on 1/7/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/7/17.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 /**
     Class encapsulating the data required within a SmartCar OAuthorization Request
  */
 
-class SmartCarOAuthRequest {
+public class SmartCarOAuthRequest {
     let clientID: String // app client ID
     let redirectURI: String //app redirect URI
     let scope: [String] //app oauth scope
@@ -31,7 +31,7 @@ class SmartCarOAuthRequest {
      - forcePrompt: forces permission screen if set to true, defaults to false
      - development: appends mock oem if true, defaults to false
      */
-    init(clientID: String, redirectURI: String, scope: [String], state: String = "", grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+    public init(clientID: String, redirectURI: String, scope: [String], state: String = "", grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
         self.clientID = clientID
         self.redirectURI = redirectURI
         self.scope = scope

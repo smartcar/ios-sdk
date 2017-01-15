@@ -2,8 +2,8 @@
 //  Utility.swift
 //  SmartCarOAuthSDK
 //
-//  Created by Ziyu Zhang on 1/6/17.
-//  Copyright © 2017 Ziyu Zhang. All rights reserved.
+//  Created by Jeremy Zhang on 1/6/17.
+//  Copyright © 2017 SmartCar Inc. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,7 @@ import UIKit
         - hex: color in hexadecimal string
  */
 
-func hexStringToUIColor (hex:String) -> UIColor {
+public func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
     
     if (cString.hasPrefix("#")) {
