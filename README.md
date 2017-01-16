@@ -135,6 +135,19 @@ Here are a subset of the buttons that can be generated:
 
 ![](Example/Assets.xcassets/buttons.png)
 
+### SmartCarOAuthPickerGenerator
+
+Similar to SmartCarOAuthButtonGenerator but for selecting between different OEMs to initiate the authorization flow via the UIPickerView
+
+```swift
+let button = ui!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
+self.view.addSubview(button)
+```
+
+Below is the generated UIPicker in action
+
+![](Example/Assets.xcassets/picker.png)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

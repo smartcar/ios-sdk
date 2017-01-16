@@ -11,7 +11,7 @@ import SmartCarOAuthSDK
 
 class ViewController: UIViewController {
 
-    var ui: SmartCarOAuthButtonGenerator? = nil
+    var ui: SmartCarOAuthPickerGenerator? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +20,16 @@ class ViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
         let sdk = appDelegate.smartCarSDK
-        ui = SmartCarOAuthButtonGenerator(sdk: sdk!, viewController: self)
+        ui = SmartCarOAuthPickerGenerator(sdk: sdk!, viewController: self)
         
         self.view.backgroundColor = UIColor(patternImage: (UIImage(named: "background"))!)
         
-        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEM(oemName: OEMName.mock))
+        let button = ui!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
         self.view.addSubview(button)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         let buttonPinMiddleX = NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
-        let buttonPinMiddleY = NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.5, constant: 0)
+        let buttonPinMiddleY = NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0)
         let buttonWidth = NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
         let buttonHeight = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
 
