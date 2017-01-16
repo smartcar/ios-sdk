@@ -85,7 +85,7 @@ The authorization response URL is returned to the app via the iOS openURL app de
 
 ```swift
 /**
-	Intercepts callback from OAuth Safari view determined by the custom URI
+	Intercepts callback from OAuth SafariView determined by the custom URI
  */
 func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
     if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
@@ -99,7 +99,7 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 
 ### SmartCarOAuthButtonGenerator
 
-The code below initiaztes the Client SDK with the minimum configuration options and generate a single button to initialize the OAuth flow for Tesla
+The code below initializes the Client SDK with the minimum configuration options and generate a single button to initialize the OAuth flow for Tesla
 
 ```swift
 // global SmartCarOAuthButtonGenerator variable to store the button and action
