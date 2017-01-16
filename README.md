@@ -43,10 +43,20 @@ let smartCarRequest = SmartCarOAuthRequest(clientID: clientId, redirectURI: redi
 ### Request Configuration
 
 `clientId`
+
 Application client ID obtained from [Smartcar Developer Portal] (https://developer.smartcar.com/).
 
 `redirectURI`
-Your app must register with the system for the custom URI scheme in order to receive the authorization response. Smartcar API requires the custom URI scheme to be in the format of `sk + clientId`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect).
+
+Your app must register with the system for the custom URI scheme in order to receive the authorization response. Smartcar API requires the custom URI scheme to be in the format of `sk + clientId`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. `sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect`).
+
+`scope`
+
+Permissions requested from the user for specific grant.
+
+`state`
+
+OAuth state parameter. Typically used for passing a user's ID or token to prevent CORS attacks
 
 ## Example
 
@@ -54,7 +64,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Author
 
-Smartcar Inc., jeremyziyuzhang@gmail.com
+Smartcar Inc., hello@smartcar.com
 
 ## License
 
