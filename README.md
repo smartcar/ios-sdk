@@ -58,6 +58,20 @@ Permissions requested from the user for specific grant.
 
 OAuth state parameter. Typically used for passing a user's ID or token to prevent CORS attacks
 
+`grantType` (optional)
+
+Defaults to `GrantType.code`. `GrantType.code` is used for a server-side OAuth transaction.
+
+`GrantType.token` sends back a 2 hour token typically used for client-side applications.
+
+`forcePrompt` (optional)
+
+Defaults to `ApprovalType.auto`. Set to `ApprovalType.force` to force a user to re-grant permissions.
+
+`development` (optional)
+
+Defaults to `false`. Set to `true` to enable the Mock OEM.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
