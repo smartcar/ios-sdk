@@ -81,6 +81,59 @@ Defaults to `false`. Set to `true` to enable the Mock OEM.
 
 ### Handling the Redirect
 
+The authorization response URL is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session
+
+```swift
+/**
+	Intercepts callback from OAuth Safari view determined by the custom URI
+ */
+func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+    if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
+        return true
+    }
+    return false
+}
+```
+
+## Auxillary Objects
+
+### SmartCarOAuthButtonGenerator
+
+The code below initiaztes the Client SDK with the minimum configuration options and generate a single button to initialize the OAuth flow for Tesla
+
+```swift
+// global SmartCarOAuthButtonGenerator variable to store the button and action
+var ui: SmartCarOAuthButtonGenerator? = nil
+    
+func mainFunction {
+    
+    // build OAuth request
+    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
+    let sdk = appDelegate.smartCarSDK
+
+    // initialize ButtonGenerator
+    ui = SmartCarOAuthButtonGenerator(sdk: sdk!, viewController: self)
+    
+    let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEM(oemName: OEMName.acura))
+    self.view.addSubview(button)
+    
+    // add autolayout constraints
+    button.translatesAutoresizingMaskIntoConstraints = false
+    let buttonPinMiddleX = NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
+    let buttonPinMiddleY = NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.5, constant: 0)
+    let buttonWidth = NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+    let buttonHeight = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+
+    self.view.addConstraints([buttonPinMiddleX, buttonPinMiddleY, buttonWidth, buttonHeight])
+```
+
+Here are a subset of the buttons that can be generated: 
+
+![Image of buttons](https://github.com/smartcar/ios-sdk/tree/master/Example/Assets.xcassets/buttons.png)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

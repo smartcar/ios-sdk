@@ -65,7 +65,7 @@ public class SmartCarOAuthSDK {
         let scopeString = self.request.scope.joined(separator: " ")
             .addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!
         
-        return "https://\(oem.oemName.rawValue).smartcar.com/oauth/authorize?response_type=\(self.request.grantType.rawValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
+        return "https://\(oem.oemName.rawValue).qa.smartcar.com/oauth/authorize?response_type=\(self.request.grantType.rawValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
     }
     
     /**
