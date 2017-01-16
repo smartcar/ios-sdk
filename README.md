@@ -144,7 +144,7 @@ let button = ui!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50
 self.view.addSubview(button)
 ```
 
-Below is the generated UIPicker in action
+Below is the generated UIPickerView in action
 
 ![](Example/Assets.xcassets/picker.png)
 
