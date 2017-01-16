@@ -146,7 +146,9 @@ self.view.addSubview(button)
 
 Below is the generated UIPickerView in action
 
-![](Example/Assets.xcassets/picker.png)
+<p align="center">
+  <img src="Example/Assets.xcassets/buttons.png"/>
+</p>
 
 ## Example
 
