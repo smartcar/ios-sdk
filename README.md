@@ -128,11 +128,12 @@ func mainFunction {
     let buttonHeight = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
 
     self.view.addConstraints([buttonPinMiddleX, buttonPinMiddleY, buttonWidth, buttonHeight])
+}
 ```
 
 Here are a subset of the buttons that can be generated: 
 
-![Image of buttons](https://github.com/smartcar/ios-sdk/tree/master/Example/Assets.xcassets/buttons.png)
+![](Example/Assets.xcassets/buttons.png)
 
 ## Example
 
