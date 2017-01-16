@@ -38,6 +38,13 @@ Then, initiate the authorization request.
 ```swift
 // build OAuth request
 let smartCarRequest = SmartCarOAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope, state: state)
+
+// initialize authorization request for Acura
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
+let sdk = appDelegate.smartCarSDK
+
+sdk.initializeAuthorizationRequest(for oem: OEM(oemName: OEMName.acura), viewController: viewController)
 ```
 
 ### Request Configuration
@@ -71,6 +78,8 @@ Defaults to `ApprovalType.auto`. Set to `ApprovalType.force` to force a user to 
 `development` (optional)
 
 Defaults to `false`. Set to `true` to enable the Mock OEM.
+
+### Handling the Redirect
 
 ## Example
 
