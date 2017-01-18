@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      Intercepts callback from OAuth Safari view determined by the custom URI
      */
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
         if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
             return true
         }

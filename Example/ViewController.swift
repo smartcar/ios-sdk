@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "c5937ac4-3634-49a6-806c-291e536d9910", redirectURI: "scc5937ac4-3634-49a6-806c-291e536d9910://", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+        let smartCarRequest = SmartCarOAuthRequest(clientID: "c5937ac4-3634-49a6-806c-291e536d9910", redirectURI: "scc5937ac4-3634-49a6-806c-291e536d9910://page", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
         let sdk = appDelegate.smartCarSDK

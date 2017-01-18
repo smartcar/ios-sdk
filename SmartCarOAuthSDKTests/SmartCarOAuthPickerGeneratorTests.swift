@@ -30,7 +30,7 @@ class SmartCarOAuthPickerGeneratorTests: XCTestCase {
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         let gen = SmartCarOAuthPickerGenerator(sdk: sdk, viewController: viewController, oemList: defaultOEM)
         
-        let button = gen.generatePicker(in: UIView(), with: .red)
+        let button = gen.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
         
         XCTAssertNotNil(button)
         XCTAssertEqual(button.titleLabel?.text, "CONNECT A VEHICLE")
@@ -44,7 +44,7 @@ class SmartCarOAuthPickerGeneratorTests: XCTestCase {
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         let gen = SmartCarOAuthPickerGenerator(sdk: sdk, viewController: viewController, oemList: defaultOEM)
         
-        let button = gen.generatePicker(in: UIView(), with: .red)
+        let button = gen.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
         
         button.sendActions(for: .touchUpInside)
         gen.invisButton.sendActions(for: .touchUpInside)

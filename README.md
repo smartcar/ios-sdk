@@ -7,7 +7,7 @@
 
 SmartCarOAuthSDK is a client SDK for communicating with the SmartCar API OAuth 2.0. It strives to map the requests and responses to the SmartCar API and ensures the specifications are followed. In addition to ensuring specification, convenience methods are avaliable to assist common tasks like auto-generation of buttons to initiate the authorization flow.
 
-It follows the best practices set out in [OAuth 2.0 for Native Apps] (https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06) including using _SFSafariViewController_ on iOS for the authorization request. For this reason, UIWebView is explicitly not supported due to usability and security reasons.
+The SDK follows the best practices set out in [OAuth 2.0 for Native Apps] (https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06) including using _SFSafariViewController_ on iOS for the authorization request. For this reason, _UIWebView_ is explicitly not supported due to usability and security reasons.
 
 ## Requirements
 
@@ -55,7 +55,7 @@ Application client ID obtained from [Smartcar Developer Portal] (https://develop
 
 `redirectURI`
 
-Your app must register with the system for the custom URI scheme in order to receive the authorization response. Smartcar API requires the custom URI scheme to be in the format of `sk + clientId`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. `sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect`).
+Your app must register with the system for the custom URI scheme in order to receive the authorization callback. Smartcar API requires the custom URI scheme to be in the format of `"sk" + clientId + "://" + hostname`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. `sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect/page`).
 
 `scope`
 
@@ -67,9 +67,7 @@ OAuth state parameter. Typically used for passing a user's ID or token to preven
 
 `grantType` (optional)
 
-Defaults to `GrantType.code`. `GrantType.code` is used for a server-side OAuth transaction.
-
-`GrantType.token` sends back a 2 hour token typically used for client-side applications.
+Defaults to `GrantType.code`. `GrantType.code` is used for a server-side OAuth transaction. `GrantType.token` sends back a 2 hour token typically used for client-side applications.
 
 `forcePrompt` (optional)
 
@@ -88,9 +86,17 @@ The authorization response URL is returned to the app via the iOS openURL app de
 	Intercepts callback from OAuth SafariView determined by the custom URI
  */
 func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+    // Close the SFSafariViewController
+    window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
+
+    // Sends the URL to the current authorization flow (if any) which will
+    // process it if it relates to an authorization response.
     if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
         return true
     }
+
+    // Your additional URL handling (if any) goes here.
+
     return false
 }
 ```
@@ -99,7 +105,7 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 
 ### SmartCarOAuthButtonGenerator
 
-The code below initializes the Client SDK with the minimum configuration options and generate a single button to initialize the OAuth flow for Tesla
+The code below initializes the Client SDK with the minimum configuration options and generate a single button to initiate the OAuth flow for Tesla
 
 ```swift
 // global SmartCarOAuthButtonGenerator variable to store the button and action

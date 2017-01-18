@@ -28,7 +28,7 @@ public class SmartCarOAuthSDK {
         - parameters
             - request: SmartCarOAuthRequest object for SmartCar API
     */
-    public init(request: SmartCarOAuthRequest) {
+    public init(request: SmartCarOAuthRequest) { 
         self.request = request
     }
     
@@ -65,7 +65,7 @@ public class SmartCarOAuthSDK {
         let scopeString = self.request.scope.joined(separator: " ")
             .addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!
         
-        return "https://\(oem.oemName.rawValue).qa.smartcar.com/oauth/authorize?response_type=\(self.request.grantType.rawValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
+        return "https://\(oem.oemName.rawValue).smartcar.com/oauth/authorize?response_type=\(self.request.grantType.rawValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
     }
     
     /**
@@ -80,6 +80,11 @@ public class SmartCarOAuthSDK {
     */
     public func resumeAuthorizationFlowWithURL(url: URL) -> Bool {
         let urlString = url.absoluteString
+        
+        if !urlString.contains("?") {
+            return false
+        }
+        
         let urlArray = urlString.components(separatedBy: "?")[1].components(separatedBy: "&")
         
         if urlArray.count > 1 {
