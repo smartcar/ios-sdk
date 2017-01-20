@@ -28,7 +28,7 @@ class SmartCarOAuthButtonGeneratorTests: XCTestCase {
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         let gen = SmartCarOAuthButtonGenerator(sdk: sdk, viewController: viewController)
         
-        let button = gen.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEM(oemName: OEMName.acura))
+        let button = gen.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.acura)
         
         XCTAssertNotNil(button)
         XCTAssertEqual(button.titleLabel?.text, "LOGIN WITH ACURA")

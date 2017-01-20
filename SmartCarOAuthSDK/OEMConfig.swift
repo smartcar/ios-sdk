@@ -7,10 +7,18 @@
 //
 
 /**
-    Struct to store OEM specific configurations. Will be expanded in the future as more configurations are avaliable
+    Class to store OEM specific configurations. Will be expanded in the future as more configurations are avaliable
  */
 
-public struct OEMConfig {
+import UIKit
+
+public class OEMConfig {
     // The default color of the OEM in Hex
-    let color: String
+    let color: UIColor
+    let displayName: String
+    
+    init(color: String, displayName: String) {
+        self.color = hexStringToUIColor(hex: color)
+        self.displayName = displayName
+    }
 }

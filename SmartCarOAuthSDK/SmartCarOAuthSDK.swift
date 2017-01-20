@@ -33,13 +33,29 @@ public class SmartCarOAuthSDK {
     }
     
     /**
-        Initializes the Authorization request and configures and return an SFSafariViewController with the correct 
+        Constructor for the SmartCarOAuthSDK
+     
+        - Parameters:
+            - clientID: app client ID
+            - redirectURI: app redirect URI
+            - scope: app oauth scope
+            - state: optional, oauth state
+            - grantType: oauth grath type enum can be either "code" or "token", defaults to "code"
+            - forcePrompt: forces permission screen if set to true, defaults to false
+            - development: appends mock oem if true, defaults to false
+    */
+    public init(clientID: String, redirectURI: String, scope: [String], state: String = "", grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+        self.request = SmartCarOAuthRequest(clientID: clientID, redirectURI: redirectURI, scope: scope, state: state, grantType: grantType, forcePrompt: forcePrompt, development: development)
+    }
+    
+    /**
+        Initializes the Authorization request and configures and return an SFSafariViewController with the correct
             authorization URL
      
         - parameters
             - oem: OEM object to identify the oem name within the authorization request URL
     */
-    public func initializeAuthorizationRequest(for oem: OEM, viewController: UIViewController) {
+    public func initializeAuthorizationRequest(for oem: OEMName, viewController: UIViewController) {
         let authorizationURL = generateLink(for: oem)
         let safariVC = SFSafariViewController(url: URL(string: authorizationURL)!)
         viewController.present(safariVC, animated: true, completion: nil)
@@ -54,7 +70,7 @@ public class SmartCarOAuthSDK {
         - returns:
             authorization request URL for the specific OEM
     */
-    public func generateLink(for oem: OEM) -> String {
+    public func generateLink(for oem: OEMName) -> String {
         var stateString = ""
         
         if self.request.state.characters.count > 0 {
@@ -65,7 +81,7 @@ public class SmartCarOAuthSDK {
         let scopeString = self.request.scope.joined(separator: " ")
             .addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!
         
-        return "https://\(oem.oemName.rawValue).smartcar.com/oauth/authorize?response_type=\(self.request.grantType.rawValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
+        return "https://\(oem.rawValue).smartcar.com/oauth/authorize?response_type=\(self.request.grantType.rawValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
     }
     
     /**

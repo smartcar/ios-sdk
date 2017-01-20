@@ -25,7 +25,7 @@ class SmartCarOAuthSDKTests: XCTestCase {
         let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         
-        let link = sdk.generateLink(for: OEM(oemName: OEMName.acura))
+        let link = sdk.generateLink(for: OEMName.acura)
         
         XCTAssertEqual(link, "https://acura.smartcar.com/oauth/authorize?response_type=code&client_id=4a1b01e5-0497-417c-a30e-6df6ba33ba46&redirect_uri=smartcar://oidc.com&scope=read_vehicle_info%20read_odometer&approval_prompt=auto&state=ABC-123-DEFG", "Link generation failed to provide the accurate link")
     }
@@ -34,7 +34,7 @@ class SmartCarOAuthSDKTests: XCTestCase {
         let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
 
-        let link = sdk.generateLink(for: OEM(oemName: OEMName.acura))
+        let link = sdk.generateLink(for: OEMName.acura)
         
         XCTAssertEqual(link, "https://acura.smartcar.com/oauth/authorize?response_type=code&client_id=4a1b01e5-0497-417c-a30e-6df6ba33ba46&redirect_uri=smartcar://oidc.com&scope=read_vehicle_info%20read_odometer&approval_prompt=auto", "Link generation failed to provide the accurate link")
     }

@@ -10,69 +10,69 @@
     OEM class storing the name and the specific configurations for the OEM
  */
 
+import UIKit
+
 public class OEM {
-    let oemName: OEMName
-    let oemConfig: OEMConfig
+    static let oemDictionary: [OEMName: OEMConfig] =
+        [.acura: OEMConfig(color: "#020202", displayName: "acura"),
+         .audi: OEMConfig(color: "#000000", displayName: "audi"),
+         .bmw: OEMConfig(color: "#2E9BDA", displayName: "bmw"),
+         .bmwConnected: OEMConfig(color: "#2E9BDA", displayName: "bmw-connected"),
+         .buick: OEMConfig(color: "#333333", displayName: "buick"),
+         .cadillac: OEMConfig(color: "#941711", displayName: "cadillac"),
+         .chevrolet: OEMConfig(color: "#042F6B", displayName: "chevrolet"),
+         .chrysler: OEMConfig(color: "#231F20", displayName: "chrysler"),
+         .dodge: OEMConfig(color: "#000000", displayName: "dodge"),
+         .ford: OEMConfig(color: "#003399", displayName: "ford"),
+         .fiat: OEMConfig(color: "#B50536", displayName: "fiat"),
+         .gmc: OEMConfig(color: "#CC0033", displayName: "gmc"),
+         .hyundai: OEMConfig(color: "#00287A", displayName: "hyundai"),
+         .infiniti: OEMConfig(color: "#1F1F1F", displayName: "infiniti"),
+         .jeep: OEMConfig(color: "#374B00", displayName: "jeep"),
+         .kia: OEMConfig(color: "#C4172C", displayName: "kia"),
+         .landrover: OEMConfig(color: "#005A2B", displayName: "landrover"),
+         .lexus: OEMConfig(color: "#5B7F95", displayName: "lexus"),
+         .nissan: OEMConfig(color: "#C71444", displayName: "nissan"),
+         .nissanev: OEMConfig(color: "#C71444", displayName: "nissanev"),
+         .ram: OEMConfig(color: "#000000", displayName: "ram"),
+         .tesla: OEMConfig(color: "#CC0000", displayName: "tesla"),
+         .volkswagen: OEMConfig(color: "#000000", displayName: "volkswagen"),
+         .volvo: OEMConfig(color: "#000F60", displayName: "volvo"),
+         .mercedes: OEMConfig(color: "#222222", displayName: "mercedes"),
+         .mock: OEMConfig(color: "#495F5D", displayName: "developer")]
     
     /**
-        Constructor taking the oemName as an input and setting the OEMConfig for the OEM
+        Return the OEMConfig object of the OEM
     */
-    public init(oemName: OEMName) {
-        self.oemName = oemName
-        
-        switch oemName {
-        case .acura:
-            self.oemConfig = OEMConfig(color: "#020202")
-        case .audi:
-            self.oemConfig = OEMConfig(color: "#000000")
-        case .bmw:
-            self.oemConfig = OEMConfig(color: "#2E9BDA")
-        case .bmwConnected:
-            self.oemConfig = OEMConfig(color: "#2E9BDA")
-        case .buick:
-            self.oemConfig = OEMConfig(color: "#333333")
-        case .cadillac:
-            self.oemConfig = OEMConfig(color: "#941711")
-        case .chevrolet:
-            self.oemConfig = OEMConfig(color: "#042F6B")
-        case .chrysler:
-            self.oemConfig = OEMConfig(color: "#231F20")
-        case .dodge:
-            self.oemConfig = OEMConfig(color: "#000000")
-        case .ford:
-            self.oemConfig = OEMConfig(color: "#003399")
-        case .fiat:
-            self.oemConfig = OEMConfig(color: "#B50536")
-        case .gmc:
-            self.oemConfig = OEMConfig(color: "#CC0033")
-        case .hyundai:
-            self.oemConfig = OEMConfig(color: "#00287A")
-        case .infiniti:
-            self.oemConfig = OEMConfig(color: "#1F1F1F")
-        case .jeep:
-            self.oemConfig = OEMConfig(color: "#374B00")
-        case .kia:
-            self.oemConfig = OEMConfig(color: "#C4172C")
-        case .landrover:
-            self.oemConfig = OEMConfig(color: "#005A2B")
-        case .lexus:
-            self.oemConfig = OEMConfig(color: "#5B7F95")
-        case .nissan:
-            self.oemConfig = OEMConfig(color: "#C71444")
-        case .nissanev:
-            self.oemConfig = OEMConfig(color: "#C71444")
-        case .ram:
-            self.oemConfig = OEMConfig(color: "#000000")
-        case .tesla:
-            self.oemConfig = OEMConfig(color: "#CC0000")
-        case .volkswagen:
-            self.oemConfig = OEMConfig(color: "#000000")
-        case .volvo:
-            self.oemConfig = OEMConfig(color: "#000F60")
-        case .mercedes:
-            self.oemConfig = OEMConfig(color: "#222222")
-        case .mock:
-            self.oemConfig = OEMConfig(color: "#495F5D")
-        }
+    public static func getOEMConfig(for oem: OEMName) -> OEMConfig {
+        return self.oemDictionary[oem]!
     }
+    
+    /**
+        Return the UIColor object of the OEM
+    */
+    public static func getColor(for oem: OEMName) -> UIColor {
+        return self.oemDictionary[oem]!.color
+    }
+    
+    /**
+        Return the displayName of the OEM
+    */
+    public static func getDisplayName(for oem: OEMName) -> String {
+        return self.oemDictionary[oem]!.displayName
+    }
+    
+    /**
+        Return a the full list of OEMNames
+    */
+    public static func getDefaultOEMList() -> [OEMName] {
+        var array = Array(oemDictionary.keys).sorted {
+            getDisplayName(for: $0) < getDisplayName(for: $1)
+        }
+        
+        array.remove(at: array.index(of: .mock)!)
+        
+        return array
+    }
+    
 }

@@ -12,11 +12,15 @@ import XCTest
 class SmartCarOAuthPickerGeneratorTests: XCTestCase {
     
     var viewController = UIViewController()
-    let defaultOEM = [OEM(oemName: OEMName.acura), OEM(oemName: OEMName.audi), OEM(oemName: OEMName.bmw),
-                      OEM(oemName: OEMName.bmwConnected)]
+    let defaultOEM = [OEMName.acura, OEMName.audi, OEMName.bmw, OEMName.bmwConnected]
+    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+    var sdk: SmartCarOAuthSDK?
+    var gen: SmartCarOAuthPickerGenerator?
     
     override func setUp() {
         super.setUp()
+        sdk = SmartCarOAuthSDK(request: smartCarRequest)
+        gen = SmartCarOAuthPickerGenerator(sdk: sdk!, viewController: viewController, oemList: defaultOEM)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -26,31 +30,24 @@ class SmartCarOAuthPickerGeneratorTests: XCTestCase {
     }
     
     func testPickerButtonGeneration() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
-        let sdk = SmartCarOAuthSDK(request: smartCarRequest)
-        let gen = SmartCarOAuthPickerGenerator(sdk: sdk, viewController: viewController, oemList: defaultOEM)
-        
-        let button = gen.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
+        let button = gen!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
         
         XCTAssertNotNil(button)
         XCTAssertEqual(button.titleLabel?.text, "CONNECT A VEHICLE")
         XCTAssertNotEqual(button.allTargets.count, 0)
         XCTAssertEqual(button.backgroundColor, .red)
-        XCTAssertEqual(gen.oemList.count, 4)
+        XCTAssertEqual(gen!.oemList.count, 4)
     }
     
     func testHidePickerButtonPress() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
-        let sdk = SmartCarOAuthSDK(request: smartCarRequest)
-        let gen = SmartCarOAuthPickerGenerator(sdk: sdk, viewController: viewController, oemList: defaultOEM)
+        let button = gen!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
+        viewController.view.addSubview(button)
         
-        let button = gen.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
+        gen!.pickerButtonPressed()
+        gen!.hidePickerView()
         
-        button.sendActions(for: .touchUpInside)
-        gen.invisButton.sendActions(for: .touchUpInside)
-        
-        XCTAssertTrue(gen.picker.isHidden)
-        XCTAssertTrue(gen.invisButton.isHidden)
-        XCTAssertTrue(gen.toolBar.isHidden)
+        XCTAssertTrue(gen!.picker.isHidden)
+        XCTAssertTrue(gen!.invisButton.isHidden)
+        XCTAssertTrue(gen!.toolBar.isHidden)
     }
 }

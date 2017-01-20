@@ -8,24 +8,13 @@
 
 import UIKit
 
-// An array of all currently supported OEMs as OEM objects
-let defaultOEM = [OEM(oemName: OEMName.acura), OEM(oemName: OEMName.audi), OEM(oemName: OEMName.bmw),
-                  OEM(oemName: OEMName.bmwConnected), OEM(oemName: OEMName.buick), OEM(oemName: OEMName.cadillac),
-                  OEM(oemName: OEMName.chevrolet), OEM(oemName: OEMName.chrysler), OEM(oemName: OEMName.dodge),
-                  OEM(oemName: OEMName.fiat), OEM(oemName: OEMName.ford), OEM(oemName: OEMName.gmc),
-                  OEM(oemName: OEMName.hyundai), OEM(oemName: OEMName.infiniti), OEM(oemName: OEMName.jeep),
-                  OEM(oemName: OEMName.kia), OEM(oemName: OEMName.landrover), OEM(oemName: OEMName.lexus),
-                  OEM(oemName: OEMName.mercedes), OEM(oemName: OEMName.nissan), OEM(oemName: OEMName.nissanev),
-                  OEM(oemName: OEMName.ram), OEM(oemName: OEMName.tesla), OEM(oemName: OEMName.volkswagen),
-                  OEM(oemName: OEMName.volvo)]
-
 /**
     Class to generate pickers to automatically initialize authentication flow for multiple OEMs
  */
 
 public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelegate, UIPickerViewDataSource {
     // List of OEMs within the picker. Defaults to a list of all OEMs
-    var oemList = defaultOEM
+    var oemList = OEM.getDefaultOEMList()
     // UIPickerView object
     var picker = UIPickerView()
     // UIToolbar object that resides above the picker
@@ -33,7 +22,7 @@ public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerVie
     // Invisible button to signal that outside the picker has been clicked
     var invisButton = UIButton()
     
-    public init(sdk: SmartCarOAuthSDK, viewController: UIViewController, oemList: [OEM] = defaultOEM) {
+    public init(sdk: SmartCarOAuthSDK, viewController: UIViewController, oemList: [OEMName] = OEM.getDefaultOEMList()){
         super.init(sdk: sdk, viewController: viewController)
         self.oemList = oemList
     }
@@ -106,9 +95,9 @@ public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerVie
     @objc func donePicker() {
         hidePickerView()
         let val = self.oemList[picker.selectedRow(inComponent: 0)]
-        let name = val.oemName.rawValue
+        let name = val.rawValue
         
-        self.sdk.initializeAuthorizationRequest(for: OEM(oemName: OEMName(rawValue: name.lowercased())!), viewController: self.viewController)
+        self.sdk.initializeAuthorizationRequest(for: OEMName(rawValue: name.lowercased())!, viewController: self.viewController)
     }
     
     /**
@@ -129,6 +118,6 @@ public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerVie
     }
     
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.oemList[row].oemName.rawValue.uppercased()
+        return OEM.getDisplayName(for: self.oemList[row]).uppercased()
     }
 }
