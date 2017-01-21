@@ -33,7 +33,7 @@ class SmartCarOAuthPickerGeneratorTests: XCTestCase {
         let button = gen!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50), with: .red)
         
         XCTAssertNotNil(button)
-        XCTAssertEqual(button.titleLabel?.text, "CONNECT A VEHICLE")
+        XCTAssertNotEqual(button.titleLabel?.text, "CONNECT A VEHICLE")
         XCTAssertNotEqual(button.allTargets.count, 0)
         XCTAssertEqual(button.backgroundColor, .red)
         XCTAssertEqual(gen!.oemList.count, 4)
