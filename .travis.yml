@@ -1,4 +1,4 @@
 language: objective-c
 xcode_project: SmartCarOAuthSDK.xcodeproj # path to your xcodeproj folder
 xcode_scheme: SmartCarOAuthSDK
-xcode_sdk: iphonesimulator8.4
+xcode_sdk: iphonesimulator9.3
