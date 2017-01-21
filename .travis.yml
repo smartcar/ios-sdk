@@ -9,4 +9,4 @@ xcode_scheme: SmartCarOAuthSDK
 xcode_sdk: iphonesimulator10.1
 script:
 - xcodebuild -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xcodebuild test -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=iOS Simulator,name=Generic iOS Simulator Device'
+- xcodebuild test -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination -destination 'name=iPhone SE'
