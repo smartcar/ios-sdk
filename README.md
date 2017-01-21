@@ -37,7 +37,7 @@ Then, initiate the authorization request.
 
 ```swift
 // build OAuth request
-let smartCarRequest = SmartCarOAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope, state: state)
+let smartCarRequest = SmartCarOAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope)
 
 // initialize authorization request for Acura
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -60,10 +60,6 @@ Your app must register with the system for the custom URI scheme in order to rec
 `scope`
 
 Permissions requested from the user for specific grant.
-
-`state`
-
-OAuth state parameter. Typically used for passing a user's ID or token to prevent CORS attacks
 
 `grantType` (optional)
 
@@ -114,7 +110,7 @@ var ui: SmartCarOAuthButtonGenerator? = nil
 func mainFunction {
     
     // build OAuth request
-    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://", scope: ["read_vehicle_info", "read_odometer"])
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
