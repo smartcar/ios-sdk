@@ -1,0 +1,10 @@
+framework module SmartCarOAuthSDK {
+  umbrella header "SmartCarOAuthSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module SmartCarOAuthSDK.Swift {
+    header "SmartCarOAuthSDK-Swift.h"
+}

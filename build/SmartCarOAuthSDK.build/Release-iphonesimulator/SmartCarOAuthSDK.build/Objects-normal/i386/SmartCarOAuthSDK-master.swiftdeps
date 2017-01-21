@@ -1,0 +1,15 @@
+version: "Apple Swift version 3.0.2 (swiftlang-800.0.63 clang-800.0.42.1)"
+options: "20927bde710bbec393352f634cb189c4"
+build_time: [538275127, 429936000]
+inputs:
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/GrantType.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthPickerGenerator.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/Utility.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/OEMName.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthRequest.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/OEMConfig.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthUIGenerator.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthSDK.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthButtonGenerator.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/ApprovalType.swift": [9223372036854775807, 0]
+  "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/OEM.swift": [9223372036854775807, 0]

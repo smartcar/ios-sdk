@@ -1,4 +1,4 @@
 language: objective-c
-xcode_project: SmartCarOAuthSDK.xcodeproj # path to your xcodeproj folder
-xcode_scheme: SmartCarOAuthSDK
-xcode_sdk: iphonesimulator10.1
+scipt: 
+	- xcodebuild -project SmartCarOAuthSDK.xcodeproj -target SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+	- xcodebuild test -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=iOS Simulator,OS=10.2,name=iPhone 7 Plus'

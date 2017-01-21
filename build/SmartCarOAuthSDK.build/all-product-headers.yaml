@@ -1,0 +1,33 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/build/Release-iphonesimulator/SmartCarOAuthSDK.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "SmartCarOAuthSDK-Swift.h",
+          'external-contents': "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/build/Release-iphonesimulator/SmartCarOAuthSDK.framework/Headers/SmartCarOAuthSDK-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "SmartCarOAuthSDK.h",
+          'external-contents': "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/SmartCarOAuthSDK/SmartCarOAuthSDK.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/build/Release-iphonesimulator/SmartCarOAuthSDK.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/jeremyzhang/Documents/XCodeProjects/iOS10/SmartCarOAuthSDK/build/SmartCarOAuthSDK.build/Release-iphonesimulator/SmartCarOAuthSDK.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
