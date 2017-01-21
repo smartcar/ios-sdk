@@ -44,8 +44,8 @@ public class SmartCarOAuthSDK {
             - forcePrompt: forces permission screen if set to true, defaults to false
             - development: appends mock oem if true, defaults to false
     */
-    public init(clientID: String, redirectURI: String, scope: [String], state: String = "", grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
-        self.request = SmartCarOAuthRequest(clientID: clientID, redirectURI: redirectURI, scope: scope, state: state, grantType: grantType, forcePrompt: forcePrompt, development: development)
+    public init(clientID: String, redirectURI: String, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+        self.request = SmartCarOAuthRequest(clientID: clientID, redirectURI: redirectURI, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
     }
     
     /**
@@ -62,7 +62,7 @@ public class SmartCarOAuthSDK {
     }
     
     /**
-        Generates the authorization request URL for a specific OEM from the request paramters
+        Generates the authorization request URL for a specific OEM from the request paramters (Not recommended for direct use. Use initializeAuthorizationRequest)
      
         - parameters
             - oem: OEM object to identify the oem name within the authorization request URL

@@ -22,25 +22,16 @@ class SmartCarOAuthSDKTests: XCTestCase {
     }
     
     func testLinkGeneration() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
-        let sdk = SmartCarOAuthSDK(request: smartCarRequest)
-        
-        let link = sdk.generateLink(for: OEMName.acura)
-        
-        XCTAssertEqual(link, "https://acura.smartcar.com/oauth/authorize?response_type=code&client_id=4a1b01e5-0497-417c-a30e-6df6ba33ba46&redirect_uri=smartcar://oidc.com&scope=read_vehicle_info%20read_odometer&approval_prompt=auto&state=ABC-123-DEFG", "Link generation failed to provide the accurate link")
-    }
-    
-    func testLinkGenerationNoState() {
         let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
-
+        
         let link = sdk.generateLink(for: OEMName.acura)
         
-        XCTAssertEqual(link, "https://acura.smartcar.com/oauth/authorize?response_type=code&client_id=4a1b01e5-0497-417c-a30e-6df6ba33ba46&redirect_uri=smartcar://oidc.com&scope=read_vehicle_info%20read_odometer&approval_prompt=auto", "Link generation failed to provide the accurate link")
+        XCTAssertEqual(link, "https://acura.smartcar.com/oauth/authorize?response_type=code&client_id=4a1b01e5-0497-417c-a30e-6df6ba33ba46&redirect_uri=smartcar://oidc.com&scope=read_vehicle_info%20read_odometer&approval_prompt=auto&state=" + smartCarRequest.state, "Link generation failed to provide the accurate link")
     }
     
     func testResumingAuthorizationFlowWithIncorrectState() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         
         let url = "com.pingidentity.developer.mobile_app://oidc/cb?code=abc123&state=ABC-123-DEG"
@@ -49,10 +40,10 @@ class SmartCarOAuthSDKTests: XCTestCase {
     }
     
     func testResumingAuthorizationFlowWithCorrectState() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+        let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         
-        let url = "com.pingidentity.developer.mobile_app://oidc/cb?code=abc123&state=ABC-123-DEFG"
+        let url = "com.pingidentity.developer.mobile_app://oidc/cb?code=abc123&state=" + smartCarRequest.state
         
         XCTAssertTrue(sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!), "ResumeAuthorizationFlowWithURL returned false for call back URL with the same states")
         XCTAssertEqual(sdk.code!, "abc123", "Code returned does not equal code in the URL")

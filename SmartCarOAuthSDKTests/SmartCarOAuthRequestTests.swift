@@ -13,7 +13,6 @@ class SmartCarOAuthRequestTests: XCTestCase {
     let clientId = "ab3f8354-49ed-4670-8f53-e8300d65b387"
     let redirectURI = "http://localhost:5000/callback"
     let scope = ["read_vehicle_info", "read_odometer"]
-    let state = "3jdk23iojsdfkjfsd"
     
     override func setUp() {
         super.setUp()
@@ -26,12 +25,11 @@ class SmartCarOAuthRequestTests: XCTestCase {
     }
     
     func testInitialization() {
-        let request = SmartCarOAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope, state: state,  forcePrompt: true)
+        let request = SmartCarOAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope,  forcePrompt: true)
         
         XCTAssertEqual(request.clientID, clientId)
         XCTAssertEqual(request.redirectURI, redirectURI)
         XCTAssertEqual(request.scope, scope)
-        XCTAssertEqual(request.state, state)
         XCTAssertEqual(request.grantType, GrantType.code)
         XCTAssertEqual(request.approvalType, ApprovalType.force)
     }

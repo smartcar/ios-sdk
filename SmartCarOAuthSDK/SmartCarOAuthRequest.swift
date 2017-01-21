@@ -31,13 +31,13 @@ public class SmartCarOAuthRequest {
      - forcePrompt: forces permission screen if set to true, defaults to false
      - development: appends mock oem if true, defaults to false
      */
-    public init(clientID: String, redirectURI: String, scope: [String], state: String = "", grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+    public init(clientID: String, redirectURI: String, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
         self.clientID = clientID
         self.redirectURI = redirectURI
         self.scope = scope
         self.grantType = grantType
         self.approvalType = forcePrompt ? ApprovalType.force : ApprovalType.auto
         self.development = development
-        self.state = state
+        self.state = randomString(length: 8)
     }
 }

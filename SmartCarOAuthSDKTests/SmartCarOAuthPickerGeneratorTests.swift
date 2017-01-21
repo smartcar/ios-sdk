@@ -13,7 +13,7 @@ class SmartCarOAuthPickerGeneratorTests: XCTestCase {
     
     var viewController = UIViewController()
     let defaultOEM = [OEMName.acura, OEMName.audi, OEMName.bmw, OEMName.bmwConnected]
-    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"], state: "ABC-123-DEFG")
+    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "smartcar://oidc.com", scope: ["read_vehicle_info", "read_odometer"])
     var sdk: SmartCarOAuthSDK?
     var gen: SmartCarOAuthPickerGenerator?
     

@@ -1,10 +1,11 @@
 language: objective-c
 before_install:
 - brew update
+- brew update xctool
 osx_image: xcode8.1
 xcode_project: SmartCarOAuthSDK.xcodeproj # path to your xcodeproj folder
 xcode_scheme: SmartCarOAuthSDK
 xcode_sdk: iphonesimulator10.1
 script:
 - xcodebuild -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xcodebuild test -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'name=iPhone SE'
+- xctool test -project SmartCarOAuthSDK.xcodeproj -scheme SmartCarOAuthSDK -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6'
