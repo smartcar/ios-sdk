@@ -31,6 +31,11 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         button.setTitle("LOGIN WITH " + OEM.getDisplayName(for: oem).uppercased(), for: .normal)
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(named: "logo"), for: .normal)
+        
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
         
         button.addTarget(self, action: #selector(oemButtonPressed(_:)), for: .touchUpInside)
         

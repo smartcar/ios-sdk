@@ -11,7 +11,7 @@ import SmartCarOAuthSDK
 
 class ViewController: UIViewController {
 
-    var ui: SmartCarOAuthPickerGenerator? = nil
+    var ui: SmartCarOAuthButtonGenerator? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,9 @@ class ViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
         let sdk = appDelegate.smartCarSDK
-        ui = SmartCarOAuthPickerGenerator(sdk: sdk!, viewController: self)
+        ui = SmartCarOAuthButtonGenerator(sdk: sdk!, viewController: self)
         
-        let button = ui!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
+        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.mock)
         self.view.addSubview(button)
         
         button.translatesAutoresizingMaskIntoConstraints = false
