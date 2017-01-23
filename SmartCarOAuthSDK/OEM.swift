@@ -39,7 +39,7 @@ public class OEM {
          .volkswagen: OEMConfig(color: "#000000", displayName: "volkswagen"),
          .volvo: OEMConfig(color: "#000F60", displayName: "volvo"),
          .mercedes: OEMConfig(color: "#222222", displayName: "mercedes"),
-         .mock: OEMConfig(color: "#495F5D", displayName: "developer")]
+         .mock: OEMConfig(color: "#495F5D", displayName: "mock")]
     
     /**
         Return the OEMConfig object of the OEM
