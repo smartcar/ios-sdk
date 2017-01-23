@@ -31,11 +31,12 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         button.setTitle("LOGIN WITH " + OEM.getDisplayName(for: oem).uppercased(), for: .normal)
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
-        button.setImage(UIImage(named: "logo"), for: .normal)
         
-        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
-        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
-        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
+        let img = UIImage(named: "SmartCarOAuthSDKResources.bundle/" + oem.rawValue + "_logo.png")
+        button.setImage(img, for: .normal)
+        
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, -(img!.size.width - (frame.maxX - (frame.maxX - frame.maxY + 5))), 0, 0)
+        button.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, frame.maxX - frame.maxY + 5)
         
         button.addTarget(self, action: #selector(oemButtonPressed(_:)), for: .touchUpInside)
         

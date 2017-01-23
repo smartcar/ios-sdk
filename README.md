@@ -133,7 +133,7 @@ func mainFunction {
 }
 ```
 
-Here are a subset of the buttons that can be generated: 
+Here are an example of the buttons that can be generated: 
 
 ![](Example/Assets.xcassets/buttons.png)
 
