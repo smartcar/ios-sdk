@@ -32,7 +32,8 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
         
-        let img = UIImage(named: "SmartCarOAuthSDKResources.bundle/" + oem.rawValue + "_logo.png")
+        let img = UIImage(named: "SmartCarOAuthSDKResources.bundle/" + oem.rawValue + "_logo.png", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        
         button.setImage(img, for: .normal)
         
         button.titleEdgeInsets = UIEdgeInsetsMake(0, -(img!.size.width - (frame.maxX - (frame.maxX - frame.maxY + 5))), 0, 0)

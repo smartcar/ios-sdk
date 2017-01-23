@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         let sdk = appDelegate.smartCarSDK
         ui = SmartCarOAuthButtonGenerator(sdk: sdk!, viewController: self)
         
-        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.bmw)
+        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.acura)
         self.view.addSubview(button)
         
         button.translatesAutoresizingMaskIntoConstraints = false

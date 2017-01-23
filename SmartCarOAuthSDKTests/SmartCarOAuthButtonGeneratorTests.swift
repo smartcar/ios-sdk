@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import SmartCarOAuthSDK
+import SmartCarOAuthSDK
 
 class SmartCarOAuthButtonGeneratorTests: XCTestCase {
     
