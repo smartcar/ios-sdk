@@ -13,6 +13,8 @@ import UIKit
  */
 
 public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
+    var oem: OEMName?
+    
     override public init(sdk: SmartCarOAuthSDK, viewController: UIViewController) {
         super.init(sdk: sdk, viewController: viewController)
     }
@@ -25,12 +27,14 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
             - in: UIView object that the button will reside and fill
     */
     public func generateButton(frame: CGRect, for oem: OEMName) -> UIButton {
+        self.oem = oem
         let button = UIButton()
         button.frame = frame
         button.backgroundColor = OEM.getColor(for: oem)
         button.setTitle("LOGIN WITH " + OEM.getDisplayName(for: oem).uppercased(), for: .normal)
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         
         let img = UIImage(named: "SmartCarOAuthSDKResources.bundle/" + oem.rawValue + "_logo.png", in: Bundle(for: type(of: self)), compatibleWith: nil)
         
@@ -48,9 +52,6 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         Action method for the generated OEM button that initiates the authentication flow
     */
     @objc func oemButtonPressed(_ sender: UIButton) {
-        let title = sender.titleLabel?.text
-        let name = title!.substring(from: title!.index(title!.startIndex, offsetBy: 11))
-        
-        self.sdk.initializeAuthorizationRequest(for: OEMName(rawValue: name.lowercased())!, viewController: viewController)
+        self.sdk.initializeAuthorizationRequest(for: self.oem!, viewController: viewController)
     }
 }
