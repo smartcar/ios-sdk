@@ -1,18 +1,18 @@
 //
 //  AppDelegate.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuth
 //
 //  Created by Ziyu Zhang on 1/6/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import UIKit
-import SmartCarOAuthSDK
+import SmartcarAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var smartCarSDK: SmartCarOAuthSDK?
+    var smartCarSDK: SmartcarAuth?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

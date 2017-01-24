@@ -1,39 +1,39 @@
 //
-//  SmartCarOAuthSDK.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuth.swift
+//  SmartcarAuth
 //
 //  Created by Jeremy Zhang on 1/6/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import UIKit
 import SafariServices
 
 /**
-    SmartCar Authentication SDK for iOS written in Swift 3.
+    Smartcar Authentication SDK for iOS written in Swift 3.
         - Allows the ability to generate buttons to login with each manufacturer which launches the OAuth flow
         - Allows the ability to use dropdown/custom buttons to trigger OAuth flow
-        - Facilitates the flow with a SFSafariViewController to redirect to SmartCar and retrieve an access code and an 
+        - Facilitates the flow with a SFSafariViewController to redirect to Smartcar and retrieve an access code and an
             access token
 */
 
-public class SmartCarOAuthSDK {
-    let request: SmartCarOAuthRequest
+public class SmartcarAuth {
+    let request: SmartcarAuthRequest
     //Access code for the current request, is nil if request has not been completed
     var code: String?
     
     /**
-        Constructor for the SmartCarOAuthSDK
+        Constructor for the SmartcarAuth
      
         - parameters
-            - request: SmartCarOAuthRequest object for SmartCar API
+            - request: SmartcarAuthRequest object for Smartcar API
     */
-    public init(request: SmartCarOAuthRequest) { 
+    public init(request: SmartcarAuthRequest) {
         self.request = request
     }
     
     /**
-        Constructor for the SmartCarOAuthSDK
+        Constructor for the SmartcarAuth
      
         - Parameters:
             - clientID: app client ID
@@ -45,7 +45,7 @@ public class SmartCarOAuthSDK {
             - development: appends mock oem if true, defaults to false
     */
     public init(clientID: String, redirectURI: String, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
-        self.request = SmartCarOAuthRequest(clientID: clientID, redirectURI: redirectURI, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
+        self.request = SmartcarAuthRequest(clientID: clientID, redirectURI: redirectURI, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
     }
     
     /**

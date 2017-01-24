@@ -1,28 +1,28 @@
 //
 //  ViewController.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuth
 //
 //  Created by Ziyu Zhang on 1/6/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import UIKit
-import SmartCarOAuthSDK
+import SmartcarAuth
 
 class ViewController: UIViewController {
 
-    var ui: SmartCarOAuthButtonGenerator? = nil
+    var ui: SmartcarAuthButtonGenerator? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let smartCarRequest = SmartCarOAuthRequest(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
+        let smartCarRequest = SmartcarAuthRequest(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
+        appDelegate.smartCarSDK = SmartcarAuth(request: smartCarRequest)
         let sdk = appDelegate.smartCarSDK
-        ui = SmartCarOAuthButtonGenerator(sdk: sdk!, viewController: self)
+        ui = SmartcarAuthButtonGenerator(sdk: sdk!, viewController: self)
         
-        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.mock)
+        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.bmw)
         self.view.addSubview(button)
         self.view.backgroundColor = .black
         

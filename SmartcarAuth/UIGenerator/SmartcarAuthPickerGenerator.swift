@@ -1,9 +1,9 @@
 //
-//  SmartCarOAuthPickerGenerator.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuthPickerGenerator.swift
+//  SmartcarAuth
 //
 //  Created by Jeremy Zhang on 1/14/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import UIKit
     Class to generate pickers to automatically initialize authentication flow for multiple OEMs
  */
 
-public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerViewDelegate, UIPickerViewDataSource {
+public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewDelegate, UIPickerViewDataSource {
     // List of OEMs within the picker. Defaults to a list of all OEMs
     var oemList = OEM.getDefaultOEMList()
     // UIPickerView object
@@ -22,7 +22,7 @@ public class SmartCarOAuthPickerGenerator: SmartCarOAuthUIGenerator, UIPickerVie
     // Invisible button to signal that outside the picker has been clicked
     var invisButton = UIButton()
     
-    public init(sdk: SmartCarOAuthSDK, viewController: UIViewController, oemList: [OEMName] = OEM.getDefaultOEMList()){
+    public init(sdk: SmartcarAuth, viewController: UIViewController, oemList: [OEMName] = OEM.getDefaultOEMList()){
         super.init(sdk: sdk, viewController: viewController)
         self.oemList = oemList
     }

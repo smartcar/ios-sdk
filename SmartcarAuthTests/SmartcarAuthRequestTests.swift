@@ -1,15 +1,15 @@
 //
-//  SmartCarOAuthRequestTests.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuthRequestTests.swift
+//  SmartcarAuth
 //
 //  Created by Jeremy Zhang on 1/14/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import XCTest
-@testable import SmartCarOAuthSDK
+@testable import SmartcarAuth
 
-class SmartCarOAuthRequestTests: XCTestCase {
+class SmartcarAuthRequestTests: XCTestCase {
     let clientId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
     let redirectURI = "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page"
     let scope = ["read_vehicle_info", "read_odometer"]
@@ -25,7 +25,7 @@ class SmartCarOAuthRequestTests: XCTestCase {
     }
     
     func testInitialization() {
-        let request = SmartCarOAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope,  forcePrompt: true)
+        let request = SmartcarAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope,  forcePrompt: true)
         
         XCTAssertEqual(request.clientID, clientId)
         XCTAssertEqual(request.redirectURI, redirectURI)

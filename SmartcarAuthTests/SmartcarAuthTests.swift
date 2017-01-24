@@ -1,16 +1,16 @@
 //
-//  SmartCarOAuthSDKTests.swift
-//  SmartCarOAuthSDKTests
+//  SmartcarAuthTests.swift
+//  SmartcarAuthTests
 //
 //  Created by Jeremy Zhang on 1/14/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import XCTest
-import SmartCarOAuthSDK
+import SmartcarAuth
 
 
-class SmartCarOAuthSDKTests: XCTestCase {
+class SmartcarAuthTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -22,8 +22,8 @@ class SmartCarOAuthSDKTests: XCTestCase {
     }
     
     func testLinkGeneration() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
-        let sdk = SmartCarOAuthSDK(request: smartCarRequest)
+        let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let sdk = SmartcarAuth(request: smartCarRequest)
         
         let link = sdk.generateLink(for: OEMName.acura)
         
@@ -31,8 +31,8 @@ class SmartCarOAuthSDKTests: XCTestCase {
     }
     
     func testResumingAuthorizationFlowWithIncorrectState() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
-        let sdk = SmartCarOAuthSDK(request: smartCarRequest)
+        let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let sdk = SmartcarAuth(request: smartCarRequest)
         
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page?code=abc123&state=ABC-123-DEG"
         
@@ -40,8 +40,8 @@ class SmartCarOAuthSDKTests: XCTestCase {
     }
     
     func testResumingAuthorizationFlowWithCorrectState() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
-        let sdk = SmartCarOAuthSDK(request: smartCarRequest)
+        let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let sdk = SmartcarAuth(request: smartCarRequest)
         
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page?code=abc123&state=" + smartCarRequest.state
         

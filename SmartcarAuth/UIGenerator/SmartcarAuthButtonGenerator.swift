@@ -1,9 +1,9 @@
 //
-//  SmartCarOAuthButtonGenerator.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuthButtonGenerator.swift
+//  SmartcarAuthSDK
 //
 //  Created by Jeremy Zhang on 1/14/17.
-//  Copyright © 2017 SmartCar Inc.. All rights reserved.
+//  Copyright © 2017 Smartcar Inc.. All rights reserved.
 //
 
 import UIKit
@@ -12,10 +12,10 @@ import UIKit
     Class for generating buttons to automatically initialize the authentication flow
  */
 
-public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
+public class SmartcarAuthButtonGenerator: SmartcarAuthUIGenerator {
     var oem: OEMName?
     
-    override public init(sdk: SmartCarOAuthSDK, viewController: UIViewController) {
+    override public init(sdk: SmartcarAuth, viewController: UIViewController) {
         super.init(sdk: sdk, viewController: viewController)
     }
     
@@ -36,7 +36,7 @@ public class SmartCarOAuthButtonGenerator: SmartCarOAuthUIGenerator {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        let img = UIImage(named: "SmartCarOAuthSDKResources.bundle/" + oem.rawValue + "_logo.png", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        let img = UIImage(named: "SmartcarAuthResources.bundle/" + oem.rawValue + "_logo.png", in: Bundle(for: type(of: self)), compatibleWith: nil)
         
         button.setImage(img, for: .normal)
         

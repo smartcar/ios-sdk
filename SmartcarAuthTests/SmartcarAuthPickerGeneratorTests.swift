@@ -1,26 +1,26 @@
 //
 //  SmartcarAuthPickerGeneratorTests.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuth
 //
 //  Created by Jeremy Zhang on 1/14/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import XCTest
-@testable import SmartCarOAuthSDK
+@testable import SmartcarAuth
 
-class SmartCarOAuthPickerGeneratorTests: XCTestCase {
+class SmartcarAuthPickerGeneratorTests: XCTestCase {
     
     var viewController = UIViewController()
     let defaultOEM = [OEMName.acura, OEMName.audi, OEMName.bmw, OEMName.bmwConnected]
-    let smartCarRequest = SmartCarOAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
-    var sdk: SmartCarOAuthSDK?
-    var gen: SmartCarOAuthPickerGenerator?
+    let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+    var sdk: SmartcarAuth?
+    var gen: SmartcarAuthPickerGenerator?
     
     override func setUp() {
         super.setUp()
-        sdk = SmartCarOAuthSDK(request: smartCarRequest)
-        gen = SmartCarOAuthPickerGenerator(sdk: sdk!, viewController: viewController, oemList: defaultOEM)
+        sdk = SmartcarAuth(request: smartCarRequest)
+        gen = SmartcarAuthPickerGenerator(sdk: sdk!, viewController: viewController, oemList: defaultOEM)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     

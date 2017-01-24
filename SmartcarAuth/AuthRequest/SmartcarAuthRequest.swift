@@ -1,16 +1,16 @@
 //
-//  SmartCarOAuthRequest.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuthRequest.swift
+//  SmartcarAuth
 //
 //  Created by Jeremy Zhang on 1/7/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 /**
-    Class encapsulating the data required within a SmartCar OAuthorization Request
+    Class encapsulating the data required within a Smartcar Authorization Request
  */
 
-public class SmartCarOAuthRequest {
+public class SmartcarAuthRequest {
     let clientID: String // app client ID
     let redirectURI: String //app redirect URI
     let scope: [String] //app oauth scope
@@ -20,7 +20,7 @@ public class SmartCarOAuthRequest {
     let development: Bool // appends mock oem if true
     
     /**
-     Initializes the SmartCarOAuthSDK Object
+     Initializes the SmartcarAuth Object
      
      - Parameters:
      - clientID: app client ID

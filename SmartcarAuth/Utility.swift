@@ -1,9 +1,9 @@
 //
 //  Utility.swift
-//  SmartCarOAuthSDK
+//  SmartcarAuth
 //
 //  Created by Jeremy Zhang on 1/6/17.
-//  Copyright © 2017 SmartCar Inc. All rights reserved.
+//  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import UIKit
