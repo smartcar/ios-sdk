@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         
         let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.mock)
         self.view.addSubview(button)
+        self.view.backgroundColor = .black
         
         button.translatesAutoresizingMaskIntoConstraints = false
         let buttonPinMiddleX = NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
@@ -40,8 +41,9 @@ class ViewController: UIViewController {
         let imPinMiddleX = NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
         let imPinMiddleY = NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 0.5, constant: 0)
         let imWidth = NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 350)
+        let imHeight = NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 175)
         
-        self.view.addConstraints([imPinMiddleX, imPinMiddleY, imWidth])
+        self.view.addConstraints([imPinMiddleX, imPinMiddleY, imWidth, imHeight])
     }
     
     func accessCodeRecieved() {
@@ -51,6 +53,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.text = "Access code is " + sdk!.code!
         label.numberOfLines = 2
+        label.textColor = .white
         
         self.view.addSubview(label)
         
