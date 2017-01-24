@@ -10,7 +10,6 @@
 		F87B2BCA1E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */; };
 		F87B2BCB1E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */; };
 		F87B2BCC1E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */; };
-		F8DB70E91E37DF6A00C08DE2 /* AccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB70E81E37DF6A00C08DE2 /* AccessViewController.swift */; };
 		F8DB70EE1E37EF2500C08DE2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB70ED1E37EF2500C08DE2 /* Config.swift */; };
 		F8F9288B1E2B2F6B009F07E5 /* SmartCarOAuthSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartCarOAuthSDK.framework */; };
 		F8F928901E2B2F6B009F07E5 /* SmartCarOAuthSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9288F1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests.swift */; };
@@ -70,7 +69,6 @@
 
 /* Begin PBXFileReference section */
 		F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SmartCarOAuthSDKResources.bundle; sourceTree = "<group>"; };
-		F8DB70E81E37DF6A00C08DE2 /* AccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessViewController.swift; sourceTree = "<group>"; };
 		F8DB70ED1E37EF2500C08DE2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F8F928811E2B2F6A009F07E5 /* SmartCarOAuthSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartCarOAuthSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F928841E2B2F6A009F07E5 /* SmartCarOAuthSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmartCarOAuthSDK.h; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				F8F928C61E2B30E5009F07E5 /* LaunchScreen.storyboard */,
 				F8F928C11E2B30E5009F07E5 /* Main.storyboard */,
 				F8F928BF1E2B30E5009F07E5 /* ViewController.swift */,
-				F8DB70E81E37DF6A00C08DE2 /* AccessViewController.swift */,
 				F8DB70ED1E37EF2500C08DE2 /* Config.swift */,
 			);
 			path = Example;
@@ -411,7 +408,6 @@
 				F8DB70EE1E37EF2500C08DE2 /* Config.swift in Sources */,
 				F8F928D91E2C0D0A009F07E5 /* SmartCarOAuthPickerGenerator.swift in Sources */,
 				F8F928DD1E2C0D10009F07E5 /* GrantType.swift in Sources */,
-				F8DB70E91E37DF6A00C08DE2 /* AccessViewController.swift in Sources */,
 				F8F928D41E2C0CFE009F07E5 /* SmartCarOAuthSDK.swift in Sources */,
 				F8F928E11E2C0D16009F07E5 /* OEMConfig.swift in Sources */,
 				F8F928E31E2C0D19009F07E5 /* OEMName.swift in Sources */,

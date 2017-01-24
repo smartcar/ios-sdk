@@ -22,7 +22,7 @@ class SmartCarOAuthSDKTests: XCTestCase {
     }
     
     func testLinkGeneration() {
-        let smartCarRequest = SmartCarOAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let smartCarRequest = SmartCarOAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartCarOAuthSDK(request: smartCarRequest)
         
         let link = sdk.generateLink(for: OEMName.acura)
