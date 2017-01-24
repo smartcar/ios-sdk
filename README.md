@@ -55,7 +55,9 @@ Application client ID obtained from [Smartcar Developer Portal] (https://develop
 
 `redirectURI`
 
-Your app must register with the system for the custom URI scheme in order to receive the authorization callback. Smartcar API requires the custom URI scheme to be in the format of `"sk" + clientId + "://" + hostname`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. `sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect/page`).
+Your app must register with the system for the custom URI scheme in order to receive the authorization callback. Smartcar API requires the custom URI scheme to be in the format of `"sc" + clientId + "://" + hostname`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. `sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect/page`).
+
+More information on [configuration of custom scheme] (http://www.idev101.com/code/Objective-C/custom_url_schemes.html).
 
 `scope`
 
