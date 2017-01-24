@@ -10,6 +10,8 @@
 build/
 DerivedData/
 
+Example/Config.swift
+
 ## Various settings
 *.pbxuser
 !default.pbxuser

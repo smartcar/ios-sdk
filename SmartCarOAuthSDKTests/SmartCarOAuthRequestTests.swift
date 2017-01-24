@@ -10,8 +10,8 @@ import XCTest
 @testable import SmartCarOAuthSDK
 
 class SmartCarOAuthRequestTests: XCTestCase {
-    let clientId = "7cc72cc2-6464-4245-9fed-b971361a820e"
-    let redirectURI = "sc7cc72cc2-6464-4245-9fed-b971361a820e://page"
+    let clientId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+    let redirectURI = "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page"
     let scope = ["read_vehicle_info", "read_odometer"]
     
     override func setUp() {
