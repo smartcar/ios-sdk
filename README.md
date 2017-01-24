@@ -110,7 +110,7 @@ var ui: SmartCarOAuthButtonGenerator? = nil
 func mainFunction {
     
     // build OAuth request
-    let smartCarRequest = SmartCarOAuthRequest(clientID: "4a1b01e5-0497-417c-a30e-6df6ba33ba46", redirectURI: "sk4a1b01e5-0497-417c-a30e-6df6ba33ba46://", scope: ["read_vehicle_info", "read_odometer"])
+    let smartCarRequest = SmartCarOAuthRequest(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     appDelegate.smartCarSDK = SmartCarOAuthSDK(request: smartCarRequest)
@@ -155,6 +155,16 @@ Below is the generated UIPickerView in action
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+Create a Config.swift file to store the clientId Config constant
+
+```swift
+struct Config {
+    static let clientId = //put clientId string here
+}
+```
+
+Edit Info.plist to adhere to the custom URI scheme stated above and then run the example
 
 ## Author
 
