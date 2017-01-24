@@ -123,14 +123,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8F1B7141E372A10008C3519 /* AuthRequest */ = {
+			isa = PBXGroup;
+			children = (
+				F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */,
+				F8F9289E1E2B2FED009F07E5 /* GrantType.swift */,
+				F8F928A21E2B2FED009F07E5 /* SmartCarOAuthRequest.swift */,
+			);
+			name = AuthRequest;
+			path = AuthRequest;
+			sourceTree = "<group>";
+		};
+		F8F1B7151E372A61008C3519 /* OEM */ = {
+			isa = PBXGroup;
+			children = (
+				F8F9289F1E2B2FED009F07E5 /* OEM.swift */,
+				F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */,
+				F8F928A11E2B2FED009F07E5 /* OEMName.swift */,
+			);
+			name = OEM;
+			path = OEM;
+			sourceTree = "<group>";
+		};
+		F8F1B7161E372A6D008C3519 /* UIGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				F8F9289B1E2B2FED009F07E5 /* SmartCarOAuthButtonGenerator.swift */,
+				F8F9289C1E2B2FED009F07E5 /* SmartCarOAuthPickerGenerator.swift */,
+				F8F928A41E2B2FED009F07E5 /* SmartCarOAuthUIGenerator.swift */,
+			);
+			name = UIGenerator;
+			path = UIGenerator;
+			sourceTree = "<group>";
+		};
 		F8F928771E2B2F6A009F07E5 = {
 			isa = PBXGroup;
 			children = (
-				F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */,
-				F8F928831E2B2F6A009F07E5 /* SmartCarOAuthSDK */,
-				F8F9288E1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests */,
 				F8F928BC1E2B30E5009F07E5 /* Example */,
 				F8F928821E2B2F6A009F07E5 /* Products */,
+				F8F928831E2B2F6A009F07E5 /* SmartCarOAuthSDK */,
+				F8F9288E1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests */,
+				F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,19 +180,13 @@
 		F8F928831E2B2F6A009F07E5 /* SmartCarOAuthSDK */ = {
 			isa = PBXGroup;
 			children = (
-				F8F9289B1E2B2FED009F07E5 /* SmartCarOAuthButtonGenerator.swift */,
-				F8F9289C1E2B2FED009F07E5 /* SmartCarOAuthPickerGenerator.swift */,
-				F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */,
-				F8F9289E1E2B2FED009F07E5 /* GrantType.swift */,
-				F8F9289F1E2B2FED009F07E5 /* OEM.swift */,
-				F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */,
-				F8F928A11E2B2FED009F07E5 /* OEMName.swift */,
-				F8F928A21E2B2FED009F07E5 /* SmartCarOAuthRequest.swift */,
-				F8F928A31E2B2FED009F07E5 /* SmartCarOAuthSDK.swift */,
-				F8F928A41E2B2FED009F07E5 /* SmartCarOAuthUIGenerator.swift */,
-				F8F928A51E2B2FED009F07E5 /* Utility.swift */,
-				F8F928841E2B2F6A009F07E5 /* SmartCarOAuthSDK.h */,
+				F8F1B7141E372A10008C3519 /* AuthRequest */,
+				F8F1B7151E372A61008C3519 /* OEM */,
+				F8F1B7161E372A6D008C3519 /* UIGenerator */,
 				F8F928851E2B2F6A009F07E5 /* Info.plist */,
+				F8F928841E2B2F6A009F07E5 /* SmartCarOAuthSDK.h */,
+				F8F928A31E2B2FED009F07E5 /* SmartCarOAuthSDK.swift */,
+				F8F928A51E2B2FED009F07E5 /* Utility.swift */,
 			);
 			path = SmartCarOAuthSDK;
 			sourceTree = "<group>";
@@ -167,11 +194,11 @@
 		F8F9288E1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				F8F9288F1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests.swift */,
+				F8F928911E2B2F6B009F07E5 /* Info.plist */,
 				F8F928B11E2B3024009F07E5 /* SmartCarOAuthButtonGeneratorTests.swift */,
 				F8F928B21E2B3024009F07E5 /* SmartCarOAuthPickerGeneratorTests.swift */,
 				F8F928B31E2B3024009F07E5 /* SmartCarOAuthRequestTests.swift */,
-				F8F928911E2B2F6B009F07E5 /* Info.plist */,
+				F8F9288F1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests.swift */,
 			);
 			path = SmartCarOAuthSDKTests;
 			sourceTree = "<group>";
@@ -180,11 +207,11 @@
 			isa = PBXGroup;
 			children = (
 				F8F928BD1E2B30E5009F07E5 /* AppDelegate.swift */,
-				F8F928BF1E2B30E5009F07E5 /* ViewController.swift */,
-				F8F928C11E2B30E5009F07E5 /* Main.storyboard */,
 				F8F928C41E2B30E5009F07E5 /* Assets.xcassets */,
-				F8F928C61E2B30E5009F07E5 /* LaunchScreen.storyboard */,
 				F8F928C91E2B30E5009F07E5 /* Info.plist */,
+				F8F928C61E2B30E5009F07E5 /* LaunchScreen.storyboard */,
+				F8F928C11E2B30E5009F07E5 /* Main.storyboard */,
+				F8F928BF1E2B30E5009F07E5 /* ViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -409,6 +436,7 @@
 				F8F928C21E2B30E5009F07E5 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		F8F928C61E2B30E5009F07E5 /* LaunchScreen.storyboard */ = {
@@ -417,6 +445,7 @@
 				F8F928C71E2B30E5009F07E5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
