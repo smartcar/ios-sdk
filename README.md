@@ -1,6 +1,6 @@
 # SmartCarOAuthSDK
 
-[![CI Status](http://img.shields.io/travis/Jeremy Zhang/SmartCarOAuthSDK.svg?style=flat)](https://travis-ci.org/Jeremy Zhang/SmartCarOAuthSDK)
+[![CI Status](http://img.shields.io/travis/Jeremy Zhang/SmartCarOAuthSDK.svg?style=flat)](https://travis-ci.com/smartcar/ios-sdk/)
 [![Version](https://img.shields.io/cocoapods/v/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 [![License](https://img.shields.io/cocoapods/l/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 [![Platform](https://img.shields.io/cocoapods/p/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
