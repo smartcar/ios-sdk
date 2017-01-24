@@ -10,6 +10,7 @@
 		F87B2BCA1E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */; };
 		F87B2BCB1E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */; };
 		F87B2BCC1E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */; };
+		F8DB70E91E37DF6A00C08DE2 /* AccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB70E81E37DF6A00C08DE2 /* AccessViewController.swift */; };
 		F8F9288B1E2B2F6B009F07E5 /* SmartCarOAuthSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartCarOAuthSDK.framework */; };
 		F8F928901E2B2F6B009F07E5 /* SmartCarOAuthSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9288F1E2B2F6B009F07E5 /* SmartCarOAuthSDKTests.swift */; };
 		F8F928921E2B2F6B009F07E5 /* SmartCarOAuthSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F928841E2B2F6A009F07E5 /* SmartCarOAuthSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		F87B2BC91E35D8A3004ABA17 /* SmartCarOAuthSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SmartCarOAuthSDKResources.bundle; sourceTree = "<group>"; };
+		F8DB70E81E37DF6A00C08DE2 /* AccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessViewController.swift; sourceTree = "<group>"; };
 		F8F928811E2B2F6A009F07E5 /* SmartCarOAuthSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartCarOAuthSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F928841E2B2F6A009F07E5 /* SmartCarOAuthSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmartCarOAuthSDK.h; sourceTree = "<group>"; };
 		F8F928851E2B2F6A009F07E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,7 +132,6 @@
 				F8F9289E1E2B2FED009F07E5 /* GrantType.swift */,
 				F8F928A21E2B2FED009F07E5 /* SmartCarOAuthRequest.swift */,
 			);
-			name = AuthRequest;
 			path = AuthRequest;
 			sourceTree = "<group>";
 		};
@@ -141,7 +142,6 @@
 				F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */,
 				F8F928A11E2B2FED009F07E5 /* OEMName.swift */,
 			);
-			name = OEM;
 			path = OEM;
 			sourceTree = "<group>";
 		};
@@ -152,7 +152,6 @@
 				F8F9289C1E2B2FED009F07E5 /* SmartCarOAuthPickerGenerator.swift */,
 				F8F928A41E2B2FED009F07E5 /* SmartCarOAuthUIGenerator.swift */,
 			);
-			name = UIGenerator;
 			path = UIGenerator;
 			sourceTree = "<group>";
 		};
@@ -212,6 +211,7 @@
 				F8F928C61E2B30E5009F07E5 /* LaunchScreen.storyboard */,
 				F8F928C11E2B30E5009F07E5 /* Main.storyboard */,
 				F8F928BF1E2B30E5009F07E5 /* ViewController.swift */,
+				F8DB70E81E37DF6A00C08DE2 /* AccessViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -407,6 +407,7 @@
 				F8F928E51E2C0D1B009F07E5 /* SmartCarOAuthRequest.swift in Sources */,
 				F8F928D91E2C0D0A009F07E5 /* SmartCarOAuthPickerGenerator.swift in Sources */,
 				F8F928DD1E2C0D10009F07E5 /* GrantType.swift in Sources */,
+				F8DB70E91E37DF6A00C08DE2 /* AccessViewController.swift in Sources */,
 				F8F928D41E2C0CFE009F07E5 /* SmartCarOAuthSDK.swift in Sources */,
 				F8F928E11E2C0D16009F07E5 /* OEMConfig.swift in Sources */,
 				F8F928E31E2C0D19009F07E5 /* OEMName.swift in Sources */,
@@ -559,6 +560,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = SmartCarOAuthSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -579,6 +582,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = SmartCarOAuthSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -593,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SmartCarOAuthSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDKTests;
@@ -605,6 +611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SmartCarOAuthSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDKTests;

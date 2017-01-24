@@ -44,6 +44,26 @@ class ViewController: UIViewController {
         self.view.addConstraints([imPinMiddleX, imPinMiddleY, imWidth])
     }
     
+    func accessCodeRecieved() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let sdk = appDelegate.smartCarSDK
+
+        let label = UILabel()
+        label.text = "Access code is " + sdk!.code!
+        label.numberOfLines = 2
+        
+        self.view.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let labelPinMiddleX = NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
+        let labelPinMiddleY = NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 0)
+        let labelWidth = NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 350)
+        let labelHeight = NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        
+         self.view.addConstraints([labelPinMiddleX, labelPinMiddleY, labelWidth, labelHeight])
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
