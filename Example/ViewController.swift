@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         self.view.addConstraints([imPinMiddleX, imPinMiddleY, imWidth, imHeight])
     }
     
-    func accessCodeRecieved() {
+    func accessCodeReceived() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let sdk = appDelegate.smartCarSDK
 

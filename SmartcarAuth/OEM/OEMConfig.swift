@@ -7,7 +7,7 @@
 //
 
 /**
-    Class to store OEM specific configurations. Will be expanded in the future as more configurations are avaliable
+    Class to store OEM specific configurations.
  */
 
 import UIKit
@@ -15,6 +15,7 @@ import UIKit
 public class OEMConfig {
     // The default color of the OEM in Hex
     let color: UIColor
+    // name to be displayed for the OEM
     let displayName: String
     
     init(color: String, displayName: String) {

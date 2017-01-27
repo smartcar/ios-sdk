@@ -7,7 +7,7 @@
 //
 
 /**
-    Enum for the to types of approval type (force and auto)
+    Enum for the request approval types (force and auto)
  */
 
 public enum ApprovalType: String {

@@ -24,8 +24,8 @@ public class SmartcarAuthButtonGenerator: SmartcarAuthUIGenerator {
      
         - parameters: 
             - for: the OEM that the button will open the authentication flow for
-            - in: UIView object that the button will reside and fill
-    */
+            - frame: CGRect object that determines the position and size of the button
+     */
     public func generateButton(frame: CGRect, for oem: OEMName) -> UIButton {
         self.oem = oem
         let button = UIButton()

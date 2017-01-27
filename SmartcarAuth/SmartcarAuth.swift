@@ -53,7 +53,8 @@ public class SmartcarAuth {
             authorization URL
      
         - parameters
-            - oem: OEM object to identify the oem name within the authorization request URL
+            - oem: OEMName object for the OEM
+            - viewController: the viewController resposible for presenting the SFSafariView
     */
     public func initializeAuthorizationRequest(for oem: OEMName, viewController: UIViewController) {
         let authorizationURL = generateLink(for: oem)
@@ -65,7 +66,7 @@ public class SmartcarAuth {
         Generates the authorization request URL for a specific OEM from the request paramters (Not recommended for direct use. Use initializeAuthorizationRequest)
      
         - parameters
-            - oem: OEM object to identify the oem name within the authorization request URL
+            - oem: OEMName object for the OEM
         
         - returns:
             authorization request URL for the specific OEM

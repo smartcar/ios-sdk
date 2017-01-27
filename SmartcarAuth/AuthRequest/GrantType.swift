@@ -7,7 +7,7 @@
 //
 
 /**
-    Enum for the two type of Grant Type (code and token)
+    Enum for the request Grant Types (code and token)
  */
 
 public enum GrantType: String {

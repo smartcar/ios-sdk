@@ -7,7 +7,7 @@
 //
 
 /**
-    Enum for the list of currently avaliable OEM names
+    Enum for the list of currently available OEM names
 */
 
 public enum OEMName: String {

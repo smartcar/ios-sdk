@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 [![Platform](https://img.shields.io/cocoapods/p/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 
-SmartcarAuth is a client SDK for communicating with the Smartcar API OAuth 2.0. It strives to map the requests and responses to the Smartcar API and ensures the specifications are followed. In addition to ensuring specification, convenience methods are avaliable to assist common tasks like auto-generation of buttons to initiate the authorization flow.
+SmartcarAuth is a client SDK for communicating with the Smartcar API OAuth 2.0. It strives to map the requests and responses to the Smartcar API and ensures the specifications are followed. In addition to ensuring specification, convenience methods are available to assist common tasks like auto-generation of buttons to initiate the authorization flow.
 
 The SDK follows the best practices set out in [OAuth 2.0 for Native Apps] (https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06) including using _SFSafariViewController_ on iOS for the authorization request. For this reason, _UIWebView_ is explicitly not supported due to usability and security reasons.
 

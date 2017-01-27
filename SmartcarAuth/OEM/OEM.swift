@@ -63,7 +63,7 @@ public class OEM {
     }
     
     /**
-        Return a the full list of OEMNames
+        Return the full list of OEMNames
     */
     public static func getDefaultOEMList() -> [OEMName] {
         var array = Array(oemDictionary.keys).sorted {

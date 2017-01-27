@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
             if window?.rootViewController! is ViewController {
                 var vc = window?.rootViewController! as! ViewController
-                vc.accessCodeRecieved()
+                vc.accessCodeReceived()
             }
             return true
         }
