@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SmartcarAuth'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'Smartcar Authentication SDK for iOS written in Swift 3.'
  
   s.description      = <<-DESC
@@ -16,6 +16,6 @@ Smartcar Authentication SDK for iOS written in Swift 3.
   s.source           = { :git => 'https://github.com/smartcar/ios-sdk.git', :tag => s.version.to_s }
  
   s.ios.deployment_target = '10.0'
-  s.source_files = 'SmartcarAuth/*.swift'
+  s.source_files = 'SmartcarAuth/**/*.swift'
  
 end

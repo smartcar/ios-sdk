@@ -10,6 +10,7 @@
 		F87B2BCA1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
 		F87B2BCB1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
 		F87B2BCC1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
+		F8B0CC771E3A934400DE9D46 /* SmartcarAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8DB70F21E37FD8300C08DE2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB70F11E37FD8300C08DE2 /* Config.swift */; };
 		F8DB70F31E37FDBE00C08DE2 /* SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */; };
 		F8F9288B1E2B2F6B009F07E5 /* SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */; };
@@ -59,6 +60,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F8B0CC781E3A934400DE9D46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8F928781E2B2F6A009F07E5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8F928801E2B2F6A009F07E5;
+			remoteInfo = SmartcarAuth;
+		};
 		F8F9288C1E2B2F6B009F07E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F8F928781E2B2F6A009F07E5 /* Project object */;
@@ -67,6 +75,20 @@
 			remoteInfo = SmartCarOAuthSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F8B0CC7A1E3A934400DE9D46 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F8B0CC771E3A934400DE9D46 /* SmartcarAuth.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SmartcarAuthResources.bundle; sourceTree = "<group>"; };
@@ -160,11 +182,11 @@
 		F8F928771E2B2F6A009F07E5 = {
 			isa = PBXGroup;
 			children = (
-				F8F928BC1E2B30E5009F07E5 /* Example */,
-				F8F928821E2B2F6A009F07E5 /* Products */,
 				F8F928831E2B2F6A009F07E5 /* SmartcarAuth */,
 				F8F9288E1E2B2F6B009F07E5 /* SmartcarAuthTests */,
+				F8F928BC1E2B30E5009F07E5 /* Example */,
 				F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */,
+				F8F928821E2B2F6A009F07E5 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,7 +211,6 @@
 				F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */,
 				F8F928A51E2B2FED009F07E5 /* Utility.swift */,
 			);
-			name = SmartcarAuth;
 			path = SmartcarAuth;
 			sourceTree = "<group>";
 		};
@@ -202,7 +223,6 @@
 				F8F928B31E2B3024009F07E5 /* SmartcarAuthRequestTests.swift */,
 				F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */,
 			);
-			name = SmartcarAuthTests;
 			path = SmartcarAuthTests;
 			sourceTree = "<group>";
 		};
@@ -277,10 +297,12 @@
 				F8F928B71E2B30E5009F07E5 /* Sources */,
 				F8F928B81E2B30E5009F07E5 /* Frameworks */,
 				F8F928B91E2B30E5009F07E5 /* Resources */,
+				F8B0CC7A1E3A934400DE9D46 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F8B0CC791E3A934400DE9D46 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -427,6 +449,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F8B0CC791E3A934400DE9D46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F8F928801E2B2F6A009F07E5 /* SmartcarAuth */;
+			targetProxy = F8B0CC781E3A934400DE9D46 /* PBXContainerItemProxy */;
+		};
 		F8F9288D1E2B2F6B009F07E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F8F928801E2B2F6A009F07E5 /* SmartcarAuth */;
@@ -627,6 +654,7 @@
 		F8F928CA1E2B30E5009F07E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -643,6 +671,7 @@
 		F8F928CB1E2B30E5009F07E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

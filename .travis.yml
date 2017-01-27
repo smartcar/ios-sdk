@@ -3,6 +3,9 @@ osx_image: xcode8.2
 xcode_project: SmartcarAuth.xcodeproj # path to your xcodeproj folder
 xcode_scheme: SmartcarAuth
 xcode_sdk: iphonesimulator10.1
+before_install:
+- gem install xcov
 script:
 - xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=7B6F8C6B-B67A-4F64-BB70-AE1FF077ACC2,OS=10.2' build test 
+- xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=7B6F8C6B-B67A-4F64-BB70-AE1FF077ACC2,OS=10.2' build test
+- xcov -p SmartcarAuth.xcodeproj -s SmartcarAuth --include_test_targets SmartcarAuthTest.xctest 
