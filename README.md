@@ -1,19 +1,24 @@
-# SmartcarAuth
+# Smartcar iOS Auth SDK
 
 [![CI Status](https://img.shields.io/travis/smartcar/ios-sdk.svg?style=flat)](https://travis-ci.com/smartcar/ios-sdk/)
 [![Version](https://img.shields.io/cocoapods/v/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 [![License](https://img.shields.io/cocoapods/l/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 [![Platform](https://img.shields.io/cocoapods/p/SmartCarOAuthSDK.svg?style=flat)](http://cocoapods.org/pods/SmartCarOAuthSDK)
 
-SmartcarAuth is a client SDK for communicating with the Smartcar API OAuth 2.0. It strives to map the requests and responses to the Smartcar API and ensures the specifications are followed. In addition to ensuring specification, convenience methods are available to assist common tasks like auto-generation of buttons to initiate the authorization flow.
+The Smartcar iOS Auth SDK makes it easy to handle the Smartcar OAuth flow from
+iOS. In addition, it provides UI elements (buttons, picker) to easily integrate
+the flow into your application.
 
-The SDK follows the best practices set out in [OAuth 2.0 for Native Apps] (https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06) including using _SFSafariViewController_ on iOS for the authorization request. For this reason, _UIWebView_ is explicitly not supported due to usability and security reasons.
+The SDK follows the best practices set out in [OAuth 2.0 for Native Apps](https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06)
+including using _SFSafariViewController_ on iOS for the authorization request.
+_UIWebView_ is explicitly not supported due to usability and security reasons.
 
 ## Requirements
 
 SmartcarAuth supports iOS 7 and above.
 
-iOS 9+ uses the in-app browser tab pattern (via _SFSafariViewController_), and falls back to the system browser (mobile Safari) on earlier versions.
+iOS 9+ uses the in-app browser tab pattern (via _SFSafariViewController_), and
+falls back to the system browser (mobile Safari) on earlier versions.
 
 ## Installation
 
@@ -26,25 +31,23 @@ pod "SmartcarAuth"
 
 ## Authorization
 
-First you need to have a global SmartcarAuth object in your AppDelegate to hold the session, in order to continue the authorization flow from the redirect.
+First you need to have a global SmartcarAuth object in your AppDelegate to hold
+the session, in order to continue the authorization flow from the redirect.
 
 ```swift
 // global variable in the app's AppDelegate
-var smartCarSDK: SmartcarAuth? = nil
+var smartcar: SmartcarAuth? = nil
 ```
 
 Then, initiate the authorization request.
 
 ```swift
-// build Auth request
-let smartCarRequest = SmartcarAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope)
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+appDelegate.smartcar = SmartcarAuth(clientID: clientId, redirectURI: redirectURI, scope: scope)
+let smartcar = appDelegate.smartcar
 
 // initialize authorization request for Acura
-let appDelegate = UIApplication.shared.delegate as! AppDelegate
-appDelegate.smartCarSDK = SmartcarAuth(request: smartCarRequest)
-let sdk = appDelegate.smartCarSDK
-
-sdk.initializeAuthorizationRequest(for oem: OEM(oemName: OEMName.acura), viewController: viewController)
+smartcar.initializeAuthorizationRequest(for oem: OEM(oemName: OEMName.acura), viewController: viewController)
 ```
 
 ### Request Configuration
@@ -55,21 +58,25 @@ Application client ID obtained from [Smartcar Developer Portal] (https://develop
 
 `redirectURI`
 
-Your app must register with the system for the custom URI scheme in order to receive the authorization callback. Smartcar API requires the custom URI scheme to be in the format of `"sc" + clientId + "://" + hostname`. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. `sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect/page`).
+Your app must register a custom URI scheme with iOS in order to receive the
+authorization callback. Smartcar requires the custom URI scheme to be in the
+format of `"sc" + clientId + "://" + hostname`. This URI must also be registered
+in [Smartcar's developer portal](https://developer.smartcar.com) for your app.
+You may append an optional path component or TLD (e.g. `sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect.com/page`).
 
 More information on [configuration of custom scheme] (http://www.idev101.com/code/Objective-C/custom_url_schemes.html).
 
 `scope`
 
-Permissions requested from the user for specific grant.
-
-`grantType` (optional)
-
-Defaults to `GrantType.code`. `GrantType.code` is used for a server-side OAuth transaction. `GrantType.token` sends back a 2 hour token typically used for client-side applications.
+Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://developer.smartcar.com/docs)
+for a full list of available permissions.
 
 `forcePrompt` (optional)
 
-Defaults to `ApprovalType.auto`. Set to `ApprovalType.force` to force a user to re-grant permissions.
+Defaults to `ApprovalType.auto`. The auto option will skip the approval prompt
+for users who have already accepted the requested permissions for Your
+application in the past. Set to `ApprovalType.force` to force a user to see the
+approval prompt even if they have already accepted the permissions in the past.
 
 `development` (optional)
 
@@ -89,9 +96,12 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 
     // Sends the URL to the current authorization flow (if any) which will
     // process it if it relates to an authorization response.
-    if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
+    if smartcar!.resumeAuthorizationFlowWithURL(url: url) {
         return true
     }
+
+    // Retrieve the auth code which can now be used to exchange for an access token
+    let code = smartcar.code
 
     // Your additional URL handling (if any) goes here.
 
@@ -99,11 +109,20 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 }
 ```
 
-## Auxillary Objects
+## UI Components
 
 ### SmartcarAuthButtonGenerator
 
-The code below initializes the Client SDK with the minimum configuration options and generate a single button to initiate the OAuth flow for Tesla
+The button generator allows you to create individual buttons for each OEM which
+are styled with the OEM's logo and colors.
+
+Here are an example of a BMW button: 
+
+![](Example/Assets.xcassets/buttons.png)
+
+
+In this example we initialize the Client SDK and generate a single button to
+initiate the OAuth flow for Tesla.
 
 ```swift
 // global SmartcarAuthButtonGenerator variable to store the button and action
@@ -111,17 +130,14 @@ var ui: SmartcarAuthButtonGenerator? = nil
     
 func mainFunction {
     
-    // build OAuth request
-    let smartCarRequest = SmartcarAuthRequest(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
-
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    appDelegate.smartCarSDK = SmartcarAuth(request: smartCarRequest)
-    let sdk = appDelegate.smartCarSDK
+    appDelegate.smartcar = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
+    let smartcar = appDelegate.smartcar
 
     // initialize ButtonGenerator
-    ui = SmartcarAuthButtonGenerator(sdk: sdk!, viewController: self)
+    ui = SmartcarAuthButtonGenerator(sdk: smartcar!, viewController: self)
     
-    let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEM(oemName: OEMName.acura))
+    let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.tesla)
     self.view.addSubview(button)
     
     // add autolayout constraints
@@ -137,13 +153,10 @@ func mainFunction {
 }
 ```
 
-Here are an example of the buttons that can be generated: 
-
-![](Example/Assets.xcassets/buttons.png)
-
 ### SmartcarAuthPickerGenerator
 
-Similar to SmartcarAuthButtonGenerator but for selecting between different OEMs to initiate the authorization flow via the UIPickerView
+Similar to SmartcarAuthButtonGenerator, the picker provides an easy way to allow
+users to select between multiple OEMs via the UIPickerView.
 
 ```swift
 let button = ui!.generatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
@@ -164,7 +177,7 @@ Create a Config.swift file to store the clientId Config constant
 
 ```swift
 struct Config {
-    static let clientId = //put clientId string here
+    static let clientId = "PUT CLIENT ID HERE"
 }
 ```
 
