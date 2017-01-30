@@ -52,7 +52,7 @@ public class SmartcarAuth {
         Initializes the Authorization request and configures and return an SFSafariViewController with the correct
             authorization URL
      
-        - parameters
+        - Parameters
             - oem: OEMName object for the OEM
             - viewController: the viewController resposible for presenting the SFSafariView
     */
@@ -65,10 +65,10 @@ public class SmartcarAuth {
     /**
         Generates the authorization request URL for a specific OEM from the request paramters (Not recommended for direct use. Use initializeAuthorizationRequest)
      
-        - parameters
+        - Parameters
             - oem: OEMName object for the OEM
         
-        - returns:
+        - Returns:
             authorization request URL for the specific OEM
     */
     public func generateLink(for oem: OEMName) -> String {
@@ -89,10 +89,10 @@ public class SmartcarAuth {
         Authorization callback function. Verifies the state parameter of the URL matches the request state parameter and
             extract the authorization code
      
-        - parameters 
+        - Parameters
             - url: callback URL containing authorization code
      
-        - returns:
+        - Returns:
             true if authorization code was successfully extracted
     */
     public func resumeAuthorizationFlowWithURL(url: URL) -> Bool {

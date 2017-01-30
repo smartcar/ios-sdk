@@ -23,13 +23,13 @@ public class SmartcarAuthRequest {
      Initializes the SmartcarAuth Object
      
      - Parameters:
-     - clientID: app client ID
-     - redirectURI: app redirect URI
-     - scope: app oauth scope
-     - state: optional, oauth state
-     - grantType: oauth grath type enum can be either "code" or "token", defaults to "code"
-     - forcePrompt: forces permission screen if set to true, defaults to false
-     - development: appends mock oem if true, defaults to false
+        - clientID: app client ID
+        - redirectURI: app redirect URI
+        - scope: app oauth scope
+        - state: optional, oauth state
+        - grantType: oauth grath type enum can be either "code" or "token", defaults to "code"
+        - forcePrompt: forces permission screen if set to true, defaults to false
+        - development: appends mock oem if true, defaults to false
      */
     public init(clientID: String, redirectURI: String, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
         self.clientID = clientID

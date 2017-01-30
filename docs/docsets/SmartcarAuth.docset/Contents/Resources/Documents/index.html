@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SmartcarAuth  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="SmartcarAuth  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">SmartcarAuth Docs</a> (37% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">SmartcarAuth Reference</a>
+        <img id="carat" src="img/carat.png" />
+        SmartcarAuth  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/OEM.html">OEM</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:C12SmartcarAuth9OEMConfig">OEMConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SmartcarAuth.html">SmartcarAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SmartcarAuthButtonGenerator.html">SmartcarAuthButtonGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SmartcarAuthPickerGenerator.html">SmartcarAuthPickerGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SmartcarAuthRequest.html">SmartcarAuthRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SmartcarAuthUIGenerator.html">SmartcarAuthUIGenerator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ApprovalType.html">ApprovalType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/GrantType.html">GrantType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/OEMName.html">OEMName</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#smartcarauth' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='smartcarauth'>SmartcarAuth</h1>
+
+<p><a href="https://travis-ci.com/smartcar/ios-sdk/"><img src="https://img.shields.io/travis/smartcar/ios-sdk.svg?style=flat" alt="CI Status"></a>
+<a href="http://cocoapods.org/pods/SmartCarOAuthSDK"><img src="https://img.shields.io/cocoapods/v/SmartCarOAuthSDK.svg?style=flat" alt="Version"></a>
+<a href="http://cocoapods.org/pods/SmartCarOAuthSDK"><img src="https://img.shields.io/cocoapods/l/SmartCarOAuthSDK.svg?style=flat" alt="License"></a>
+<a href="http://cocoapods.org/pods/SmartCarOAuthSDK"><img src="https://img.shields.io/cocoapods/p/SmartCarOAuthSDK.svg?style=flat" alt="Platform"></a></p>
+
+<p>SmartcarAuth is a client SDK for communicating with the Smartcar API OAuth 2.0. It strives to map the requests and responses to the Smartcar API and ensures the specifications are followed. In addition to ensuring specification, convenience methods are available to assist common tasks like auto-generation of buttons to initiate the authorization flow.</p>
+
+<p>The SDK follows the best practices set out in <a href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06">OAuth 2.0 for Native Apps</a> including using <em>SFSafariViewController</em> on iOS for the authorization request. For this reason, <em>UIWebView</em> is explicitly not supported due to usability and security reasons.</p>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<p>SmartcarAuth supports iOS 7 and above.</p>
+
+<p>iOS 9+ uses the in-app browser tab pattern (via <em>SFSafariViewController</em>), and falls back to the system browser (mobile Safari) on earlier versions.</p>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+
+<p>SmartcarAuth is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"SmartcarAuth"</span>
+</code></pre>
+<a href='#authorization' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='authorization'>Authorization</h2>
+
+<p>First you need to have a global SmartcarAuth object in your AppDelegate to hold the session, in order to continue the authorization flow from the redirect.</p>
+<pre class="highlight swift"><code><span class="c1">// global variable in the app's AppDelegate</span>
+<span class="k">var</span> <span class="nv">smartCarSDK</span><span class="p">:</span> <span class="kt">SmartcarAuth</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+</code></pre>
+
+<p>Then, initiate the authorization request.</p>
+<pre class="highlight swift"><code><span class="c1">// build Auth request</span>
+<span class="k">let</span> <span class="nv">smartCarRequest</span> <span class="o">=</span> <span class="kt">SmartcarAuthRequest</span><span class="p">(</span><span class="nv">clientID</span><span class="p">:</span> <span class="n">clientId</span><span class="p">,</span> <span class="nv">redirectURI</span><span class="p">:</span> <span class="n">redirectURI</span><span class="p">,</span> <span class="nv">scope</span><span class="p">:</span> <span class="n">scope</span><span class="p">)</span>
+
+<span class="c1">// initialize authorization request for Acura</span>
+<span class="k">let</span> <span class="nv">appDelegate</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="k">as!</span> <span class="kt">AppDelegate</span>
+<span class="n">appDelegate</span><span class="o">.</span><span class="n">smartCarSDK</span> <span class="o">=</span> <span class="kt">SmartcarAuth</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">smartCarRequest</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">sdk</span> <span class="o">=</span> <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartCarSDK</span>
+
+<span class="n">sdk</span><span class="o">.</span><span class="nf">initializeAuthorizationRequest</span><span class="p">(</span><span class="k">for</span> <span class="nv">oem</span><span class="p">:</span> <span class="kt">OEM</span><span class="p">(</span><span class="nv">oemName</span><span class="p">:</span> <span class="kt">OEMName</span><span class="o">.</span><span class="n">acura</span><span class="p">),</span> <span class="nv">viewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
+</code></pre>
+<a href='#request-configuration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='request-configuration'>Request Configuration</h3>
+
+<p><code>clientId</code></p>
+
+<p>Application client ID obtained from <a href="https://developer.smartcar.com/">Smartcar Developer Portal</a>.</p>
+
+<p><code>redirectURI</code></p>
+
+<p>Your app must register with the system for the custom URI scheme in order to receive the authorization callback. Smartcar API requires the custom URI scheme to be in the format of <code>&quot;sc&quot; + clientId + &quot;://&quot; + hostname</code>. Where clienId is the application client ID obtained from the Smartcar Developer Portal. You may append an optional path component (e.g. <code>sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect/page</code>).</p>
+
+<p>More information on <a href="http://www.idev101.com/code/Objective-C/custom_url_schemes.html">configuration of custom scheme</a>.</p>
+
+<p><code>scope</code></p>
+
+<p>Permissions requested from the user for specific grant.</p>
+
+<p><code>grantType</code> (optional)</p>
+
+<p>Defaults to <code>GrantType.code</code>. <code>GrantType.code</code> is used for a server-side OAuth transaction. <code>GrantType.token</code> sends back a 2 hour token typically used for client-side applications.</p>
+
+<p><code>forcePrompt</code> (optional)</p>
+
+<p>Defaults to <code>ApprovalType.auto</code>. Set to <code>ApprovalType.force</code> to force a user to re-grant permissions.</p>
+
+<p><code>development</code> (optional)</p>
+
+<p>Defaults to <code>false</code>. Set to <code>true</code> to enable the Mock OEM.</p>
+<a href='#handling-the-redirect' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='handling-the-redirect'>Handling the Redirect</h3>
+
+<p>The authorization response URL is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session</p>
+<pre class="highlight swift"><code><span class="cm">/**
+    Intercepts callback from OAuth SafariView determined by the custom URI
+ */</span>
+<span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">handleOpen</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="c1">// Close the SFSafariViewController</span>
+    <span class="n">window</span><span class="o">!.</span><span class="n">rootViewController</span><span class="p">?</span><span class="o">.</span><span class="n">presentedViewController</span><span class="p">?</span><span class="o">.</span><span class="nf">dismiss</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span> <span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+    <span class="c1">// Sends the URL to the current authorization flow (if any) which will</span>
+    <span class="c1">// process it if it relates to an authorization response.</span>
+    <span class="k">if</span> <span class="n">smartCarSDK</span><span class="o">!.</span><span class="nf">resumeAuthorizationFlowWithURL</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Your additional URL handling (if any) goes here.</span>
+
+    <span class="k">return</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#auxillary-objects' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='auxillary-objects'>Auxillary Objects</h2>
+<a href='#smartcarauthbuttongenerator' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='smartcarauthbuttongenerator'>SmartcarAuthButtonGenerator</h3>
+
+<p>The code below initializes the Client SDK with the minimum configuration options and generate a single button to initiate the OAuth flow for Tesla</p>
+<pre class="highlight swift"><code><span class="c1">// global SmartcarAuthButtonGenerator variable to store the button and action</span>
+<span class="k">var</span> <span class="nv">ui</span><span class="p">:</span> <span class="kt">SmartcarAuthButtonGenerator</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+
+<span class="kd">func</span> <span class="n">mainFunction</span> <span class="p">{</span>
+
+    <span class="c1">// build OAuth request</span>
+    <span class="k">let</span> <span class="nv">smartCarRequest</span> <span class="o">=</span> <span class="kt">SmartcarAuthRequest</span><span class="p">(</span><span class="nv">clientID</span><span class="p">:</span> <span class="kt">Config</span><span class="o">.</span><span class="n">clientId</span><span class="p">,</span> <span class="nv">redirectURI</span><span class="p">:</span> <span class="s">"sc"</span> <span class="o">+</span> <span class="kt">Config</span><span class="o">.</span><span class="n">clientId</span> <span class="o">+</span> <span class="s">"://page"</span><span class="p">,</span> <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="s">"read_vehicle_info"</span><span class="p">,</span> <span class="s">"read_odometer"</span><span class="p">])</span>
+
+    <span class="k">let</span> <span class="nv">appDelegate</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="k">as!</span> <span class="kt">AppDelegate</span>
+    <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartCarSDK</span> <span class="o">=</span> <span class="kt">SmartcarAuth</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">smartCarRequest</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">sdk</span> <span class="o">=</span> <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartCarSDK</span>
+
+    <span class="c1">// initialize ButtonGenerator</span>
+    <span class="n">ui</span> <span class="o">=</span> <span class="kt">SmartcarAuthButtonGenerator</span><span class="p">(</span><span class="nv">sdk</span><span class="p">:</span> <span class="n">sdk</span><span class="o">!</span><span class="p">,</span> <span class="nv">viewController</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+
+    <span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="n">ui</span><span class="o">!.</span><span class="nf">generateButton</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">),</span> <span class="nv">for</span><span class="p">:</span> <span class="kt">OEM</span><span class="p">(</span><span class="nv">oemName</span><span class="p">:</span> <span class="kt">OEMName</span><span class="o">.</span><span class="n">acura</span><span class="p">))</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+
+    <span class="c1">// add autolayout constraints</span>
+    <span class="n">button</span><span class="o">.</span><span class="n">translatesAutoresizingMaskIntoConstraints</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">let</span> <span class="nv">buttonPinMiddleX</span> <span class="o">=</span> <span class="kt">NSLayoutConstraint</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="n">button</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">centerX</span><span class="p">,</span> <span class="nv">relatedBy</span><span class="p">:</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span> <span class="nv">toItem</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">centerX</span><span class="p">,</span> <span class="nv">multiplier</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nv">constant</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">buttonPinMiddleY</span> <span class="o">=</span> <span class="kt">NSLayoutConstraint</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="n">button</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">centerY</span><span class="p">,</span> <span class="nv">relatedBy</span><span class="p">:</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span> <span class="nv">toItem</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">centerY</span><span class="p">,</span> <span class="nv">multiplier</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="nv">constant</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">//make sure contraint width is equal to frame width</span>
+    <span class="k">let</span> <span class="nv">buttonWidth</span> <span class="o">=</span> <span class="kt">NSLayoutConstraint</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="n">button</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nv">relatedBy</span><span class="p">:</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span> <span class="nv">toItem</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">notAnAttribute</span><span class="p">,</span> <span class="nv">multiplier</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">constant</span><span class="p">:</span> <span class="mi">250</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">buttonHeight</span> <span class="o">=</span> <span class="kt">NSLayoutConstraint</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="n">button</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="nv">relatedBy</span><span class="p">:</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span> <span class="nv">toItem</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">notAnAttribute</span><span class="p">,</span> <span class="nv">multiplier</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">constant</span><span class="p">:</span> <span class="mi">50</span><span class="p">)</span>
+
+    <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addConstraints</span><span class="p">([</span><span class="n">buttonPinMiddleX</span><span class="p">,</span> <span class="n">buttonPinMiddleY</span><span class="p">,</span> <span class="n">buttonWidth</span><span class="p">,</span> <span class="n">buttonHeight</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Here are an example of the buttons that can be generated: </p>
+
+<p><img src="Example/Assets.xcassets/buttons.png" alt=""></p>
+<a href='#smartcarauthpickergenerator' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='smartcarauthpickergenerator'>SmartcarAuthPickerGenerator</h3>
+
+<p>Similar to SmartcarAuthButtonGenerator but for selecting between different OEMs to initiate the authorization flow via the UIPickerView</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="n">ui</span><span class="o">!.</span><span class="nf">generatePicker</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">))</span>
+<span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+</code></pre>
+
+<p>Below is the generated UIPickerView in action</p>
+
+<p align="center">
+  <img src="Example/Assets.xcassets/picker.png"/>
+</p>
+<a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example'>Example</h2>
+
+<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
+
+<p>Create a Config.swift file to store the clientId Config constant</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Config</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">clientId</span> <span class="o">=</span> <span class="c1">//put clientId string here</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Edit Info.plist to adhere to the custom URI scheme stated above and then run the example</p>
+<a href='#author' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='author'>Author</h2>
+
+<p>Smartcar Inc., <a href="mailto:hello@smartcar.com">hello@smartcar.com</a></p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>SmartcarAuth is available under the MIT license. See the LICENSE file for more info.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2017-01-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

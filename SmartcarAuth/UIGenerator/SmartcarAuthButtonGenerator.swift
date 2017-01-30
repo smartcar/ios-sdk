@@ -22,7 +22,7 @@ public class SmartcarAuthButtonGenerator: SmartcarAuthUIGenerator {
     /**
         Generate and displayes a single button for a OEM that resides in the specific UIView provided
      
-        - parameters: 
+        - Parameters: 
             - for: the OEM that the button will open the authentication flow for
             - frame: CGRect object that determines the position and size of the button
      */

@@ -5,12 +5,11 @@
 //  Created by Jeremy Zhang on 1/6/17.
 //  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
+import UIKit
 
 /**
-    OEM class storing the name and the specific configurations for the OEM
+    Class containing the name and the specific configurations for the OEMs
  */
-
-import UIKit
 
 public class OEM {
     static let oemDictionary: [OEMName: OEMConfig] =
@@ -43,6 +42,8 @@ public class OEM {
     
     /**
         Return the OEMConfig object of the OEM
+     
+        - Returns: OEMConfig object for the OEM
     */
     public static func getOEMConfig(for oem: OEMName) -> OEMConfig {
         return self.oemDictionary[oem]!

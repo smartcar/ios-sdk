@@ -5,12 +5,11 @@
 //  Created by Jeremy Zhang on 1/6/17.
 //  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
+import UIKit
 
 /**
-    Class to store OEM specific configurations.
+ Class to store OEM specific configurations.
  */
-
-import UIKit
 
 public class OEMConfig {
     // The default color of the OEM in Hex

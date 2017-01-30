@@ -15,11 +15,11 @@ import UIKit
 /**
     Converts a hexString to the UIColor class
  
-    - parameters:
+    - Parameters:
         - hex: color in hexadecimal string
  */
 
-public func hexStringToUIColor (hex:String) -> UIColor {
+func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
     
     if (cString.hasPrefix("#")) {

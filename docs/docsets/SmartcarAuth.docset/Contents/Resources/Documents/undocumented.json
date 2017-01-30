@@ -1,0 +1,257 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/AuthRequest/ApprovalType.swift",
+      "line": 14,
+      "symbol": "ApprovalType.force",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/AuthRequest/ApprovalType.swift",
+      "line": 15,
+      "symbol": "ApprovalType.auto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/AuthRequest/GrantType.swift",
+      "line": 14,
+      "symbol": "GrantType.code",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/AuthRequest/GrantType.swift",
+      "line": 15,
+      "symbol": "GrantType.token",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 14,
+      "symbol": "OEMName.acura",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 15,
+      "symbol": "OEMName.audi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 16,
+      "symbol": "OEMName.bmw",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 17,
+      "symbol": "OEMName.bmwConnected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 18,
+      "symbol": "OEMName.buick",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 19,
+      "symbol": "OEMName.cadillac",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 20,
+      "symbol": "OEMName.chevrolet",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 21,
+      "symbol": "OEMName.chrysler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 22,
+      "symbol": "OEMName.dodge",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 23,
+      "symbol": "OEMName.ford",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 24,
+      "symbol": "OEMName.fiat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 25,
+      "symbol": "OEMName.gmc",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 26,
+      "symbol": "OEMName.hyundai",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 27,
+      "symbol": "OEMName.infiniti",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 28,
+      "symbol": "OEMName.jeep",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 29,
+      "symbol": "OEMName.kia",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 30,
+      "symbol": "OEMName.landrover",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 31,
+      "symbol": "OEMName.lexus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 32,
+      "symbol": "OEMName.nissan",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 33,
+      "symbol": "OEMName.nissanev",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 34,
+      "symbol": "OEMName.ram",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 35,
+      "symbol": "OEMName.tesla",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 36,
+      "symbol": "OEMName.volkswagen",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 37,
+      "symbol": "OEMName.volvo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 38,
+      "symbol": "OEMName.mercedes",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/OEM/OEMName.swift",
+      "line": 39,
+      "symbol": "OEMName.mock",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/UIGenerator/SmartcarAuthButtonGenerator.swift",
+      "line": 18,
+      "symbol": "SmartcarAuthButtonGenerator.init(sdk:viewController:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/UIGenerator/SmartcarAuthPickerGenerator.swift",
+      "line": 25,
+      "symbol": "SmartcarAuthPickerGenerator.init(sdk:viewController:oemList:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/UIGenerator/SmartcarAuthPickerGenerator.swift",
+      "line": 115,
+      "symbol": "SmartcarAuthPickerGenerator.numberOfComponents(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/UIGenerator/SmartcarAuthPickerGenerator.swift",
+      "line": 119,
+      "symbol": "SmartcarAuthPickerGenerator.pickerView(_:numberOfRowsInComponent:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/UIGenerator/SmartcarAuthPickerGenerator.swift",
+      "line": 123,
+      "symbol": "SmartcarAuthPickerGenerator.pickerView(_:titleForRow:forComponent:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth/SmartcarAuth/UIGenerator/SmartcarAuthUIGenerator.swift",
+      "line": 19,
+      "symbol": "SmartcarAuthUIGenerator.init(sdk:viewController:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/jeremyzhang/Documents/xcode/iOS10/SmartcarAuth"
+}

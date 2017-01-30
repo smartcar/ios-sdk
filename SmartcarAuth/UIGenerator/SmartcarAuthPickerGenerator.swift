@@ -34,7 +34,7 @@ public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewD
     /**
         Generates and displays the initial button which displays the UIPickerView when pressed
      
-        - parameters:
+        - Parameters:
             - frame: CGRect object that determins the location and size of the button
             - with: color of the initial button. Defaults to black
      */

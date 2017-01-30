@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SmartcarAuthRequest Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/SmartcarAuthRequest" class="dashAnchor"></a>
+    <a title="SmartcarAuthRequest Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SmartcarAuth Docs</a> (37% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SmartcarAuth Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        SmartcarAuthRequest Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/OEM.html">OEM</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C12SmartcarAuth9OEMConfig">OEMConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuth.html">SmartcarAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuthButtonGenerator.html">SmartcarAuthButtonGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuthPickerGenerator.html">SmartcarAuthPickerGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuthRequest.html">SmartcarAuthRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuthUIGenerator.html">SmartcarAuthUIGenerator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ApprovalType.html">ApprovalType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GrantType.html">GrantType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OEMName.html">OEMName</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SmartcarAuthRequest</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SmartcarAuthRequest</span></code></pre>
+
+                </div>
+              </div>
+            <p>Class encapsulating the data required within a Smartcar Authorization Request</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC12SmartcarAuth19SmartcarAuthRequestcFT8clientIDSS11redirectURISS5scopeGSaSS_9grantTypeOS_9GrantType11forcePromptSb11developmentSb_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(clientID:redirectURI:scope:grantType:forcePrompt:development:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC12SmartcarAuth19SmartcarAuthRequestcFT8clientIDSS11redirectURISS5scopeGSaSS_9grantTypeOS_9GrantType11forcePromptSb11developmentSb_S0_">init(clientID:redirectURI:scope:grantType:forcePrompt:development:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes the SmartcarAuth Object</p>
+
+<ul>
+<li>Parameters:
+
+<ul>
+<li>clientID: app client ID</li>
+<li>redirectURI: app redirect URI</li>
+<li>scope: app oauth scope</li>
+<li>state: optional, oauth state</li>
+<li>grantType: oauth grath type enum can be either <q>code</q> or <q>token</q>, defaults to <q>code</q></li>
+<li>forcePrompt: forces permission screen if set to true, defaults to false</li>
+<li>development: appends mock oem if true, defaults to false</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">clientID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">redirectURI</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">grantType</span><span class="p">:</span> <span class="kt"><a href="../Enums/GrantType.html">GrantType</a></span> <span class="o">=</span> <span class="kt"><a href="../Enums/GrantType.html">GrantType</a></span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="nv">forcePrompt</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">development</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>clientID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>app client ID</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redirectURI</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>app redirect URI</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>scope</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>app oauth scope</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>state</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>optional, oauth state</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grantType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>oauth grath type enum can be either “code” or “token”, defaults to “code”</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forcePrompt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>forces permission screen if set to true, defaults to false</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>development</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>appends mock oem if true, defaults to false</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2017-01-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
