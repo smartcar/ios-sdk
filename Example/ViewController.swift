@@ -16,9 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let smartCarRequest = SmartcarAuthRequest(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.smartCarSDK = SmartcarAuth(request: smartCarRequest)
+        appDelegate.smartCarSDK = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = appDelegate.smartCarSDK
         ui = SmartcarAuthButtonGenerator(sdk: sdk!, viewController: self)
         

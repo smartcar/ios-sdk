@@ -47,7 +47,7 @@ appDelegate.smartcar = SmartcarAuth(clientID: clientId, redirectURI: redirectURI
 let smartcar = appDelegate.smartcar
 
 // initialize authorization request for Acura
-smartcar.initializeAuthorizationRequest(for oem: OEM(oemName: OEMName.acura), viewController: viewController)
+smartcar.initializeAuthorizationRequest(for oem: OEMName.acura, viewController: viewController)
 ```
 
 ### Request Configuration
