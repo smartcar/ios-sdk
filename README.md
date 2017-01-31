@@ -96,16 +96,20 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 
     // Sends the URL to the current authorization flow (if any) which will
     // process it if it relates to an authorization response.
-    if smartcar!.resumeAuthorizationFlowWithURL(url: url) {
-        return true
+    do {
+        let code = try smartcar!.resumeAuthorizationFlowWithURL(url: url)
+               
+        if window?.rootViewController! is ViewController {
+            var vc = window?.rootViewController! as! ViewController
+            vc.accessCodeReceived(code: code)
+        }
+    } catch {
+        print("Error caught")
     }
-
-    // Retrieve the auth code which can now be used to exchange for an access token
-    let code = smartcar.code
-
+    
     // Your additional URL handling (if any) goes here.
 
-    return false
+    return true
 }
 ```
 
