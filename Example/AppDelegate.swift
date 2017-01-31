@@ -46,14 +46,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
-        if smartCarSDK!.resumeAuthorizationFlowWithURL(url: url) {
+        
+        do {
+            let code = try smartCarSDK!.resumeAuthorizationFlowWithURL(url: url)
+                
             if window?.rootViewController! is ViewController {
                 var vc = window?.rootViewController! as! ViewController
-                vc.accessCodeReceived()
+                vc.accessCodeReceived(code: code)
             }
-            return true
+        } catch {
+            print("Error caught")
         }
-        return false
+        
+        return true
     }
 }
 

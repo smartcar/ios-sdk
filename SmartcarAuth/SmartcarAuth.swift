@@ -19,9 +19,7 @@ import SafariServices
 
 public class SmartcarAuth {
     let request: SmartcarAuthRequest
-    //Access code for the current request, is nil if request has not been completed
-    var code: String?
-    
+
     /**
         Constructor for the SmartcarAuth
      
@@ -95,24 +93,21 @@ public class SmartcarAuth {
         - Returns:
             true if authorization code was successfully extracted
     */
-    public func resumeAuthorizationFlowWithURL(url: URL) -> Bool {
+    public func resumeAuthorizationFlowWithURL(url: URL) throws -> String {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let query = urlComp?.queryItems
         
         if let code = query?[0].value {
             if let state = query?[1].value {
                 if state != self.request.state {
-                    return false
+                    throw AuthorizationError.invalidState
                 }
-                
-                self.code = code
+                return code
             } else {
-                return false
+                throw AuthorizationError.missingState
             }
         } else {
-            return false
+            throw AuthorizationError.missingURL
         }
-        
-        return true
     }
 }

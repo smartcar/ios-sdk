@@ -45,12 +45,9 @@ class ViewController: UIViewController {
         self.view.addConstraints([imPinMiddleX, imPinMiddleY, imWidth, imHeight])
     }
     
-    func accessCodeReceived() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let sdk = appDelegate.smartCarSDK
-
+    func accessCodeReceived(code: String) {
         let label = UILabel()
-        label.text = "Access code is " + sdk!.code!
+        label.text = "Access code is " + code
         label.numberOfLines = 2
         label.textColor = .white
         

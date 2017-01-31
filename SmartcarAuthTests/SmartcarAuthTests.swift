@@ -44,7 +44,11 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page"
         
-        XCTAssertFalse(sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!))
+        do {
+            try sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!)
+            XCTFail()
+        } catch {
+        }
     }
     
     func testResumingAuthorizationFlowWithIncorrectState() {
@@ -53,7 +57,11 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page?code=abc123&state=ABC-123-DEG"
         
-        XCTAssertFalse(sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!), "ResumeAuthorizationFlowWithURL returned true for call back URL with different states")
+        do {
+            try sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!)
+            XCTFail()
+        } catch {
+        }
     }
     
     func testResumingAuthorizationFlowWithCorrectState() {
@@ -62,8 +70,11 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page?code=abc123&state=" + smartCarRequest.state
         
-        XCTAssertTrue(sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!), "ResumeAuthorizationFlowWithURL returned false for call back URL with the same states")
-        XCTAssertEqual(sdk.code!, "abc123", "Code returned does not equal code in the URL")
-
+        do {
+            let code = try sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!)
+            XCTAssertEqual(code, "abc123", "Code returned does not equal code in the URL")
+        } catch {
+            XCTFail()
+        }
     }
 }
