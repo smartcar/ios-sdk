@@ -96,22 +96,22 @@ public class SmartcarAuth {
             true if authorization code was successfully extracted
     */
     public func resumeAuthorizationFlowWithURL(url: URL) -> Bool {
-        let urlString = url.absoluteString
+        let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let query = urlComp?.queryItems
         
-        if !urlString.contains("?") {
-            return false
-        }
-        
-        let urlArray = urlString.components(separatedBy: "?")[1].components(separatedBy: "&")
-        
-        if urlArray.count > 1 {
-            let comp = urlArray[1].components(separatedBy: "=")
-            if(comp[1] != self.request.state) {
+        if let code = query?[0].value {
+            if let state = query?[1].value {
+                if state != self.request.state {
+                    return false
+                }
+                
+                self.code = code
+            } else {
                 return false
             }
+        } else {
+            return false
         }
-        
-        self.code = urlArray[0].substring(from: urlArray[0].index(urlArray[0].startIndex, offsetBy: 5))
         
         return true
     }

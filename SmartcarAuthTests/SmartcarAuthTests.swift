@@ -38,6 +38,15 @@ class SmartcarAuthTests: XCTestCase {
         XCTAssertEqual(link, "https://acura.smartcar.com/oauth/authorize?response_type=code&client_id=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa&redirect_uri=scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page&scope=read_vehicle_info%20read_odometer&approval_prompt=auto&state=" + sdk.request.state, "Link generation failed to provide the accurate link")
     }
     
+    func testResumingAuthorizationFlowWithIncorrectURL() {
+        let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let sdk = SmartcarAuth(request: smartCarRequest)
+        
+        let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page"
+        
+        XCTAssertFalse(sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!))
+    }
+    
     func testResumingAuthorizationFlowWithIncorrectState() {
         let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartcarAuth(request: smartCarRequest)
