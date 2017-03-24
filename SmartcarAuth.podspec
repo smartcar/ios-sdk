@@ -17,5 +17,8 @@ Smartcar Authentication SDK for iOS written in Swift 3.
  
   s.ios.deployment_target = '10.0'
   s.source_files = 'SmartcarAuth/**/*.swift'
- 
+  s.resource_bundles = {
+      'SmartcarAuthResources' => [ 'SmartcarAuthResources.bundle/*' ]
+  }
+
 end
