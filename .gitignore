@@ -11,8 +11,6 @@ build/
 DerivedData/
 xcov_report/
 
-Example/Config.swift
-
 ## Various settings
 *.pbxuser
 !default.pbxuser
