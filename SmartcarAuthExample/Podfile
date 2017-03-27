@@ -9,4 +9,7 @@ target 'SmartcarAuthExample' do
 
   pod 'SmartcarAuth', '~> 1.0'
 
+  # For accessing local pods uncomment the line below
+  # pod 'SmartcarAuth', :path => "path/to/SmartcarAuth/"
+
 end
