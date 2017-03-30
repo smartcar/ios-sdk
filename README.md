@@ -54,7 +54,7 @@ smartcar.initializeAuthorizationRequest(for oem: OEMName.acura, viewController: 
 
 `clientId`
 
-Application client ID obtained from [Smartcar Developer Portal] (https://developer.smartcar.com/).
+Application client ID obtained from [Smartcar Developer Portal](https://developer.smartcar.com/).
 
 `redirectURI`
 
@@ -64,7 +64,7 @@ format of `"sc" + clientId + "://" + hostname`. This URI must also be registered
 in [Smartcar's developer portal](https://developer.smartcar.com) for your app.
 You may append an optional path component or TLD (e.g. `sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect.com/page`).
 
-More information on [configuration of custom scheme] (http://www.idev101.com/code/Objective-C/custom_url_schemes.html).
+More information on [configuration of custom scheme](http://www.idev101.com/code/Objective-C/custom_url_schemes.html).
 
 `scope`
 
