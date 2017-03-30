@@ -122,7 +122,7 @@ are styled with the OEM's logo and colors.
 
 Here are an example of a BMW button: 
 
-![](Example/Assets.xcassets/buttons.png)
+![](SmartcarAuthExample/SmartcarAuthExample/Assets.xcassets/buttons.png)
 
 
 In this example we initialize the Client SDK and generate a single button to
@@ -170,7 +170,7 @@ self.view.addSubview(button)
 Below is the generated UIPickerView in action
 
 <p align="center">
-  <img src="Example/Assets.xcassets/picker.png"/>
+  <img src="SmartcarAuthExample/SmartcarAuthExample/Assets.xcassets/picker.png"/>
 </p>
 
 ## Example
