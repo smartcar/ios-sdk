@@ -7,5 +7,5 @@ before_install:
 - gem install xcov
 script:
 - xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=F78B5B13-6104-4568-8CE7-80C41711DD03,OS=10.2' build test
+- xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=755CF652-86F0-42D0-8CBB-909008FEF7C6,OS=10.2' build test
 - xcov -p SmartcarAuth.xcodeproj -s SmartcarAuth --include_test_targets SmartcarAuthTest.xctest 
