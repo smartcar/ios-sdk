@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F832A4A21F34F55900E95E62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9611E8962C900021C83 /* Assets.xcassets */; };
 		F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
 		F85EC7721E414818003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
 		F85EC7731E414818003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
@@ -443,6 +444,7 @@
 			files = (
 				F8A1E97C1E89658200021C83 /* LaunchScreen.storyboard in Resources */,
 				F87B2BCC1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */,
+				F832A4A21F34F55900E95E62 /* Assets.xcassets in Resources */,
 				F8A1E97B1E89657400021C83 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

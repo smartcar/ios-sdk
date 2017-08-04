@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         let sdk = appDelegate.smartCarSDK
         ui = SmartcarAuthButtonGenerator(sdk: sdk!, viewController: self)
         
-        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.mock)
+        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.honda)
         self.view.addSubview(button)
         self.view.backgroundColor = .black
         
