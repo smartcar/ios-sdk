@@ -23,6 +23,7 @@ public enum OEMName: String {
     case ford
     case fiat
     case gmc
+    case honda
     case hyundai
     case infiniti
     case jeep

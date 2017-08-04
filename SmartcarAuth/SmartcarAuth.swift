@@ -84,8 +84,7 @@ public class SmartcarAuth {
     }
     
     /**
-        Authorization callback function. Verifies the state parameter of the URL matches the request state parameter and
-            extract the authorization code
+        Authorization callback function. Verifies the state parameter of the URL matches the request state parameter and extract the authorization code
      
         - Parameters
             - url: callback URL containing authorization code

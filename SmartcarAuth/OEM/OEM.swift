@@ -25,6 +25,7 @@ public class OEM {
          .ford: OEMConfig(color: "#003399", displayName: "ford"),
          .fiat: OEMConfig(color: "#B50536", displayName: "fiat"),
          .gmc: OEMConfig(color: "#CC0033", displayName: "gmc"),
+         .honda: OEMConfig(color: "#DA251D", displayName: "honda"),
          .hyundai: OEMConfig(color: "#00287A", displayName: "hyundai"),
          .infiniti: OEMConfig(color: "#1F1F1F", displayName: "infiniti"),
          .jeep: OEMConfig(color: "#374B00", displayName: "jeep"),

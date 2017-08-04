@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.smartCarSDK = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
+        appDelegate.smartCarSDK = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info"])
         let sdk = appDelegate.smartCarSDK
         ui = SmartcarAuthButtonGenerator(sdk: sdk!, viewController: self)
         
@@ -48,6 +48,7 @@ class ViewController: UIViewController {
     func accessCodeReceived(code: String) {
         let label = UILabel()
         label.text = "Access code is " + code
+        print(code)
         label.numberOfLines = 2
         label.textColor = .white
         
@@ -60,6 +61,10 @@ class ViewController: UIViewController {
         let labelHeight = NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
         
          self.view.addConstraints([labelPinMiddleX, labelPinMiddleY, labelWidth, labelHeight])
+    }
+    
+    func callSmartcarAPI(code: String) {
+        
     }
     
     
