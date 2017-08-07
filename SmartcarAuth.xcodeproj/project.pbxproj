@@ -8,19 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		F832A4A21F34F55900E95E62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9611E8962C900021C83 /* Assets.xcassets */; };
+		F832A4A71F39018C00E95E62 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
+		F832A4A81F3901A300E95E62 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
+		F832A4A91F3901A600E95E62 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
+		F832A4AA1F3901A600E95E62 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
+		F832A4AB1F3901A900E95E62 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
+		F832A4AC1F3901AB00E95E62 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
 		F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
 		F85EC7721E414818003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
 		F85EC7731E414818003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
 		F87B2BCA1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
 		F87B2BCB1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
 		F87B2BCC1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
-		F8A1E96C1E8962C900021C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9601E8962C900021C83 /* AppDelegate.swift */; };
 		F8A1E96D1E8962C900021C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9611E8962C900021C83 /* Assets.xcassets */; };
 		F8A1E96E1E8962C900021C83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9621E8962C900021C83 /* LaunchScreen.storyboard */; };
 		F8A1E96F1E8962C900021C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9641E8962C900021C83 /* Main.storyboard */; };
-		F8A1E9701E8962C900021C83 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9661E8962C900021C83 /* Config.swift */; };
 		F8A1E9711E8962C900021C83 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9671E8962C900021C83 /* Info.plist */; };
-		F8A1E9721E8962C900021C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9681E8962C900021C83 /* ViewController.swift */; };
 		F8A1E9761E89630400021C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9601E8962C900021C83 /* AppDelegate.swift */; };
 		F8A1E9781E89630400021C83 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9661E8962C900021C83 /* Config.swift */; };
 		F8A1E97A1E89630400021C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9681E8962C900021C83 /* ViewController.swift */; };
@@ -51,18 +54,12 @@
 		F8F928D71E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289B1E2B2FED009F07E5 /* SmartcarAuthButtonGenerator.swift */; };
 		F8F928D81E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */; };
 		F8F928D91E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */; };
-		F8F928DA1E2C0D0D009F07E5 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
-		F8F928DB1E2C0D0D009F07E5 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
-		F8F928DC1E2C0D0F009F07E5 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
-		F8F928DD1E2C0D10009F07E5 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
 		F8F928DE1E2C0D12009F07E5 /* OEM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289F1E2B2FED009F07E5 /* OEM.swift */; };
 		F8F928DF1E2C0D13009F07E5 /* OEM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289F1E2B2FED009F07E5 /* OEM.swift */; };
 		F8F928E01E2C0D15009F07E5 /* OEMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */; };
 		F8F928E11E2C0D16009F07E5 /* OEMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */; };
 		F8F928E21E2C0D18009F07E5 /* OEMName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A11E2B2FED009F07E5 /* OEMName.swift */; };
 		F8F928E31E2C0D19009F07E5 /* OEMName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A11E2B2FED009F07E5 /* OEMName.swift */; };
-		F8F928E41E2C0D1B009F07E5 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
-		F8F928E51E2C0D1B009F07E5 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
 		F8F928E61E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */; };
 		F8F928E71E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */; };
 		F8F928E81E2C0D21009F07E5 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A51E2B2FED009F07E5 /* Utility.swift */; };
@@ -456,17 +453,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8A1E9721E8962C900021C83 /* ViewController.swift in Sources */,
 				F8F928A91E2B2FED009F07E5 /* GrantType.swift in Sources */,
 				F8F928A71E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */,
 				F8F928B01E2B2FED009F07E5 /* Utility.swift in Sources */,
-				F8A1E9701E8962C900021C83 /* Config.swift in Sources */,
 				F8F928AC1E2B2FED009F07E5 /* OEMName.swift in Sources */,
 				F8F928AD1E2B2FED009F07E5 /* SmartcarAuthRequest.swift in Sources */,
 				F8F928AB1E2B2FED009F07E5 /* OEMConfig.swift in Sources */,
 				F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */,
 				F8F928AF1E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */,
-				F8A1E96C1E8962C900021C83 /* AppDelegate.swift in Sources */,
 				F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */,
 				F8F928D21E2B47BF009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */,
 				F8F928A81E2B2FED009F07E5 /* ApprovalType.swift in Sources */,
@@ -478,22 +472,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F832A4A71F39018C00E95E62 /* SmartcarAuthRequest.swift in Sources */,
 				F8F928D51E2C0CFF009F07E5 /* SmartcarAuth.swift in Sources */,
 				F8F928B61E2B3024009F07E5 /* SmartcarAuthRequestTests.swift in Sources */,
 				F8F928B41E2B3024009F07E5 /* SmartcarAuthButtonGeneratorTests.swift in Sources */,
 				F8F928901E2B2F6B009F07E5 /* SmartcarAuthTests.swift in Sources */,
-				F8F928DA1E2C0D0D009F07E5 /* ApprovalType.swift in Sources */,
 				F8F928E81E2C0D21009F07E5 /* Utility.swift in Sources */,
 				F8F928D61E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */,
 				F8F928E21E2C0D18009F07E5 /* OEMName.swift in Sources */,
+				F832A4AB1F3901A900E95E62 /* GrantType.swift in Sources */,
+				F832A4A91F3901A600E95E62 /* ApprovalType.swift in Sources */,
 				F8F928B51E2B3024009F07E5 /* SmartcarAuthPickerGeneratorTests.swift in Sources */,
-				F8F928DC1E2C0D0F009F07E5 /* GrantType.swift in Sources */,
 				F8F928E01E2C0D15009F07E5 /* OEMConfig.swift in Sources */,
 				F8F928E61E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */,
 				F8F928D81E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */,
 				F8F928DE1E2C0D12009F07E5 /* OEM.swift in Sources */,
 				F85EC7721E414818003575F6 /* AuthorizationError.swift in Sources */,
-				F8F928E41E2C0D1B009F07E5 /* SmartcarAuthRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,15 +499,15 @@
 				F8A1E9781E89630400021C83 /* Config.swift in Sources */,
 				F8A1E97A1E89630400021C83 /* ViewController.swift in Sources */,
 				F8F928E71E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */,
-				F8F928E51E2C0D1B009F07E5 /* SmartcarAuthRequest.swift in Sources */,
+				F832A4AC1F3901AB00E95E62 /* GrantType.swift in Sources */,
 				F8F928D91E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */,
-				F8F928DD1E2C0D10009F07E5 /* GrantType.swift in Sources */,
 				F8F928D41E2C0CFE009F07E5 /* SmartcarAuth.swift in Sources */,
 				F85EC7731E414818003575F6 /* AuthorizationError.swift in Sources */,
 				F8F928E11E2C0D16009F07E5 /* OEMConfig.swift in Sources */,
 				F8F928E31E2C0D19009F07E5 /* OEMName.swift in Sources */,
 				F8F928E91E2C0D22009F07E5 /* Utility.swift in Sources */,
-				F8F928DB1E2C0D0D009F07E5 /* ApprovalType.swift in Sources */,
+				F832A4AA1F3901A600E95E62 /* ApprovalType.swift in Sources */,
+				F832A4A81F3901A300E95E62 /* SmartcarAuthRequest.swift in Sources */,
 				F8F928DF1E2C0D13009F07E5 /* OEM.swift in Sources */,
 				F8F928D71E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */,
 			);

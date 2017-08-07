@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
         
         do {
-            let code = try smartCarSDK!.resumeAuthorizationFlowWithURL(url: url)
+            let code = try smartCarSDK!.resumeAuthorizationFlow(with: url)
                 
             if window?.rootViewController! is ViewController {
                 var vc = window?.rootViewController! as! ViewController

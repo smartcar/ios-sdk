@@ -6,11 +6,13 @@
 //  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
+import Foundation
+
 /**
     Class encapsulating the data required within a Smartcar Authorization Request
  */
 
-public class SmartcarAuthRequest {
+@objc public class SmartcarAuthRequest: NSObject {
     let clientID: String // app client ID
     let redirectURI: String //app redirect URI
     let scope: [String] //app oauth scope

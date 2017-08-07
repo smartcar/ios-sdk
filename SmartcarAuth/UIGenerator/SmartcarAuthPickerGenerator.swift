@@ -22,6 +22,14 @@ public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewD
     // Invisible button to signal that outside the picker has been clicked
     var invisButton = UIButton()
     
+    public convenience init(sdk: SmartcarAuth, viewController: UIViewController, oem: [Int]?) {
+        var oemList = OEM.getDefaultOEMList()
+        if let oem = oem {
+            oemList = oem.flatMap{ OEMName(rawValue: $0) }
+        }
+        self.init(sdk: sdk, viewController: viewController, oemList: oemList)
+    }
+    
     public init(sdk: SmartcarAuth, viewController: UIViewController, oemList: [OEMName] = OEM.getDefaultOEMList()){
         super.init(sdk: sdk, viewController: viewController)
         self.oemList = oemList
@@ -55,7 +63,7 @@ public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewD
     /**
         Action methods for the pressing of the initial picker button. Formats and displays the UIPickerView, UIToolbar, and the invisible button
     */
-    @objc func pickerButtonPressed() {
+    @objc public func pickerButtonPressed() {
         self.picker = UIPickerView()
         self.picker.dataSource = self
         self.picker.delegate = self
@@ -98,9 +106,8 @@ public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewD
     @objc func donePicker() {
         hidePickerView()
         let val = self.oemList[picker.selectedRow(inComponent: 0)]
-        let name = val.rawValue
         
-        self.sdk.initializeAuthorizationRequest(for: OEMName(rawValue: name.lowercased())!, viewController: self.viewController)
+        self.sdk.initializeAuthorizationRequest(for: val, viewController: self.viewController)
     }
     
     /**

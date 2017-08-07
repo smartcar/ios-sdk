@@ -45,7 +45,7 @@ class SmartcarAuthTests: XCTestCase {
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page"
         
         do {
-            try sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!)
+            try sdk.resumeAuthorizationFlow(with: URL(string: url)!)
             XCTFail()
         } catch {
         }
@@ -58,7 +58,7 @@ class SmartcarAuthTests: XCTestCase {
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page?code=abc123&state=ABC-123-DEG"
         
         do {
-            try sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!)
+            try sdk.resumeAuthorizationFlow(with: URL(string: url)!)
             XCTFail()
         } catch {
         }
@@ -71,7 +71,7 @@ class SmartcarAuthTests: XCTestCase {
         let url = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page?code=abc123&state=" + smartCarRequest.state
         
         do {
-            let code = try sdk.resumeAuthorizationFlowWithURL(url: URL(string: url)!)
+            let code = try sdk.resumeAuthorizationFlow(with: URL(string: url)!)
             XCTAssertEqual(code, "abc123", "Code returned does not equal code in the URL")
         } catch {
             XCTFail()

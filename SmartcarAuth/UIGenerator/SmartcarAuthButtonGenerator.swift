@@ -36,7 +36,7 @@ public class SmartcarAuthButtonGenerator: SmartcarAuthUIGenerator {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        let img = UIImage(named: "SmartcarAuthResources.bundle/" + oem.rawValue + "_logo.png", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        let img = UIImage(named: "SmartcarAuthResources.bundle/" + oem.stringValue + "_logo.png", in: Bundle(for: type(of: self)), compatibleWith: nil)
         
         button.setImage(img, for: .normal)
         
