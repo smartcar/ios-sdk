@@ -42,8 +42,8 @@ public class SmartcarAuth: NSObject {
             - forcePrompt: forces permission screen if set to true, defaults to false
             - development: appends mock oem if true, defaults to false
     */
-    public init(clientID: String, redirectURI: String, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
-        self.request = SmartcarAuthRequest(clientID: clientID, redirectURI: redirectURI, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
+    public init(clientID: String, redirectURI: String, state: String = "", scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+        self.request = SmartcarAuthRequest(clientID: clientID, redirectURI: redirectURI, state: state, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
     }
     
     /**

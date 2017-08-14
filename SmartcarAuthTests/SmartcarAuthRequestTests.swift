@@ -25,7 +25,7 @@ class SmartcarAuthRequestTests: XCTestCase {
     }
     
     func testInitialization() {
-        let request = SmartcarAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope,  forcePrompt: true)
+        let request = SmartcarAuthRequest(clientID: clientId, redirectURI: redirectURI, scope: scope, forcePrompt: true)
         
         XCTAssertEqual(request.clientID, clientId)
         XCTAssertEqual(request.redirectURI, redirectURI)

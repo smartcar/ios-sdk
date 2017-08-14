@@ -22,7 +22,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testLinkGeneration() {
-        let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let smartCarRequest = SmartcarAuthRequest(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", state: randomString(length: 8), scope: ["read_vehicle_info", "read_odometer"])
         let sdk = SmartcarAuth(request: smartCarRequest)
         
         let link = sdk.generateLink(for: OEMName.acura)
@@ -31,7 +31,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testLinkGenerationWithoutRequest() {
-        let sdk = SmartcarAuth(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", scope: ["read_vehicle_info", "read_odometer"])
+        let sdk = SmartcarAuth(clientID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", redirectURI: "scaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa://page", state: randomString(length: 8), scope: ["read_vehicle_info", "read_odometer"])
         
         let link = sdk.generateLink(for: OEMName.acura)
         
