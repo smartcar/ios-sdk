@@ -42,7 +42,7 @@ public class SmartcarAuth: NSObject {
             - forcePrompt: forces permission screen if set to true, defaults to false
             - development: appends mock oem if true, defaults to false
     */
-    public init(clientID: String, redirectURI: String, state: String = "", scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+    public init(clientID: String, redirectURI: String, state: String? = nil, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
         self.request = SmartcarAuthRequest(clientID: clientID, redirectURI: redirectURI, state: state, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
     }
     
@@ -72,8 +72,8 @@ public class SmartcarAuth: NSObject {
     public func generateLink(for oem: OEMName) -> String {
         var stateString = ""
         
-        if self.request.state.characters.count > 0 {
-            stateString = "&state=" + self.request.state
+        if let state = self.request.state {
+            stateString = "&state=" + state
         }
         
         let redirectString = self.request.redirectURI.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -94,19 +94,27 @@ public class SmartcarAuth: NSObject {
     */
     public func resumeAuthorizationFlow(with url: URL) throws -> String {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        let query = urlComp?.queryItems
         
-        if let code = query?[0].value {
-            if let state = query?[1].value {
-                if state != self.request.state {
-                    throw AuthorizationError.invalidState
-                }
-                return code
-            } else {
-                throw AuthorizationError.missingState
-            }
-        } else {
+        guard let query = urlComp?.queryItems else {
             throw AuthorizationError.missingURL
         }
+        
+        guard let code = query.filter({ $0.name == "code"}).first?.value else {
+            throw AuthorizationError.missingURL
+        }
+        
+        guard let state = self.request.state else {
+            return code
+        }
+        
+        guard let queryState = query.filter({ $0.name == "state"}).first?.value else {
+            throw AuthorizationError.missingState
+        }
+        
+        if queryState != state {
+            throw AuthorizationError.invalidState
+        }
+        
+        return code
     }
 }

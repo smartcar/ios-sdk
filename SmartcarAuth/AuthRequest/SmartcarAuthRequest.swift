@@ -16,7 +16,7 @@ import Foundation
     let clientID: String // app client ID
     let redirectURI: String //app redirect URI
     let scope: [String] //app oauth scope
-    let state: String // oauth state
+    let state: String? // oauth state
     let grantType: GrantType //oauth grant type enum
     let approvalType: ApprovalType // force permission screen of ApprovalType enum
     let development: Bool // appends mock oem if true
@@ -33,7 +33,7 @@ import Foundation
         - forcePrompt: forces permission screen if set to true, defaults to false
         - development: appends mock oem if true, defaults to false
      */
-    public init(clientID: String, redirectURI: String, state: String = "", scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
+    public init(clientID: String, redirectURI: String, state: String? = nil, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
         self.clientID = clientID
         self.redirectURI = redirectURI
         self.scope = scope
