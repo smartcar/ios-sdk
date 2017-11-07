@@ -66,6 +66,10 @@ You may append an optional path component or TLD (e.g. `sc4a1b01e5-0497-417c-a30
 
 More information on [configuration of custom scheme](http://www.idev101.com/code/Objective-C/custom_url_schemes.html).
 
+`state` (optional)
+
+Defaults to `nil`. An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The paramter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings without whitespaces.
+
 `scope`
 
 Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://developer.smartcar.com/docs)
