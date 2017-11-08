@@ -46,8 +46,10 @@ class SmartcarAuthPickerGeneratorTests: XCTestCase {
         gen!.pickerButtonPressed()
         gen!.hidePickerView()
         
-        XCTAssertTrue(gen!.picker.isHidden)
-        XCTAssertTrue(gen!.invisButton.isHidden)
-        XCTAssertTrue(gen!.toolBar.isHidden)
+        expectation(for: NSPredicate(format: "superview == nil"), evaluatedWith: gen!.picker, handler: nil)
+        expectation(for: NSPredicate(format: "superview == nil"), evaluatedWith: gen!.invisButton, handler: nil)
+        expectation(for: NSPredicate(format: "superview == nil"), evaluatedWith: gen!.toolBar, handler: nil)
+        
+        waitForExpectations(timeout: 3, handler: nil)
     }
 }
