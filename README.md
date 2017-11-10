@@ -68,7 +68,7 @@ More information on [configuration of custom scheme](http://www.idev101.com/code
 
 `state` (optional)
 
-Defaults to `nil`. An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The paramter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings without whitespaces.
+Defaults to `nil`. An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The paramter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings that can be url-encoded.
 
 `scope`
 
@@ -102,7 +102,7 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
     // process it if it relates to an authorization response.
     do {
         let code = try smartcar!.resumeAuthorizationFlowWithURL(url: url)
-               
+
         if window?.rootViewController! is ViewController {
             var vc = window?.rootViewController! as! ViewController
             vc.accessCodeReceived(code: code)
@@ -110,7 +110,7 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
     } catch {
         print("Error caught")
     }
-    
+
     // Your additional URL handling (if any) goes here.
 
     return true
@@ -124,7 +124,7 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 The button generator allows you to create individual buttons for each OEM which
 are styled with the OEM's logo and colors.
 
-Here are an example of a BMW button: 
+Here are an example of a BMW button:
 
 ![](SmartcarAuthExample/SmartcarAuthExample/Assets.xcassets/buttons.png)
 
@@ -135,19 +135,19 @@ initiate the OAuth flow for Tesla.
 ```swift
 // global SmartcarAuthButtonGenerator variable to store the button and action
 var ui: SmartcarAuthButtonGenerator? = nil
-    
+
 func mainFunction {
-    
+
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     appDelegate.smartcar = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info", "read_odometer"])
     let smartcar = appDelegate.smartcar
 
     // initialize ButtonGenerator
     ui = SmartcarAuthButtonGenerator(sdk: smartcar!, viewController: self)
-    
+
     let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.tesla)
     self.view.addSubview(button)
-    
+
     // add autolayout constraints
     button.translatesAutoresizingMaskIntoConstraints = false
     let buttonPinMiddleX = NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
