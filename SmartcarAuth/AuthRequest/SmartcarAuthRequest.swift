@@ -40,6 +40,6 @@ import Foundation
         self.grantType = grantType
         self.approvalType = forcePrompt ? ApprovalType.force : ApprovalType.auto
         self.development = development
-        self.state = state.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
+        self.state = state
     }
 }
