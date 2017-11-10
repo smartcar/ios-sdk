@@ -20,10 +20,10 @@ import Foundation
     let grantType: GrantType //oauth grant type enum
     let approvalType: ApprovalType // force permission screen of ApprovalType enum
     let development: Bool // appends mock oem if true
-    
+
     /**
      Initializes the SmartcarAuth Object
-     
+
      - Parameters:
         - clientID: app client ID
         - redirectURI: app redirect URI
@@ -40,6 +40,6 @@ import Foundation
         self.grantType = grantType
         self.approvalType = forcePrompt ? ApprovalType.force : ApprovalType.auto
         self.development = development
-        self.state = state
+        self.state = state.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
     }
 }
