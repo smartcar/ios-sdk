@@ -36,7 +36,7 @@ public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewD
     
     public init(sdk: SmartcarAuth, viewController: UIViewController, oemList: [OEMName] = OEM.getDefaultOEMList()){
         super.init(sdk: sdk, viewController: viewController)
-        self.oemList = oemList
+        self.oemList = oemList.sortedByDisplayName()
         
         if sdk.request.development {
             self.oemList.append(OEMName.mock)
@@ -159,6 +159,6 @@ public class SmartcarAuthPickerGenerator: SmartcarAuthUIGenerator, UIPickerViewD
     }
     
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return OEM.getDisplayName(for: self.oemList[row]).uppercased()
+        return OEM.getDisplayName(for: self.oemList[row])
     }
 }
