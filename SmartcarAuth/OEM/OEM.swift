@@ -11,7 +11,7 @@ import UIKit
     Class containing the name and the specific configurations for the OEMs
  */
 
-public class OEM {
+@objc public class OEM : NSObject {
     static let oemDictionary: [OEMName: OEMConfig] =
         [.acura: OEMConfig(color: "#020202", displayName: "Acura"),
          .audi: OEMConfig(color: "#000000", displayName: "Audi"),
@@ -53,14 +53,14 @@ public class OEM {
     /**
         Return the UIColor object of the OEM
     */
-    public static func getColor(for oem: OEMName) -> UIColor {
+    @objc public static func getColor(for oem: OEMName) -> UIColor {
         return self.oemDictionary[oem]!.color
     }
     
     /**
         Return the displayName of the OEM
     */
-    public static func getDisplayName(for oem: OEMName) -> String {
+    @objc public static func getDisplayName(for oem: OEMName) -> String {
         return self.oemDictionary[oem]!.displayName
     }
     
