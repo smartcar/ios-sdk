@@ -73,7 +73,7 @@ public class SmartcarAuth: NSObject {
         var stateString = ""
 
         if let state = self.request.state {
-            stateString = "&state=" + state.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
+            stateString = "&state=" + state.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         }
 
         let redirectString = self.request.redirectURI.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!

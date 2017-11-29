@@ -17,11 +17,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.smartCarSDK = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", scope: ["read_vehicle_info"])
+        appDelegate.smartCarSDK = SmartcarAuth(clientID: Config.clientId, redirectURI: "sc" + Config.clientId + "://page", state: "test_state", scope: ["read_vehicle_info"])
         let sdk = appDelegate.smartCarSDK
         ui = SmartcarAuthButtonGenerator(sdk: sdk!, viewController: self)
         
-        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.honda)
+        let button = ui!.generateButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50), for: OEMName.mock)
         self.view.addSubview(button)
         self.view.backgroundColor = .black
         
