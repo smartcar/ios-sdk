@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SmartcarAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let code = try smartCarSDK!.resumeAuthorizationFlow(with: url)
                 
             if window?.rootViewController! is ViewController {
-                var vc = window?.rootViewController! as! ViewController
+                let vc = window?.rootViewController! as! ViewController
                 vc.accessCodeReceived(code: code)
             }
         } catch {

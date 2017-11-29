@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SmartcarAuth
 
 class ViewController: UIViewController {
 
