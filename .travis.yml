@@ -7,6 +7,7 @@ before_install:
 - gem install cocoapods
 - pod install
 script:
+- pod lib lint
 - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=0EB5E60F-2EAA-47B3-9631-AD718F490007,OS=11.3' build test
 - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 95.0 --only_project_targets

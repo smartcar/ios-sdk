@@ -101,7 +101,7 @@ public class SmartcarAuth: NSObject {
     the output of the executed completion function
     */
 
-    public func resumeAuthFlow(with url: URL) -> Any {
+    public func resumeAuthFlow(with url: URL) -> Any? {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
 
         guard let query = urlComp?.queryItems else {
