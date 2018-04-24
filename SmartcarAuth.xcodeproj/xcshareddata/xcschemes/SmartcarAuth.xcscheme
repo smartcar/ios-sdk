@@ -43,6 +43,16 @@
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8F928891E2B2F6B009F07E5"
+               BuildableName = "SmartcarAuthTests.xctest"
+               BlueprintName = "SmartcarAuthTests"
+               ReferencedContainer = "container:SmartcarAuth.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

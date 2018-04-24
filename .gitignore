@@ -70,6 +70,5 @@ fastlane/test_output
 
 # Other
 .DS_Store
-
-# Jazzy
 docs/
+xcov_report/

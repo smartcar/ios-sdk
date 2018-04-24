@@ -1,11 +1,13 @@
 language: objective-c
 osx_image: xcode8.2
-xcode_project: SmartcarAuth.xcodeproj # path to your xcodeproj folder
+xcode_workspace: SmartcarAuth.xcworkspace # path to your xcodeproj folder
 xcode_scheme: SmartcarAuth
 xcode_sdk: iphonesimulator10.1
 before_install:
 - gem install xcov
+- gem install cocoapods
+- pod install
 script:
-- xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xcodebuild -project SmartcarAuth.xcodeproj -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=755CF652-86F0-42D0-8CBB-909008FEF7C6,OS=10.2' build test
-- xcov -p SmartcarAuth.xcodeproj -s SmartcarAuth --include_test_targets SmartcarAuthTest.xctest 
+- xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+- xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=850D6525-AF7F-4FF9-891B-F20D732F35C2,OS=11.3' build test
+- xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 95.0 --only_project_targets
