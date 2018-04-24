@@ -16,7 +16,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
 */
 
 public class SmartcarAuth: NSObject {
-    
+
     var clientId: String
     var redirectUri: String
     var scope: [String]
@@ -48,46 +48,46 @@ public class SmartcarAuth: NSObject {
         - viewController: the viewController resposible for presenting the SFSafariView
     */
     public func launchAuthFlow(state: String = "", forcePrompt: Bool = false, showMock: Bool = false, viewController: UIViewController) {
-        
+
         let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, showMock: showMock))!)
         viewController.present(safariVC, animated: true, completion: nil)
     }
-    
+
     /**
      Generates the authorization request URL from the authorization parameters
-     
+
      - parameters:
         - state: oauth state
         - forcePrompt: forces permission screen if set to true, defaults to false
         - showMock: shows the mock OEM for testing, defaults to false
-     
+
      - returns:
      authorization request URL
-     
+
      */
     public func generateUrl(state: String, forcePrompt: Bool, showMock: Bool) -> String {
         var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
-        
+
         var queryItems: [URLQueryItem] = []
-        
+
         queryItems.append(URLQueryItem(name: "response_type", value: "code"))
         queryItems.append(URLQueryItem(name: "client_id", value: self.clientId))
         queryItems.append(URLQueryItem(name: "redirect_uri", value: self.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
-        
+
         if !scope.isEmpty {
             queryItems.append(URLQueryItem(name: "scope", value: self.scope.joined(separator: " ").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!))
         }
-        
+
         queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
-        
+
         if state != "" {
             queryItems.append(URLQueryItem(name: "state", value: state.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
         }
-        
+
         queryItems.append(URLQueryItem(name: "mock", value: showMock ? "true" : "false"))
-        
+
         components.queryItems = queryItems
-        
+
         return components.url!.absoluteString
     }
 
@@ -100,10 +100,10 @@ public class SmartcarAuth: NSObject {
     - returns:
     the output of the executed completion function
     */
-    
+
     public func resumeAuthFlow(with url: URL) -> Any {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
-    
+
         guard let query = urlComp?.queryItems else {
             return completion(AuthorizationError.missingURL, nil, nil)
         }
@@ -111,9 +111,9 @@ public class SmartcarAuth: NSObject {
         guard let code = query.filter({ $0.name == "code"}).first?.value else {
             return completion(AuthorizationError.missingURL, nil, nil)
         }
-        
+
         let queryState = query.filter({ $0.name == "state"}).first?.value
-        
+
         return completion(nil, code, queryState)
     }
 }
