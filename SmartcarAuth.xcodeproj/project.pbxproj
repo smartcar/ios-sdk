@@ -7,83 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F832A4A21F34F55900E95E62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9611E8962C900021C83 /* Assets.xcassets */; };
-		F832A4A71F39018C00E95E62 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
-		F832A4A81F3901A300E95E62 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
-		F832A4A91F3901A600E95E62 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
-		F832A4AA1F3901A600E95E62 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
-		F832A4AB1F3901A900E95E62 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
-		F832A4AC1F3901AB00E95E62 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
+		3A404918AA733D5C515461D1 /* Pods_SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFAA204EE2149B6149D518EC /* Pods_SmartcarAuth.framework */; };
+		711AE9E69D3DBEF9B1100D51 /* Pods_SmartcarAuthTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E61CCCB5200A0A9CE8E787 /* Pods_SmartcarAuthTests.framework */; };
+		F80C4ABD208E54AE00F8C47F /* SmartcarAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */; };
+		F80C4ABE208E559300F8C47F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8F928851E2B2F6A009F07E5 /* Info.plist */; };
+		F85ABF81208C191D00FB2F3E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F85ABF80208C191D00FB2F3E /* Podfile */; };
+		F85ABF82208C196200FB2F3E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F85ABF80208C191D00FB2F3E /* Podfile */; };
 		F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
-		F85EC7721E414818003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
-		F85EC7731E414818003575F6 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EC7701E4144A8003575F6 /* AuthorizationError.swift */; };
-		F87B2BCA1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
-		F87B2BCB1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
-		F87B2BCC1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */; };
-		F8A1E96D1E8962C900021C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9611E8962C900021C83 /* Assets.xcassets */; };
-		F8A1E96E1E8962C900021C83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9621E8962C900021C83 /* LaunchScreen.storyboard */; };
-		F8A1E96F1E8962C900021C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9641E8962C900021C83 /* Main.storyboard */; };
-		F8A1E9711E8962C900021C83 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9671E8962C900021C83 /* Info.plist */; };
-		F8A1E9761E89630400021C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9601E8962C900021C83 /* AppDelegate.swift */; };
-		F8A1E97A1E89630400021C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9681E8962C900021C83 /* ViewController.swift */; };
-		F8A1E97B1E89657400021C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9641E8962C900021C83 /* Main.storyboard */; };
-		F8A1E97C1E89658200021C83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A1E9621E8962C900021C83 /* LaunchScreen.storyboard */; };
-		F8A1E97D1E8968D000021C83 /* SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F8A1E97E1E8968D000021C83 /* SmartcarAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F8B71AB81F422B9500B9C1A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9681E8962C900021C83 /* ViewController.swift */; };
-		F8B71AB91F422B9800B9C1A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9601E8962C900021C83 /* AppDelegate.swift */; };
-		F8B71ABB1F422CFE00B9C1A4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9661E8962C900021C83 /* Config.swift */; };
-		F8B71ABC1F422CFF00B9C1A4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E9661E8962C900021C83 /* Config.swift */; };
 		F8F9288B1E2B2F6B009F07E5 /* SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */; };
-		F8F928901E2B2F6B009F07E5 /* SmartcarAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */; };
 		F8F928921E2B2F6B009F07E5 /* SmartcarAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F928841E2B2F6A009F07E5 /* SmartcarAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8F928A71E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */; };
-		F8F928A81E2B2FED009F07E5 /* ApprovalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */; };
-		F8F928A91E2B2FED009F07E5 /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289E1E2B2FED009F07E5 /* GrantType.swift */; };
-		F8F928AA1E2B2FED009F07E5 /* OEM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289F1E2B2FED009F07E5 /* OEM.swift */; };
-		F8F928AB1E2B2FED009F07E5 /* OEMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */; };
-		F8F928AC1E2B2FED009F07E5 /* OEMName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A11E2B2FED009F07E5 /* OEMName.swift */; };
-		F8F928AD1E2B2FED009F07E5 /* SmartcarAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */; };
 		F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */; };
-		F8F928AF1E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */; };
-		F8F928B01E2B2FED009F07E5 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A51E2B2FED009F07E5 /* Utility.swift */; };
-		F8F928B41E2B3024009F07E5 /* SmartcarAuthButtonGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928B11E2B3024009F07E5 /* SmartcarAuthButtonGeneratorTests.swift */; };
-		F8F928B51E2B3024009F07E5 /* SmartcarAuthPickerGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928B21E2B3024009F07E5 /* SmartcarAuthPickerGeneratorTests.swift */; };
-		F8F928B61E2B3024009F07E5 /* SmartcarAuthRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928B31E2B3024009F07E5 /* SmartcarAuthRequestTests.swift */; };
-		F8F928D21E2B47BF009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289B1E2B2FED009F07E5 /* SmartcarAuthButtonGenerator.swift */; };
-		F8F928D41E2C0CFE009F07E5 /* SmartcarAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */; };
-		F8F928D51E2C0CFF009F07E5 /* SmartcarAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */; };
-		F8F928D61E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289B1E2B2FED009F07E5 /* SmartcarAuthButtonGenerator.swift */; };
-		F8F928D71E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289B1E2B2FED009F07E5 /* SmartcarAuthButtonGenerator.swift */; };
-		F8F928D81E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */; };
-		F8F928D91E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */; };
-		F8F928DE1E2C0D12009F07E5 /* OEM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289F1E2B2FED009F07E5 /* OEM.swift */; };
-		F8F928DF1E2C0D13009F07E5 /* OEM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9289F1E2B2FED009F07E5 /* OEM.swift */; };
-		F8F928E01E2C0D15009F07E5 /* OEMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */; };
-		F8F928E11E2C0D16009F07E5 /* OEMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */; };
-		F8F928E21E2C0D18009F07E5 /* OEMName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A11E2B2FED009F07E5 /* OEMName.swift */; };
-		F8F928E31E2C0D19009F07E5 /* OEMName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A11E2B2FED009F07E5 /* OEMName.swift */; };
-		F8F928E61E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */; };
-		F8F928E71E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */; };
-		F8F928E81E2C0D21009F07E5 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A51E2B2FED009F07E5 /* Utility.swift */; };
-		F8F928E91E2C0D22009F07E5 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A51E2B2FED009F07E5 /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F8A1E9741E8962CA00021C83 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F8A1E9691E8962C900021C83 /* SmartcarAuthExample.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8A1E9491E89628900021C83;
-			remoteInfo = SmartcarAuthExample;
-		};
-		F8A1E97F1E8968D000021C83 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F8F928781E2B2F6A009F07E5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F8F928801E2B2F6A009F07E5;
-			remoteInfo = SmartcarAuth;
-		};
 		F8F9288C1E2B2F6B009F07E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F8F928781E2B2F6A009F07E5 /* Project object */;
@@ -93,52 +29,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		F8A1E9811E8968D000021C83 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F8A1E97E1E8968D000021C83 /* SmartcarAuth.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		27E61CCCB5200A0A9CE8E787 /* Pods_SmartcarAuthTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuthTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.release.xcconfig"; sourceTree = "<group>"; };
+		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
+		B06E3582ED1597AA5389FE57 /* Pods-SmartcarAuthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuthTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD668AF997F2B3DDFDBE6656 /* Pods-SmartcarAuthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuthTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DFAA204EE2149B6149D518EC /* Pods_SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85ABF80208C191D00FB2F3E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F85EC7701E4144A8003575F6 /* AuthorizationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationError.swift; sourceTree = "<group>"; };
-		F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SmartcarAuthResources.bundle; sourceTree = "<group>"; };
-		F8A1E9601E8962C900021C83 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F8A1E9611E8962C900021C83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F8A1E9631E8962C900021C83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F8A1E9651E8962C900021C83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F8A1E9661E8962C900021C83 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		F8A1E9671E8962C900021C83 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8A1E9681E8962C900021C83 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F8A1E9691E8962C900021C83 /* SmartcarAuthExample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SmartcarAuthExample.xcodeproj; sourceTree = "<group>"; };
 		F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F928841E2B2F6A009F07E5 /* SmartcarAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmartcarAuth.h; sourceTree = "<group>"; };
 		F8F928851E2B2F6A009F07E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F9288A1E2B2F6B009F07E5 /* SmartcarAuthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartcarAuthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartcarAuthTests.swift; sourceTree = "<group>"; };
 		F8F928911E2B2F6B009F07E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8F9289B1E2B2FED009F07E5 /* SmartcarAuthButtonGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthButtonGenerator.swift; sourceTree = "<group>"; };
-		F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthPickerGenerator.swift; sourceTree = "<group>"; };
-		F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApprovalType.swift; sourceTree = "<group>"; };
-		F8F9289E1E2B2FED009F07E5 /* GrantType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantType.swift; sourceTree = "<group>"; };
-		F8F9289F1E2B2FED009F07E5 /* OEM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEM.swift; sourceTree = "<group>"; };
-		F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEMConfig.swift; sourceTree = "<group>"; };
-		F8F928A11E2B2FED009F07E5 /* OEMName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEMName.swift; sourceTree = "<group>"; };
-		F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthRequest.swift; sourceTree = "<group>"; };
 		F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuth.swift; sourceTree = "<group>"; };
-		F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthUIGenerator.swift; sourceTree = "<group>"; };
-		F8F928A51E2B2FED009F07E5 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		F8F928B11E2B3024009F07E5 /* SmartcarAuthButtonGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthButtonGeneratorTests.swift; sourceTree = "<group>"; };
-		F8F928B21E2B3024009F07E5 /* SmartcarAuthPickerGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthPickerGeneratorTests.swift; sourceTree = "<group>"; };
-		F8F928B31E2B3024009F07E5 /* SmartcarAuthRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuthRequestTests.swift; sourceTree = "<group>"; };
-		F8F928BB1E2B30E5009F07E5 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A404918AA733D5C515461D1 /* Pods_SmartcarAuth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,97 +61,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8F9288B1E2B2F6B009F07E5 /* SmartcarAuth.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8F928B81E2B30E5009F07E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F8A1E97D1E8968D000021C83 /* SmartcarAuth.framework in Frameworks */,
+				711AE9E69D3DBEF9B1100D51 /* Pods_SmartcarAuthTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F85EC76F1E414495003575F6 /* Error */ = {
+		74EEDAD8CB0F3464D2D534A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F85EC7701E4144A8003575F6 /* AuthorizationError.swift */,
+				DFAA204EE2149B6149D518EC /* Pods_SmartcarAuth.framework */,
+				27E61CCCB5200A0A9CE8E787 /* Pods_SmartcarAuthTests.framework */,
 			);
-			path = Error;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F8A1E95E1E8962C900021C83 /* SmartcarAuthExample */ = {
+		983E52F77135954D8184B267 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F8A1E95F1E8962C900021C83 /* SmartcarAuthExample */,
-				F8A1E9691E8962C900021C83 /* SmartcarAuthExample.xcodeproj */,
+				8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */,
+				41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */,
+				BD668AF997F2B3DDFDBE6656 /* Pods-SmartcarAuthTests.debug.xcconfig */,
+				B06E3582ED1597AA5389FE57 /* Pods-SmartcarAuthTests.release.xcconfig */,
 			);
-			path = SmartcarAuthExample;
-			sourceTree = "<group>";
-		};
-		F8A1E95F1E8962C900021C83 /* SmartcarAuthExample */ = {
-			isa = PBXGroup;
-			children = (
-				F8A1E9601E8962C900021C83 /* AppDelegate.swift */,
-				F8A1E9611E8962C900021C83 /* Assets.xcassets */,
-				F8A1E9621E8962C900021C83 /* LaunchScreen.storyboard */,
-				F8A1E9641E8962C900021C83 /* Main.storyboard */,
-				F8A1E9661E8962C900021C83 /* Config.swift */,
-				F8A1E9671E8962C900021C83 /* Info.plist */,
-				F8A1E9681E8962C900021C83 /* ViewController.swift */,
-			);
-			path = SmartcarAuthExample;
-			sourceTree = "<group>";
-		};
-		F8A1E96A1E8962C900021C83 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F8A1E9751E8962CA00021C83 /* SmartcarAuthExample.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F8F1B7141E372A10008C3519 /* AuthRequest */ = {
-			isa = PBXGroup;
-			children = (
-				F8F9289D1E2B2FED009F07E5 /* ApprovalType.swift */,
-				F8F9289E1E2B2FED009F07E5 /* GrantType.swift */,
-				F8F928A21E2B2FED009F07E5 /* SmartcarAuthRequest.swift */,
-			);
-			path = AuthRequest;
-			sourceTree = "<group>";
-		};
-		F8F1B7151E372A61008C3519 /* OEM */ = {
-			isa = PBXGroup;
-			children = (
-				F8F9289F1E2B2FED009F07E5 /* OEM.swift */,
-				F8F928A01E2B2FED009F07E5 /* OEMConfig.swift */,
-				F8F928A11E2B2FED009F07E5 /* OEMName.swift */,
-			);
-			path = OEM;
-			sourceTree = "<group>";
-		};
-		F8F1B7161E372A6D008C3519 /* UIGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				F8F9289B1E2B2FED009F07E5 /* SmartcarAuthButtonGenerator.swift */,
-				F8F9289C1E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift */,
-				F8F928A41E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift */,
-			);
-			path = UIGenerator;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F8F928771E2B2F6A009F07E5 = {
 			isa = PBXGroup;
 			children = (
-				F8A1E95E1E8962C900021C83 /* SmartcarAuthExample */,
+				F85ABF80208C191D00FB2F3E /* Podfile */,
 				F8F928821E2B2F6A009F07E5 /* Products */,
 				F8F928831E2B2F6A009F07E5 /* SmartcarAuth */,
 				F8F9288E1E2B2F6B009F07E5 /* SmartcarAuthTests */,
-				F87B2BC91E35D8A3004ABA17 /* SmartcarAuthResources.bundle */,
+				983E52F77135954D8184B267 /* Pods */,
+				74EEDAD8CB0F3464D2D534A1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,7 +105,6 @@
 			children = (
 				F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */,
 				F8F9288A1E2B2F6B009F07E5 /* SmartcarAuthTests.xctest */,
-				F8F928BB1E2B30E5009F07E5 /* Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,14 +112,10 @@
 		F8F928831E2B2F6A009F07E5 /* SmartcarAuth */ = {
 			isa = PBXGroup;
 			children = (
-				F8F1B7141E372A10008C3519 /* AuthRequest */,
-				F85EC76F1E414495003575F6 /* Error */,
-				F8F1B7151E372A61008C3519 /* OEM */,
-				F8F1B7161E372A6D008C3519 /* UIGenerator */,
+				F85EC7701E4144A8003575F6 /* AuthorizationError.swift */,
 				F8F928851E2B2F6A009F07E5 /* Info.plist */,
 				F8F928841E2B2F6A009F07E5 /* SmartcarAuth.h */,
 				F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */,
-				F8F928A51E2B2FED009F07E5 /* Utility.swift */,
 			);
 			path = SmartcarAuth;
 			sourceTree = "<group>";
@@ -277,9 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				F8F928911E2B2F6B009F07E5 /* Info.plist */,
-				F8F928B11E2B3024009F07E5 /* SmartcarAuthButtonGeneratorTests.swift */,
-				F8F928B21E2B3024009F07E5 /* SmartcarAuthPickerGeneratorTests.swift */,
-				F8F928B31E2B3024009F07E5 /* SmartcarAuthRequestTests.swift */,
 				F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */,
 			);
 			path = SmartcarAuthTests;
@@ -303,6 +147,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F8F928951E2B2F6B009F07E5 /* Build configuration list for PBXNativeTarget "SmartcarAuth" */;
 			buildPhases = (
+				D8883AFEA3976721048A426A /* [CP] Check Pods Manifest.lock */,
 				F8F9287C1E2B2F6A009F07E5 /* Sources */,
 				F8F9287D1E2B2F6A009F07E5 /* Frameworks */,
 				F8F9287E1E2B2F6A009F07E5 /* Headers */,
@@ -321,9 +166,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F8F928981E2B2F6B009F07E5 /* Build configuration list for PBXNativeTarget "SmartcarAuthTests" */;
 			buildPhases = (
+				113C8BB0D3E2C4DD3C17F3EF /* [CP] Check Pods Manifest.lock */,
 				F8F928861E2B2F6B009F07E5 /* Sources */,
 				F8F928871E2B2F6B009F07E5 /* Frameworks */,
 				F8F928881E2B2F6B009F07E5 /* Resources */,
+				8459021C4B68AA1C31288073 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -334,25 +181,6 @@
 			productName = SmartCarOAuthSDKTests;
 			productReference = F8F9288A1E2B2F6B009F07E5 /* SmartcarAuthTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F8F928BA1E2B30E5009F07E5 /* Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F8F928CC1E2B30E5009F07E5 /* Build configuration list for PBXNativeTarget "Example" */;
-			buildPhases = (
-				F8F928B71E2B30E5009F07E5 /* Sources */,
-				F8F928B81E2B30E5009F07E5 /* Frameworks */,
-				F8F928B91E2B30E5009F07E5 /* Resources */,
-				F8A1E9811E8968D000021C83 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F8A1E9801E8968D000021C83 /* PBXTargetDependency */,
-			);
-			name = Example;
-			productName = Example;
-			productReference = F8F928BB1E2B30E5009F07E5 /* Example.app */;
-			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -374,11 +202,6 @@
 						CreatedOnToolsVersion = 8.2;
 						ProvisioningStyle = Automatic;
 					};
-					F8F928BA1E2B30E5009F07E5 = {
-						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = EE32J27TKP;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = F8F9287B1E2B2F6A009F07E5 /* Build configuration list for PBXProject "SmartcarAuth" */;
@@ -392,41 +215,21 @@
 			mainGroup = F8F928771E2B2F6A009F07E5;
 			productRefGroup = F8F928821E2B2F6A009F07E5 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = F8A1E96A1E8962C900021C83 /* Products */;
-					ProjectRef = F8A1E9691E8962C900021C83 /* SmartcarAuthExample.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				F8F928801E2B2F6A009F07E5 /* SmartcarAuth */,
 				F8F928891E2B2F6B009F07E5 /* SmartcarAuthTests */,
-				F8F928BA1E2B30E5009F07E5 /* Example */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		F8A1E9751E8962CA00021C83 /* SmartcarAuthExample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SmartcarAuthExample.app;
-			remoteRef = F8A1E9741E8962CA00021C83 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F8F9287F1E2B2F6A009F07E5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8A1E96E1E8962C900021C83 /* LaunchScreen.storyboard in Resources */,
-				F8A1E96D1E8962C900021C83 /* Assets.xcassets in Resources */,
-				F87B2BCA1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */,
-				F8A1E9711E8962C900021C83 /* Info.plist in Resources */,
-				F8A1E96F1E8962C900021C83 /* Main.storyboard in Resources */,
+				F85ABF81208C191D00FB2F3E /* Podfile in Resources */,
+				F80C4ABE208E559300F8C47F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,43 +237,76 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F87B2BCB1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8F928B91E2B30E5009F07E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F8A1E97C1E89658200021C83 /* LaunchScreen.storyboard in Resources */,
-				F87B2BCC1E35D8A3004ABA17 /* SmartcarAuthResources.bundle in Resources */,
-				F832A4A21F34F55900E95E62 /* Assets.xcassets in Resources */,
-				F8A1E97B1E89657400021C83 /* Main.storyboard in Resources */,
+				F85ABF82208C196200FB2F3E /* Podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		113C8BB0D3E2C4DD3C17F3EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartcarAuthTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8459021C4B68AA1C31288073 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8883AFEA3976721048A426A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartcarAuth-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F8F9287C1E2B2F6A009F07E5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8F928A91E2B2FED009F07E5 /* GrantType.swift in Sources */,
-				F8F928A71E2B2FED009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */,
-				F8B71ABC1F422CFF00B9C1A4 /* Config.swift in Sources */,
-				F8F928B01E2B2FED009F07E5 /* Utility.swift in Sources */,
-				F8B71AB91F422B9800B9C1A4 /* AppDelegate.swift in Sources */,
-				F8F928AC1E2B2FED009F07E5 /* OEMName.swift in Sources */,
-				F8B71AB81F422B9500B9C1A4 /* ViewController.swift in Sources */,
-				F8F928AD1E2B2FED009F07E5 /* SmartcarAuthRequest.swift in Sources */,
-				F8F928AB1E2B2FED009F07E5 /* OEMConfig.swift in Sources */,
 				F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */,
-				F8F928AF1E2B2FED009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */,
 				F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */,
-				F8F928D21E2B47BF009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */,
-				F8F928A81E2B2FED009F07E5 /* ApprovalType.swift in Sources */,
-				F8F928AA1E2B2FED009F07E5 /* OEM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,80 +314,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F832A4A71F39018C00E95E62 /* SmartcarAuthRequest.swift in Sources */,
-				F8F928D51E2C0CFF009F07E5 /* SmartcarAuth.swift in Sources */,
-				F8F928B61E2B3024009F07E5 /* SmartcarAuthRequestTests.swift in Sources */,
-				F8F928B41E2B3024009F07E5 /* SmartcarAuthButtonGeneratorTests.swift in Sources */,
-				F8F928901E2B2F6B009F07E5 /* SmartcarAuthTests.swift in Sources */,
-				F8F928E81E2C0D21009F07E5 /* Utility.swift in Sources */,
-				F8F928D61E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */,
-				F8F928E21E2C0D18009F07E5 /* OEMName.swift in Sources */,
-				F832A4AB1F3901A900E95E62 /* GrantType.swift in Sources */,
-				F832A4A91F3901A600E95E62 /* ApprovalType.swift in Sources */,
-				F8F928B51E2B3024009F07E5 /* SmartcarAuthPickerGeneratorTests.swift in Sources */,
-				F8F928E01E2C0D15009F07E5 /* OEMConfig.swift in Sources */,
-				F8F928E61E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */,
-				F8F928D81E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */,
-				F8F928DE1E2C0D12009F07E5 /* OEM.swift in Sources */,
-				F85EC7721E414818003575F6 /* AuthorizationError.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8F928B71E2B30E5009F07E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F8A1E9761E89630400021C83 /* AppDelegate.swift in Sources */,
-				F8A1E97A1E89630400021C83 /* ViewController.swift in Sources */,
-				F8B71ABB1F422CFE00B9C1A4 /* Config.swift in Sources */,
-				F8F928E71E2C0D1F009F07E5 /* SmartcarAuthUIGenerator.swift in Sources */,
-				F832A4AC1F3901AB00E95E62 /* GrantType.swift in Sources */,
-				F8F928D91E2C0D0A009F07E5 /* SmartcarAuthPickerGenerator.swift in Sources */,
-				F8F928D41E2C0CFE009F07E5 /* SmartcarAuth.swift in Sources */,
-				F85EC7731E414818003575F6 /* AuthorizationError.swift in Sources */,
-				F8F928E11E2C0D16009F07E5 /* OEMConfig.swift in Sources */,
-				F8F928E31E2C0D19009F07E5 /* OEMName.swift in Sources */,
-				F8F928E91E2C0D22009F07E5 /* Utility.swift in Sources */,
-				F832A4AA1F3901A600E95E62 /* ApprovalType.swift in Sources */,
-				F832A4A81F3901A300E95E62 /* SmartcarAuthRequest.swift in Sources */,
-				F8F928DF1E2C0D13009F07E5 /* OEM.swift in Sources */,
-				F8F928D71E2C0D07009F07E5 /* SmartcarAuthButtonGenerator.swift in Sources */,
+				F80C4ABD208E54AE00F8C47F /* SmartcarAuthTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F8A1E9801E8968D000021C83 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F8F928801E2B2F6A009F07E5 /* SmartcarAuth */;
-			targetProxy = F8A1E97F1E8968D000021C83 /* PBXContainerItemProxy */;
-		};
 		F8F9288D1E2B2F6B009F07E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F8F928801E2B2F6A009F07E5 /* SmartcarAuth */;
 			targetProxy = F8F9288C1E2B2F6B009F07E5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F8A1E9621E8962C900021C83 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F8A1E9631E8962C900021C83 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		F8A1E9641E8962C900021C83 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F8A1E9651E8962C900021C83 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F8F928931E2B2F6B009F07E5 /* Debug */ = {
@@ -655,6 +430,7 @@
 		};
 		F8F928961E2B2F6B009F07E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -679,6 +455,7 @@
 		};
 		F8F928971E2B2F6B009F07E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -702,6 +479,7 @@
 		};
 		F8F928991E2B2F6B009F07E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD668AF997F2B3DDFDBE6656 /* Pods-SmartcarAuthTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -715,50 +493,13 @@
 		};
 		F8F9289A1E2B2F6B009F07E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B06E3582ED1597AA5389FE57 /* Pods-SmartcarAuthTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SmartcarAuthTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDKTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		F8F928CA1E2B30E5009F07E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EE32J27TKP;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Example",
-				);
-				INFOPLIST_FILE = SmartcarAuthExample/SmartcarAuthExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.Example;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		F8F928CB1E2B30E5009F07E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EE32J27TKP;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Example",
-				);
-				INFOPLIST_FILE = SmartcarAuthExample/SmartcarAuthExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -790,15 +531,6 @@
 			buildConfigurations = (
 				F8F928991E2B2F6B009F07E5 /* Debug */,
 				F8F9289A1E2B2F6B009F07E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F8F928CC1E2B30E5009F07E5 /* Build configuration list for PBXNativeTarget "Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F8F928CA1E2B30E5009F07E5 /* Debug */,
-				F8F928CB1E2B30E5009F07E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

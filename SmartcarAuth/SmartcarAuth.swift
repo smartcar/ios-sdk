@@ -2,119 +2,118 @@
 //  SmartcarAuth.swift
 //  SmartcarAuth
 //
-//  Created by Jeremy Zhang on 1/6/17.
 //  Copyright © 2017 Smartcar Inc. All rights reserved.
 //
 
 import UIKit
 import SafariServices
 
+let domain = "connect.smartcar.com"
+
 /**
-    Smartcar Authentication SDK for iOS written in Swift 3.
-        - Allows the ability to generate buttons to login with each manufacturer which launches the OAuth flow
-        - Allows the ability to use dropdown/custom buttons to trigger OAuth flow
-        - Facilitates the flow with a SFSafariViewController to redirect to Smartcar and retrieve an access code and an
-            access token
+Smartcar Authentication SDK for iOS written in Swift 3.
+    - Facilitates the flow with a SFSafariViewController to redirect to Smartcar and retrieve an authorization code
 */
 
 public class SmartcarAuth: NSObject {
-    let request: SmartcarAuthRequest
+    
+    var clientId: String
+    var redirectUri: String
+    var scope: [String]
+    var completion: (Error?, String?, String?) -> Any?
 
     /**
-        Constructor for the SmartcarAuth
+    Constructor for the SmartcarAuth
 
-        - parameters
-            - request: SmartcarAuthRequest object for Smartcar API
+    - parameters:
+        - clientId: app client id
+        - redirectUri: app redirect uri
+        - scope: app oauth scope
+        - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    public init(request: SmartcarAuthRequest) {
-        self.request = request
+    public init(clientId: String, redirectUri: String, scope: [String] = [], completion: @escaping (Error?, String?, String?) -> Any?) {
+        self.clientId = clientId
+        self.redirectUri = redirectUri
+        self.scope = scope
+        self.completion = completion
     }
 
     /**
-        Constructor for the SmartcarAuth
+    Presents a SFSafariViewController with the initial authorization url
 
-        - Parameters:
-            - clientID: app client ID
-            - redirectURI: app redirect URI
-            - scope: app oauth scope
-            - state: optional, oauth state
-            - grantType: oauth grath type enum can be either "code" or "token", defaults to "code"
-            - forcePrompt: forces permission screen if set to true, defaults to false
-            - development: appends mock oem if true, defaults to false
+    - parameters:
+        - state: optional, oauth state
+        - forcePrompt: optional, forces permission screen if set to true, defaults to false
+        - showMock: optional, shows the mock OEM for testing, defaults to false
+        - viewController: the viewController resposible for presenting the SFSafariView
     */
-    public init(clientID: String, redirectURI: String, state: String? = nil, scope: [String], grantType: GrantType = GrantType.code, forcePrompt: Bool = false, development: Bool = false) {
-        self.request = SmartcarAuthRequest(clientID: clientID, redirectURI: redirectURI, state: state, scope: scope, grantType: grantType, forcePrompt: forcePrompt, development: development)
-    }
-
-    /**
-        Initializes the Authorization request and configures and return an SFSafariViewController with the correct
-            authorization URL
-
-        - Parameters
-            - oem: OEMName object for the OEM
-            - viewController: the viewController resposible for presenting the SFSafariView
-    */
-    public func initializeAuthorizationRequest(for oem: OEMName, viewController: UIViewController) {
-        let authorizationURL = generateLink(for: oem)
-        let safariVC = SFSafariViewController(url: URL(string: authorizationURL)!)
+    public func launchAuthFlow(state: String = "", forcePrompt: Bool = false, showMock: Bool = false, viewController: UIViewController) {
+        
+        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, showMock: showMock))!)
         viewController.present(safariVC, animated: true, completion: nil)
     }
-
+    
     /**
-        Generates the authorization request URL for a specific OEM from the request paramters (Not recommended for direct use. Use initializeAuthorizationRequest)
-
-        - Parameters
-            - oem: OEMName object for the OEM
-
-        - Returns:
-            authorization request URL for the specific OEM
-    */
-    public func generateLink(for oem: OEMName) -> String {
-        var stateString = ""
-
-        if let state = self.request.state {
-            stateString = "&state=" + state.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+     Generates the authorization request URL from the authorization parameters
+     
+     - parameters:
+        - state: oauth state
+        - forcePrompt: forces permission screen if set to true, defaults to false
+        - showMock: shows the mock OEM for testing, defaults to false
+     
+     - returns:
+     authorization request URL
+     
+     */
+    public func generateUrl(state: String, forcePrompt: Bool, showMock: Bool) -> String {
+        var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
+        
+        var queryItems: [URLQueryItem] = []
+        
+        queryItems.append(URLQueryItem(name: "response_type", value: "code"))
+        queryItems.append(URLQueryItem(name: "client_id", value: self.clientId))
+        queryItems.append(URLQueryItem(name: "redirect_uri", value: self.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
+        
+        if !scope.isEmpty {
+            queryItems.append(URLQueryItem(name: "scope", value: self.scope.joined(separator: " ").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!))
         }
-
-        let redirectString = self.request.redirectURI.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let scopeString = self.request.scope.joined(separator: " ")
-            .addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!
-
-        return "https://\(oem.stringValue).smartcar.com/oauth/authorize?response_type=\(self.request.grantType.stringValue)&client_id=\(self.request.clientID)&redirect_uri=\(redirectString)&scope=\(scopeString)&approval_prompt=\(self.request.approvalType.rawValue + stateString)";
+        
+        queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
+        
+        if state != "" {
+            queryItems.append(URLQueryItem(name: "state", value: state.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
+        }
+        
+        queryItems.append(URLQueryItem(name: "mock", value: showMock ? "true" : "false"))
+        
+        components.queryItems = queryItems
+        
+        return components.url!.absoluteString
     }
 
     /**
-        Authorization callback function. Verifies the state parameter of the URL matches the request state parameter and extract the authorization code
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string. Returns the call to the completion callback.
 
-        - Parameters
-            - url: callback URL containing authorization code
+    - parameters:
+        - url: callback URL containing authorization code
 
-        - Returns:
-            true if authorization code was successfully extracted
+    - returns:
+    the output of the executed completion function
     */
-    public func resumeAuthorizationFlow(with url: URL) throws -> String {
+    
+    public func resumeAuthFlow(with url: URL) -> Any {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
-
+    
         guard let query = urlComp?.queryItems else {
-            throw AuthorizationError.missingURL
+            return completion(AuthorizationError.missingURL, nil, nil)
         }
 
         guard let code = query.filter({ $0.name == "code"}).first?.value else {
-            throw AuthorizationError.missingURL
+            return completion(AuthorizationError.missingURL, nil, nil)
         }
-
-        guard let state = self.request.state else {
-            return code
-        }
-
-        guard let queryState = query.filter({ $0.name == "state"}).first?.value else {
-            throw AuthorizationError.missingState
-        }
-
-        if queryState != state.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
-            throw AuthorizationError.invalidState
-        }
-
-        return code
+        
+        let queryState = query.filter({ $0.name == "state"}).first?.value
+        
+        return completion(nil, code, queryState)
     }
 }
