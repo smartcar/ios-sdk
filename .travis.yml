@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode8.2
 xcode_workspace: SmartcarAuth.xcworkspace # path to your xcodeproj folder
 xcode_scheme: SmartcarAuth
-xcode_sdk: iphonesimulator10.1
+xcode_sdk: iphonesimulator11.3
 before_install:
 - gem install xcov
 - gem install cocoapods
