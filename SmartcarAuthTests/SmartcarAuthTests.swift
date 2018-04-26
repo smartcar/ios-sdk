@@ -26,14 +26,14 @@ class SmartcarAuthTests: XCTestCase {
     
     func testGenerateUrl() {
         
-        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completion: {
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
             error, code, state in
             
-            fail("Calback should not have been called")
+            fail("Callback should not have been called")
             
         })
         
-        let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, showMock: true)
+        let url = smartcarSdk.generateUrl(state: state, forcePrompt: true)
         
         expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%2520read_odometer&approval_prompt=force&state=\(self.state)&mock=true"))
     }
@@ -42,22 +42,22 @@ class SmartcarAuthTests: XCTestCase {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
             
-            fail("Calback should not have been called")
+            fail("Callback should not have been called")
         
         })
         
-        let url = smartcarSdk.generateUrl(state: "", forcePrompt: true, showMock: true)
+        let url = smartcarSdk.generateUrl()
         
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&approval_prompt=force&mock=true"))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&approval_prompt=auto&mock=false"))
     }
     
-    func testResumeAuthFlowNoQueryParameters() {
+    func testHandleCallbackNoQueryParameters() {
         let exp = expectation(description: "Completion should've been called with an error")
         
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
             
-            expect(error).toNot(beNil())
+            expect(error).to(matchError(AuthorizationError.missingQueryParameters))
             
             exp.fulfill()
             
@@ -66,7 +66,7 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = URL(string: "https://localhost:8000")!
         
-        smartcarSdk.resumeAuthFlow(with: url)
+        smartcarSdk.handleCallback(with: url)
         
         waitForExpectations(timeout: 1) { error in
             if let error = error {
@@ -75,14 +75,14 @@ class SmartcarAuthTests: XCTestCase {
         }
     }
     
-    func testResumeAuthFlowNoCode() {
+    func testHandleCallbackNoCode() {
         
         let exp = expectation(description: "Completion should've been called with an error")
         
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
             
-            expect(error).toNot(beNil())
+            expect(error).to(matchError(AuthorizationError.missingAuthCode))
             
             exp.fulfill()
             
@@ -91,7 +91,32 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = URL(string: "https://localhost:8000?state=fakeState")!
         
-        smartcarSdk.resumeAuthFlow(with: url)
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func testHandleCallbackAccessDenied() {
+        
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state in
+            
+            expect(error).to(matchError(AuthorizationError.accessDenied))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=access_denied&error_description=User+denied+access+to+application.&state=0facda3319")!
+        
+        smartcarSdk.handleCallback(with: url)
         
         waitForExpectations(timeout: 1) { error in
             if let error = error {
@@ -120,7 +145,7 @@ class SmartcarAuthTests: XCTestCase {
             
         })
         
-        smartcarSdk.resumeAuthFlow(with: url)
+        smartcarSdk.handleCallback(with: url)
         
         waitForExpectations(timeout: 1) { error in
             if let error = error {
@@ -133,7 +158,7 @@ class SmartcarAuthTests: XCTestCase {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completion: {
             error, code, state in
             
-            fail("Calback should not have been called")
+            fail("Callback should not have been called")
         })
         
         class ViewControllerStub: UIViewController {

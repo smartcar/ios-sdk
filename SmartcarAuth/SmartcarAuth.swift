@@ -1,9 +1,24 @@
-//
-//  SmartcarAuth.swift
-//  SmartcarAuth
-//
-//  Copyright © 2017 Smartcar Inc. All rights reserved.
-//
+/*
+ SmartcarAuth.swift
+ SmartcarAuth
+ 
+ Copyright (c) 2017-present, Smartcar, Inc. All rights reserved.
+ You are hereby granted a limited, non-exclusive, worldwide, royalty-free
+ license to use, copy, modify, and distribute this software in source code or
+ binary form, for the limited purpose of this software's use in connection
+ with the web services and APIs provided by Smartcar.
+ 
+ As with any software that integrates with the Smartcar platform, your use of
+ this software is subject to the Smartcar Developer Agreement. This copyright
+ notice shall be included in all copies or substantial portions of the software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 import UIKit
 import SafariServices
@@ -21,6 +36,7 @@ public class SmartcarAuth: NSObject {
     var redirectUri: String
     var scope: [String]
     var completion: (Error?, String?, String?) -> Any?
+    var development: Bool
 
     /**
     Constructor for the SmartcarAuth
@@ -29,13 +45,15 @@ public class SmartcarAuth: NSObject {
         - clientId: app client id
         - redirectUri: app redirect uri
         - scope: app oauth scope
+        - development: optional, shows the mock OEM for testing, defaults to false
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    public init(clientId: String, redirectUri: String, scope: [String] = [], completion: @escaping (Error?, String?, String?) -> Any?) {
+    public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool = false, completion: @escaping (Error?, String?, String?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
         self.completion = completion
+        self.development = development
     }
 
     /**
@@ -44,28 +62,27 @@ public class SmartcarAuth: NSObject {
     - parameters:
         - state: optional, oauth state
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
-        - showMock: optional, shows the mock OEM for testing, defaults to false
-        - viewController: the viewController resposible for presenting the SFSafariView
+        - viewController: the viewController responsible for presenting the SFSafariView
     */
-    public func launchAuthFlow(state: String = "", forcePrompt: Bool = false, showMock: Bool = false, viewController: UIViewController) {
+    public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, viewController: UIViewController) {
 
-        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, showMock: showMock))!)
+        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt))!)
         viewController.present(safariVC, animated: true, completion: nil)
     }
 
     /**
-     Generates the authorization request URL from the authorization parameters
+    Generates the authorization request URL from the authorization parameters
 
-     - parameters:
-        - state: oauth state
-        - forcePrompt: forces permission screen if set to true, defaults to false
+    - parameters:
+        - state: optional, oauth state
+        - forcePrompt: optional, forces permission screen if set to true, defaults to false
         - showMock: shows the mock OEM for testing, defaults to false
 
-     - returns:
-     authorization request URL
+    - returns:
+    authorization request URL
 
-     */
-    public func generateUrl(state: String, forcePrompt: Bool, showMock: Bool) -> String {
+    */
+    public func generateUrl(state: String? = nil, forcePrompt: Bool = false) -> String {
         var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
 
         var queryItems: [URLQueryItem] = []
@@ -80,11 +97,11 @@ public class SmartcarAuth: NSObject {
 
         queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
 
-        if state != "" {
-            queryItems.append(URLQueryItem(name: "state", value: state.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
+        if state != nil {
+            queryItems.append(URLQueryItem(name: "state", value: state!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
         }
 
-        queryItems.append(URLQueryItem(name: "mock", value: showMock ? "true" : "false"))
+        queryItems.append(URLQueryItem(name: "mock", value: self.development ? "true" : "false"))
 
         components.queryItems = queryItems
 
@@ -92,7 +109,7 @@ public class SmartcarAuth: NSObject {
     }
 
     /**
-    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string. Returns the call to the completion callback.
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string. Invokes the completion function with the appropriate parameters.
 
     - parameters:
         - url: callback URL containing authorization code
@@ -101,18 +118,22 @@ public class SmartcarAuth: NSObject {
     the output of the executed completion function
     */
 
-    public func resumeAuthFlow(with url: URL) -> Any? {
+    public func handleCallback(with url: URL) -> Any? {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
 
         guard let query = urlComp?.queryItems else {
-            return completion(AuthorizationError.missingURL, nil, nil)
+            return completion(AuthorizationError.missingQueryParameters, nil, nil)
+        }
+        
+        let queryState = query.filter({ $0.name == "state"}).first?.value
+        
+        if query.filter({ $0.name == "error"}).first?.value != nil {
+            return completion(AuthorizationError.accessDenied, nil, queryState)
         }
 
         guard let code = query.filter({ $0.name == "code"}).first?.value else {
-            return completion(AuthorizationError.missingURL, nil, nil)
+            return completion(AuthorizationError.missingAuthCode, nil, queryState)
         }
-
-        let queryState = query.filter({ $0.name == "state"}).first?.value
 
         return completion(nil, code, queryState)
     }

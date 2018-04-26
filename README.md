@@ -40,7 +40,7 @@ appDelegate.smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri
 let smartcarSdk = appDelegate.smartcarSdk
 
 // initialize authorization flow on the SFSafariViewController
-smartcarSdk.launcAuthFlow(state: state, forcePrompt: false, showMock: false, viewController: viewController)
+smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, showMock: false, viewController: viewController)
 ```
 
 ### SmartcarAuth Parameters
@@ -60,6 +60,10 @@ More information on [configuration of custom scheme](http://www.idev101.com/code
 
 Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://developer.smartcar.com/docs) for a full list of available permissions. If no `scope` variable is provided, then Smartcar Authorization Flow will display the full list of permissions granted to the clientId.
 
+`development` (optional)
+
+Defaults to `false`. Set to `true` to enable the Mock OEM for testing.
+
 `completion`
 
 Callback function for when the Authorization Flow returns with either an Error or a `code` and the `state`. The function should take in the optional params `func (error: Error?, code: String?, state: String?) -> Any`. The return of the callback function will be returned from `smartcarSdk.launchAuthFlow()`. The completion handler should handle any Errors encountered during the Authorization Flow process and send the `code` to the server-side to retrieve an `accessToken`. If a `state` parameter was provided, then it should be checked to make sure the returned `state` matches the input `state`.
@@ -68,15 +72,11 @@ Callback function for when the Authorization Flow returns with either an Error o
 
 `state` (optional)
 
-Defaults to `nil`. An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The paramter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings that can be url-encoded.
+Defaults to `nil`. An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The parameter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings that can be url-encoded.
 
 `forcePrompt` (optional)
 
 Defaults to `false`. The `false` option will skip the approval prompt for users who have already accepted the requested permissions for your application in the past. Set to `true` to force a user to see the approval prompt even if they have already accepted the permissions in the past.
-
-`showMock` (optional)
-
-Defaults to `false`. Set to `true` to enable the Mock OEM for testing.
 
 ### Handling the Redirect
 
@@ -93,7 +93,7 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
     // Sends the URL to the current authorization flow (if any) which will
     // process it and then call the completion handler.
 
-		smartcarSdk!resumeAuthFlow(url: url)
+		smartcarSdk!.handleCallback(url: url)
 
     // Your additional URL handling (if any) goes here.
 
