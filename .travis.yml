@@ -4,8 +4,7 @@ xcode_workspace: SmartcarAuth.xcworkspace
 xcode_scheme: SmartcarAuth
 
 before_install:
-  - cat .git/config
-  - echo $SECRET
+
   - gem install xcov
   - gem install cocoapods
   - pod install
@@ -25,9 +24,13 @@ script:
 
 deploy:
 
+
+
   - provider: script
     skip_cleanup: true
-    script: git push origin v$pod_spec_tag
+    script:
+      - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+      - git push origin v$pod_spec_tag
     on:
       branch: master
 
