@@ -4,7 +4,7 @@ xcode_workspace: SmartcarAuth.xcworkspace
 xcode_scheme: SmartcarAuth
 
 before_install:
-
+  - cat .git/config
   - gem install xcov
   - gem install cocoapods
   - pod install
