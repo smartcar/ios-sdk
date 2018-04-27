@@ -45,9 +45,16 @@ smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, showMock: false, vi
 
 ### SmartcarAuth Parameters
 
-`clientId`
+| Name          | Type           | Optional | Description          |
+| ------------- | -------------- | -------- | -------------------- |
+| `clientId`    | String         | No       | Application client ID obtained from [Smartcar Developer Portal](https://developer.smartcar.com/). |
+| `redirectUri` | String         | No       | Your app must register a custom URI scheme with iOS in order to receive the authorization callback. Smartcar requires the custom URI scheme to be in the format of `"sc" + clientId + "://" + hostname`. This URI must also be registered
+in [Smartcar's developer portal](https://developer.smartcar.com) for your app. You may append an optional path component or TLD (e.g. `sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://oauth2redirect.com/page`).
 
-Application client ID obtained from [Smartcar Developer Portal](https://developer.smartcar.com/).
+More information on [configuration of custom scheme](http://www.idev101.com/code/Objective-C/custom_url_schemes.html). |
+| `scope`       | Array[String]  | Yes      | Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://developer.smartcar.com/docs) for a full list of available permissions. If no `scope` variable is provided, then Smartcar Authorization Flow will display the full list of permissions granted to the clientId. |
+| `development` | Boolean        | Yes      | Defaults to `false`. Set to `true` to enable the Mock OEM for testing. |
+| `completion`  | Function       | No       | Callback function for when the Authorization Flow returns with either an Error or a `code` and the `state`. The function should take in the optional params `func (error: Error?, code: String?, state: String?) -> Any`. The return of the callback function will be returned from `smartcarSdk.launchAuthFlow()`. The completion handler should handle any Errors encountered during the Authorization Flow process and send the `code` to the server-side to retrieve an `accessToken`. If a `state` parameter was provided, then it should be checked to make sure the returned `state` matches the input `state`. |
 
 `redirectUri`
 
