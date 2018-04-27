@@ -92,8 +92,9 @@ func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
 
     // Sends the URL to the current authorization flow (if any) which will
     // process it and then call the completion handler.
-
-		smartcarSdk!.handleCallback(url: url)
+		if let sdk = smartcarSdk {
+			sdk.handleCallback(url: url)
+		}
 
     // Your additional URL handling (if any) goes here.
 

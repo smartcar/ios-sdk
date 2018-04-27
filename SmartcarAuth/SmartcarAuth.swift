@@ -89,19 +89,25 @@ public class SmartcarAuth: NSObject {
 
         queryItems.append(URLQueryItem(name: "response_type", value: "code"))
         queryItems.append(URLQueryItem(name: "client_id", value: self.clientId))
-        queryItems.append(URLQueryItem(name: "redirect_uri", value: self.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
+        
+        if let redirectUri = self.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            queryItems.append(URLQueryItem(name: "redirect_uri", value: redirectUri))
+        }
 
         if !scope.isEmpty {
-            queryItems.append(URLQueryItem(name: "scope", value: self.scope.joined(separator: " ").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!))
+            if let scopeString = self.scope.joined(separator: " ").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
+                queryItems.append(URLQueryItem(name: "scope", value: scopeString))
+            }
+            
         }
 
         queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
 
-        if state != nil {
-            queryItems.append(URLQueryItem(name: "state", value: state!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!))
+        if let stateString = state?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
 
-        queryItems.append(URLQueryItem(name: "mock", value: self.development ? "true" : "false"))
+        queryItems.append(URLQueryItem(name: "mock", value: String(self.development)))
 
         components.queryItems = queryItems
 
