@@ -1,17 +1,17 @@
 /*
  SmartcarAuth.swift
  SmartcarAuth
- 
+
  Copyright (c) 2017-present, Smartcar, Inc. All rights reserved.
  You are hereby granted a limited, non-exclusive, worldwide, royalty-free
  license to use, copy, modify, and distribute this software in source code or
  binary form, for the limited purpose of this software's use in connection
  with the web services and APIs provided by Smartcar.
- 
+
  As with any software that integrates with the Smartcar platform, your use of
  this software is subject to the Smartcar Developer Agreement. This copyright
  notice shall be included in all copies or substantial portions of the software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -76,7 +76,6 @@ public class SmartcarAuth: NSObject {
     - parameters:
         - state: optional, oauth state
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
-        - showMock: shows the mock OEM for testing, defaults to false
 
     - returns:
     authorization request URL
@@ -89,7 +88,7 @@ public class SmartcarAuth: NSObject {
 
         queryItems.append(URLQueryItem(name: "response_type", value: "code"))
         queryItems.append(URLQueryItem(name: "client_id", value: self.clientId))
-        
+
         if let redirectUri = self.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             queryItems.append(URLQueryItem(name: "redirect_uri", value: redirectUri))
         }
@@ -98,7 +97,7 @@ public class SmartcarAuth: NSObject {
             if let scopeString = self.scope.joined(separator: " ").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
                 queryItems.append(URLQueryItem(name: "scope", value: scopeString))
             }
-            
+
         }
 
         queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
@@ -130,9 +129,9 @@ public class SmartcarAuth: NSObject {
         guard let query = urlComp?.queryItems else {
             return completion(AuthorizationError.missingQueryParameters, nil, nil)
         }
-        
+
         let queryState = query.filter({ $0.name == "state"}).first?.value
-        
+
         if query.filter({ $0.name == "error"}).first?.value != nil {
             return completion(AuthorizationError.accessDenied, nil, queryState)
         }
