@@ -5,7 +5,7 @@ xcode_scheme: SmartcarAuth
 
 before_install:
   - cat .git/config
-  - env
+  - echo $SECRET
   - gem install xcov
   - gem install cocoapods
   - pod install
