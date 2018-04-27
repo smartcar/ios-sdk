@@ -20,13 +20,13 @@ script:
   - git config --global user.email "ci@smartcar.com"
   - git config --global user.name "Travis CI User"
   - export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\s*s.version' | sed "s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\(.*\)'/\1/g")
-  - if [ "$(echo $TRAVIS_BRANCH)" = "master" ]; then git tag -a v$(echo $pod_spec_tag) -m "Travis Generated Tag"; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then git tag -a v$pod_spec_tag -m "Travis Generated Tag"; fi
 
 deploy:
 
   - provider: script
     skip_cleanup: true
-    script: git push origin v$(echo $pod_spec_tag)
+    script: git push origin v$pod_spec_tag
     on:
       branch: master
 
