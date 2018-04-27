@@ -45,14 +45,6 @@ smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, showMock: false, vi
 
 ### SmartcarAuth Parameters
 
-| Name          | Type           | Required | Description          |
-| ------------- | -------------- | -------- | -------------------- |
-| `clientId`    | String         | Yes      | app client id        |
-| `redirectUri` | String         | Yes      | app redirect uri     |
-| `scope`       | Array[String]  | No       | app oauth scope      |
-| `development` | Boolean        | No       | shows the mock OEM for testing, defaults to false |
-| `completion`  | Function       | Yes      | callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string |
-
 `clientId`
 
 Application client ID obtained from [Smartcar Developer Portal](https://developer.smartcar.com/).
@@ -77,11 +69,6 @@ Defaults to `false`. Set to `true` to enable the Mock OEM for testing.
 Callback function for when the Authorization Flow returns with either an Error or a `code` and the `state`. The function should take in the optional params `func (error: Error?, code: String?, state: String?) -> Any`. The return of the callback function will be returned from `smartcarSdk.launchAuthFlow()`. The completion handler should handle any Errors encountered during the Authorization Flow process and send the `code` to the server-side to retrieve an `accessToken`. If a `state` parameter was provided, then it should be checked to make sure the returned `state` matches the input `state`.
 
 ### launchAuthFlow Parameters
-
-| Name          | Type           | Required | Description          |
-| ------------- | -------------- | -------- | -------------------- |
-| `state`       | String         | No       | oauth state          |
-| `forcePrompt` | Boolean        | No       | forces permission screen if set to true, defaults to false |
 
 `state` (optional)
 
