@@ -18,3 +18,4 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: echo "adding authorization"
+    all_branches: true
