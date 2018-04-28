@@ -3,34 +3,11 @@ osx_image: xcode9.3
 xcode_workspace: SmartcarAuth.xcworkspace
 xcode_scheme: SmartcarAuth
 
-before_install:
-
-  - gem install xcov
-  - gem install cocoapods
-  - pod install
-
-script:
-
-  - pod lib lint
-  - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-  - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=0EB5E60F-2EAA-47B3-9631-AD718F490007,OS=11.3' build test
-  - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 95.0 --only_project_targets
-
-  # create tag
-  - git config --global user.email "ci@smartcar.com"
-  - git config --global user.name "Travis CI User"
-  - export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\s*s.version' | sed "s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\(.*\)'/\1/g")
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then git tag -a v$pod_spec_tag -m "Travis Generated Tag"; fi
-
 deploy:
-
-
 
   - provider: script
     skip_cleanup: true
-    script:
-      - echo "adding authorization"
-      - echo "push tag"
+    script: echo "adding authorization"
 
   - provider: script
     skip_cleanup: true
