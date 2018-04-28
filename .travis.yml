@@ -18,9 +18,3 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: echo "adding authorization"
-
-  - provider: script
-    skip_cleanup: true
-    script: pod trunk push SmartcarAuth.podspec
-    on:
-      branch: master
