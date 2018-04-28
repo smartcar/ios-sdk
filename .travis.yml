@@ -29,7 +29,7 @@ deploy:
     skip_cleanup: true
     script: echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc && git push origin v$pod_spec_tag
     on:
-      all_branches: true
+      branch: master
 
   - provider: script
     skip_cleanup: true
