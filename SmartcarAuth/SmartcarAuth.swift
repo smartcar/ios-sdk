@@ -94,15 +94,14 @@ public class SmartcarAuth: NSObject {
         }
 
         if !scope.isEmpty {
-            if let scopeString = self.scope.joined(separator: " ").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
-                queryItems.append(URLQueryItem(name: "scope", value: scopeString))
-            }
+            let scopeString = self.scope.joined(separator: " ")
+            queryItems.append(URLQueryItem(name: "scope", value: scopeString))
 
         }
 
         queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
 
-        if let stateString = state?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        if let stateString = state {
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
 
