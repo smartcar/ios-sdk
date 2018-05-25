@@ -35,7 +35,7 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = smartcarSdk.generateUrl(state: state, forcePrompt: true)
         
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%2520read_odometer&approval_prompt=force&state=\(self.state)&mock=true"))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mock=true"))
     }
     
     func testGenerateUrlDefaultValues() {
