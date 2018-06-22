@@ -58,7 +58,7 @@ More information on [configuration of custom scheme](http://www.idev101.com/code
 
 `scope` (optional)
 
-Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://developer.smartcar.com/docs) for a full list of available permissions. If no `scope` variable is provided, then Smartcar Authorization Flow will display the full list of permissions granted to the clientId.
+Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://smartcar.com/docs) for a full list of available permissions. If no `scope` variable is provided, then Smartcar Authorization Flow will display the full list of permissions granted to the clientId.
 
 `development` (optional)
 
