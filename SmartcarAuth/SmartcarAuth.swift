@@ -30,7 +30,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     - Facilitates the flow with a SFSafariViewController to redirect to Smartcar and retrieve an authorization code
 */
 
-public class SmartcarAuth: NSObject {
+@objc public class SmartcarAuth: NSObject {
 
     var clientId: String
     var redirectUri: String
@@ -48,7 +48,7 @@ public class SmartcarAuth: NSObject {
         - development: optional, shows the mock OEM for testing, defaults to false
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool = false, completion: @escaping (Error?, String?, String?) -> Any?) {
+    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool = false, completion: @escaping (Error?, String?, String?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
@@ -64,7 +64,7 @@ public class SmartcarAuth: NSObject {
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
         - viewController: the viewController responsible for presenting the SFSafariView
     */
-    public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, viewController: UIViewController) {
+    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, viewController: UIViewController) {
 
         let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt))!)
         viewController.present(safariVC, animated: true, completion: nil)
@@ -81,7 +81,7 @@ public class SmartcarAuth: NSObject {
     authorization request URL
 
     */
-    public func generateUrl(state: String? = nil, forcePrompt: Bool = false) -> String {
+    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false) -> String {
         var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
 
         var queryItems: [URLQueryItem] = []
@@ -122,7 +122,7 @@ public class SmartcarAuth: NSObject {
     the output of the executed completion function
     */
 
-    public func handleCallback(with url: URL) -> Any? {
+    @objc public func handleCallback(with url: URL) -> Any? {
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
 
         guard let query = urlComp?.queryItems else {
