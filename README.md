@@ -40,7 +40,7 @@ appDelegate.smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri
 let smartcarSdk = appDelegate.smartcarSdk
 
 // initialize authorization flow on the SFSafariViewController
-smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, showMock: false, viewController: viewController)
+smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, development: false, viewController: viewController)
 ```
 
 ### SmartcarAuth Parameters
