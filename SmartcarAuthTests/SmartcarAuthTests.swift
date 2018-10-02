@@ -26,7 +26,7 @@ class SmartcarAuthTests: XCTestCase {
     
     func testGenerateUrl() {
         
-        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  testMode: true, completion: {
             error, code, state in
             
             fail("Callback should not have been called")
@@ -35,7 +35,7 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = smartcarSdk.generateUrl(state: state, forcePrompt: true)
         
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mock=true"))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test"))
     }
     
     func testGenerateUrlDefaultValues() {
@@ -48,7 +48,7 @@ class SmartcarAuthTests: XCTestCase {
         
         let url = smartcarSdk.generateUrl()
         
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&approval_prompt=auto&mock=false"))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&approval_prompt=auto&mode=live"))
     }
     
     func testHandleCallbackNoQueryParameters() {
