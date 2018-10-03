@@ -45,7 +45,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - clientId: app client id
         - redirectUri: app redirect uri
         - scope: app oauth scope
-        - testMode: optional, launch the Smartcar auth flow in test mode
+        - testMode: optional, launch the Smartcar auth flow in test mode, defaults to false
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
     @objc public init(clientId: String, redirectUri: String, scope: [String] = [], testMode: Bool = false, completion: @escaping (Error?, String?, String?) -> Any?) {
