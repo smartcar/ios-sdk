@@ -105,7 +105,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
         
-        var mode = self.testMode ? "test" : "live";
+        let mode = self.testMode ? "test" : "live";
 
         queryItems.append(URLQueryItem(name: "mode", value: mode))
 
