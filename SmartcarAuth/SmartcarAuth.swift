@@ -37,7 +37,8 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     var scope: [String]
     var completion: (Error?, String?, String?) -> Any?
     var development: Bool
-    var testMode: Bool?
+    // NSNumber? is used here instead of Bool? because there is no concept of Bool? in Objective-C
+    var testMode: NSNumber?
 
     /**
     Constructor for the SmartcarAuth
@@ -46,11 +47,11 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - clientId: app client id
         - redirectUri: app redirect uri
         - scope: app oauth scope
-        - development: optional, shows the mock OEM for testing, defaults to false
-        - testMode: optional, launch the Smartcar auth flow in test mode.
+        - development: shows the mock OEM for testing, defaults to false
+        - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: Bool? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
+    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
@@ -107,11 +108,12 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         if let stateString = state {
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
-z
+
         // if testMode specified,
         var mode = self.development;
         if (self.testMode != nil) {
-           mode = self.testMode;
+          // convert NSNumber to Bool
+           mode = self.testMode!.boolValue;
         }
 
         queryItems.append(URLQueryItem(name: "mode", value: mode ? "test" : "live"))
