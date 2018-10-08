@@ -47,7 +47,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - clientId: app client id
         - redirectUri: app redirect uri
         - scope: app oauth scope
-        - development: shows the mock OEM for testing, defaults to false
+        - development: shows the mock OEM for testing, defaults to false. This is deprecated and has been replaced with testMode.
         - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
