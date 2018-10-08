@@ -40,7 +40,7 @@ appDelegate.smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri
 let smartcarSdk = appDelegate.smartcarSdk
 
 // initialize authorization flow on the SFSafariViewController
-smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, development: false, viewController: viewController)
+smartcarSdk.launchAuthFlow(state: state, forcePrompt: false, testMode: false, viewController: viewController)
 ```
 
 ### SmartcarAuth Parameters
@@ -60,9 +60,9 @@ More information on [configuration of custom scheme](http://www.idev101.com/code
 
 Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://smartcar.com/docs) for a full list of available permissions. If no `scope` variable is provided, then Smartcar Authorization Flow will display the full list of permissions granted to the clientId.
 
-`development` (optional)
+`testMode` (optional)
 
-Defaults to `false`. Set to `true` to enable the Mock OEM for testing.
+Defaults to `false`. Set to `true` to launch the Smartcar auth flow in test mode.
 
 `completion`
 
