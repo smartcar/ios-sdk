@@ -37,6 +37,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     var scope: [String]
     var completion: (Error?, String?, String?) -> Any?
     var development: Bool
+    var testMode: Bool?
 
     /**
     Constructor for the SmartcarAuth
@@ -106,11 +107,11 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         if let stateString = state {
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
-
+z
         // if testMode specified,
         var mode = self.development;
         if (self.testMode != nil) {
-           modeInput = self.testMode;
+           mode = self.testMode;
         }
 
         queryItems.append(URLQueryItem(name: "mode", value: mode ? "test" : "live"))
