@@ -46,14 +46,16 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - redirectUri: app redirect uri
         - scope: app oauth scope
         - development: optional, shows the mock OEM for testing, defaults to false
+        - testMode: optional, launch the Smartcar auth flow in test mode.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool = false, completion: @escaping (Error?, String?, String?) -> Any?) {
+    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: Bool? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
         self.completion = completion
         self.development = development
+        self.testMode = testMode
     }
 
     /**
@@ -105,7 +107,13 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
 
-        queryItems.append(URLQueryItem(name: "mock", value: String(self.development)))
+        // if testMode specified,
+        var mode = self.development;
+        if (self.testMode != nil) {
+           modeInput = self.testMode;
+        }
+
+        queryItems.append(URLQueryItem(name: "mode", value: mode ? "test" : "live"))
 
         components.queryItems = queryItems
 
