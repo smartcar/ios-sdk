@@ -109,7 +109,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
 
-        // if testMode specified,
+        // if testMode specified, override self.development
         var mode = self.development;
         if (self.testMode != nil) {
           // convert NSNumber to Bool
