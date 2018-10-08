@@ -62,7 +62,7 @@ Permissions requested from the user for specific grant. See the [Smartcar develo
 
 `testMode` (optional)
 
-Defaults to `false`. Set to `true` to launch the Smartcar auth flow in test mode.
+Defaults to `nil`. Set to `true` to launch the Smartcar auth flow in test mode.
 
 `completion`
 
