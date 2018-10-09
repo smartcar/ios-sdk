@@ -36,7 +36,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     var redirectUri: String
     var scope: [String]
     var completion: (Error?, String?, String?) -> Any?
-    var development: NSNumber?
+    var development: Bool
     // NSNumber? is used here instead of Bool? because there is no concept of Bool? in Objective-C
     var testMode: NSNumber?
 
@@ -47,11 +47,11 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - clientId: app client id
         - redirectUri: app redirect uri
         - scope: app oauth scope
-        - development: optional, launch the Smartcar auth flow in test mode, defaults to false. This is deprecated and has been replaced with testMode.
+        - development: shows the mock OEM for testing, defaults to false. This is deprecated and has been replaced with testMode.
         - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: NSNumber? =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
+    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
