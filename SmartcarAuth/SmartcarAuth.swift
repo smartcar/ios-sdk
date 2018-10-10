@@ -37,6 +37,8 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     var scope: [String]
     var completion: (Error?, String?, String?) -> Any?
     var development: Bool
+    // NSNumber? is used here instead of Bool? because there is no concept of Bool? in Objective-C
+    var testMode: NSNumber?
 
     /**
     Constructor for the SmartcarAuth
@@ -45,15 +47,17 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - clientId: app client id
         - redirectUri: app redirect uri
         - scope: app oauth scope
-        - development: optional, shows the mock OEM for testing, defaults to false
+        - development: shows the mock OEM for testing, defaults to false. This is deprecated and has been replaced with testMode.
+        - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool = false, completion: @escaping (Error?, String?, String?) -> Any?) {
+    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
         self.completion = completion
         self.development = development
+        self.testMode = testMode
     }
 
     /**
@@ -105,7 +109,14 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             queryItems.append(URLQueryItem(name: "state", value: stateString))
         }
 
-        queryItems.append(URLQueryItem(name: "mock", value: String(self.development)))
+        // if testMode specified, override self.development
+        var mode = self.development;
+        if (self.testMode != nil) {
+          // convert NSNumber to Bool
+           mode = self.testMode!.boolValue;
+        }
+
+        queryItems.append(URLQueryItem(name: "mode", value: mode ? "test" : "live"))
 
         components.queryItems = queryItems
 
