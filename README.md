@@ -1,9 +1,9 @@
 # Smartcar iOS Auth SDK
 
-[![CI Status](https://img.shields.io/travis/smartcar/ios-sdk.svg?style=flat)](https://travis-ci.com/smartcar/ios-sdk/)
-[![Version](https://img.shields.io/cocoapods/v/SmartcarAuth.svg?style=flat)](http://cocoapods.org/pods/SmartcarAuth)
-[![License](https://img.shields.io/cocoapods/l/SmartcarAuth.svg?style=flat)](http://cocoapods.org/pods/SmartcarAuth)
-[![Platform](https://img.shields.io/cocoapods/p/SmartcarAuth.svg?style=flat)](http://cocoapods.org/pods/SmartcarAuth)
+[![CI Status](https://img.shields.io/travis/com/smartcar/ios-sdk.svg?style=flat-square)](https://travis-ci.com/smartcar/ios-sdk/)
+[![Version](https://img.shields.io/cocoapods/v/SmartcarAuth.svg?style=flat-square)](http://cocoapods.org/pods/SmartcarAuth)
+[![License](https://img.shields.io/cocoapods/l/SmartcarAuth.svg?style=flat-square)](http://cocoapods.org/pods/SmartcarAuth)
+[![Platform](https://img.shields.io/cocoapods/p/SmartcarAuth.svg?style=flat-square)](http://cocoapods.org/pods/SmartcarAuth)
 
 The SmartcarAuth iOS SDK makes it easy to handle the Smartcar authorization flow from iOS.
 
