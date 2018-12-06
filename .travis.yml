@@ -23,6 +23,9 @@ script:
   - export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\s*s.version' | sed "s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\(.*\)'/\1/g")
   - if [ "$TRAVIS_BRANCH" = "master" ]; then git tag -a v$pod_spec_tag -m "Travis Generated Tag"; fi
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 deploy:
 
   - provider: script
