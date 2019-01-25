@@ -86,7 +86,7 @@ The authorization response URL is returned to the app via the iOS openURL app de
 /**
 	Intercepts callback from OAuth SafariView determined by the custom URI
  */
-func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsLey : Any] = [:]) -> Bool {
     // Close the SFSafariViewController
     window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
 
