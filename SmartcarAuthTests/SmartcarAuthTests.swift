@@ -8,12 +8,14 @@
 import Nimble
 import XCTest
 @testable import SmartcarAuth
+@testable import VehicleInfo
 
 class SmartcarAuthTests: XCTestCase {
     let clientId = UUID().uuidString
     let redirectUri = "http://localhost.com"
     let state = UUID().uuidString
     let scope = ["read_vehicle_info", "read_odometer"]
+    let make = "Tesla"
 
     override func setUp() {
         super.setUp()
@@ -64,6 +66,20 @@ class SmartcarAuthTests: XCTestCase {
         let url = smartcarSdk.generateUrl(state: state, forcePrompt: true)
 
         expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test"))
+    }
+
+    func testGenerateUrlVehicleInfoIncluded() {
+        let testVehicle = VehicleInfo(make: make)
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
+            error, code, state in
+
+            fail("Callback should not have been called")
+
+        })
+
+        let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, vehicleInfo: testVehicle)
+
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(testVehicle.make)))
     }
 
     func testGenerateUrlDefaultValues() {
