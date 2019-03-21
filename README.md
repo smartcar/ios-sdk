@@ -86,7 +86,8 @@ Defaults to `false`. The `false` option will skip the approval prompt for users 
 
 `vehicleInfo` (optional)
 
-Defaults to `nil`. Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen.
+Defaults to `nil`. Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen. The following are valid makes supported by the Smartcar API: `[Audi, BMW, Buick, Cadillac, Chevrolet, Chrysler, Dodge, GMC, Jeep, Lexus, Ram, Tesla, Volkswagen]`. Makes are case-insensitive.
+
 
 ### Handling the Redirect
 
