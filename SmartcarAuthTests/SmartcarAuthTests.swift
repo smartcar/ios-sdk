@@ -68,7 +68,7 @@ class SmartcarAuthTests: XCTestCase {
         expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test"))
     }
 
-    func testGenerateUrlVehicleInfoIncluded() {
+    func testGenerateUrlAllOptionalParametersIncluded() {
         let testVehicle = VehicleInfo(make: make)
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
             error, code, state in
@@ -79,7 +79,7 @@ class SmartcarAuthTests: XCTestCase {
 
         let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, vehicleInfo: testVehicle)
 
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(testVehicle.make)))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(testVehicle.make)"))
     }
 
     func testGenerateUrlDefaultValues() {

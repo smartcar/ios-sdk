@@ -27,7 +27,7 @@ VehicleInfo.swift
     Constructor for VehicleInfo
 
     - parameters:
-        - make: optional, allows user to bypass OEM selection screen and go directly to vehicle login screen, defaults to nil
+        - make: allows user to bypass OEM selection screen and go directly to vehicle login screen, defaults to nil
     */
 
   @objc public init(make: String? = nil) {
