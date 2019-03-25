@@ -8,7 +8,6 @@
 import Nimble
 import XCTest
 @testable import SmartcarAuth
-@testable import VehicleInfo
 
 class SmartcarAuthTests: XCTestCase {
     let clientId = UUID().uuidString
@@ -204,6 +203,9 @@ class SmartcarAuthTests: XCTestCase {
 
             fail("Callback should not have been called")
         })
+        
+
+
 
         class ViewControllerStub: UIViewController {
             var presentCount: Int = 0

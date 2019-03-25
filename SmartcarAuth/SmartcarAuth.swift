@@ -22,7 +22,6 @@
 
 import UIKit
 import SafariServices
-import VehicleInfo
 
 let domain = "connect.smartcar.com"
 
