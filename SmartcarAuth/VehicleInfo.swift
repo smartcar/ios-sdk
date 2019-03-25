@@ -1,5 +1,5 @@
 /*
-VehicleInfo.swift
+ VehicleInfo.swift
  SmartcarAuth
  
  Copyright (c) 2017-present, Smartcar, Inc. All rights reserved.
@@ -21,16 +21,15 @@ VehicleInfo.swift
  */
 
 @objc public class VehicleInfo: NSObject {
-  var make: String?
-
-   /**
-    Constructor for VehicleInfo
-
-    - parameters:
-        - make: allows user to bypass OEM selection screen and go directly to vehicle login screen, defaults to nil
-    */
-
-  @objc public init(make: String? = nil) {
-    self.make = make;
-  }
+    var make: String?
+    
+    /**
+     Constructor for VehicleInfo
+     - parameters:
+     - make: allows user to bypass OEM selection screen and go directly to vehicle login screen, defaults to nil
+     */
+    
+    @objc public init(make: String? = nil) {
+        self.make = make;
+    }
 }
