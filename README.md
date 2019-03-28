@@ -68,6 +68,12 @@ Defaults to `nil`. Set to `true` to launch the Smartcar auth flow in test mode.
 
 Callback function for when the Authorization Flow returns with either an Error or a `code` and the `state`. The function should take in the optional params `func (error: Error?, code: String?, state: String?) -> Any`. The return of the callback function will be returned from `smartcarSdk.launchAuthFlow()`. The completion handler should handle any Errors encountered during the Authorization Flow process and send the `code` to the server-side to retrieve an `accessToken`. If a `state` parameter was provided, then it should be checked to make sure the returned `state` matches the input `state`.
 
+### VehicleInfo Parameters
+
+`make` (optional)
+
+Defaults to `nil`. Including a `make` on the optional `VehicleInfo` object causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen. The following are valid makes supported by the Smartcar API: `[Audi, BMW, Buick, Cadillac, Cheverolet, Chrysler, Dodge, GMC, Jeep, Lexus, Ram, Tesla, Volkswagen]`. Makes are case-insensitive.
+
 ### launchAuthFlow Parameters
 
 `state` (optional)
@@ -77,6 +83,11 @@ Defaults to `nil`. An opaque value used by the client to maintain state between 
 `forcePrompt` (optional)
 
 Defaults to `false`. The `false` option will skip the approval prompt for users who have already accepted the requested permissions for your application in the past. Set to `true` to force a user to see the approval prompt even if they have already accepted the permissions in the past.
+
+`vehicleInfo` (optional)
+
+Defaults to `nil`. Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation.
+
 
 ### Handling the Redirect
 

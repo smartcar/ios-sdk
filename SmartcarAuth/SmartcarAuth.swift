@@ -66,11 +66,12 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     - parameters:
         - state: optional, oauth state
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
+        - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
         - viewController: the viewController responsible for presenting the SFSafariView
     */
-    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, viewController: UIViewController) {
+    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, viewController: UIViewController) {
 
-        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt))!)
+        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, vehicleInfo: vehicleInfo))!)
         viewController.present(safariVC, animated: true, completion: nil)
     }
 
@@ -80,12 +81,12 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     - parameters:
         - state: optional, oauth state
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
-
+        - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
     - returns:
     authorization request URL
 
     */
-    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false) -> String {
+    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil) -> String {
         var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
 
         var queryItems: [URLQueryItem] = []
@@ -117,6 +118,12 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         }
 
         queryItems.append(URLQueryItem(name: "mode", value: mode ? "test" : "live"))
+
+        if let vehicleObject = vehicleInfo {
+            if let vehicleObjectMake = vehicleObject.make {
+                queryItems.append(URLQueryItem(name: "make", value: vehicleObjectMake))
+            }
+        }
 
         components.queryItems = queryItems
 
