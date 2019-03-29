@@ -72,7 +72,7 @@ Callback function for when the Authorization Flow returns with either an Error o
 
 `make` (optional)
 
-Defaults to `nil`. Including a `make` on the optional `VehicleInfo` object causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen. The following are valid makes supported by the Smartcar API: `[Audi, BMW, Buick, Cadillac, Cheverolet, Chrysler, Dodge, GMC, Jeep, Lexus, Ram, Tesla, Volkswagen]`. Makes are case-insensitive.
+Defaults to `nil`. Including a `make` on the optional `VehicleInfo` object causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation.
 
 ### launchAuthFlow Parameters
 
