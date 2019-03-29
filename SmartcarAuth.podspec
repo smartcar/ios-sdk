@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SmartcarAuth'
-  s.version          = '2.2.1'
+  s.version          = '2.2.2'
   s.summary          = 'Smartcar Authentication SDK for iOS written in Swift 3.'
 
   s.description      = <<-DESC
