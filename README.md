@@ -72,7 +72,7 @@ Callback function for when the Authorization Flow returns with either an Error o
 
 `make` (optional)
 
-Defaults to `nil`. Including a `make` on the optional `VehicleInfo` object causes the car brand selection screen to be bypassed, allowing the user to go directly to the vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation.
+Defaults to `nil`. Including a `make` on the optional `VehicleInfo` object allows users to bypass the car brand selection screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation.
 
 ### launchAuthFlow Parameters
 
@@ -86,7 +86,7 @@ Defaults to `false`. The `false` option will skip the approval prompt for users 
 
 `vehicleInfo` (optional)
 
-Defaults to `nil`. Passing in a `VehicleInfo` object with a `make` property allows users to bypass the car brand selection screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation.
+Defaults to `nil`. Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation.
 
 
 ### Handling the Redirect
