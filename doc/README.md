@@ -2,6 +2,22 @@
 
 Smartcar iOS SDK documentation.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Class `SmartcarAuth` Constructor](#class-smartcarauth-constructor)
+  - [Example](#example)
+- [Completion Handler](#completion-handler)
+  - [Example](#example-1)
+- [Method `.launchAuthFlow`](#method-launchauthflow)
+  - [Example](#example-2)
+- [Class `VehicleInfo` Constructor](#class-vehicleinfo-constructor)
+  - [Example](#example-3)
+- [Enum `AuthorizationError`](#enum-authorizationerror)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Class `SmartcarAuth` Constructor
 
 | Parameter | Type | Default | Description |
