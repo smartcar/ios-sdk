@@ -80,7 +80,7 @@ func application(_ application: UIApplication, open url: URL, options: [UIApplic
 ## SDK Reference
 
 For detailed documentation on parameters and available methods, please refer to
-the [SDK Reference](doc/readme.md).
+the [SDK Reference](doc/README.md).
 
 ## Author
 
