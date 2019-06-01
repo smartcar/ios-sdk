@@ -74,7 +74,7 @@ smartcar.launchAuthFlow(viewController: self)
 
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| `make` | String | `nil` | Including a `make` on the optional `VehicleInfo` object allows users to bypass the car brand selection screen. For a complete list of compabible makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
+| `make` | String | `nil` | For a complete list of compabible makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
 
 ### Example
 
