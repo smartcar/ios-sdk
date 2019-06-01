@@ -26,7 +26,7 @@ Smartcar iOS SDK documentation.
 | `redirectUri` | `String` | _Required_ | Your app must register a custom URI scheme with iOS in order to receive the authorization callback. Smartcar requires the custom URI scheme to be in the format of `"sc" + clientId + "://" + hostname`. This URI must also be registered in [Smartcar's developer portal](https://developer.smartcar.com) for your app. You may append an optional path component or TLD (e.g. `sc4a1b01e5-0497-417c-a30e-6df6ba33ba46://page`). Read here for more information on [configuration of a custom scheme](http://www.idev101.com/code/Objective-C/custom_url_schemes.html). |
 | `scope` | `Array<String>` | `[]` | Permissions requested from the user for specific grant. See the [Smartcar developer documentation](https://smartcar.com/docs/api) for a full list of available permissions. If the `scope` array is empty, all permissions will be requested. |
 | `testMode` | `Bool` | `false` | Set to `true` to launch the Smartcar auth flow in test mode. |
-| `completion` | `Function` | _Required_ | Callback function to be invoked upon completion of the Smartcar Authorization Flow. See the **Completion Handler** section below for details on the function's inputs. |
+| `completion` | `Function` | _Required_ | Callback function to be invoked upon completion of the Smartcar Authorization Flow. See the [Completion Handler](#completion-handler) section below for details on the function's inputs. |
 
 ### Example
 
@@ -43,7 +43,7 @@ let smartcar = SmartcarAuth(
 
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| `error` | `AuthorizationError` | `nil` | This error will be present if there is a failure in the Smartcar Authorization Flow. Normally, this indicates that a vehicle owner pressed "Deny" to grant your application access to their vehicle. |
+| `error` | [`AuthorizationError`](#enum-authorizationerror) | `nil` | This error will be present if there is a failure in the Smartcar Authorization Flow. Normally, this indicates that a vehicle owner pressed "Deny" to grant your application access to their vehicle. |
 | `code` | `String` | `nil` | Received upon successful authorization. This code should be used to exchange with Smartcar for a long lasting access token. See our [iOS Integration Guide](https://smartcar.com/docs/integration-guides/ios/introduction/) for more on this exchange. |
 | `state` | `String` | `nil` | If `state` was provided in the `.launchAuthFlow` method, it will be returned here. |
 
@@ -61,7 +61,7 @@ func completionHandler(err: Error?, code: String?, state: String?) -> Any {
 | --------- | ---- | ------- | ----------- |
 | `state` | `String` | `nil` | An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The parameter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings that can be url-encoded. |
 | `forcePrompt` | `Bool` | `false` | The `false` option will skip the approval prompt for users who have already accepted the requested permissions for your application in the past. Set to `true` to force a user to see the approval prompt even if they have already accepted the permissions in the past. |
-| `vehicleInfo` | `VehicleInfo` | `nil` | Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the specific brand vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
+| `vehicleInfo` | [`VehicleInfo`](#class-vehicleinfo-constructor) | `nil` | Passing in a [`VehicleInfo`](#class-vehicleinfo-constructor) object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the specific brand vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
 | `viewController` | `UIViewController` | _Required_ | Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the specific brand vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
 
 ### Example
