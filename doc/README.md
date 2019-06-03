@@ -44,7 +44,7 @@ let smartcar = SmartcarAuth(
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
 | `error` | [`AuthorizationError`](#enum-authorizationerror) | `nil` | This error will be present if there is a failure in the Smartcar Authorization Flow. Normally, this indicates that a vehicle owner pressed "Deny" to grant your application access to their vehicle. |
-| `code` | `String` | `nil` | Received upon successful authorization. This code should be used to exchange with Smartcar for a long lasting access token. See our [iOS Integration Guide](https://smartcar.com/docs/integration-guides/ios/introduction/) for more on this exchange. |
+| `code` | `String` | `nil` | Received upon successful authorization. This code should be used to exchange with Smartcar for a long-lasting access token. See our [iOS Integration Guide](https://smartcar.com/docs/integration-guides/ios/introduction/) for more on this exchange. |
 | `state` | `String` | `nil` | If `state` was provided in the `.launchAuthFlow` method, it will be returned here. |
 
 ### Example
@@ -88,5 +88,5 @@ smartcar.launchAuthFlow(vehicleInfo: VehicleInfo(make: "Tesla"), viewController:
 | Case | Description | 
 | ---- | ----------- |
 | `accessDenied` | The vehicle owner denied your application access to their vehicle. This case is common and should be handled. |
-| `missingQueryParameters` | The redirect callback was recieved with no query parameters. This is unexpected and should not occur in normal operation. |
-| `missingAuthCode` | The redirect callback was recieved with some query parameters, but neither a `code` nor an `error` was present. This is unexpected and should not occur in normal operation. |
+| `missingQueryParameters` | The redirect callback was received with no query parameters. This is unexpected and should not occur in normal operation. |
+| `missingAuthCode` | The redirect callback was received with some query parameters, but neither a `code` nor an `error` was present. This is unexpected and should not occur in normal operation. |

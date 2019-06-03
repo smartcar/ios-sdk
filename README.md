@@ -25,7 +25,7 @@ pod "SmartcarAuth"
 
 ## Getting Started
 
-First you need to have a global SmartcarAuth object in your AppDelegate to hold the session, in order to continue the authorization flow from the redirect.
+First, you need to have a global SmartcarAuth object in your AppDelegate to hold the session, in order to continue the authorization flow from the redirect.
 
 ```swift
 // global variable in the app's AppDelegate
