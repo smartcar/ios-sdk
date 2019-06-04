@@ -62,7 +62,7 @@ func completionHandler(err: Error?, code: String?, state: String?) -> Any {
 | `state` | `String` | `nil` | An opaque value used by the client to maintain state between the request and the callback. The authorization server includes this value when redirecting the user-agent back to the client. The parameter SHOULD be used for preventing cross-site request forgery attempts. Smartcar supports all `state` strings that can be url-encoded. |
 | `forcePrompt` | `Bool` | `false` | The `false` option will skip the approval prompt for users who have already accepted the requested permissions for your application in the past. Set to `true` to force a user to see the approval prompt even if they have already accepted the permissions in the past. |
 | `vehicleInfo` | [`VehicleInfo`](#class-vehicleinfo-constructor) | `nil` | Passing in a [`VehicleInfo`](#class-vehicleinfo-constructor) object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the specific brand vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
-| `viewController` | `UIViewController` | _Required_ | Passing in a `VehicleInfo` object with a `make` property causes the OEM selector screen to be bypassed, allowing the user to go directly to the specific brand vehicle login screen. For a complete list of supported makes, please see our [API Reference](https://smartcar.com/docs/api#authorization) documentation. |
+| `viewController` | `UIViewController` | _Required_ | The ViewController responsible for presenting the SFSafariView to the user. |
 
 ### Example
 
@@ -85,7 +85,7 @@ smartcar.launchAuthFlow(vehicleInfo: VehicleInfo(make: "Tesla"), viewController:
 
 ## Enum `AuthorizationError`
 
-| Case | Description | 
+| Case | Description |
 | ---- | ----------- |
 | `accessDenied` | The vehicle owner denied your application access to their vehicle. This case is common and should be handled. |
 | `missingQueryParameters` | The redirect callback was received with no query parameters. This is unexpected and should not occur in normal operation. |
