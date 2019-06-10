@@ -24,4 +24,5 @@ enum AuthorizationError: Error {
     case missingQueryParameters
     case missingAuthCode
     case accessDenied
+    case vehicleIncompatible
 }

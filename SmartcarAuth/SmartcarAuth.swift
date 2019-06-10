@@ -149,8 +149,15 @@ Smartcar Authentication SDK for iOS written in Swift 3.
 
         let queryState = query.filter({ $0.name == "state"}).first?.value
 
-        if query.filter({ $0.name == "error"}).first?.value != nil {
-            return completion(AuthorizationError.accessDenied, nil, queryState)
+        let error = query.filter({ $0.name == "error"}).first?.value
+        if (error != nil) {
+            switch (error) {
+                case 'vehicle_incompatible':
+                    return completion(AuthorizationError.vehicleIncompatible, nil, queryState)
+                case 'access_denied':
+                default:
+                    return completion(AuthorizationError.accessDenied, nil, queryState)
+            }
         }
 
         guard let code = query.filter({ $0.name == "code"}).first?.value else {
