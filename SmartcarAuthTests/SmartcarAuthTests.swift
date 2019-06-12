@@ -29,7 +29,7 @@ class SmartcarAuthTests: XCTestCase {
     func testGenerateUrl() {
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             fail("Callback should not have been called")
 
@@ -43,7 +43,7 @@ class SmartcarAuthTests: XCTestCase {
     func testGenerateUrlTestModeOverrideFalse() {
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, testMode: false, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             fail("Callback should not have been called")
 
@@ -57,7 +57,7 @@ class SmartcarAuthTests: XCTestCase {
     func testGenerateUrlTestModeOverrideTrue() {
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: false, testMode: true, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             fail("Callback should not have been called")
 
@@ -71,7 +71,7 @@ class SmartcarAuthTests: XCTestCase {
     func testGenerateUrlAllOptionalParametersIncluded() {
         let testVehicle = VehicleInfo(make: make)
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             fail("Callback should not have been called")
 
@@ -84,7 +84,7 @@ class SmartcarAuthTests: XCTestCase {
 
     func testGenerateUrlDefaultValues() {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             fail("Callback should not have been called")
 
@@ -99,7 +99,7 @@ class SmartcarAuthTests: XCTestCase {
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             expect(error).to(matchError(AuthorizationError.missingQueryParameters))
 
@@ -124,7 +124,7 @@ class SmartcarAuthTests: XCTestCase {
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             expect(error).to(matchError(AuthorizationError.missingAuthCode))
 
@@ -149,7 +149,7 @@ class SmartcarAuthTests: XCTestCase {
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             expect(error).to(matchError(AuthorizationError.accessDenied))
 
@@ -168,6 +168,56 @@ class SmartcarAuthTests: XCTestCase {
             }
         }
     }
+    
+    func testHandleCallbackVehicleIncompatible() {
+        
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state, vehicle in
+            
+            expect(error).to(matchError(AuthorizationError.vehicleIncompatible))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=vehicle_incompatible&error_description=The+user's+vehicle+is+not+compatible.&state=0facda3319")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func testHandleCallbackVehicleIncompatibleWithVehicle() {
+        
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state, vehicle in
+            
+            expect(error).to(matchError(AuthorizationError.vehicleIncompatible))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=vehicle_incompatible&error_description=The+user's+vehicle+is+not+compatible.&vin=0000000000&make=CHEVROLET&make=Camaro&year=2010&state=0facda3319")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
 
     func testResumeAuthFlowSuccess() {
 
@@ -177,7 +227,7 @@ class SmartcarAuthTests: XCTestCase {
         let url = URL(string: "https://localhost:8000?code=\(code)&state=\(self.state)")!
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
-            error, authCode, state in
+            error, authCode, state, vehicle in
 
             expect(error).to(beNil())
             expect(authCode).to(equal(code))
@@ -200,7 +250,7 @@ class SmartcarAuthTests: XCTestCase {
 
     func testLaunchAuthFlow() {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completion: {
-            error, code, state in
+            error, code, state, vehicle in
 
             fail("Callback should not have been called")
         })

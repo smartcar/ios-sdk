@@ -31,11 +31,10 @@ Smartcar Authentication SDK for iOS written in Swift 3.
 */
 
 @objc public class SmartcarAuth: NSObject {
-
     var clientId: String
     var redirectUri: String
     var scope: [String]
-    var completion: (Error?, String?, String?) -> Any?
+    var completion: (Error?, String?, String?, Vehicle?) -> Any?
     var development: Bool
     // NSNumber? is used here instead of Bool? because there is no concept of Bool? in Objective-C
     var testMode: NSNumber?
@@ -51,7 +50,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
+    init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?, Vehicle?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
@@ -144,26 +143,32 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
 
         guard let query = urlComp?.queryItems else {
-            return completion(AuthorizationError.missingQueryParameters, nil, nil)
+            return completion(AuthorizationError.missingQueryParameters, nil, nil, nil)
         }
 
         let queryState = query.filter({ $0.name == "state"}).first?.value
-
+        var vehicle = Vehicle()
+        vehicle.vin = query.filter({ $0.name == "vin"}).first?.value ?? ""
+        vehicle.make = query.filter({ $0.name == "make"}).first?.value ?? ""
+        vehicle.model = query.filter({ $0.name == "model"}).first?.value ?? ""
+        vehicle.year = query.filter({ $0.name == "year"}).first?.value ?? ""
         let error = query.filter({ $0.name == "error"}).first?.value
+        
         if (error != nil) {
             switch (error) {
-                case 'vehicle_incompatible':
-                    return completion(AuthorizationError.vehicleIncompatible, nil, queryState)
-                case 'access_denied':
+                case "vehicle_incompatible":
+                    return completion(AuthorizationError.vehicleIncompatible, nil, queryState, vehicle)
+                case "access_denied":
+                    return completion(AuthorizationError.accessDenied, nil, queryState, nil)
                 default:
-                    return completion(AuthorizationError.accessDenied, nil, queryState)
+                    return completion(AuthorizationError.accessDenied, nil, queryState, nil)
             }
         }
 
         guard let code = query.filter({ $0.name == "code"}).first?.value else {
-            return completion(AuthorizationError.missingAuthCode, nil, queryState)
+            return completion(AuthorizationError.missingAuthCode, nil, queryState, nil)
         }
 
-        return completion(nil, code, queryState)
+        return completion(nil, code, queryState, vehicle)
     }
 }
