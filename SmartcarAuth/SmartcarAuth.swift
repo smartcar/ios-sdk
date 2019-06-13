@@ -154,7 +154,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         vehicle.year = query.filter({ $0.name == "year"}).first?.value ?? ""
         let error = query.filter({ $0.name == "error"}).first?.value
         
-        if (error != nil) {
+        guard (error != nil) else {
             switch (error) {
                 case "vehicle_incompatible":
                     return completion(AuthorizationError.vehicleIncompatible, nil, queryState, vehicle)
