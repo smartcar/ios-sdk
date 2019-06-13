@@ -169,6 +169,31 @@ class SmartcarAuthTests: XCTestCase {
         }
     }
     
+    func testHandleCallbackDefaultError() {
+        
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state, vehicle in
+            
+            expect(error).to(matchError(AuthorizationError.accessDenied))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=fake_error&error_description=User+denied+access+to+application.&state=0facda3319")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
     func testHandleCallbackVehicleIncompatible() {
         
         let exp = expectation(description: "Completion should've been called with an error")
