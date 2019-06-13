@@ -118,6 +118,30 @@ class SmartcarAuthTests: XCTestCase {
             }
         }
     }
+    
+    func testHandleCallbackBadParameters() {
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state, vehicle in
+            
+            expect(error).to(matchError(AuthorizationError.missingAuthCode))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://localhost:8000?hello=hello")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
 
     func testHandleCallbackNoCode() {
 
