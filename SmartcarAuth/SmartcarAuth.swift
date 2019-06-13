@@ -50,7 +50,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-    init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?, Vehicle?) -> Any?) {
+     init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?, Vehicle?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
@@ -154,7 +154,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         vehicle.year = query.filter({ $0.name == "year"}).first?.value ?? ""
         let error = query.filter({ $0.name == "error"}).first?.value
         
-        guard (error != nil) else {
+        if (error != nil) {
             switch (error) {
                 case "vehicle_incompatible":
                     return completion(AuthorizationError.vehicleIncompatible, nil, queryState, vehicle)
