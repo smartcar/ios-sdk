@@ -14,4 +14,4 @@ coverage:
       unit:
         flags: "unit"
   ignore:
-    "SmartcarAuthTests"
+    - "SmartcarAuthTests/*"
