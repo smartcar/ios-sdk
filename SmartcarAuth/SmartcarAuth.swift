@@ -169,6 +169,6 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             return completion(AuthorizationError.missingAuthCode, nil, queryState, nil)
         }
 
-        return completion(nil, code, queryState, vehicle)
+        return completion(nil, code, queryState, nil)
     }
 }
