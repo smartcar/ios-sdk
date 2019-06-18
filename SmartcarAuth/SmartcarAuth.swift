@@ -34,7 +34,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     var clientId: String
     var redirectUri: String
     var scope: [String]
-    var completion: (Error?, String?, String?, Vehicle?) -> Any?
+    var completion: (Error?, String?, String?, VehicleInfo?) -> Any?
     var development: Bool
     // NSNumber? is used here instead of Bool? because there is no concept of Bool? in Objective-C
     var testMode: NSNumber?
@@ -50,7 +50,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
         - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
     */
-     init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?, Vehicle?) -> Any?) {
+     init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?, VehicleInfo?) -> Any?) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
@@ -147,11 +147,13 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         }
 
         let queryState = query.filter({ $0.name == "state"}).first?.value
-        var vehicle = Vehicle()
+        let vehicle = VehicleInfo()
         vehicle.vin = query.filter({ $0.name == "vin"}).first?.value ?? ""
         vehicle.make = query.filter({ $0.name == "make"}).first?.value ?? ""
         vehicle.model = query.filter({ $0.name == "model"}).first?.value ?? ""
-        vehicle.year = query.filter({ $0.name == "year"}).first?.value ?? ""
+        if let year = query.filter({ $0.name == "year"}).first?.value {
+            vehicle.year = Int(year)
+        }
         let error = query.filter({ $0.name == "error"}).first?.value
         
         if (error != nil) {

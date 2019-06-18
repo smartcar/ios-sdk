@@ -21,15 +21,20 @@
  */
 
 @objc public class VehicleInfo: NSObject {
+    var vin: String?
     var make: String?
-    
+    var model: String?
+    var year: Int? 
     /**
      Constructor for VehicleInfo
      - parameters:
      - make: allows user to bypass OEM selection screen and go directly to vehicle login screen, defaults to nil
      */
     
-    @objc public init(make: String? = nil) {
+    public init(vin: String? = nil, make: String? = nil, model: String? = nil, year: Int? = nil) {
+        self.vin = vin;
         self.make = make;
+        self.model = model;
+        self.year = year;
     }
 }

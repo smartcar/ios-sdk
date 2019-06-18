@@ -30,4 +30,16 @@ class VehicleInfoTests: XCTestCase {
         let vehicleInfo = VehicleInfo(make: "TESLA")
         expect(vehicleInfo.make).to(equal("TESLA"))
     }
+    
+    func fullVehicle() {
+        var vehicle = VehicleInfo()
+        vehicle.vin = "0000"
+        vehicle.make = "TESLA"
+        vehicle.model = "Model S"
+        vehicle.year = 2019
+        expect(vehicle.vin).to(equal("0000"))
+        expect(vehicle.make).to(equal("TESLA"))
+        expect(vehicle.model).to(equal("Model S"))
+        expect(vehicle.year).to(equal(2019))
+    }
 }
