@@ -32,7 +32,7 @@ class VehicleInfoTests: XCTestCase {
     }
     
     func fullVehicle() {
-        var vehicle = VehicleInfo()
+        let vehicle = VehicleInfo()
         vehicle.vin = "0000"
         vehicle.make = "TESLA"
         vehicle.model = "Model S"
