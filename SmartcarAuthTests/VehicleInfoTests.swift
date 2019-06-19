@@ -21,17 +21,17 @@ class VehicleInfoTests: XCTestCase {
         super.tearDown()
     }
 
-    func emptyVehicleInfo() {
+    func testEmptyVehicleInfo() {
         let vehicleInfo = VehicleInfo()
-        expect(vehicleInfo.make).to(equal(nil))
+        expect(vehicleInfo.make).to(beNil())
     }
     
-    func nonEmptyVehicleInfo() {
+    func testVehicleInfo() {
         let vehicleInfo = VehicleInfo(make: "TESLA")
         expect(vehicleInfo.make).to(equal("TESLA"))
     }
     
-    func fullVehicle() {
+    func testFullVehicleInfo() {
         let vehicle = VehicleInfo()
         vehicle.vin = "0000"
         vehicle.make = "TESLA"

@@ -144,7 +144,6 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackNoCode() {
-
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
@@ -169,7 +168,6 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackAccessDenied() {
-
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
@@ -194,7 +192,6 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackDefaultError() {
-        
         let exp = expectation(description: "Completion should've been called with an error")
         
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
@@ -219,7 +216,6 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackVehicleIncompatible() {
-        
         let exp = expectation(description: "Completion should've been called with an error")
         
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
@@ -244,7 +240,6 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackVehicleIncompatibleWithVehicle() {
-        
         let exp = expectation(description: "Completion should've been called with an error")
         
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
