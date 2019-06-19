@@ -151,8 +151,8 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         vehicle.vin = query.filter({ $0.name == "vin"}).first?.value ?? ""
         vehicle.make = query.filter({ $0.name == "make"}).first?.value ?? ""
         vehicle.model = query.filter({ $0.name == "model"}).first?.value ?? ""
-        if let year = query.filter({ $0.name == "year"}).first?.value {
-            vehicle.year = Int(year)
+        if let year = query.filter({ $0.name == "year"}).first?.value as? Int? {
+            vehicle.year = year
         }
         let error = query.filter({ $0.name == "error"}).first?.value
         
