@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/SmartcarAuth.svg?style=flat-square)](http://cocoapods.org/pods/SmartcarAuth)
 [![Platform](https://img.shields.io/cocoapods/p/SmartcarAuth.svg?style=flat-square)](http://cocoapods.org/pods/SmartcarAuth)
 
-The SmartcarAuth iOS SDK makes it easy to handle the Smartcar authorization flow from iOS.
+The SmartcarAuth iOS SDK makes it easy to integrate with Smartcar Connect from iOS.
 
 The SDK follows the best practices set out in [OAuth 2.0 for Native Apps](https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06) including using _SFSafariViewController_ on iOS for the authorization request. _UIWebView_ is explicitly not supported due to usability and security reasons.
 
@@ -49,13 +49,13 @@ appDelegate.smartcar = SmartcarAuth(
 )
 let smartcar = appDelegate.smartcar
 
-// initialize authorization flow on the SFSafariViewController
+// Launch Connect on the SFSafariViewController
 smartcar.launchAuthFlow(state: state, forcePrompt: false, testMode: false, viewController: viewController)
 ```
 
 ## Handling the Redirect
 
-The authorization response URL is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session
+The Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session
 
 ```swift
 /**
@@ -65,8 +65,8 @@ func application(_ application: UIApplication, open url: URL, options: [UIApplic
     // Close the SFSafariViewController
     window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
 
-    // Sends the URL to the current authorization flow (if any) which will
-    // process it and then call the completion handler.
+    // Sends the URL to the current SmartcarAuth object (if any) which will
+    // process it and then call the completion handler.s
     if let sdk = smartcarSdk {
         sdk.handleCallback(url: url)
     }
