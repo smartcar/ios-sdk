@@ -66,7 +66,7 @@ func application(_ application: UIApplication, open url: URL, options: [UIApplic
     window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
 
     // Sends the URL to the current SmartcarAuth object (if any) which will
-    // process it and then call the completion handler.s
+    // process it and then call the completion handler.
     if let sdk = smartcarSdk {
         sdk.handleCallback(url: url)
     }
