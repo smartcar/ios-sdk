@@ -245,8 +245,6 @@ class SmartcarAuthTests: XCTestCase {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state, vehicle in
             
-            let expectedVehicle = VehicleInfo(vin: "0000", make: "CHEVROLET", year: 2010, model: "Camaro")
-            
             expect(error).to(matchError(AuthorizationError.vehicleIncompatible))
             expect(vehicle!.vin).to(equal("0000"))
             expect(vehicle!.make).to(equal("CHEVROLET"))

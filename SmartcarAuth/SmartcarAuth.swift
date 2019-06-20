@@ -22,7 +22,7 @@
 
 import UIKit
 import SafariServices
-import os.log
+
 let domain = "connect.smartcar.com"
 
 /**
