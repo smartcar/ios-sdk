@@ -24,17 +24,20 @@
     var vin: String?
     var make: String?
     var model: String?
-    var year: Int? 
+    var year: Int?
+    
     /**
      Constructor for VehicleInfo
      - parameters:
-     - make: allows user to bypass OEM selection screen and go directly to vehicle login screen, defaults to nil
+     - vin
+     - make
+     - year
+     - model
      */
-    
-    public init(vin: String? = nil, make: String? = nil, model: String? = nil, year: Int? = nil) {
-        self.vin = vin;
-        self.make = make;
-        self.model = model;
-        self.year = year;
+    public init(vin: String? = nil, make: String? = nil, year: Int? = nil, model: String? = nil) {
+        self.vin = vin
+        self.make = make
+        self.year = year
+        self.model = model
     }
 }

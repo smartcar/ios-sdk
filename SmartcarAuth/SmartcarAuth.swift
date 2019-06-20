@@ -22,7 +22,7 @@
 
 import UIKit
 import SafariServices
-
+import os.log
 let domain = "connect.smartcar.com"
 
 /**
@@ -147,13 +147,22 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         }
 
         let queryState = query.filter({ $0.name == "state"}).first?.value
+        
         let vehicle = VehicleInfo()
-        vehicle.vin = query.filter({ $0.name == "vin"}).first?.value ?? ""
-        vehicle.make = query.filter({ $0.name == "make"}).first?.value ?? ""
-        vehicle.model = query.filter({ $0.name == "model"}).first?.value ?? ""
-        if let year = query.filter({ $0.name == "year"}).first?.value as? Int? {
-            vehicle.year = year
+        
+        if let vin = query.filter({ $0.name == "vin"}).first?.value {
+            vehicle.vin = vin
+            if let make = query.filter({ $0.name == "make"}).first?.value {
+                vehicle.make = make
+            }
+            if let model = query.filter({ $0.name == "model"}).first?.value {
+                vehicle.model = model
+            }
+            if let year = query.filter({ $0.name == "year"}).first?.value {
+                vehicle.year = Int(year)
+            }
         }
+        
         let error = query.filter({ $0.name == "error"}).first?.value
         
         if (error != nil) {

@@ -245,14 +245,20 @@ class SmartcarAuthTests: XCTestCase {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state, vehicle in
             
+            let expectedVehicle = VehicleInfo(vin: "0000", make: "CHEVROLET", year: 2010, model: "Camaro")
+            
             expect(error).to(matchError(AuthorizationError.vehicleIncompatible))
+            expect(vehicle!.vin).to(equal("0000"))
+            expect(vehicle!.make).to(equal("CHEVROLET"))
+            expect(vehicle!.year).to(equal(2010))
+            expect(vehicle!.model).to(equal("Camaro"))
             
             exp.fulfill()
             
             return nil
         })
         
-        let url = URL(string: "https://example.com/home?error=vehicle_incompatible&error_description=The+user's+vehicle+is+not+compatible.&vin=0000000000&make=CHEVROLET&make=Camaro&year=2010&state=0facda3319")!
+        let url = URL(string: "https://example.com/home?error=vehicle_incompatible&error_description=The+user's+vehicle+is+not+compatible.&vin=0000&make=CHEVROLET&model=Camaro&year=2010")!
         
         smartcarSdk.handleCallback(with: url)
         
