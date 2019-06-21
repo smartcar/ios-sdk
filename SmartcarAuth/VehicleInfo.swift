@@ -26,14 +26,6 @@
     var model: String?
     var year: Int?
     
-    /**
-     Constructor for VehicleInfo
-     - parameters:
-     - vin
-     - make
-     - year
-     - model
-     */
     public init(vin: String? = nil, make: String? = nil, year: Int? = nil, model: String? = nil) {
         self.vin = vin
         self.make = make
