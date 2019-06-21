@@ -100,8 +100,10 @@ class SmartcarAuthTests: XCTestCase {
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
-
-            expect(error).to(matchError(AuthorizationError.missingQueryParameters))
+            
+            let expectedError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil,
+                                                   vehicleInfo: nil)
+            expect(error).to(matchError(expectedError))
 
             exp.fulfill()
 
@@ -118,15 +120,42 @@ class SmartcarAuthTests: XCTestCase {
             }
         }
     }
+    
+    func testHandleCallbackBadParameters() {
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state in
+            
+            let expectedError = AuthorizationError(type: .missingAuthCode, errorDescription: nil,
+                                                   vehicleInfo: nil)
+            expect(error).to(matchError(expectedError))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://localhost:8000?hello=hello")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
 
     func testHandleCallbackNoCode() {
-
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
-
-            expect(error).to(matchError(AuthorizationError.missingAuthCode))
+            
+            let expectedError = AuthorizationError(type: .missingAuthCode, errorDescription: nil,
+                                                   vehicleInfo: nil)
+            expect(error).to(matchError(expectedError))
 
             exp.fulfill()
 
@@ -145,13 +174,13 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackAccessDenied() {
-
         let exp = expectation(description: "Completion should've been called with an error")
 
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
-
-            expect(error).to(matchError(AuthorizationError.accessDenied))
+            
+            let expectedError = AuthorizationError(type: .accessDenied, errorDescription: "User denied access to application.", vehicleInfo: nil)
+            expect(error).to(matchError(expectedError))
 
             exp.fulfill()
 
@@ -162,6 +191,82 @@ class SmartcarAuthTests: XCTestCase {
 
         smartcarSdk.handleCallback(with: url)
 
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func testHandleCallbackDefaultError() {
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state in
+            
+            let expectedError = AuthorizationError(type: .accessDenied, errorDescription: "User denied access to application.", vehicleInfo: nil)
+            expect(error).to(matchError(expectedError))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=fake_error&error_description=User+denied+access+to+application.&state=0facda3319")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func testHandleCallbackVehicleIncompatible() {
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state in
+            
+            let expectedError = AuthorizationError(type: .vehicleIncompatible, errorDescription: "The user's vehicle is not compatible.", vehicleInfo: nil)
+            expect(error).to(matchError(expectedError))
+            
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=vehicle_incompatible&error_description=The+user's+vehicle+is+not+compatible.&state=0facda3319")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                fail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func testHandleCallbackVehicleIncompatibleWithVehicle() {
+        let exp = expectation(description: "Completion should've been called with an error")
+        
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
+            error, code, state in
+            
+            let expectedVehicle = VehicleInfo(vin: "0000", make: "CHEVROLET", year: 2010, model: "CAMARO")
+            let expectedError = AuthorizationError(type: .vehicleIncompatible, errorDescription: "The user's vehicle is not compatible.", vehicleInfo: expectedVehicle)
+            
+            expect(error).to(matchError(expectedError))
+            exp.fulfill()
+            
+            return nil
+        })
+        
+        let url = URL(string: "https://example.com/home?error=vehicle_incompatible&error_description=The+user's+vehicle+is+not+compatible.&vin=0000&make=CHEVROLET&model=Camaro&year=2010")!
+        
+        smartcarSdk.handleCallback(with: url)
+        
         waitForExpectations(timeout: 1) { error in
             if let error = error {
                 fail("waitForExpectationsWithTimeout errored: \(error)")

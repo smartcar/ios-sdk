@@ -20,8 +20,15 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-enum AuthorizationError: Error {
-    case missingQueryParameters
-    case missingAuthCode
-    case accessDenied
+struct AuthorizationError: Error {
+    enum ErrorType {
+        case missingQueryParameters
+        case missingAuthCode
+        case accessDenied
+        case vehicleIncompatible
+    }
+    
+    let type: ErrorType
+    let errorDescription: String?
+    let vehicleInfo: VehicleInfo?
 }
