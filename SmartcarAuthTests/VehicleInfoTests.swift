@@ -2,7 +2,6 @@
 //  VehicleInfo.swift
 //  SmartcarAuthTests
 //
-//  Created by Morgan Newman on 6/14/19.
 //  Copyright © 2019 SmartCar Inc. All rights reserved.
 //
 
