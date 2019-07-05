@@ -128,7 +128,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
 
         if let singleSelectValue = singleSelect {
             let singleSelectBoolValue = singleSelectValue.boolValue;
-            queryItems.append(URLQueryItem(name: "single_select", value: singleSelectBoolValue))
+            queryItems.append(URLQueryItem(name: "single_select", value: singleSelectBoolValue ? "true" : "false"))
         }
 
         components.queryItems = queryItems
