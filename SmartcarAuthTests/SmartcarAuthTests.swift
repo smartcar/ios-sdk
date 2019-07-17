@@ -82,6 +82,20 @@ class SmartcarAuthTests: XCTestCase {
         expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(self.make)&single_select=true"))
     }
 
+    func testGenerateUrlSingleSelectFalse() {
+        let testVehicle = VehicleInfo(make: make)
+        let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
+            error, code, state in
+
+            fail("Callback should not have been called")
+
+        })
+
+        let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, vehicleInfo: testVehicle, singleSelect: false)
+
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(self.make)&single_select=false"))
+    }
+
     func testGenerateUrlDefaultValues() {
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completion: {
             error, code, state in
