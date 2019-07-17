@@ -87,7 +87,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
     authorization request URL
 
     */
-    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil) -> String {
+    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectOptions: VehicleInfo? = nil) -> String {
         var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
 
         var queryItems: [URLQueryItem] = []
@@ -126,9 +126,20 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             }
         }
 
-        if let singleSelectValue = singleSelect {
-            let singleSelectBoolValue = singleSelectValue.boolValue;
-            queryItems.append(URLQueryItem(name: "single_select", value: singleSelectBoolValue ? "true" : "false"))
+        var singleSelectAdded = false;
+
+        if let singleSelectObject = singleSelectOptions {
+            if let singleSelectVIN = singleSelectObject.vin {
+                queryItems.append(URLQueryItem(name: "single_select_vin", value: singleSelectVIN))
+                singleSelectAdded = true;
+            }
+        }
+
+        if singleSelectAdded == false {
+            if let singleSelectValue = singleSelect {
+                let singleSelectBoolValue = singleSelectValue.boolValue;
+                queryItems.append(URLQueryItem(name: "single_select", value: singleSelectBoolValue ? "true" : "false"))
+            }
         }
 
         components.queryItems = queryItems

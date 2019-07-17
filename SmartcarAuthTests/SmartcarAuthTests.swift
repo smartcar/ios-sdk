@@ -16,6 +16,7 @@ class SmartcarAuthTests: XCTestCase {
     let state = UUID().uuidString
     let scope = ["read_vehicle_info", "read_odometer"]
     let make = "Tesla"
+    let vin = "12345678901234"
 
     override func setUp() {
         super.setUp()
@@ -69,7 +70,7 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testGenerateUrlAllOptionalParametersIncluded() {
-        let testVehicle = VehicleInfo(make: make)
+        let testVehicle = VehicleInfo(make: make, vin: vin)
         let smartcarSdk = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope,  development: true, completion: {
             error, code, state in
 
@@ -77,9 +78,9 @@ class SmartcarAuthTests: XCTestCase {
 
         })
 
-        let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, vehicleInfo: testVehicle, singleSelect: true)
+        let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, vehicleInfo: testVehicle, singleSelect: true, singleSelectOptions: testVehicle)
 
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(self.make)&single_select=true"))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(self.make)&single_select_vin=\(self.vin)"))
     }
 
     func testGenerateUrlSingleSelectFalse() {
