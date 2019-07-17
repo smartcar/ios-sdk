@@ -120,7 +120,7 @@ class SmartcarAuthTests: XCTestCase {
 
         let url = smartcarSdk.generateUrl(state: state, forcePrompt: true, singleSelect: true)
 
-        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&make=\(self.make)&single_selec=true"))
+        expect(url).to(equal("https://connect.smartcar.com/oauth/authorize?response_type=code&client_id=\(self.clientId)&redirect_uri=\(self.redirectUri)&scope=read_vehicle_info%20read_odometer&approval_prompt=force&state=\(self.state)&mode=test&single_select=true"))
     }
 
     func testGenerateUrlOnlySingleSelectOptionsIncluded() {
