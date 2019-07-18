@@ -66,12 +66,13 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - state: optional, oauth state
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
         - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
-        - singleSelect: optional, controls the behavior of the grant dialog and by only allowing the user to select a single vehicle to authorize, defaults to nil
+        - singleSelect: optional, controls the behavior of the grant dialog by only allowing the user to select a single vehicle to authorize, defaults to nil
+        - singleSelectOptions: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
         - viewController: the viewController responsible for presenting the SFSafariView
     */
-    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, viewController: UIViewController) {
+    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectOptions: VehicleInfo? = nil, viewController: UIViewController) {
 
-        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, vehicleInfo: vehicleInfo, singleSelect: singleSelect))!)
+        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, vehicleInfo: vehicleInfo, singleSelect: singleSelect, singleSelectOptions: singleSelectOptions))!)
         viewController.present(safariVC, animated: true, completion: nil)
     }
 
@@ -83,6 +84,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
         - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
         - singleSelect: optional, controls the behavior of the grant dialog and by only allowing the user to select a single vehicle to authorize, defaults to nil
+        - singleSelectOptions: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
     - returns:
     authorization request URL
 
