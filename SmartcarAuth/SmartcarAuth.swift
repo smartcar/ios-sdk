@@ -133,7 +133,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
                 queryItems.append(URLQueryItem(name: "single_select_vin", value: singleSelectVIN))
                 singleSelectAdded = true;
             }
-            if singleSelectAdded = false {
+            if singleSelectAdded == false {
                 queryItems.append(URLQueryItem(name: "single_select", value: "false"))
                 singleSelectAdded = true;
             }
