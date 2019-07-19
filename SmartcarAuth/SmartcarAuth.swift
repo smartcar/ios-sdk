@@ -129,6 +129,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         }
 
         var singleSelectAdded = false;
+        var noValidOptionsFound = false;
 
         if let singleSelectObject = singleSelectOptions {
             if let singleSelectVIN = singleSelectObject.vin {
@@ -136,8 +137,9 @@ Smartcar Authentication SDK for iOS written in Swift 3.
                 singleSelectAdded = true;
             }
             if singleSelectAdded == false {
-                queryItems.append(URLQueryItem(name: "single_select", value: "false"))
-                singleSelectAdded = true;
+                noValidOptionsFound = true;
+            } else {
+                queryItems.append(URLQueryItem(name: "single_select", value: "true"))
             }
         }
 
@@ -145,6 +147,8 @@ Smartcar Authentication SDK for iOS written in Swift 3.
             if let singleSelectValue = singleSelect {
                 let singleSelectBoolValue = singleSelectValue.boolValue;
                 queryItems.append(URLQueryItem(name: "single_select", value: singleSelectBoolValue ? "true" : "false"))
+            } else if (noValidOptionsFound) {
+                queryItems.append(URLQueryItem(name: "single_select", value: "false"))
             }
         }
 
