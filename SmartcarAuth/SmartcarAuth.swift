@@ -67,12 +67,12 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
         - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
         - singleSelect: optional, controls the behavior of the grant dialog by only allowing the user to select a single vehicle to authorize, defaults to nil
-        - singleSelectOptions: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
+        - singleSelectVehicle: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
         - viewController: the viewController responsible for presenting the SFSafariView
     */
-    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectOptions: VehicleInfo? = nil, viewController: UIViewController) {
+    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectVehicle: VehicleInfo? = nil, viewController: UIViewController) {
 
-        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, vehicleInfo: vehicleInfo, singleSelect: singleSelect, singleSelectOptions: singleSelectOptions))!)
+        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, vehicleInfo: vehicleInfo, singleSelect: singleSelect, singleSelectVehicle: singleSelectVehicle))!)
         viewController.present(safariVC, animated: true, completion: nil)
     }
 
@@ -84,12 +84,12 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         - forcePrompt: optional, forces permission screen if set to true, defaults to false
         - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
         - singleSelect: optional, controls the behavior of the grant dialog and by only allowing the user to select a single vehicle to authorize, defaults to nil
-        - singleSelectOptions: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
+        - singleSelectVehicle: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
     - returns:
     authorization request URL
 
     */
-    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectOptions: VehicleInfo? = nil) -> String {
+    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectVehicle: VehicleInfo? = nil) -> String {
         var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
 
         var queryItems: [URLQueryItem] = []
@@ -131,7 +131,7 @@ Smartcar Authentication SDK for iOS written in Swift 3.
         var singleSelectAdded = false;
         var noValidOptionsFound = false;
 
-        if let singleSelectObject = singleSelectOptions {
+        if let singleSelectObject = singleSelectVehicle {
             if let singleSelectVIN = singleSelectObject.vin {
                 queryItems.append(URLQueryItem(name: "single_select_vin", value: singleSelectVIN))
                 singleSelectAdded = true;
