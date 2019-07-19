@@ -26,6 +26,7 @@ struct AuthorizationError: Error {
         case missingAuthCode
         case accessDenied
         case vehicleIncompatible
+        case invalidSingleSelectOptions
     }
     
     let type: ErrorType
