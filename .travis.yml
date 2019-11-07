@@ -12,7 +12,7 @@ before_install:
 
 script:
 
-  - pod lib lint
+  - pod lib lint --verbose
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.0,name=iPhone 8' build test
   - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 93.8 --only_project_targets
