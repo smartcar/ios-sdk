@@ -28,7 +28,6 @@ import Foundation
         case missingAuthCode
         case accessDenied
         case vehicleIncompatible
-        case invalidSingleSelectOptions
         case subscriptionInactive
         case userExitedFlow
         case unknownError

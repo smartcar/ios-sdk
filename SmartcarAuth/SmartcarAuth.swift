@@ -35,6 +35,7 @@ import AuthenticationServices
     var development: Bool
     var testMode: Bool
     
+    // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating. AnyObject is used so that session isn't limited to either SFAuthenticationSession or AsWebAuthenticationSession types
     var session: AnyObject?
 
     @objc public init(clientId: String, redirectUri: String, completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, scope: [String] = [], testMode: Bool = false, development: Bool = false) {
@@ -46,16 +47,18 @@ import AuthenticationServices
         self.completionHandler = completionHandler
     }
     
+    // legacy method for developers that want to support iOS 10 and under
     @objc public func launchAuthFlow(authUrl: URL, viewController: UIViewController) {
         let safariVC = SFSafariViewController(url: authUrl)
         viewController.present(safariVC, animated: true, completion: nil)
     }
     
-
+    // method to launch auth flow in iOS 11 and above
     @objc public func launchWebAuthSession(authUrl: URL, callbackUrlScheme: String) {
         if #available(iOS 12, *) {
             let authSession = ASWebAuthenticationSession.init(url: authUrl, callbackURLScheme: callbackUrlScheme, completionHandler: webAuthSessionCompletion)
             self.session = authSession
+            // this is required for the browser to open in iOS 13
             if #available(iOS 13, *) {
                 authSession.presentationContextProvider = self
             }
@@ -67,6 +70,7 @@ import AuthenticationServices
         }
     }
     
+    // Handles the completion of the auth flow
     @objc func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
         var authorizationError: AuthorizationError? = nil
         guard error == nil, let successUrl = callback else {
@@ -148,6 +152,7 @@ import AuthenticationServices
     
 }
 
+// Required if we want to provide a default browser window so that developers don't have to (so that they can  use launchWebAuthSession the same regardless of iOS versioning)
 @available(iOS 13, *)
 extension SmartcarAuth: ASWebAuthenticationPresentationContextProviding {
     public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
