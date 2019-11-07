@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = 'SmartcarAuth'
-  s.version          = '3.0.3'
-  s.summary          = 'Smartcar Authentication SDK for iOS written in Swift 3.'
+  s.version          = '3.0.4'
+  s.summary          = 'Smartcar Authentication SDK for iOS written in Swift 5.'
 
   s.description      = <<-DESC
-    Smartcar Authentication SDK for iOS written in Swift 3.
-        - Facilitates the flow with a SFSafariViewController to redirect to Smartcar and retrieve an authorization code
+    Smartcar Authentication SDK for iOS written in Swift 5.
+        - Facilitates the flow to redirect to Smartcar and retrieve an authorization code
                        DESC
 
   s.homepage         = 'https://github.com/smartcar/ios-sdk'
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
   s.source_files = 'SmartcarAuth/**/*.swift'
-  s.swift_version = '3.2'
+  s.swift_version = '5'
 
 end
