@@ -55,15 +55,15 @@ import AuthenticationServices
     
     // method to launch auth flow in iOS 11 and above
     @objc public func launchWebAuthSession(authUrl: URL, callbackUrlScheme: String) {
-        if #available(iOS 12, *) {
+        if #available(iOS 12.0, *) {
             let authSession = ASWebAuthenticationSession.init(url: authUrl, callbackURLScheme: callbackUrlScheme, completionHandler: webAuthSessionCompletion)
             self.session = authSession
             // this is required for the browser to open in iOS 13
-            if #available(iOS 13, *) {
+            if #available(iOS 13.0, *) {
                 authSession.presentationContextProvider = self
             }
             authSession.start()
-        } else if #available(iOS 11, *) {
+        } else if #available(iOS 11.0, *) {
             let authSession = SFAuthenticationSession.init(url: authUrl, callbackURLScheme: callbackUrlScheme, completionHandler: webAuthSessionCompletion)
             self.session = authSession
             authSession.start()

@@ -57,3 +57,4 @@ class VehicleInfoTests: XCTestCase {
         expect(vehicleInfo.year).to(equal(2019))
     }
 }
+
