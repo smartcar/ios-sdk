@@ -17,16 +17,11 @@ import Foundation
         self.components.scheme = "https"
         self.components.host = "connect.smartcar.com"
         self.components.path = "/oauth/authorize"
-        
-        var mode = auth.development
-        if (auth.testMode != auth.development) {
-            mode = auth.testMode
-        }
-        
+    
         self.queryItems.append(contentsOf: [
             URLQueryItem(name: "client_id", value: auth.clientId),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "mode", value: mode ? "test" : "live")
+            URLQueryItem(name: "mode", value: auth.testMode ? "test" : "live")
         ])
 
         if let redirectUri = auth.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {

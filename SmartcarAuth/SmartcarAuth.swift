@@ -26,53 +26,77 @@ import SafariServices
 import AuthenticationServices
 #endif
 
-
+/**
+Smartcar Authentication SDK for iOS written in Swift 5.
+    - Facilitates the authorization flow to launch the flow and retrieve an authorization code
+*/
 @objc public class SmartcarAuth: NSObject {
     var clientId: String
     var redirectUri: String
     var scope: [String]
     var completionHandler: (_ code: String?, _ state: String?, _ error: AuthorizationError?) -> Void
-    var development: Bool
     var testMode: Bool
     
-    // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating. AnyObject is used so that session isn't limited to either SFAuthenticationSession or AsWebAuthenticationSession types
+    // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating
     private var session: Session?
 
-    @objc public init(clientId: String, redirectUri: String, completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, scope: [String] = [], testMode: Bool = false, development: Bool = false) {
+    /**
+    Constructor for the SmartcarAuth
+    - parameters:
+        - clientId: app client id
+        - redirectUri: app redirect uri
+        - scope: app oauth scope
+        - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
+        - completion: callback function called upon the completion of the OAuth flow with the auth code, the state string, and the error
+    */
+    @objc public init(clientId: String, redirectUri: String, completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, scope: [String] = [], testMode: Bool = false) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
-        self.development = development
         self.testMode = testMode
         self.completionHandler = completionHandler
     }
     
-    // legacy method for developers that want to support iOS 10 and under
+    /**
+       Presents a SFSafariViewController with the initial authorization url. Should only be used in iOS 10 and under
+       - parameters:
+           - authUrl: the authorization url that the user the browser opens
+           - viewController: the viewController responsible for presenting the SFSafariView
+       */
     @objc public func launchAuthFlow(authUrl: URL, viewController: UIViewController) {
         let safariVC = SFSafariViewController(url: authUrl)
         viewController.present(safariVC, animated: true, completion: nil)
     }
     
-    // method to launch auth flow in iOS 11 and above
-    @objc public func launchWebAuthSession(authUrl: URL, callbackUrlScheme: String) {
+    /**
+    Presents an ASWebAuthenticationSession or SFAuthenticationSession with the initial authorization url
+    - parameters:
+        - authUrl: the authorization url that the user the browser opens
+        - redirectUriScheme: the custom uri scheme that the application can expect the redirect uri to be in
+    */
+    @objc public func launchWebAuthSession(authUrl: URL, redirectUriScheme: String) {
         if #available(iOS 12.0, *) {
-            let authSession = ASWebAuthenticationSession.init(url: authUrl, callbackURLScheme: callbackUrlScheme, completionHandler: webAuthSessionCompletion)
+            let authSession = ASWebAuthenticationSession.init(url: authUrl, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
             self.session = authSession
             // this is required for the browser to open in iOS 13
             if #available(iOS 13.0, *) {
                 authSession.presentationContextProvider = self
             }
         } else if #available(iOS 11.0, *) {
-            let authSession = SFAuthenticationSession.init(url: authUrl, callbackURLScheme: callbackUrlScheme, completionHandler: webAuthSessionCompletion)
+            let authSession = SFAuthenticationSession.init(url: authUrl, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
             self.session = authSession
         }
         self.session?.start()
     }
 
     
-    
-    // Handles the completion of the auth flow
-    @objc public func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
+    /**
+    Authorization callback function. Verifies that no error occured during the OAuth process and calls handleCallback, which extracts the auth code and state string
+    - parameters:
+        - callback: callback URL containing authorization code
+        - error: error that comes back if user cancels mid authorization flow or
+    */
+    @objc private func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
         var authorizationError: AuthorizationError? = nil
         guard error == nil, let successUrl = callback else {
             let canceledLoginCode: Int?
@@ -100,6 +124,13 @@ import AuthenticationServices
         handleCallback(successUrl: successUrl)
     }
     
+    /**
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string. Invokes the completion function with the appropriate parameters.
+    - parameters:
+        - url: callback URL containing authorization code
+    - returns:
+    the output of the executed completion function
+    */
     @objc public func handleCallback(successUrl: URL) {
         let authorizationError: AuthorizationError
         
