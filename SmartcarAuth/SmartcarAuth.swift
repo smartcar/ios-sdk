@@ -31,12 +31,12 @@ import AuthenticationServices
     var clientId: String
     var redirectUri: String
     var scope: [String]
-    var completionHandler: (String?, String?, AuthorizationError?) -> Void
+    var completionHandler: (_ code: String?, _ state: String?, _ error: AuthorizationError?) -> Void
     var development: Bool
     var testMode: Bool
     
     // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating. AnyObject is used so that session isn't limited to either SFAuthenticationSession or AsWebAuthenticationSession types
-    var session: AnyObject?
+    private var session: Session?
 
     @objc public init(clientId: String, redirectUri: String, completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, scope: [String] = [], testMode: Bool = false, development: Bool = false) {
         self.clientId = clientId
@@ -62,16 +62,17 @@ import AuthenticationServices
             if #available(iOS 13.0, *) {
                 authSession.presentationContextProvider = self
             }
-            authSession.start()
         } else if #available(iOS 11.0, *) {
             let authSession = SFAuthenticationSession.init(url: authUrl, callbackURLScheme: callbackUrlScheme, completionHandler: webAuthSessionCompletion)
             self.session = authSession
-            authSession.start()
         }
+        self.session?.start()
     }
+
+    
     
     // Handles the completion of the auth flow
-    @objc func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
+    @objc public func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
         var authorizationError: AuthorizationError? = nil
         guard error == nil, let successUrl = callback else {
             let canceledLoginCode: Int?
@@ -156,6 +157,19 @@ import AuthenticationServices
 @available(iOS 13, *)
 extension SmartcarAuth: ASWebAuthenticationPresentationContextProviding {
     public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return UIApplication.shared.keyWindow ?? ASPresentationAnchor()
+        return UIApplication.shared.windows.filter {$0.isKeyWindow}.first ?? ASPresentationAnchor()
     }
+}
+
+private protocol Session {
+    @discardableResult
+    func start() -> Bool
+}
+
+@available(iOS 12.0, *)
+extension ASWebAuthenticationSession: Session {
+}
+
+@available(iOS 11.0, *)
+extension SFAuthenticationSession: Session {
 }

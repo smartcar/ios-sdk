@@ -9,8 +9,8 @@
 import Foundation
 
 @objc public class URLBuilder: NSObject {
-    var components: URLComponents
-    var queryItems: [URLQueryItem] = []
+    private var components: URLComponents
+    private var queryItems: [URLQueryItem] = []
     
     @objc public init(auth: SmartcarAuth) {
         self.components = URLComponents()
