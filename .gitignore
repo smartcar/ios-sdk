@@ -70,5 +70,4 @@ fastlane/test_output
 
 # Other
 .DS_Store
-docs/
 xcov_report/
