@@ -20,15 +20,13 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-
 @objc public class AuthorizationError: NSObject, Error {
     enum ErrorType {
         case missingQueryParameters
         case missingAuthCode
         case accessDenied
         case vehicleIncompatible
-        case subscriptionInactive
+        case invalidSubscription
         case userExitedFlow
         case unknownError
     }

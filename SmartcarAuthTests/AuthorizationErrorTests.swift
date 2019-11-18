@@ -6,7 +6,10 @@
 //  Copyright © 2019 SmartCar Inc. All rights reserved.
 //
 
+import Nimble
 import XCTest
+
+@testable import SmartcarAuth
 
 class AuthorizationErrorTests: XCTestCase {
 

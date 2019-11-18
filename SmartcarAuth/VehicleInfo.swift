@@ -20,15 +20,13 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-
-@objc public class VehicleInfo: NSObject {
+@objcMembers public class VehicleInfo: NSObject {
     var vin: String?
     var make: String?
     var model: String?
     var year: NSNumber?
     
-    @objc public init(vin: String? = nil, make: String? = nil, model: String? = nil, year: NSNumber? = nil) {
+    public init(vin: String? = nil, make: String? = nil, model: String? = nil, year: NSNumber? = nil) {
         self.vin = vin
         self.make = make
         self.model = model
