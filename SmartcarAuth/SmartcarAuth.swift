@@ -212,5 +212,3 @@ extension ASWebAuthenticationSession: Session {
 @available(iOS 11.0, *)
 extension SFAuthenticationSession: Session {
 }
-
-
