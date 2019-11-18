@@ -20,6 +20,9 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+* Error that gets created when the authorization flow exits with an error.
+*/
 @objc public class AuthorizationError: NSObject, Error {
     enum ErrorType {
         case missingQueryParameters

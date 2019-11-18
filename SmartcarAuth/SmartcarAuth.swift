@@ -44,11 +44,11 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     /**
     Constructor for the SmartcarAuth
     - parameters:
-        - clientId: app client id
-        - redirectUri: app redirect uri
-        - scope: app oauth scope
-        - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
-        - completion: callback function called upon the completion of the OAuth flow with the auth code, the state string, and the error
+        - clientId: The application's client ID
+        - redirectUri: The application's redirect URI
+        - scope: An array of authorization scopes
+        - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - completion: Callback function called upon the completion of the Smartcar Connect
     */
     public init(clientId: String, redirectUri: String, scope: [String], completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, testMode: Bool = false) {
         self.clientId = clientId
@@ -58,14 +58,18 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         self.completionHandler = completionHandler
     }
     
+    /**
+     Helper method to generate a SCURLBuilder instance, which then can be used (with various setters) to build an auth URL
+        See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
+    */
     public func generateAuthUrl() -> SCURLBuilder {
         return SCURLBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
     }
 
     /**
-       Presents a SFSafariViewController with the initial authorization url. Should only be used in iOS 10 and under
+       Presents a SFSafariViewController with the initial authorization url. *Should only be used in iOS 10 and under*
        - parameters:
-           - authUrl: the authorization url that the user the browser opens
+           - authUrl: The Smartcar Connect authorization url that the browser will open
            - viewController: the viewController responsible for presenting the SFSafariView
        */
     public func launchAuthFlow(url: String, viewController: UIViewController) {
@@ -77,7 +81,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     /**
     Presents an ASWebAuthenticationSession or SFAuthenticationSession with the initial authorization url
     - parameters:
-        - authUrl: the authorization url that the user the browser opens
+        - authUrl: the authorization URL for Smartcar Connect. Use `SCURLBuilder` to generate a auth URL
         - redirectUriScheme: the custom uri scheme that the application can expect the redirect uri to be in
     */
     @available(iOS 11.0, *)
@@ -100,10 +104,10 @@ Smartcar Authentication SDK for iOS written in Swift 5.
 
     
     /**
-    Authorization callback function. Verifies that no error occured during the OAuth process and calls handleCallback, which extracts the auth code and state string
+    Authorization callback function that is called when the session is completed, or if the user cancels the session. Upon session completion, calls handleCallback, which extracts the auth code and state string upon success, or the error upon authentication failure. If the user cancels mid-session, the completionHandler is called with an AuthorizationError
     - parameters:
-        - callback: callback URL containing authorization code
-        - error: error that comes back if user cancels mid authorization flow or
+        - callback: callback URL containing either an authorization code or error
+        - error: error that comes back if user cancels mid authorization flow
     */
     private func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
         var authorizationError: AuthorizationError? = nil
@@ -129,11 +133,9 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     }
     
     /**
-    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string. Invokes the completion function with the appropriate parameters.
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string upon success. Invokes the completion function with either the code or an error (and state if included).
     - parameters:
-        - url: callback URL containing authorization code
-    - returns:
-    the output of the executed completion function
+        - url: callback URL containing authorization code or an error
     */
     public func handleCallback(callbackUrl: URL) {
         let authorizationError: AuthorizationError

@@ -27,11 +27,6 @@ class SCURLBuilderTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
     
     func testSCURLBuilderBaseUrlLiveMode() {
         let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
@@ -134,12 +129,4 @@ class SCURLBuilderTests: XCTestCase {
         
         expect(urlWithState).to(equal(expectedUrl))
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
