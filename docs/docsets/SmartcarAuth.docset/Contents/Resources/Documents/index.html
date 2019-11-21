@@ -58,12 +58,12 @@
 
 <p>The SmartcarAuth iOS SDK makes it easy to integrate with Smartcar Connect from iOS.</p>
 
-<p>The SDK follows the best practices set out in <a href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06">OAuth 2.0 for Native Apps</a> including using <em>SFSafariViewController</em> on iOS for the authorization request. <em>UIWebView</em> is explicitly not supported due to usability and security reasons.</p>
+<p>The SDK follows the best practices set out in <a href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06">OAuth 2.0 for Native Apps</a> including using <em>SFSafariViewController</em>, <em>SFAuthenticationSession</em>, or <em>ASWebAuthenticationSession</em> depending on iOS version for the authorization request. <em>UIWebView</em> is explicitly not supported due to usability and security reasons.</p>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
-<p>SmartcarAuth supports iOS 7 and above.</p>
+<p>SmartcarAuth supports iOS 10 and above.</p>
 
-<p>iOS 9+ uses the in-app browser tab pattern (via <em>SFSafariViewController</em>), and falls back to the system browser (mobile Safari) on earlier versions.</p>
+<p>iOS 10 uses the in-app browser tab pattern (via <em>SFSafariViewController</em>), iOS 11 presents the authentication webpage in Safari using <em>SFAuthenticationSession</em>, and iOS 12 and above uses a secure embedded webview (via <em>ASWebAuthenticationSession</em>).</p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>SmartcarAuth is available through <a href="http://cocoapods.org">CocoaPods</a>. To install it, simply add the following line to your Podfile:</p>
@@ -79,24 +79,32 @@
 <p>Then, initiate the SmartcarAuth object in the UIViewController.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">appDelegate</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="k">as!</span> <span class="kt">AppDelegate</span>
 
-<span class="kd">func</span> <span class="nf">completionHandler</span><span class="p">(</span><span class="nv">err</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?,</span> <span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Any</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="nf">completionHandler</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">err</span><span class="p">:</span> <span class="kt">AuthorizationError</span><span class="p">?,)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
  <span class="c1">// Receive authorization code</span>
 <span class="p">}</span>
 
 <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartcar</span> <span class="o">=</span> <span class="kt">SmartcarAuth</span><span class="p">(</span>
   <span class="nv">clientId</span><span class="p">:</span> <span class="s">"afb0b7d3-807f-4c61-9b04-352e91fe3134"</span><span class="p">,</span>
-  <span class="nv">redirectUri</span><span class="p">:</span> <span class="s">"scafb0b7d3-807f-4c61-9b04-352e91fe3134://page"</span><span class="p">,</span>
+  <span class="nv">redirectUri</span><span class="p">:</span> <span class="s">"scafb0b7d3-807f-4c61-9b04-352e91fe3134://exchange"</span><span class="p">,</span>
   <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="s">"read_vin"</span><span class="p">,</span> <span class="s">"read_vehicle_info"</span><span class="p">,</span> <span class="s">"read_odometer"</span><span class="p">],</span>
   <span class="nv">completion</span><span class="p">:</span> <span class="n">completionHandler</span>
 <span class="p">)</span>
 <span class="k">let</span> <span class="nv">smartcar</span> <span class="o">=</span> <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartcar</span>
 
-<span class="c1">// Launch Connect on the SFSafariViewController</span>
-<span class="n">smartcar</span><span class="o">.</span><span class="nf">launchAuthFlow</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">forcePrompt</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">testMode</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">viewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
+<span class="c1">// Generate a Connect URL</span>
+<span class="k">let</span> <span class="nv">authUrl</span> <span class="o">=</span> <span class="nf">authUrlBuilder</span><span class="p">()</span><span class="o">.</span><span class="nf">build</span><span class="p">()</span>
+
+<span class="c1">// Launch Connect using SFAuthenticationSession (iOS 11) or ASWebAuthenticationSession (iOS 12+)</span>
+<span class="n">smartcar</span><span class="o">.</span><span class="nf">launchWebAuthSession</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">,</span> <span class="nv">redirectUriScheme</span><span class="p">:</span> <span class="s">"scafb0b7d3-807f-4c61-9b04-352e91fe3134"</span><span class="p">)</span>
+
+<span class="c1">// Launch Connect on the SFSafariViewController if using iOS 10</span>
+<span class="n">smartcar</span><span class="o">.</span><span class="nf">launchAuthFlow</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">,</span> <span class="nv">viewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
 </code></pre>
 <h2 id='handling-the-redirect' class='heading'>Handling the Redirect</h2>
 
-<p>The Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session</p>
+<p>For iOS 11 and above, if you launched Connect using the <em>launchWebAuthSession</em> method, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.</p>
+
+<p>For iOS 10, or if you launched Connect using the <em>launchAuthFlow</em> method, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.</p>
 <pre class="highlight swift"><code><span class="cm">/**
     Intercepts callback from OAuth SafariView determined by the custom URI
  */</span>
@@ -118,7 +126,7 @@
 <h2 id='sdk-reference' class='heading'>SDK Reference</h2>
 
 <p>For detailed documentation on parameters and available methods, please refer to
-the <a href="doc/README.md">SDK Reference</a>.</p>
+the <a href="https://smartcar.github.io/ios-sdk/">SDK Reference</a>.</p>
 <h2 id='author' class='heading'>Author</h2>
 
 <p>Smartcar Inc., <a href="mailto:hello@smartcar.com">hello@smartcar.com</a></p>
