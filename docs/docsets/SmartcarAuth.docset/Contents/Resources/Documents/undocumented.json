@@ -1,12 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/smartcar/Desktop/ios-sdk/SmartcarAuth/SmartcarAuth.swift",
-      "line": 198,
-      "symbol": "SmartcarAuth.presentationAnchor(for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/smartcar/Desktop/ios-sdk"
 }

@@ -62,8 +62,8 @@ Smartcar Authentication SDK for iOS written in Swift 5.
      Helper method to generate a SCURLBuilder instance, which then can be used (with various setters) to build an auth URL
         See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
     */
-    public func generateAuthUrl() -> SCURLBuilder {
-        return SCURLBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
+    public func authUrlBuilder() -> SCUrlBuilder {
+        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
     }
 
     /**
@@ -195,6 +195,9 @@ Smartcar Authentication SDK for iOS written in Swift 5.
 // Required if we want to provide a default browser window so that developers don't have to (so that they can  use launchWebAuthSession with the same interface regardless of iOS versioning)
 @available(iOS 13, *)
 extension SmartcarAuth: ASWebAuthenticationPresentationContextProviding {
+    /**
+        Provides a default window to act as the presentation anchor for the authentication session
+     */
     public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return UIApplication.shared.windows.filter {$0.isKeyWindow}.first ?? ASPresentationAnchor()
     }

@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B07A82248E2DF00474A10 /* VehicleInfo.swift */; };
 		6810869DEB563BDF5A13C966 /* Pods_SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E3D48746CA24C116520A4A /* Pods_SmartcarAuth.framework */; };
-		A69F57A92374EA9E005971D2 /* SCURLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F57A82374EA9E005971D2 /* SCURLBuilderTests.swift */; };
+		A69F57A92374EA9E005971D2 /* SCUrlBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F57A82374EA9E005971D2 /* SCUrlBuilderTests.swift */; };
 		A69F57AB2374EAB9005971D2 /* AuthorizationErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */; };
 		A6B8653E2374EDE4008BFD7F /* VehicleInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B8653D2374EDE4008BFD7F /* VehicleInfoTests.swift */; };
-		A6C2239F2374AC6200D40CE3 /* SCURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2239E2374AC6200D40CE3 /* SCURLBuilder.swift */; };
+		A6C2239F2374AC6200D40CE3 /* SCUrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2239E2374AC6200D40CE3 /* SCUrlBuilder.swift */; };
 		BD6F87320FA50DDC202ADF59 /* Pods_SmartcarAuthTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C65C9D0D291B77BE47281A0 /* Pods_SmartcarAuthTests.framework */; };
 		F80C4ABD208E54AE00F8C47F /* SmartcarAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */; };
 		F85ABF81208C191D00FB2F3E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F85ABF80208C191D00FB2F3E /* Podfile */; };
@@ -39,10 +39,10 @@
 		4C65C9D0D291B77BE47281A0 /* Pods_SmartcarAuthTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuthTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
 		85E3D48746CA24C116520A4A /* Pods_SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A69F57A82374EA9E005971D2 /* SCURLBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCURLBuilderTests.swift; sourceTree = "<group>"; };
+		A69F57A82374EA9E005971D2 /* SCUrlBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilderTests.swift; sourceTree = "<group>"; };
 		A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationErrorTests.swift; sourceTree = "<group>"; };
 		A6B8653D2374EDE4008BFD7F /* VehicleInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfoTests.swift; sourceTree = "<group>"; };
-		A6C2239E2374AC6200D40CE3 /* SCURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCURLBuilder.swift; sourceTree = "<group>"; };
+		A6C2239E2374AC6200D40CE3 /* SCUrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilder.swift; sourceTree = "<group>"; };
 		B06E3582ED1597AA5389FE57 /* Pods-SmartcarAuthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuthTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests.release.xcconfig"; sourceTree = "<group>"; };
 		BD668AF997F2B3DDFDBE6656 /* Pods-SmartcarAuthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuthTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F85ABF80208C191D00FB2F3E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -126,7 +126,7 @@
 				F8F928841E2B2F6A009F07E5 /* SmartcarAuth.h */,
 				F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */,
 				278B07A82248E2DF00474A10 /* VehicleInfo.swift */,
-				A6C2239E2374AC6200D40CE3 /* SCURLBuilder.swift */,
+				A6C2239E2374AC6200D40CE3 /* SCUrlBuilder.swift */,
 			);
 			path = SmartcarAuth;
 			sourceTree = "<group>";
@@ -136,7 +136,7 @@
 			children = (
 				F8F928911E2B2F6B009F07E5 /* Info.plist */,
 				F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */,
-				A69F57A82374EA9E005971D2 /* SCURLBuilderTests.swift */,
+				A69F57A82374EA9E005971D2 /* SCUrlBuilderTests.swift */,
 				A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */,
 				A6B8653D2374EDE4008BFD7F /* VehicleInfoTests.swift */,
 			);
@@ -321,7 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */,
-				A6C2239F2374AC6200D40CE3 /* SCURLBuilder.swift in Sources */,
+				A6C2239F2374AC6200D40CE3 /* SCUrlBuilder.swift in Sources */,
 				F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */,
 				F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */,
 			);
@@ -334,7 +334,7 @@
 				A6B8653E2374EDE4008BFD7F /* VehicleInfoTests.swift in Sources */,
 				F80C4ABD208E54AE00F8C47F /* SmartcarAuthTests.swift in Sources */,
 				A69F57AB2374EAB9005971D2 /* AuthorizationErrorTests.swift in Sources */,
-				A69F57A92374EA9E005971D2 /* SCURLBuilderTests.swift in Sources */,
+				A69F57A92374EA9E005971D2 /* SCUrlBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

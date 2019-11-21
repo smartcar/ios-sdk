@@ -34,9 +34,9 @@ class SmartcarAuthTests: XCTestCase {
     func testSmartcarAuthGenerateAuthUrl() {
         let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: completion(code:state:err:))
         
-        let builder = smartcar.generateAuthUrl()
+        let builder = smartcar.authUrlBuilder()
         
-        expect(builder).to(beAnInstanceOf(SCURLBuilder.self))
+        expect(builder).to(beAnInstanceOf(SCUrlBuilder.self))
     }
 
     func testHandleCallbackSuccess() {
@@ -195,7 +195,7 @@ class SmartcarAuthTests: XCTestCase {
 
         let vc = ViewControllerStub()
         
-        let authUrl = smartcar.generateAuthUrl().build()
+        let authUrl = smartcar.authUrlBuilder().build()
 
         smartcar.launchAuthFlow(url: authUrl, viewController: vc)
 
