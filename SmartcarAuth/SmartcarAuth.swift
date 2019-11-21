@@ -79,7 +79,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     }
     
     /**
-    Presents an ASWebAuthenticationSession or SFAuthenticationSession with the initial authorization url
+    Presents an ASWebAuthenticationSession or SFAuthenticationSession with the initial authorization url. Upon authorization completion, the `completionHandler` function passed in the initialization of the Smartcar class will be called.
     - parameters:
         - authUrl: the authorization URL for Smartcar Connect. Use `SCURLBuilder` to generate a auth URL
         - redirectUriScheme: the custom uri scheme that the application can expect the redirect uri to be in
