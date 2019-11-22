@@ -65,41 +65,47 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     public func authUrlBuilder() -> SCUrlBuilder {
         return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
     }
-
-    /**
-       Presents a SFSafariViewController with the initial authorization url. *Should only be used in iOS 10 and under*
-       - parameters:
-           - authUrl: The Smartcar Connect authorization url that the browser will open
-           - viewController: the viewController responsible for presenting the SFSafariView
-       */
-    public func launchAuthFlow(url: String, viewController: UIViewController) {
-        let authUrl = URL(string: url)
-        let safariVC = SFSafariViewController(url: authUrl!)
-        viewController.present(safariVC, animated: true, completion: nil)
-    }
     
     /**
-    Presents an ASWebAuthenticationSession or SFAuthenticationSession with the initial authorization url. Upon authorization completion, the `completionHandler` function passed in the initialization of the Smartcar class will be called.
-    - parameters:
+     Starts the launch of Smartcar Connect.
+     
+     The way that the browser is launched depends on the iOS version:
+     
+        iOS 10: `SFSafariViewController`
+     
+        iOS 11: `SFAuthenticationSession`
+     
+        iOS 12+: `ASWebAuthenticationSession`
+     
+     If you are supporting iOS 10, you will need to pass in a UIViewController, as well as intercept the callback in your application (see `README` for an example).
+     
+     - parameters:
         - authUrl: the authorization URL for Smartcar Connect. Use `SCURLBuilder` to generate a auth URL
-        - redirectUriScheme: the custom uri scheme that the application can expect the redirect uri to be in
+        - viewController: Optional, the view controller responsible for presenting the SFSafariView. Only necessary if the application supports iOS 10 and lower. Defaults to nil.
     */
-    @available(iOS 11.0, *)
-    public func launchWebAuthSession(url: String, redirectUriScheme: String) {
+    public func launchAuthFlow(url: String, viewController: UIViewController? = nil) {
         let authUrl = URL(string: url)
-        if #available(iOS 13.0, *) {
-            let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
-            // this is required for the browser to open in iOS 13
-            authSession.presentationContextProvider = self
-            self.session = authSession
-        } else if #available(iOS 12.0, *) {
-            let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
-            self.session = authSession
-        } else {
-            let authSession = SFAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
-            self.session = authSession
+        let redirectUriScheme = "sc" + self.clientId
+
+        if #available(iOS 11.0, *) {
+            if #available(iOS 13.0, *) {
+                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                // this is required for the browser to open in iOS 13
+                authSession.presentationContextProvider = self
+                self.session = authSession
+            } else if #available(iOS 12.0, *) {
+                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                self.session = authSession
+            } else {
+                let authSession = SFAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                self.session = authSession
+            }
+            self.session?.start()
+        // fall back to SFSafariViewController
+        } else if viewController != nil {
+            let safariVC = SFSafariViewController(url: authUrl!)
+            viewController?.present(safariVC, animated: true, completion: nil)
         }
-        self.session?.start()
     }
 
     

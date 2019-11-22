@@ -92,19 +92,19 @@
 <span class="k">let</span> <span class="nv">smartcar</span> <span class="o">=</span> <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartcar</span>
 
 <span class="c1">// Generate a Connect URL</span>
-<span class="k">let</span> <span class="nv">authUrl</span> <span class="o">=</span> <span class="nf">authUrlBuilder</span><span class="p">()</span><span class="o">.</span><span class="nf">build</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">authUrl</span> <span class="o">=</span> <span class="n">smartcar</span><span class="o">.</span><span class="nf">authUrlBuilder</span><span class="p">()</span><span class="o">.</span><span class="nf">build</span><span class="p">()</span>
 
-<span class="c1">// Launch Connect using SFAuthenticationSession (iOS 11) or ASWebAuthenticationSession (iOS 12+)</span>
-<span class="n">smartcar</span><span class="o">.</span><span class="nf">launchWebAuthSession</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">,</span> <span class="nv">redirectUriScheme</span><span class="p">:</span> <span class="s">"scafb0b7d3-807f-4c61-9b04-352e91fe3134"</span><span class="p">)</span>
+<span class="c1">// If you are developing for iOS 11 and above only, you can launch Connect without passing in a viewController</span>
+<span class="n">smartcar</span><span class="o">.</span><span class="nf">launchAuthFlow</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">)</span>
 
-<span class="c1">// Launch Connect on the SFSafariViewController if using iOS 10</span>
+<span class="c1">// If you are developing for iOS 10 and above, you will need to pass in a viewController</span>
 <span class="n">smartcar</span><span class="o">.</span><span class="nf">launchAuthFlow</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">,</span> <span class="nv">viewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
 </code></pre>
 <h2 id='handling-the-redirect' class='heading'>Handling the Redirect</h2>
 
-<p>For iOS 11 and above, if you launched Connect using the <em>launchWebAuthSession</em> method, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.</p>
+<p>For iOS 11 and above, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.</p>
 
-<p>For iOS 10, or if you launched Connect using the <em>launchAuthFlow</em> method, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.</p>
+<p>For iOS 10, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.</p>
 <pre class="highlight swift"><code><span class="cm">/**
     Intercepts callback from OAuth SafariView determined by the custom URI
  */</span>
@@ -112,7 +112,7 @@
     <span class="c1">// Close the SFSafariViewController</span>
     <span class="n">window</span><span class="o">!.</span><span class="n">rootViewController</span><span class="p">?</span><span class="o">.</span><span class="n">presentedViewController</span><span class="p">?</span><span class="o">.</span><span class="nf">dismiss</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span> <span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
 
-    <span class="c1">// Sends the URL to the current SmartcarAuth object (if any) which will</span>
+    <span class="c1">// Sends the URL to the current SmartcarAuth object which will</span>
     <span class="c1">// process it and then call the completion handler.</span>
     <span class="k">if</span> <span class="k">let</span> <span class="nv">sdk</span> <span class="o">=</span> <span class="n">smartcarSdk</span> <span class="p">{</span>
         <span class="n">sdk</span><span class="o">.</span><span class="nf">handleCallback</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
@@ -137,7 +137,7 @@ the <a href="https://smartcar.github.io/ios-sdk/">SDK Reference</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2019-11-21)</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2019-11-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
