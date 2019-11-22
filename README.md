@@ -69,7 +69,7 @@ For iOS 10, the Connect response is returned to the app via the iOS openURL app 
 /**
 	Intercepts callback from OAuth SafariView determined by the custom URI
  */
-func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsLey : Any] = [:]) -> Bool {
+func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
     // Close the SFSafariViewController
     window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
 
