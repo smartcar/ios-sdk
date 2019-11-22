@@ -50,20 +50,20 @@ appDelegate.smartcar = SmartcarAuth(
 let smartcar = appDelegate.smartcar
 
 // Generate a Connect URL
-let authUrl = authUrlBuilder().build()
+let authUrl = smartcar.authUrlBuilder().build()
 
-// Launch Connect using SFAuthenticationSession (iOS 11) or ASWebAuthenticationSession (iOS 12+)
-smartcar.launchWebAuthSession(url: authUrl, redirectUriScheme: "scafb0b7d3-807f-4c61-9b04-352e91fe3134")
+// If you are developing for iOS 11 and above only, you can launch Connect without passing in a viewController
+smartcar.launchAuthFlow(url: authUrl)
 
-// Launch Connect on the SFSafariViewController if using iOS 10
+// If you are developing for iOS 10 and above, you will need to pass in a viewController
 smartcar.launchAuthFlow(url: authUrl, viewController: viewController)
 ```
 
 ## Handling the Redirect
 
-For iOS 11 and above, if you launched Connect using the _launchWebAuthSession_ method, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.
+For iOS 11 and above, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.
 
-For iOS 10, or if you launched Connect using the _launchAuthFlow_ method, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.
+For iOS 10, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.
 
 ```swift
 /**
@@ -73,7 +73,7 @@ func application(_ application: UIApplication, open url: URL, options: [UIApplic
     // Close the SFSafariViewController
     window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
 
-    // Sends the URL to the current SmartcarAuth object (if any) which will
+    // Sends the URL to the current SmartcarAuth object which will
     // process it and then call the completion handler.
     if let sdk = smartcarSdk {
         sdk.handleCallback(url: url)
