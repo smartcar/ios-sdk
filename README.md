@@ -50,7 +50,7 @@ appDelegate.smartcar = SmartcarAuth(
 let smartcar = appDelegate.smartcar
 
 // Generate a Connect URL
-let authUrl = authUrlBuilder().build()
+let authUrl = smartcar.authUrlBuilder().build()
 
 // Launch Connect using SFAuthenticationSession (iOS 11) or ASWebAuthenticationSession (iOS 12+)
 smartcar.launchWebAuthSession(url: authUrl, redirectUriScheme: "scafb0b7d3-807f-4c61-9b04-352e91fe3134")
