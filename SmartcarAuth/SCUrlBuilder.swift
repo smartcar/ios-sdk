@@ -1,17 +1,14 @@
 /*
 SCUrlBuilder.swift
 SmartcarAuth
-
 Copyright (c) 2017-present, Smartcar, Inc. All rights reserved.
 You are hereby granted a limited, non-exclusive, worldwide, royalty-free
 license to use, copy, modify, and distribute this software in source code or
 binary form, for the limited purpose of this software's use in connection
 with the web services and APIs provided by Smartcar.
-
 As with any software that integrates with the Smartcar platform, your use of
 this software is subject to the Smartcar Developer Agreement. This copyright
 notice shall be included in all copies or substantial portions of the software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
 FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -22,9 +19,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /**
 * A builder used for generating Smartcar Connect authorization URLs.
-
 * Use the built string with `SmartcarAuth.launchAuthFlow(...)` in iOS 10 and under or `SmartcarAuth.launchWebAuthSession(...)` in iOS 11 and above
-
 * To see a full description of Smartcar Connect parameters, see the [Smartcar API Reference](https://smartcar.com/api#smartcar-connect)
 */
 @objcMembers public class SCUrlBuilder: NSObject {
@@ -93,7 +88,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     Bypass the brand selector screen to a specified make.
      
     A list of compatible makes is available on the [Smartcar API Reference](https://smartcar.com/docs/api#connect-direct)
-
     - see: [Smartcar Connect Direct](https://smartcar.com/docs/api#connect-direct)
     - parameters:
         - make: The selected make
@@ -111,7 +105,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     Ensure the user only authorizes a single vehicle.
     
     A user's connected service account can be connected to multiple vehicles. Setting this parameter to true forces the user to select only a single vehicle.
-
     - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
     - parameters:
       - singleSelect: Set to true to ensure only a single vehicle is authorized
@@ -125,7 +118,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     /**
     Specify the vin a user can authorize in Smartcar Connect.
-
     When `setSingleSelect(...)` is set to true, this parameter can be used to ensure that Smartcar Connect will allow the user to authorize only the vehicle with a specific VIN.
     
     - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
