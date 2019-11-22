@@ -20,203 +20,204 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import UIKit
+import Foundation
 import SafariServices
+#if canImport(AuthenticationServices)
+import AuthenticationServices
+#endif
 
-let domain = "connect.smartcar.com"
 
 /**
-Smartcar Authentication SDK for iOS written in Swift 3.
-    - Facilitates the flow with a SFSafariViewController to redirect to Smartcar and retrieve an authorization code
+Smartcar Authentication SDK for iOS written in Swift 5.
+    - Facilitates the authorization flow to launch the flow and retrieve an authorization code
 */
-
-@objc public class SmartcarAuth: NSObject {
+@objcMembers public class SmartcarAuth: NSObject {
     var clientId: String
     var redirectUri: String
     var scope: [String]
-    var completion: (Error?, String?, String?) -> Any?
-    var development: Bool
-    // NSNumber? is used here instead of Bool? because there is no concept of Bool? in Objective-C
-    var testMode: NSNumber?
+    var completionHandler: (_ code: String?, _ state: String?, _ error: AuthorizationError?) -> Void
+    var testMode: Bool
+    
+    // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating
+    private var session: Session?
 
     /**
     Constructor for the SmartcarAuth
-
     - parameters:
-        - clientId: app client id
-        - redirectUri: app redirect uri
-        - scope: app oauth scope
-        - development: shows the mock OEM for testing, defaults to false. This is deprecated and has been replaced with testMode.
-        - testMode: optional, launch the Smartcar auth flow in test mode, defaults to nil.
-        - completion: callback function called upon the completion of the OAuth flow with the error, the auth code, and the state string
+        - clientId: The application's client ID
+        - redirectUri: The application's redirect URI
+        - scope: An array of authorization scopes
+        - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - completion: Callback function called upon the completion of the Smartcar Connect
     */
-    @objc public init(clientId: String, redirectUri: String, scope: [String] = [], development: Bool =  false, testMode: NSNumber? = nil, completion: @escaping (Error?, String?, String?) -> Any?) {
+    public init(clientId: String, redirectUri: String, scope: [String], completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, testMode: Bool = false) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
-        self.completion = completion
-        self.development = development
         self.testMode = testMode
+        self.completionHandler = completionHandler
     }
-
+    
     /**
-    Presents a SFSafariViewController with the initial authorization url
-
-    - parameters:
-        - state: optional, oauth state
-        - forcePrompt: optional, forces permission screen if set to true, defaults to false
-        - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
-        - singleSelect: optional, controls the behavior of the grant dialog by only allowing the user to select a single vehicle to authorize, defaults to nil
-        - singleSelectVehicle: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
-        - viewController: the viewController responsible for presenting the SFSafariView
+     Helper method to generate a SCURLBuilder instance, which then can be used (with various setters) to build an auth URL
+        See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
     */
-    @objc public func launchAuthFlow(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectVehicle: VehicleInfo? = nil, viewController: UIViewController) {
-
-        let safariVC = SFSafariViewController(url: URL(string: generateUrl(state: state, forcePrompt: forcePrompt, vehicleInfo: vehicleInfo, singleSelect: singleSelect, singleSelectVehicle: singleSelectVehicle))!)
-        viewController.present(safariVC, animated: true, completion: nil)
+    public func authUrlBuilder() -> SCUrlBuilder {
+        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
     }
-
+    
     /**
-    Generates the authorization request URL from the authorization parameters
-
-    - parameters:
-        - state: optional, oauth state
-        - forcePrompt: optional, forces permission screen if set to true, defaults to false
-        - vehicleInfo: optional, when 'make' property is present, allows user to bypass oem selector screen and go straight to vehicle login screen, defaults to nil
-        - singleSelect: optional, controls the behavior of the grant dialog and by only allowing the user to select a single vehicle to authorize, defaults to nil
-        - singleSelectVehicle: optional, when 'vin' property is present, controls the behavior of the grant dialog by only allowing the user to authorize the vehicle with the specified VIN, defaults to nil
-    - returns:
-    authorization request URL
-
+     Starts the launch of Smartcar Connect.
+     
+     The way that the browser is launched depends on the iOS version:
+     
+        iOS 10: `SFSafariViewController`
+     
+        iOS 11: `SFAuthenticationSession`
+     
+        iOS 12+: `ASWebAuthenticationSession`
+     
+     If you are supporting iOS 10, you will need to pass in a UIViewController, as well as intercept the callback in your application (see `README` for an example).
+     
+     - parameters:
+        - authUrl: the authorization URL for Smartcar Connect. Use `SCURLBuilder` to generate a auth URL
+        - viewController: Optional, the view controller responsible for presenting the SFSafariView. Only necessary if the application supports iOS 10 and lower. Defaults to nil.
     */
-    @objc public func generateUrl(state: String? = nil, forcePrompt: Bool = false, vehicleInfo: VehicleInfo? = nil, singleSelect: NSNumber? = nil, singleSelectVehicle: VehicleInfo? = nil) -> String {
-        var components = URLComponents(string: "https://\(domain)/oauth/authorize")!
+    public func launchAuthFlow(url: String, viewController: UIViewController? = nil) {
+        let authUrl = URL(string: url)
+        let redirectUriScheme = "sc" + self.clientId
 
-        var queryItems: [URLQueryItem] = []
-
-        queryItems.append(URLQueryItem(name: "response_type", value: "code"))
-        queryItems.append(URLQueryItem(name: "client_id", value: self.clientId))
-
-        if let redirectUri = self.redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            queryItems.append(URLQueryItem(name: "redirect_uri", value: redirectUri))
-        }
-
-        if !scope.isEmpty {
-            let scopeString = self.scope.joined(separator: " ")
-            queryItems.append(URLQueryItem(name: "scope", value: scopeString))
-
-        }
-
-        queryItems.append(URLQueryItem(name: "approval_prompt", value: forcePrompt ? "force" : "auto"))
-
-        if let stateString = state {
-            queryItems.append(URLQueryItem(name: "state", value: stateString))
-        }
-
-        // if testMode specified, override self.development
-        var mode = self.development;
-        if (self.testMode != nil) {
-          // convert NSNumber to Bool
-           mode = self.testMode!.boolValue;
-        }
-
-        queryItems.append(URLQueryItem(name: "mode", value: mode ? "test" : "live"))
-
-        if let vehicleObject = vehicleInfo {
-            if let vehicleObjectMake = vehicleObject.make {
-                queryItems.append(URLQueryItem(name: "make", value: vehicleObjectMake))
-            }
-        }
-
-        var singleSelectAdded = false;
-        var noValidOptionsFound = false;
-
-        if let singleSelectObject = singleSelectVehicle {
-            if let singleSelectVIN = singleSelectObject.vin {
-                queryItems.append(URLQueryItem(name: "single_select_vin", value: singleSelectVIN))
-                singleSelectAdded = true;
-            }
-            if singleSelectAdded == false {
-                noValidOptionsFound = true;
+        if #available(iOS 11.0, *) {
+            if #available(iOS 13.0, *) {
+                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                // this is required for the browser to open in iOS 13
+                authSession.presentationContextProvider = self
+                self.session = authSession
+            } else if #available(iOS 12.0, *) {
+                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                self.session = authSession
             } else {
-                queryItems.append(URLQueryItem(name: "single_select", value: "true"))
+                let authSession = SFAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                self.session = authSession
             }
+            self.session?.start()
+        // fall back to SFSafariViewController
+        } else if viewController != nil {
+            let safariVC = SFSafariViewController(url: authUrl!)
+            viewController?.present(safariVC, animated: true, completion: nil)
         }
-
-        if singleSelectAdded == false {
-            if let singleSelectValue = singleSelect {
-                let singleSelectBoolValue = singleSelectValue.boolValue;
-                queryItems.append(URLQueryItem(name: "single_select", value: singleSelectBoolValue ? "true" : "false"))
-            } else if (noValidOptionsFound) {
-                queryItems.append(URLQueryItem(name: "single_select", value: "false"))
-            }
-        }
-
-        components.queryItems = queryItems
-
-        return components.url!.absoluteString
     }
 
+    
     /**
-    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string. Invokes the completion function with the appropriate parameters.
-
+    Authorization callback function that is called when the session is completed, or if the user cancels the session. Upon session completion, calls handleCallback, which extracts the auth code and state string upon success, or the error upon authentication failure. If the user cancels mid-session, the completionHandler is called with an AuthorizationError
     - parameters:
-        - url: callback URL containing authorization code
-
-    - returns:
-    the output of the executed completion function
+        - callback: callback URL containing either an authorization code or error
+        - error: error that comes back if user cancels mid authorization flow
     */
-
-    @objc public func handleCallback(with url: URL) -> Any? {
-        let urlComp = URLComponents(url: url, resolvingAgainstBaseURL: false)
-
+    private func webAuthSessionCompletion(callback: URL?, error: Error?) -> Void {
+        var authorizationError: AuthorizationError? = nil
+        guard error == nil, let callback = callback else {
+            let canceledLoginCode: Int?
+            if #available(iOS 12.0, *) {
+                canceledLoginCode = ASWebAuthenticationSessionError.canceledLogin.rawValue
+            } else if #available(iOS 11.0, *) {
+                canceledLoginCode = SFAuthenticationError.canceledLogin.rawValue
+            } else {
+                canceledLoginCode = nil
+            }
+            
+            switch error?._code {
+                case canceledLoginCode:
+                    authorizationError = AuthorizationError(type: .userExitedFlow, errorDescription: "User exited flow before authorizing vehicles")
+                default:
+                    authorizationError = AuthorizationError(type: .unknownError)
+            }
+            return self.completionHandler(nil, nil, authorizationError)
+        }
+        handleCallback(callbackUrl: callback)
+    }
+    
+    /**
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string upon success. Invokes the completion function with either the code or an error (and state if included).
+    - parameters:
+        - url: callback URL containing authorization code or an error
+    */
+    public func handleCallback(callbackUrl: URL) {
+        let authorizationError: AuthorizationError
+        
+        let urlComp = URLComponents(url: callbackUrl, resolvingAgainstBaseURL: false)
         guard let query = urlComp?.queryItems else {
-            let authorizationError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil, vehicleInfo: nil)
-            return completion(authorizationError, nil, nil)
-        }
-
-        let queryState = query.filter({ $0.name == "state"}).first?.value
-        
-        let vehicle = VehicleInfo()
-        
-        if let vin = query.filter({ $0.name == "vin"}).first?.value {
-            vehicle.vin = vin
-            if let make = query.filter({ $0.name == "make"}).first?.value {
-                vehicle.make = make
-            }
-            if let model = query.filter({ $0.name == "model"}).first?.value {
-                vehicle.model = model
-            }
-            if let year = query.filter({ $0.name == "year"}).first?.value {
-                vehicle.year = Int(year)
-            }
+            authorizationError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil, vehicleInfo: nil)
+            return self.completionHandler(nil, nil, authorizationError)
         }
         
-        let error = query.filter({ $0.name == "error"}).first?.value
-        let errorDescription = query.filter({ $0.name == "error_description"}).first?.value
+        let queryState = query.filter({$0.name == "state"}).first?.value!
+        
+        let vehicle: VehicleInfo?
+        
+        if let vin = query.filter({$0.name == "vin"}).first?.value {
+            vehicle = VehicleInfo(vin: vin)
+            if let make = query.filter({$0.name == "make"}).first?.value {
+                vehicle?.make = make
+            }
+            if let model = query.filter({$0.name == "model"}).first?.value {
+                vehicle?.model = model
+            }
+            if let year = query.filter({$0.name == "year"}).first?.value {
+                vehicle?.year = NSNumber(value: Int(year)!)
+            }
+        } else {
+            vehicle = nil
+        }
+        
+        let error = query.filter({$0.name == "error"}).first?.value
         
         if (error != nil) {
+            let errorDescription = query.filter({$0.name == "error_description"}).first?.value
             switch (error) {
                 case "vehicle_incompatible":
-                    let authorizationError = AuthorizationError(type: .vehicleIncompatible, errorDescription: errorDescription, vehicleInfo: vehicle)
-
-                    return completion(authorizationError, nil, queryState)
+                    authorizationError = AuthorizationError(type: .vehicleIncompatible, errorDescription: errorDescription, vehicleInfo: vehicle)
+                case "invalid_subscription":
+                    authorizationError = AuthorizationError(type: .invalidSubscription, errorDescription: errorDescription)
                 case "access_denied":
-                    let authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription, vehicleInfo: nil)
-                    
-                    return completion(authorizationError, nil, queryState)
+                    authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription)
                 default:
-                    let authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription, vehicleInfo: nil)
-                    
-                    return completion(authorizationError, nil, queryState)
+                    authorizationError = AuthorizationError(type: .unknownError, errorDescription: errorDescription)
             }
+            return self.completionHandler(nil, queryState, authorizationError)
         }
 
-        guard let code = query.filter({ $0.name == "code"}).first?.value else {
+        guard let code = query.filter({$0.name == "code"}).first?.value else {
             let authorizationError = AuthorizationError(type: .missingAuthCode, errorDescription: nil, vehicleInfo: nil)
-            return completion(authorizationError, nil, queryState)
+            return self.completionHandler(nil, queryState, authorizationError)
         }
 
-        return completion(nil, code, queryState)
+        return self.completionHandler(code, queryState, nil)
     }
+    
+}
+
+// Required if we want to provide a default browser window so that developers don't have to (so that they can  use launchWebAuthSession with the same interface regardless of iOS versioning)
+@available(iOS 13, *)
+extension SmartcarAuth: ASWebAuthenticationPresentationContextProviding {
+    /**
+        Provides a default window to act as the presentation anchor for the authentication session
+     */
+    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return UIApplication.shared.windows.filter {$0.isKeyWindow}.first ?? ASPresentationAnchor()
+    }
+}
+
+private protocol Session {
+    @discardableResult
+    func start() -> Bool
+}
+
+@available(iOS 12.0, *)
+extension ASWebAuthenticationSession: Session {
+}
+
+@available(iOS 11.0, *)
+extension SFAuthenticationSession: Session {
 }

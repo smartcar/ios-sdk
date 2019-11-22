@@ -20,16 +20,28 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@objc public class VehicleInfo: NSObject {
+/**
+ VehicleInfo class is used to describe the vehicle information that may be returned via query parameters in the case of authentication failure.
+ */
+@objcMembers public class VehicleInfo: NSObject {
     var vin: String?
     var make: String?
     var model: String?
-    var year: Int?
+    var year: NSNumber?
     
-    public init(vin: String? = nil, make: String? = nil, year: Int? = nil, model: String? = nil) {
+    /**
+    Constructor for the VehicleInfo
+    - parameters:
+        - vin: Optional, the VIN of the vehicle. Defaults to nil.
+        - make: Optional, the make of the vehicle. Defaults to nil.
+        - model: Optional, the model of the vehicle. Defaults to nil.
+        - year: Optional, the year of the vehicle. Defaults to nil.
+
+    */
+    public init(vin: String? = nil, make: String? = nil, model: String? = nil, year: NSNumber? = nil) {
         self.vin = vin
         self.make = make
-        self.year = year
         self.model = model
+        self.year = year
     }
 }

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SCUrlBuilder Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/SCUrlBuilder" class="dashAnchor"></a>
+    <a title="SCUrlBuilder Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SmartcarAuth Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SmartcarAuth Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        SCUrlBuilder Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:@M@SmartcarAuth@objc(cs)AuthorizationError">AuthorizationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SCUrlBuilder.html">SCUrlBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuth.html">SmartcarAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VehicleInfo.html">VehicleInfo</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SCUrlBuilder</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">SCUrlBuilder</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>A builder used for generating Smartcar Connect authorization URLs.
+Use the built string with <code><a href="../Classes/SmartcarAuth.html#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)launchAuthFlowWithUrl:viewController:">SmartcarAuth.launchAuthFlow(...)</a></code> in iOS 10 and under or <code>SmartcarAuth.launchWebAuthSession(...)</code> in iOS 11 and above
+To see a full description of Smartcar Connect parameters, see the <a href="https://smartcar.com/api#smartcar-connect">Smartcar API Reference</a></p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)initWithClientId:redirectUri:scope:testMode:"></a>
+                    <a name="//apple_ref/swift/Method/init(clientId:redirectUri:scope:testMode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)initWithClientId:redirectUri:scope:testMode:">init(clientId:redirectUri:scope:testMode:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Constructor for SCUrlBuilder. Represents the minimum requirements for an authorization URL.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">clientId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">redirectUri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">testMode</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>clientId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The application&rsquo;s client ID</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redirectUri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The application&rsquo;s redirect URI</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>scope</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of authorization scopes</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testMode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setStateWithState:"></a>
+                    <a name="//apple_ref/swift/Method/setState(state:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setStateWithState:">setState(state:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set an optional state parameter</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setState</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SCUrlBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>state</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional value included on the redirect uri returned to <code>SmartcarAuth.webAuthSessionCompletion(...)</code> and <code><a href="../Classes/SmartcarAuth.html#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)handleCallbackWithCallbackUrl:">SmartcarAuth.handleCallback(...)</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A reference to this object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setForcePromptWithForcePrompt:"></a>
+                    <a name="//apple_ref/swift/Method/setForcePrompt(forcePrompt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setForcePromptWithForcePrompt:">setForcePrompt(forcePrompt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Force display of the grant approval dialog in Smartcar Connect.</p>
+
+<p>Defaults to false and will only display the approval dialog if the user has not previously approved the scope. Set this to true to ensure the approval dialog is always shown to the user even if they have previously approved the same scope.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setForcePrompt</span><span class="p">(</span><span class="nv">forcePrompt</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SCUrlBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forcePrompt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Set to true to ensure the grant approval dialog is always shown</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A reference to this object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setMakeBypassWithMake:"></a>
+                    <a name="//apple_ref/swift/Method/setMakeBypass(make:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setMakeBypassWithMake:">setMakeBypass(make:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bypass the brand selector screen to a specified make.</p>
+
+<p>A list of compatible makes is available on the <a href="https://smartcar.com/docs/api#connect-direct">Smartcar API Reference</a></p>
+<div class="aside aside-see">
+    <p class="aside-title">See</p>
+    <a href="https://smartcar.com/docs/api#connect-direct">Smartcar Connect Direct</a>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMakeBypass</span><span class="p">(</span><span class="nv">make</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SCUrlBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>make</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The selected make</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A reference to this object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setSingleSelectWithSingleSelect:"></a>
+                    <a name="//apple_ref/swift/Method/setSingleSelect(singleSelect:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setSingleSelectWithSingleSelect:">setSingleSelect(singleSelect:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Ensure the user only authorizes a single vehicle.</p>
+
+<p>A user&rsquo;s connected service account can be connected to multiple vehicles. Setting this parameter to true forces the user to select only a single vehicle.</p>
+<div class="aside aside-see">
+    <p class="aside-title">See</p>
+    <a href="https://smartcar.com/docs/api#connect-match">Smartcar Connect Match</a>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setSingleSelect</span><span class="p">(</span><span class="nv">singleSelect</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SCUrlBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>singleSelect</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Set to true to ensure only a single vehicle is authorized</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A reference to this object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setSingleSelectVinWithVin:"></a>
+                    <a name="//apple_ref/swift/Method/setSingleSelectVin(vin:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setSingleSelectVinWithVin:">setSingleSelectVin(vin:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Specify the vin a user can authorize in Smartcar Connect.
+When <code><a href="../Classes/SCUrlBuilder.html#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setSingleSelectWithSingleSelect:">setSingleSelect(...)</a></code> is set to true, this parameter can be used to ensure that Smartcar Connect will allow the user to authorize only the vehicle with a specific VIN.</p>
+<div class="aside aside-see">
+    <p class="aside-title">See</p>
+    <a href="https://smartcar.com/docs/api#connect-match">Smartcar Connect Match</a>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setSingleSelectVin</span><span class="p">(</span><span class="nv">vin</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SCUrlBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>vin</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The specific VIN to authorize</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A reference to this object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)build"></a>
+                    <a name="//apple_ref/swift/Method/build()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)build">build()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Build a Smartcar Connect authorization URL string</p>
+
+<p>Use the built string with <code><a href="../Classes/SmartcarAuth.html#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)launchAuthFlowWithUrl:viewController:">SmartcarAuth.launchAuthFlow(...)</a></code> in iOS 10 and under or <code>SmartcarAuth.launchWebAuthSession(...)</code> in iOS 11 and above</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">build</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An authorization URL string</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2019-11-22)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

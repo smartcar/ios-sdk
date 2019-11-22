@@ -25,11 +25,26 @@ class VehicleInfoTests: XCTestCase {
         expect(vehicleInfo.make).to(beNil())
     }
     
-    func testVehicleInfo() {
+    func testVehicleInfoMakeOnly() {
         let vehicleInfo = VehicleInfo(make: "TESLA")
         expect(vehicleInfo.make).to(equal("TESLA"))
     }
+
+    func testVehicleInfoModelOnly() {
+        let vehicleInfo = VehicleInfo(model: "Model S")
+        expect(vehicleInfo.model).to(equal("Model S"))
+    }
     
+    func testVehicleInfoYearOnly() {
+        let vehicleInfo = VehicleInfo(year: 2019)
+        expect(vehicleInfo.year).to(equal(2019))
+    }
+    
+    func testVehicleInfoVinOnly() {
+        let vehicleInfo = VehicleInfo(vin: "SC123456789012345")
+        expect(vehicleInfo.vin).to(equal("SC123456789012345"))
+    }
+
     func testFullVehicleInfo() {
         let vehicleInfo = VehicleInfo()
         vehicleInfo.vin = "0000"
@@ -42,3 +57,4 @@ class VehicleInfoTests: XCTestCase {
         expect(vehicleInfo.year).to(equal(2019))
     }
 }
+

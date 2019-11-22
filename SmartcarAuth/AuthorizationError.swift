@@ -20,16 +20,27 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-struct AuthorizationError: Error {
+/**
+* Error that gets created when the authorization flow exits with an error.
+*/
+@objc public class AuthorizationError: NSObject, Error {
     enum ErrorType {
         case missingQueryParameters
         case missingAuthCode
         case accessDenied
         case vehicleIncompatible
-        case invalidSingleSelectOptions
+        case invalidSubscription
+        case userExitedFlow
+        case unknownError
     }
     
-    let type: ErrorType
-    let errorDescription: String?
-    let vehicleInfo: VehicleInfo?
+    var type: ErrorType
+    var errorDescription: String?
+    var vehicleInfo: VehicleInfo?
+    
+    init(type: ErrorType, errorDescription: String? = nil, vehicleInfo: VehicleInfo? = nil) {
+        self.type = type
+        self.errorDescription = errorDescription
+        self.vehicleInfo = vehicleInfo
+    }
 }
