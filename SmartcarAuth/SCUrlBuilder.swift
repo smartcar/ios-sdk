@@ -134,6 +134,23 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     }
 
     /**
+    Set flags to enable early access features.
+    
+    - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
+    - parameters:
+      - flags: A list of early access features to enable. The naming of the flags is colon separated for any sub-options the flag may have (ex: country:DE).
+    - returns:
+        A reference to this object
+    */
+    public func setFlags(flags: [String]) -> SCUrlBuilder {
+        if (!flags.isEmpty) {
+            let flagsString = flags.joined(separator: " ")
+            self.queryItems.append(URLQueryItem(name: "flags", value: flagsString))
+        }
+        return self
+    }
+
+    /**
     Build a Smartcar Connect authorization URL string
      
     Use the built string with `SmartcarAuth.launchAuthFlow(...)` in iOS 10 and under or `SmartcarAuth.launchWebAuthSession(...)` in iOS 11 and above

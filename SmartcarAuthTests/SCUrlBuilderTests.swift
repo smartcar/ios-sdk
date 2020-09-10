@@ -115,6 +115,16 @@ class SCUrlBuilderTests: XCTestCase {
         expect(urlWithState).to(equal(expectedUrl))
     }
 
+    func testSCUrlBuilderSetFlags() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&flags=country%3ADE%20flag%3Asuboption"
+
+        let urlWithState = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
+            .setFlags(["country:DE", "flag:suboption"])
+            .build()
+
+        expect(urlWithState).to(equal(expectedUrl))
+    }
+
     func testSCUrlBuilderSetAllParameters() {
         let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567"
 
