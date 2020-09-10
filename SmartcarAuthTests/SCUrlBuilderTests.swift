@@ -17,6 +17,7 @@ class SCUrlBuilderTests: XCTestCase {
     let state = UUID().uuidString
     let make = "TESLA"
     let vin = "12345678901234567"
+    let flags = ["country:DE", "flag:suboption"]
     var testMode = false
 
     override func setUp() {
@@ -116,8 +117,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderSetFlags() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&flags=country%3ADE%20flag%3Asuboption"
-        let flags = ["country:DE", "flag:suboption"]
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&flags=country:DE%20flag:suboption"
 
         let urlWithState = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
             .setFlags(flags: flags)
@@ -135,6 +135,7 @@ class SCUrlBuilderTests: XCTestCase {
             .setMakeBypass(make: make)
             .setSingleSelect(singleSelect: true)
             .setSingleSelectVin(vin: vin)
+            .setFlags(flags: flags)
             .build()
 
         expect(urlWithState).to(equal(expectedUrl))
