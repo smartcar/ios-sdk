@@ -138,13 +138,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     
     - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
     - parameters:
-      - flags: A list of early access features to enable. The naming of the flags is colon separated for any sub-options the flag may have (ex: country:DE).
+      - flags: A    
     - returns:
         A reference to this object
     */
     public func setFlags(flags: [String]) -> SCUrlBuilder {
         if (!flags.isEmpty) {
-            let flagsString = flags.joined(separator: " ")
+            let encodedFlags = flags.map { $0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) }
+            
+            let flagsString = encodedFlags.joined(separator: " ")
             self.queryItems.append(URLQueryItem(name: "flags", value: flagsString))
         }
         return self
