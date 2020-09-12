@@ -135,10 +135,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     /**
     Set flags to enable early access features.
-    
-    - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
+
     - parameters:
-      - flags: A list of early access features to enable. The naming of the flags is colon separated for any sub-options the flag may have (ex: country:DE).
+      - flags: List of feature flags that your application has early access to.
     - returns:
         A reference to this object
     */
