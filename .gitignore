@@ -68,6 +68,9 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
+# Docs
+docs/undocumented.json
+
 # Other
 .DS_Store
 xcov_report/
