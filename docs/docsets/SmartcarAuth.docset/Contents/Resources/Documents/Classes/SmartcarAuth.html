@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/SmartcarAuth" class="dashAnchor"></a>
     <a title="SmartcarAuth Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SmartcarAuth Docs</a> (100% documented)</p>
+        <p><a href="../index.html">SmartcarAuth 4.1.0 Docs</a> (100% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -52,8 +60,10 @@
             <h1>SmartcarAuth</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="kt">SmartcarAuth</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">SmartcarAuth</span><span class="p">:</span> <span class="kt">ASWebAuthenticationPresentationContextProviding</span></code></pre>
 
                 </div>
               </div>
@@ -69,7 +79,7 @@
                     <code>
                     <a name="/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)initWithClientId:redirectUri:scope:completionHandler:testMode:"></a>
                     <a name="//apple_ref/swift/Method/init(clientId:redirectUri:scope:completionHandler:testMode:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)initWithClientId:redirectUri:scope:completionHandler:testMode:">init(clientId:redirectUri:scope:completionHandler:testMode:)</a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)initWithClientId:redirectUri:scope:completionHandler:testMode:">init(clientId:<wbr>redirectUri:<wbr>scope:<wbr>completionHandler:<wbr>testMode:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -191,7 +201,7 @@
                     <code>
                     <a name="/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)launchAuthFlowWithUrl:viewController:"></a>
                     <a name="//apple_ref/swift/Method/launchAuthFlow(url:viewController:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)launchAuthFlowWithUrl:viewController:">launchAuthFlow(url:viewController:)</a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)launchAuthFlowWithUrl:viewController:">launchAuthFlow(url:<wbr>viewController:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -259,7 +269,7 @@
                     <code>
                     <a name="/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)handleCallbackWithCallbackUrl:"></a>
                     <a name="//apple_ref/swift/Method/handleCallback(callbackUrl:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)handleCallbackWithCallbackUrl:">handleCallback(callbackUrl:)</a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)handleCallbackWithCallbackUrl:">handleCallback(callbackUrl:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -300,16 +310,12 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
                     <a name="/c:@CM@SmartcarAuth@objc(cs)SmartcarAuth(im)presentationAnchorForWebAuthenticationSession:"></a>
                     <a name="//apple_ref/swift/Method/presentationAnchor(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@SmartcarAuth@objc(cs)SmartcarAuth(im)presentationAnchorForWebAuthenticationSession:">presentationAnchor(for:)</a>
+                    <a class="token" href="#/c:@CM@SmartcarAuth@objc(cs)SmartcarAuth(im)presentationAnchorForWebAuthenticationSession:">presentationAnchor(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -336,8 +342,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2019-11-22)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external">Smartcar Inc.</a>. All rights reserved. (Last updated: 2020-09-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
