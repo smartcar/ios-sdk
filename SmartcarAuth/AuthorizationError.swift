@@ -24,7 +24,7 @@
 * Error that gets created when the authorization flow exits with an error.
 */
 @objc public class AuthorizationError: NSObject, Error {
-    enum ErrorType {
+    public enum ErrorType {
         case missingQueryParameters
         case missingAuthCode
         case accessDenied
@@ -34,8 +34,8 @@
         case unknownError
     }
     
-    var type: ErrorType
-    var errorDescription: String?
+    public let type: ErrorType
+    public let errorDescription: String?
     var vehicleInfo: VehicleInfo?
     
     init(type: ErrorType, errorDescription: String? = nil, vehicleInfo: VehicleInfo? = nil) {
