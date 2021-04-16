@@ -1,17 +1,14 @@
-
 language: objective-c
 osx_image: xcode11.2
 xcode_workspace: SmartcarAuth.xcworkspace
 xcode_scheme: SmartcarAuth
 
 before_install:
-
   - gem install xcov
   - gem install cocoapods
   - pod install
 
 script:
-
   - pod lib lint --verbose
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=1DED7F18-1F63-4593-B316-E6A44FEE23D6,OS=12.4' build test
@@ -27,7 +24,6 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
-
   - provider: script
     skip_cleanup: true
     script: echo -e "machine github.com\n  login $GH_TOKEN" >> ~/.netrc && git push origin v$pod_spec_tag
