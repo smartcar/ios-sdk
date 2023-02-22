@@ -128,6 +128,61 @@ class SmartcarAuthTests: XCTestCase {
         smartcar.handleCallback(callbackUrl: url)
     }
     
+    func testHandleCallbackNoVehicles() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+            
+            expect(err?.errorDescription).to(equal("User does not have any vehicles connected to this connected services account"))
+            expect(err?.type).to(equal(.noVehicles))
+            expect(err?.vehicleInfo).to(beNil())
+        })
+
+        let urlString = redirectUri + "?error=no_vehicles&error_description=User%20does%20not%20have%20any%20vehicles%20connected%20to%20this%20connected%20services%20account"
+        
+        let url = URL(string: urlString)!
+        
+        smartcar.handleCallback(callbackUrl: url)
+    }
+    
+    func testHandleCallbackConfigurationError() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+            
+            expect(err?.errorDescription).to(equal("There has been an error in the configuration of your application."))
+            expect(err?.type).to(equal(.configurationError))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(equal("400"))
+            expect(err?.errorMessage).to(equal("You have entered a test mode VIN. Please enter a VIN that belongs to a real vehicle."))
+        })
+
+        let urlString = redirectUri + "?error=configuration_error&error_description=There%20has%20been%20an%20error%20in%20the%20configuration%20of%20your%20application.&status_code=400&error_message=You%20have%20entered%20a%20test%20mode%20VIN.%20Please%20enter%20a%20VIN%20that%20belongs%20to%20a%20real%20vehicle."
+        
+        let url = URL(string: urlString)!
+        
+        smartcar.handleCallback(callbackUrl: url)
+    }
+    
+    func testHandleCallbackServerError() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+            
+            expect(err?.errorDescription).to(equal("Unexpected server error. Please try again."))
+            expect(err?.type).to(equal(.serverError))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
+        })
+
+        let urlString = redirectUri + "?error=server_error&error_description=Unexpected%20server%20error.%20Please%20try%20again."
+        
+        let url = URL(string: urlString)!
+        
+        smartcar.handleCallback(callbackUrl: url)
+    }
+    
     func testHandleCallbackUnrecognizedError() {
         let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, err in
             expect(code).to(beNil())

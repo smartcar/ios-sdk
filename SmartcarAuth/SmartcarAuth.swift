@@ -182,6 +182,14 @@ Smartcar Authentication SDK for iOS written in Swift 5.
                     authorizationError = AuthorizationError(type: .invalidSubscription, errorDescription: errorDescription)
                 case "access_denied":
                     authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription)
+                case "no_vehicles":
+                    authorizationError = AuthorizationError(type: .noVehicles, errorDescription: errorDescription)
+                case "configuration_error":
+                    let statusCode = query.filter({$0.name == "status_code"}).first?.value;
+                    let errorMessage = query.filter({$0.name == "error_message"}).first?.value;
+                    authorizationError = AuthorizationError(type: .configurationError, errorDescription: errorDescription, statusCode: statusCode, errorMessage: errorMessage)
+                case "server_error":
+                    authorizationError = AuthorizationError(type: .serverError, errorDescription: errorDescription)
                 default:
                     authorizationError = AuthorizationError(type: .unknownError, errorDescription: errorDescription)
             }

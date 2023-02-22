@@ -28,19 +28,26 @@
         case missingQueryParameters
         case missingAuthCode
         case accessDenied
+        case configurationError
         case vehicleIncompatible
         case invalidSubscription
+        case noVehicles
+        case serverError
         case userExitedFlow
         case unknownError
     }
     
     public let type: ErrorType
     public let errorDescription: String?
+    public let statusCode: String?
+    public let errorMessage: String?
     var vehicleInfo: VehicleInfo?
     
-    init(type: ErrorType, errorDescription: String? = nil, vehicleInfo: VehicleInfo? = nil) {
+    init(type: ErrorType, errorDescription: String? = nil, vehicleInfo: VehicleInfo? = nil, statusCode: String? = nil, errorMessage: String? = nil) {
         self.type = type
         self.errorDescription = errorDescription
         self.vehicleInfo = vehicleInfo
+        self.statusCode = statusCode
+        self.errorMessage = errorMessage
     }
 }
