@@ -50,7 +50,7 @@ appDelegate.smartcar = SmartcarAuth(
   clientId: "afb0b7d3-807f-4c61-9b04-352e91fe3134",
   redirectUri: "scafb0b7d3-807f-4c61-9b04-352e91fe3134://exchange",
   scope: ["read_vin", "read_vehicle_info", "read_odometer"],
-  completion: completionHandler
+  completionHandler: completionHandler
 )
 let smartcar = appDelegate.smartcar
 

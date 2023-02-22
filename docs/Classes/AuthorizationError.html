@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SmartcarAuth Class Reference</title>
+    <title>AuthorizationError Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/SmartcarAuth" class="dashAnchor"></a>
-    <a title="SmartcarAuth Class Reference"></a>
+    <a name="//apple_ref/swift/Class/AuthorizationError" class="dashAnchor"></a>
+    <a title="AuthorizationError Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SmartcarAuth 4.2.3 Docs</a> (0% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SmartcarAuth Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        SmartcarAuth Class Reference
+        AuthorizationError Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -60,9 +60,8 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>SmartcarAuth</h1>
-            <p>Smartcar Authentication SDK for iOS written in Swift 5.
-    - Facilitates the authorization flow to launch the flow and retrieve an authorization code</p>
+            <h1>AuthorizationError</h1>
+            <p>Error that gets created when the authorization flow exits with an error.</p>
 
           </section>
           <section class="section task-group-section">
@@ -72,8 +71,8 @@
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(clientId:redirectUri:scope:completionHandler:testMode:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(clientId:<wbr>redirectUri:<wbr>scope:<wbr>completionHandler:<wbr>testMode:<wbr>)</a>
+                    <a name="//apple_ref/swift/Enum/ErrorType" class="dashAnchor"></a>
+                    <a class="token" href="#/">ErrorType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -81,8 +80,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Constructor for the SmartcarAuth</p>
-
+                        
+                        <a href="../Classes/AuthorizationError/ErrorType.html" class="slightly-smaller">See more</a>
                       </div>
                     </section>
                   </div>
@@ -91,8 +90,8 @@
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/authUrlBuilder()" class="dashAnchor"></a>
-                    <a class="token" href="#/">authUrlBuilder()</a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/">type</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -100,9 +99,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Helper method to generate a SCURLBuilder instance, which then can be used (with various setters) to build an auth URL
-   See <code>SCURLBuilder</code> for a full list of query parameters that can be set on the authorization URL</p>
-
+                        
                       </div>
                     </section>
                   </div>
@@ -111,8 +108,8 @@
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/launchAuthFlow(url:viewController:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">launchAuthFlow(url:<wbr>viewController:<wbr>)</a>
+                    <a name="//apple_ref/swift/Property/errorDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/">errorDescription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -120,18 +117,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Starts the launch of Smartcar Connect.</p>
-
-<p>The way that the browser is launched depends on the iOS version:</p>
-
-<p>iOS 10: <code>SFSafariViewController</code></p>
-
-<p>iOS 11: <code>SFAuthenticationSession</code></p>
-
-<p>iOS 12+: <code>ASWebAuthenticationSession</code></p>
-
-<p>If you are supporting iOS 10, you will need to pass in a UIViewController, as well as intercept the callback in your application (see <code>README</code> for an example).</p>
-
+                        
                       </div>
                     </section>
                   </div>
@@ -140,8 +126,8 @@
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/handleCallback(callbackUrl:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">handleCallback(callbackUrl:<wbr>)</a>
+                    <a name="//apple_ref/swift/Property/statusCode" class="dashAnchor"></a>
+                    <a class="token" href="#/">statusCode</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -149,8 +135,25 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string upon success. Invokes the completion function with either the code or an error (and state if included).</p>
-
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/errorMessage" class="dashAnchor"></a>
+                    <a class="token" href="#/">errorMessage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
                       </div>
                     </section>
                   </div>
