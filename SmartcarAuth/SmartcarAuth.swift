@@ -26,17 +26,23 @@ import SafariServices
 import AuthenticationServices
 #endif
 
+public enum SmartcarAuthMode: String {
+    case live
+    case test
+    case simulated
+}
 
 /**
 Smartcar Authentication SDK for iOS written in Swift 5.
     - Facilitates the authorization flow to launch the flow and retrieve an authorization code
 */
 @objcMembers public class SmartcarAuth: NSObject {
+    
     var clientId: String
     var redirectUri: String
     var scope: [String]
     var completionHandler: (_ code: String?, _ state: String?, _ error: AuthorizationError?) -> Void
-    var testMode: Bool
+    var authMode: SmartcarAuthMode
     
     // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating
     private var session: Session?
@@ -47,14 +53,14 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         - clientId: The application's client ID
         - redirectUri: The application's redirect URI
         - scope: An array of authorization scopes
-        - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - authMode: Launch the Smartcar auth flow with the corresponding mode. Defaults to test mode.
         - completion: Callback function called upon the completion of the Smartcar Connect
     */
-    public init(clientId: String, redirectUri: String, scope: [String], completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, testMode: Bool = false) {
+    public init(clientId: String, redirectUri: String, scope: [String], completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, authMode: SmartcarAuthMode = .test) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
-        self.testMode = testMode
+        self.authMode = authMode
         self.completionHandler = completionHandler
     }
     
@@ -63,7 +69,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
     */
     public func authUrlBuilder() -> SCUrlBuilder {
-        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
+        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, authMode: authMode)
     }
     
     /**

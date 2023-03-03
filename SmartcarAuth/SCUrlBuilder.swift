@@ -32,9 +32,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         - clientId: The application's client ID
         - redirectUri: The application's redirect URI
         - scope: An array of authorization scopes
-        - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - authMode: Launch the Smartcar auth flow with the corresponding mode. Defaults to test mode.
     */
-    public init(clientId: String, redirectUri: String, scope: [String], testMode: Bool) {
+    public init(clientId: String, redirectUri: String, scope: [String], authMode: SmartcarAuthMode) {
         self.components = URLComponents()
         self.components.scheme = "https"
         self.components.host = "connect.smartcar.com"
@@ -43,7 +43,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         self.queryItems.append(contentsOf: [
             URLQueryItem(name: "client_id", value: clientId),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "mode", value: testMode ? "test" : "live")
+            URLQueryItem(name: "mode", value: authMode.rawValue)
         ])
 
         if let redirectUri = redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
