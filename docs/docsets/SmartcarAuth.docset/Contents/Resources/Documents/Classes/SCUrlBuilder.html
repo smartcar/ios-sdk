@@ -17,7 +17,7 @@
     <a title="SCUrlBuilder Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SmartcarAuth 4.1.3 Docs</a> (67% documented)</p>
+        <p><a href="../index.html">SmartcarAuth 4.2.0 Docs</a> (62% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -55,6 +55,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SCMode.html">SCMode</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -80,9 +88,9 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)initWithClientId:redirectUri:scope:testMode:"></a>
-                    <a name="//apple_ref/swift/Method/init(clientId:redirectUri:scope:testMode:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)initWithClientId:redirectUri:scope:testMode:">init(clientId:<wbr>redirectUri:<wbr>scope:<wbr>testMode:<wbr>)</a>
+                    <a name="/s:12SmartcarAuth12SCUrlBuilderC8clientId11redirectUri5scope8testMode4modeACSS_SSSaySSGSbAA6SCModeOSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(clientId:redirectUri:scope:testMode:mode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuth12SCUrlBuilderC8clientId11redirectUri5scope8testMode4modeACSS_SSSaySSGSbAA6SCModeOSgtcfc">init(clientId:<wbr>redirectUri:<wbr>scope:<wbr>testMode:<wbr>mode:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -97,7 +105,7 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">clientId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">redirectUri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">testMode</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">clientId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">redirectUri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">testMode</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/SCMode.html">SCMode</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -149,7 +157,19 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
                               </td>
                               <td>
                                 <div>
-                                  <p>Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.</p>
+                                  <p>Deprecated, please use <code>mode</code> instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.</p>
                                 </div>
                               </td>
                             </tr>
@@ -519,7 +539,7 @@ When <code><a href="../Classes/SCUrlBuilder.html#/c:@M@SmartcarAuth@objc(cs)SCUr
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2023-11-02)</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2023-11-13)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

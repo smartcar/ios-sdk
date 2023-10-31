@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B07A82248E2DF00474A10 /* VehicleInfo.swift */; };
+		94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D43EB22AF067BD00F5ABAB /* SCMode.swift */; };
 		A644ADEA238861F60036CE46 /* SCUrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */; };
 		A644ADEC238862810036CE46 /* SCUrlBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */; };
 		A69F57AB2374EAB9005971D2 /* AuthorizationErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */; };
@@ -35,6 +36,7 @@
 		278B07A82248E2DF00474A10 /* VehicleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfo.swift; sourceTree = "<group>"; };
 		41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.release.xcconfig"; sourceTree = "<group>"; };
 		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
+		94D43EB22AF067BD00F5ABAB /* SCMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMode.swift; sourceTree = "<group>"; };
 		A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilder.swift; sourceTree = "<group>"; };
 		A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilderTests.swift; sourceTree = "<group>"; };
 		A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationErrorTests.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */,
 				278B07A82248E2DF00474A10 /* VehicleInfo.swift */,
 				A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */,
+				94D43EB22AF067BD00F5ABAB /* SCMode.swift */,
 			);
 			path = SmartcarAuth;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			files = (
 				278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */,
 				A644ADEA238861F60036CE46 /* SCUrlBuilder.swift in Sources */,
+				94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */,
 				F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */,
 				F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */,
 			);

@@ -32,18 +32,27 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         - clientId: The application's client ID
         - redirectUri: The application's redirect URI
         - scope: An array of authorization scopes
-        - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.
     */
-    public init(clientId: String, redirectUri: String, scope: [String], testMode: Bool) {
+    public init(clientId: String, redirectUri: String, scope: [String], testMode: Bool = false, mode: SCMode? = nil) {
         self.components = URLComponents()
         self.components.scheme = "https"
         self.components.host = "connect.smartcar.com"
         self.components.path = "/oauth/authorize"
+        
+        var connectMode = "live";
+        if (testMode) {
+            connectMode = "test"
+        }
+        if (mode != nil) {
+            connectMode = mode?.rawValue ?? "live";
+        }
 
         self.queryItems.append(contentsOf: [
             URLQueryItem(name: "client_id", value: clientId),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "mode", value: testMode ? "test" : "live")
+            URLQueryItem(name: "mode", value: connectMode)
         ])
 
         if let redirectUri = redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
