@@ -32,7 +32,7 @@ First, you need to have a global SmartcarAuth object in your AppDelegate to hold
 var smartcarSdk: SmartcarAuth? = nil
 ```
 
-Next, you will need to configure your redirect URI. Your redirect URI must follow this format: `"sc" + clientId + "://" + hostname`. 
+Next, you will need to configure your redirect URI. Your redirect URI must follow this format: `<custom scheme>://<hostname>`. We suggest `"sc" + clientId + "://" + hostname`. 
 
 If you are supporting iOS 10 with your application, you will also need to register your custom URL scheme (`sc<clientId>`) in your `Info.plist`:
 ![Info.plist](images/infoPlist.png)
