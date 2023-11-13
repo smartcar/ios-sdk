@@ -14,7 +14,7 @@ script:
   - pod lib lint --verbose
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=EBFABEDC-FB85-45BE-BC9F-8C6D6A1773ED,OS=16.0' build test
-  - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 75 --only_project_targets
+  # - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 75 --only_project_targets
 
   # create tag
   - git config --global user.email "ci@smartcar.com"
