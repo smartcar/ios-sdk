@@ -1,6 +1,6 @@
 
 language: objective-c
-osx_image: xcode11.2
+osx_image: xcode14.2
 xcode_workspace: SmartcarAuth.xcworkspace
 xcode_scheme: SmartcarAuth
 
