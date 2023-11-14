@@ -23,9 +23,9 @@
 /**
  Enum to be used with the `mode` parameter for SmartcarAuth to determine which mode Connect will launch in
 
- Live: Allows users to login with a real connected services account
- Test: Allows users to connect to test vehicles using any credentials
- Simualted: Allows users to connect to simulated vehicles created on the Smartcar developer dashboard
+  - live: Allows users to login with a real connected services account
+  - test: Allows users to connect to test vehicles using any credentials
+  - simulated: Allows users to connect to simulated vehicles created on the Smartcar developer dashboard
  */
 public enum SCMode: String {
     case live
