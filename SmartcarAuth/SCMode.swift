@@ -25,7 +25,7 @@
 
   - live: Allows users to login with a real connected services account
   - test: Allows users to connect to test vehicles using any credentials
-  - simualted: Allows users to connect to simulated vehicles created on the Smartcar developer dashboard
+  - simulated: Allows users to connect to simulated vehicles created on the Smartcar developer dashboard
  */
 public enum SCMode: String {
     case live
