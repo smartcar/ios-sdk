@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AuthorizationError Class Reference</title>
+    <title>SCMode Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/AuthorizationError" class="dashAnchor"></a>
-    <a title="AuthorizationError Class Reference"></a>
+    <a name="//apple_ref/swift/Enum/SCMode" class="dashAnchor"></a>
+    <a title="SCMode Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SmartcarAuth 4.2.0 Docs</a> (62% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SmartcarAuth Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        AuthorizationError Class Reference
+        SCMode Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -68,16 +68,19 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>AuthorizationError</h1>
+            <h1>SCMode</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">AuthorizationError</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">Error</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SCMode</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
 
                 </div>
               </div>
-            <p>Error that gets created when the authorization flow exits with an error.</p>
+            <p>Enum to be used with the <code>mode</code> parameter for SmartcarAuth to determine which mode Connect will launch in</p>
+
+<p>Live: Allows users to login with a real connected services account
+Test: Allows users to connect to test vehicles using any credentials
+Simualted: Allows users to connect to simulated vehicles created on the Smartcar developer dashboard</p>
 
           </section>
           <section class="section task-group-section">
@@ -86,9 +89,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC0D4TypeO"></a>
-                    <a name="//apple_ref/swift/Enum/ErrorType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC0D4TypeO">ErrorType</a>
+                    <a name="/s:12SmartcarAuth6SCModeO4liveyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/live" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuth6SCModeO4liveyA2CmF">live</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -98,13 +101,12 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
-                        <a href="../Classes/AuthorizationError/ErrorType.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ErrorType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">live</span></code></pre>
 
                         </div>
                       </div>
@@ -114,9 +116,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC4typeAC0D4TypeOvp"></a>
-                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC4typeAC0D4TypeOvp">type</a>
+                    <a name="/s:12SmartcarAuth6SCModeO4testyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/test" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuth6SCModeO4testyA2CmF">test</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -131,7 +133,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Classes/AuthorizationError/ErrorType.html">ErrorType</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">test</span></code></pre>
 
                         </div>
                       </div>
@@ -141,9 +143,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC16errorDescriptionSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/errorDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC16errorDescriptionSSSgvp">errorDescription</a>
+                    <a name="/s:12SmartcarAuth6SCModeO9simulatedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/simulated" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuth6SCModeO9simulatedyA2CmF">simulated</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -158,7 +160,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">errorDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">simulated</span></code></pre>
 
                         </div>
                       </div>

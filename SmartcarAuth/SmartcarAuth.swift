@@ -36,6 +36,8 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     var redirectUri: String
     var scope: [String]
     var completionHandler: (_ code: String?, _ state: String?, _ error: AuthorizationError?) -> Void
+    var mode: SCMode?
+    @available(*, deprecated, message: "Use mode instead")
     var testMode: Bool
     
     // SFAuthenticationSession/ASWebAuthenticationSession require a strong reference to the session so that the system doesn't deallocate the session before the user finishes authenticating
@@ -47,15 +49,25 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         - clientId: The application's client ID
         - redirectUri: The application's redirect URI. Must be a valid URI.
         - scope: An array of authorization scopes
-        - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
         - completion: Callback function called upon the completion of the Smartcar Connect
+        - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
+        - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.
+
     */
-    public init(clientId: String, redirectUri: String, scope: [String], completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void, testMode: Bool = false) {
+    public init(
+        clientId: String,
+        redirectUri: String,
+        scope: [String],
+        completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void,
+        testMode: Bool = false,
+        mode: SCMode? = nil
+    ) {
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
-        self.testMode = testMode
         self.completionHandler = completionHandler
+        self.testMode = testMode
+        self.mode = mode
     }
     
     /**
@@ -63,7 +75,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
     */
     public func authUrlBuilder() -> SCUrlBuilder {
-        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode)
+        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode, mode: mode)
     }
     
     /**
