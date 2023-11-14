@@ -45,7 +45,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     Constructor for the SmartcarAuth
     - parameters:
         - clientId: The application's client ID
-        - redirectUri: The application's redirect URI
+        - redirectUri: The application's redirect URI. Must be a valid URI.
         - scope: An array of authorization scopes
         - testMode: Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
         - completion: Callback function called upon the completion of the Smartcar Connect
@@ -85,19 +85,20 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     */
     public func launchAuthFlow(url: String, viewController: UIViewController? = nil) {
         let authUrl = URL(string: url)
-        let redirectUriScheme = "sc" + self.clientId
-
+        let redirectUrl = URL(string: redirectUri)
+        let redirectUriScheme = redirectUrl?.scheme
+        
         if #available(iOS 11.0, *) {
             if #available(iOS 13.0, *) {
-                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme!, completionHandler: webAuthSessionCompletion)
                 // this is required for the browser to open in iOS 13
                 authSession.presentationContextProvider = self
                 self.session = authSession
             } else if #available(iOS 12.0, *) {
-                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                let authSession = ASWebAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme!, completionHandler: webAuthSessionCompletion)
                 self.session = authSession
             } else {
-                let authSession = SFAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme, completionHandler: webAuthSessionCompletion)
+                let authSession = SFAuthenticationSession.init(url: authUrl!, callbackURLScheme: redirectUriScheme!, completionHandler: webAuthSessionCompletion)
                 self.session = authSession
             }
             self.session?.start()

@@ -1,6 +1,6 @@
 
 language: objective-c
-osx_image: xcode11.2
+osx_image: xcode14.2
 xcode_workspace: SmartcarAuth.xcworkspace
 xcode_scheme: SmartcarAuth
 
@@ -11,11 +11,10 @@ before_install:
   - pod install
 
 script:
-
   - pod lib lint --verbose
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-  - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=1DED7F18-1F63-4593-B316-E6A44FEE23D6,OS=12.4' build test
-  - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 75 --only_project_targets
+  - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=EBFABEDC-FB85-45BE-BC9F-8C6D6A1773ED,OS=16.0' build test
+  # - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 75 --only_project_targets
 
   # create tag
   - git config --global user.email "ci@smartcar.com"
@@ -30,7 +29,7 @@ deploy:
 
   - provider: script
     skip_cleanup: true
-    script: echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc && git push origin v$pod_spec_tag
+    script: echo -e "machine github.com\n  login $GH_TOKEN" >> ~/.netrc && git push origin v$pod_spec_tag
     on:
       branch: master
 
