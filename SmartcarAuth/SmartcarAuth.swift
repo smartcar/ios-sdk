@@ -152,7 +152,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     }
     
     /**
-    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string upon success. Invokes the completion function with either the code or an error (and state if included).
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code, state string, and virtualKeyUrl upon success. Invokes the completion function with either the code or an error (and state and/or virtualKeyUrl if included).
     - parameters:
         - url: callback URL containing authorization code or an error
     */
