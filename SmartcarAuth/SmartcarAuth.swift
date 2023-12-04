@@ -35,7 +35,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     var clientId: String
     var redirectUri: String
     var scope: [String]
-    var completionHandler: (_ code: String?, _ state: String?, _ error: AuthorizationError?) -> Void
+    var completionHandler: (_ code: String?, _ state: String?, _ virtualKeyUrl: String?, _ error: AuthorizationError?) -> Void
     var mode: SCMode?
     @available(*, deprecated, message: "Use mode instead")
     var testMode: Bool
@@ -58,7 +58,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         clientId: String,
         redirectUri: String,
         scope: [String],
-        completionHandler: @escaping (String?, String?, AuthorizationError?) -> Void,
+        completionHandler: @escaping (String?, String?, String?, AuthorizationError?) -> Void,
         testMode: Bool = false,
         mode: SCMode? = nil
     ) {
@@ -146,13 +146,13 @@ Smartcar Authentication SDK for iOS written in Swift 5.
                 default:
                     authorizationError = AuthorizationError(type: .unknownError)
             }
-            return self.completionHandler(nil, nil, authorizationError)
+            return self.completionHandler(nil, nil, nil, authorizationError)
         }
         handleCallback(callbackUrl: callback)
     }
     
     /**
-    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code and state string upon success. Invokes the completion function with either the code or an error (and state if included).
+    Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code, state string, and virtualKeyUrl upon success. Invokes the completion function with either the code or an error (and state and/or virtualKeyUrl if included).
     - parameters:
         - url: callback URL containing authorization code or an error
     */
@@ -162,7 +162,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         let urlComp = URLComponents(url: callbackUrl, resolvingAgainstBaseURL: false)
         guard let query = urlComp?.queryItems else {
             authorizationError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil, vehicleInfo: nil)
-            return self.completionHandler(nil, nil, authorizationError)
+            return self.completionHandler(nil, nil, nil, authorizationError)
         }
         
         let queryState = query.filter({$0.name == "state"}).first?.value!
@@ -198,15 +198,17 @@ Smartcar Authentication SDK for iOS written in Swift 5.
                 default:
                     authorizationError = AuthorizationError(type: .unknownError, errorDescription: errorDescription)
             }
-            return self.completionHandler(nil, queryState, authorizationError)
+            return self.completionHandler(nil, queryState, nil, authorizationError)
         }
+
+        let virtualKeyUrl = query.filter({$0.name == "virtual_key_url"}).first?.value!
 
         guard let code = query.filter({$0.name == "code"}).first?.value else {
             let authorizationError = AuthorizationError(type: .missingAuthCode, errorDescription: nil, vehicleInfo: nil)
-            return self.completionHandler(nil, queryState, authorizationError)
+            return self.completionHandler(nil, queryState, nil, authorizationError)
         }
 
-        return self.completionHandler(code, queryState, nil)
+        return self.completionHandler(code, queryState, virtualKeyUrl, nil)
     }
     
 }
