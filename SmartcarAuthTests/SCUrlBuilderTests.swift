@@ -20,6 +20,7 @@ class SCUrlBuilderTests: XCTestCase {
     let flags = ["country:DE", "flag:suboption"]
     var testMode = false
     var connectMode = SCMode.live
+    let user = "a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -155,8 +156,18 @@ class SCUrlBuilderTests: XCTestCase {
         expect(urlWithState).to(equal(expectedUrl))
     }
 
+    func testSCUrlBuilderSetUser() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&user=a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
+
+        let urlWithState = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope)
+            .setUser(user: user)
+            .build()
+
+        expect(urlWithState).to(equal(expectedUrl))
+    }
+
     func testSCUrlBuilderSetAllSupportedParameters() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=simulated&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=simulated&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption&user=a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
         self.connectMode = SCMode.simulated
 
         let urlWithState = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, mode: connectMode)
@@ -166,13 +177,14 @@ class SCUrlBuilderTests: XCTestCase {
             .setSingleSelect(singleSelect: true)
             .setSingleSelectVin(vin: vin)
             .setFlags(flags: flags)
+            .setUser(user: user)
             .build()
 
         expect(urlWithState).to(equal(expectedUrl))
     }
     
     func testSCUrlBuilderSetAllParametersWithTestMode() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=simulated&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=simulated&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption&user=a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
         self.testMode = true
         self.connectMode = SCMode.simulated
 
@@ -183,6 +195,7 @@ class SCUrlBuilderTests: XCTestCase {
             .setSingleSelect(singleSelect: true)
             .setSingleSelectVin(vin: vin)
             .setFlags(flags: flags)
+            .setUser(user: user)
             .build()
 
         expect(urlWithState).to(equal(expectedUrl))

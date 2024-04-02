@@ -96,8 +96,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     /**
     Bypass the brand selector screen to a specified make.
      
-    A list of compatible makes is available on the [Smartcar API Reference](https://smartcar.com/docs/api#connect-direct)
-    - see: [Smartcar Connect Direct](https://smartcar.com/docs/api#connect-direct)
+    A list of compatible makes is available on the [Smartcar API Reference](https://smartcar.com/docs/api-reference/makes)
+    - see: [Bypassing the Brand Screen Selection](https://smartcar.com/docs/connect/advanced-config/flows)
     - parameters:
         - make: The selected make
     - returns:
@@ -114,7 +114,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     Ensure the user only authorizes a single vehicle.
     
     A user's connected service account can be connected to multiple vehicles. Setting this parameter to true forces the user to select only a single vehicle.
-    - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
+    - see: [Authorizing a Single Vehicle](https://smartcar.com/docs/connect/advanced-config/flows)
     - parameters:
       - singleSelect: Set to true to ensure only a single vehicle is authorized
     - returns:
@@ -129,7 +129,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     Specify the vin a user can authorize in Smartcar Connect.
     When `setSingleSelect(...)` is set to true, this parameter can be used to ensure that Smartcar Connect will allow the user to authorize only the vehicle with a specific VIN.
     
-    - see: [Smartcar Connect Match](https://smartcar.com/docs/api#connect-match)
+    - see: [Authorizing a Single Vehicle](https://smartcar.com/docs/connect/advanced-config/flows)
     - parameters:
       - vin: The specific VIN to authorize
     - returns:
@@ -154,6 +154,21 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         if (!flags.isEmpty) {
             let flagsString = flags.joined(separator: " ")
             self.queryItems.append(URLQueryItem(name: "flags", value: flagsString))
+        }
+        return self
+    }
+    
+    /**
+     Specify a unique identifier for the vehicle owner to track and aggregate analytics across Connect sessions for each vehicle owner
+
+    - parameters:
+      - user An optional developer-defined unique identifier for a vehicle owner.
+    - returns:
+        A reference to this object
+    */
+    public func setUser(user: String) -> SCUrlBuilder {
+        if (!user.isEmpty) {
+            self.queryItems.append(URLQueryItem(name: "user", value: user))
         }
         return self
     }

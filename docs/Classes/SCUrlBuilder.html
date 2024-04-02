@@ -17,7 +17,7 @@
     <a title="SCUrlBuilder Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SmartcarAuth 5.3.1 Docs</a> (61% documented)</p>
+        <p><a href="../index.html">SmartcarAuth 5.4.1 Docs</a> (62% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -296,10 +296,10 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
                       <div class="abstract">
                         <p>Bypass the brand selector screen to a specified make.</p>
 
-<p>A list of compatible makes is available on the <a href="https://smartcar.com/docs/api#connect-direct">Smartcar API Reference</a></p>
+<p>A list of compatible makes is available on the <a href="https://smartcar.com/docs/api-reference/makes">Smartcar API Reference</a></p>
 <div class="aside aside-see">
     <p class="aside-title">See</p>
-    <a href="https://smartcar.com/docs/api#connect-direct">Smartcar Connect Direct</a>
+    <a href="https://smartcar.com/docs/connect/advanced-config/flows">Bypassing the Brand Screen Selection</a>
 
 </div>
 
@@ -356,7 +356,7 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
 <p>A user&rsquo;s connected service account can be connected to multiple vehicles. Setting this parameter to true forces the user to select only a single vehicle.</p>
 <div class="aside aside-see">
     <p class="aside-title">See</p>
-    <a href="https://smartcar.com/docs/api#connect-match">Smartcar Connect Match</a>
+    <a href="https://smartcar.com/docs/connect/advanced-config/flows">Authorizing a Single Vehicle</a>
 
 </div>
 
@@ -412,7 +412,7 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
 When <code><a href="../Classes/SCUrlBuilder.html#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setSingleSelectWithSingleSelect:">setSingleSelect(...)</a></code> is set to true, this parameter can be used to ensure that Smartcar Connect will allow the user to authorize only the vehicle with a specific VIN.</p>
 <div class="aside aside-see">
     <p class="aside-title">See</p>
-    <a href="https://smartcar.com/docs/api#connect-match">Smartcar Connect Match</a>
+    <a href="https://smartcar.com/docs/connect/advanced-config/flows">Authorizing a Single Vehicle</a>
 
 </div>
 
@@ -504,6 +504,37 @@ When <code><a href="../Classes/SCUrlBuilder.html#/c:@M@SmartcarAuth@objc(cs)SCUr
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setUserWithUser:"></a>
+                    <a name="//apple_ref/swift/Method/setUser(user:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)setUserWithUser:">setUser(user:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Specify a unique identifier for the vehicle owner to track and aggregate analytics across Connect sessions for each vehicle owner</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setUser</span><span class="p">(</span><span class="nv">user</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SCUrlBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A reference to this object</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)build"></a>
                     <a name="//apple_ref/swift/Method/build()" class="dashAnchor"></a>
                     <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder(im)build">build()</a>
@@ -539,7 +570,7 @@ When <code><a href="../Classes/SCUrlBuilder.html#/c:@M@SmartcarAuth@objc(cs)SCUr
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2023-11-30)</p>
+          <p>&copy; 2024 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2024-04-01)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
