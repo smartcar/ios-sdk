@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B07A82248E2DF00474A10 /* VehicleInfo.swift */; };
+		571384A68465D9DBA4CE0F21 /* Pods_SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8044801E941BD0B7B6F71B12 /* Pods_SmartcarAuth.framework */; };
 		94BA530D2C997C9B00A39782 /* OauthCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530C2C997C9B00A39782 /* OauthCapture.swift */; };
 		94BA530F2C997D6D00A39782 /* RPCInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530E2C997D6D00A39782 /* RPCInterface.swift */; };
 		94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D43EB22AF067BD00F5ABAB /* SCMode.swift */; };
@@ -15,6 +16,7 @@
 		A644ADEC238862810036CE46 /* SCUrlBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */; };
 		A69F57AB2374EAB9005971D2 /* AuthorizationErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */; };
 		A6B8653E2374EDE4008BFD7F /* VehicleInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B8653D2374EDE4008BFD7F /* VehicleInfoTests.swift */; };
+		E28A1B107AAAA470DCE57B39 /* Pods_SmartcarAuthTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825D4076C2B456C94011615C /* Pods_SmartcarAuthTests.framework */; };
 		F80C4ABD208E54AE00F8C47F /* SmartcarAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9288F1E2B2F6B009F07E5 /* SmartcarAuthTests.swift */; };
 		F85ABF81208C191D00FB2F3E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F85ABF80208C191D00FB2F3E /* Podfile */; };
 		F85ABF82208C196200FB2F3E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F85ABF80208C191D00FB2F3E /* Podfile */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		278B07A82248E2DF00474A10 /* VehicleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfo.swift; sourceTree = "<group>"; };
 		41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.release.xcconfig"; sourceTree = "<group>"; };
+		8044801E941BD0B7B6F71B12 /* Pods_SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		825D4076C2B456C94011615C /* Pods_SmartcarAuthTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuthTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
 		94BA530C2C997C9B00A39782 /* OauthCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthCapture.swift; sourceTree = "<group>"; };
 		94BA530E2C997D6D00A39782 /* RPCInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCInterface.swift; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				571384A68465D9DBA4CE0F21 /* Pods_SmartcarAuth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8F9288B1E2B2F6B009F07E5 /* SmartcarAuth.framework in Frameworks */,
+				E28A1B107AAAA470DCE57B39 /* Pods_SmartcarAuthTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +86,8 @@
 		74EEDAD8CB0F3464D2D534A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8044801E941BD0B7B6F71B12 /* Pods_SmartcarAuth.framework */,
+				825D4076C2B456C94011615C /* Pods_SmartcarAuthTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
