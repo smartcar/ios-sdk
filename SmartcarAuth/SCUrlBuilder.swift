@@ -19,7 +19,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /**
 * A builder used for generating Smartcar Connect authorization URLs.
-* Use the built string with `SmartcarAuth.launchAuthFlow(...)` in iOS 10 and under or `SmartcarAuth.launchWebAuthSession(...)` in iOS 11 and above
+* Use the built string with `SmartcarAuth.launchAuthFlow(...)
 * To see a full description of Smartcar Connect parameters, see the [Smartcar API Reference](https://smartcar.com/api#smartcar-connect)
 */
 @objcMembers public class SCUrlBuilder: NSObject {

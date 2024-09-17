@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B07A82248E2DF00474A10 /* VehicleInfo.swift */; };
+		94BA530D2C997C9B00A39782 /* OauthCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530C2C997C9B00A39782 /* OauthCapture.swift */; };
+		94BA530F2C997D6D00A39782 /* RPCInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530E2C997D6D00A39782 /* RPCInterface.swift */; };
 		94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D43EB22AF067BD00F5ABAB /* SCMode.swift */; };
 		A644ADEA238861F60036CE46 /* SCUrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */; };
 		A644ADEC238862810036CE46 /* SCUrlBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */; };
@@ -36,6 +38,8 @@
 		278B07A82248E2DF00474A10 /* VehicleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfo.swift; sourceTree = "<group>"; };
 		41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.release.xcconfig"; sourceTree = "<group>"; };
 		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
+		94BA530C2C997C9B00A39782 /* OauthCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthCapture.swift; sourceTree = "<group>"; };
+		94BA530E2C997D6D00A39782 /* RPCInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCInterface.swift; sourceTree = "<group>"; };
 		94D43EB22AF067BD00F5ABAB /* SCMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMode.swift; sourceTree = "<group>"; };
 		A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilder.swift; sourceTree = "<group>"; };
 		A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilderTests.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				278B07A82248E2DF00474A10 /* VehicleInfo.swift */,
 				A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */,
 				94D43EB22AF067BD00F5ABAB /* SCMode.swift */,
+				94BA530C2C997C9B00A39782 /* OauthCapture.swift */,
+				94BA530E2C997D6D00A39782 /* RPCInterface.swift */,
 			);
 			path = SmartcarAuth;
 			sourceTree = "<group>";
@@ -318,6 +324,8 @@
 			files = (
 				278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */,
 				A644ADEA238861F60036CE46 /* SCUrlBuilder.swift in Sources */,
+				94BA530F2C997D6D00A39782 /* RPCInterface.swift in Sources */,
+				94BA530D2C997C9B00A39782 /* OauthCapture.swift in Sources */,
 				94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */,
 				F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */,
 				F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */,
@@ -476,7 +484,7 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = SmartcarAuth/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -502,7 +510,7 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = SmartcarAuth/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -520,6 +528,7 @@
 				DEVELOPMENT_TEAM = KP52A6LHWC;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SmartcarAuthTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -536,6 +545,7 @@
 				DEVELOPMENT_TEAM = KP52A6LHWC;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SmartcarAuthTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartcar.SmartCarOAuthSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

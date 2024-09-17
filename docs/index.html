@@ -16,7 +16,7 @@
     <a title="SmartcarAuth  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SmartcarAuth 5.4.1 Docs</a> (62% documented)</p>
+        <p><a href="index.html">SmartcarAuth 6.0.0 Docs</a> (68% documented)</p>
         <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -44,6 +44,9 @@
                 <a href="Classes/AuthorizationError/ErrorType.html">– ErrorType</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/OauthCapture.html">OauthCapture</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/SCUrlBuilder.html">SCUrlBuilder</a>
               </li>
               <li class="nav-group-task">
@@ -62,6 +65,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12SmartcarAuth35getOauthCaptureCompletionJavascript19jsonRPCResponseDataSS10Foundation0J0V_tF">getOauthCaptureCompletionJavascript(jsonRPCResponseData:)</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -77,12 +88,12 @@
 
 <p>The SmartcarAuth iOS SDK makes it easy to integrate with Smartcar Connect from iOS.</p>
 
-<p>The SDK follows the best practices set out in <a href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06">OAuth 2.0 for Native Apps</a> including using <em>SFSafariViewController</em>, <em>SFAuthenticationSession</em>, or <em>ASWebAuthenticationSession</em> depending on iOS version for the authorization request. <em>UIWebView</em> is explicitly not supported due to usability and security reasons.</p>
+<p>The SDK follows the best practices set out in <a href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06">OAuth 2.0 for Native Apps</a>.</p>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
-<p>SmartcarAuth supports iOS 10 and above.</p>
+<p>SmartcarAuth supports iOS 12 and above.</p>
 
-<p>iOS 10 uses the in-app browser tab pattern (via <em>SFSafariViewController</em>), iOS 11 presents the authentication webpage in Safari using <em>SFAuthenticationSession</em>, and iOS 12 and above uses a secure embedded webview (via <em>ASWebAuthenticationSession</em>).</p>
+<p>Smartcar Connect is presented in a webview in your application using the Smartcar iOS SDK.</p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>SmartcarAuth is available through <a href="http://cocoapods.org">CocoaPods</a>. To install it, simply add the following line to your Podfile:</p>
@@ -96,9 +107,6 @@
 </code></pre>
 
 <p>Next, you will need to configure your redirect URI. Your redirect URI must follow this format: <code>&lt;custom scheme&gt;://&lt;hostname&gt;</code>. We suggest <code>&quot;sc&quot; + clientId + &quot;://&quot; + hostname</code>. </p>
-
-<p>If you are supporting iOS 10 with your application, you will also need to register your custom URL scheme (<code>sc&lt;clientId&gt;</code>) in your <code>Info.plist</code>:
-<img src="images/infoPlist.png" alt="Info.plist"></p>
 
 <p>Then, initiate the SmartcarAuth object in the UIViewController.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">appDelegate</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="k">as!</span> <span class="kt">AppDelegate</span>
@@ -126,27 +134,7 @@
 </code></pre>
 <h2 id='handling-the-redirect' class='heading'>Handling the Redirect</h2>
 
-<p>For iOS 11 and above, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.</p>
-
-<p>For iOS 10, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.</p>
-<pre class="highlight swift"><code><span class="cm">/**
-    Intercepts callback from OAuth SafariView determined by the custom URI
- */</span>
-<span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
-    <span class="c1">// Close the SFSafariViewController</span>
-    <span class="n">window</span><span class="o">!.</span><span class="n">rootViewController</span><span class="p">?</span><span class="o">.</span><span class="n">presentedViewController</span><span class="p">?</span><span class="o">.</span><span class="nf">dismiss</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span> <span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-
-    <span class="c1">// Sends the URL to the current SmartcarAuth object which will</span>
-    <span class="c1">// process it and then call the completion handler.</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">sdk</span> <span class="o">=</span> <span class="n">smartcarSdk</span> <span class="p">{</span>
-        <span class="n">sdk</span><span class="o">.</span><span class="nf">handleCallback</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Your additional URL handling (if any) goes here.</span>
-
-    <span class="k">return</span> <span class="kc">true</span>
-<span class="p">}</span>
-</code></pre>
+<p>For iOS 12 and above, the callback URL with the authentication code (or error) is automatically passed to the completion handler and no further action to intercept the callback is required.</p>
 <h2 id='sdk-reference' class='heading'>SDK Reference</h2>
 
 <p>For detailed documentation on parameters and available methods, please refer to
@@ -161,7 +149,7 @@ the <a href="https://smartcar.github.io/ios-sdk/">SDK Reference</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2024 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2024-04-01)</p>
+          <p>&copy; 2024 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2024-09-17)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

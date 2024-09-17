@@ -17,7 +17,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SmartcarAuth 5.4.1 Docs</a> (62% documented)</p>
+        <p><a href="index.html">SmartcarAuth 6.0.0 Docs</a> (68% documented)</p>
         <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -45,6 +45,9 @@
                 <a href="Classes/AuthorizationError/ErrorType.html">– ErrorType</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/OauthCapture.html">OauthCapture</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/SCUrlBuilder.html">SCUrlBuilder</a>
               </li>
               <li class="nav-group-task">
@@ -60,6 +63,14 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/SCMode.html">SCMode</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12SmartcarAuth35getOauthCaptureCompletionJavascript19jsonRPCResponseDataSS10Foundation0J0V_tF">getOauthCaptureCompletionJavascript(jsonRPCResponseData:)</a>
               </li>
             </ul>
           </li>
@@ -107,6 +118,36 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)OauthCapture"></a>
+                    <a name="//apple_ref/swift/Class/OauthCapture" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)OauthCapture">OauthCapture</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Class for the OauthCapture that will launch a webview for the specified auth URL, open an ASWebAuthenticationSession for a specified OEM, and process the redirect from Connect</p>
+
+                        <a href="Classes/OauthCapture.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">OauthCapture</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">WKScriptMessageHandler</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">OauthCapture</span><span class="p">:</span> <span class="kt">ASWebAuthenticationPresentationContextProviding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder"></a>
                     <a name="//apple_ref/swift/Class/SCUrlBuilder" class="dashAnchor"></a>
                     <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)SCUrlBuilder">SCUrlBuilder</a>
@@ -118,7 +159,7 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A builder used for generating Smartcar Connect authorization URLs.
-Use the built string with <code><a href="Classes/SmartcarAuth.html#/c:@M@SmartcarAuth@objc(cs)SmartcarAuth(im)launchAuthFlowWithUrl:viewController:">SmartcarAuth.launchAuthFlow(...)</a></code> in iOS 10 and under or <code>SmartcarAuth.launchWebAuthSession(...)</code> in iOS 11 and above
+Use the built string with `SmartcarAuth.launchAuthFlow(&hellip;)
 To see a full description of Smartcar Connect parameters, see the <a href="https://smartcar.com/api#smartcar-connect">Smartcar API Reference</a></p>
 
                         <a href="Classes/SCUrlBuilder.html" class="slightly-smaller">See more</a>
@@ -159,7 +200,6 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="kt">SmartcarAuth</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">SmartcarAuth</span><span class="p">:</span> <span class="kt">ASWebAuthenticationPresentationContextProviding</span></code></pre>
 
                         </div>
                       </div>
@@ -200,7 +240,7 @@ To see a full description of Smartcar Connect parameters, see the <a href="https
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2024 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2024-04-01)</p>
+          <p>&copy; 2024 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2024-09-17)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
