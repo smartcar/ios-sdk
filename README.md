@@ -7,13 +7,13 @@
 
 The SmartcarAuth iOS SDK makes it easy to integrate with Smartcar Connect from iOS.
 
-The SDK follows the best practices set out in [OAuth 2.0 for Native Apps](https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06) including using _SFSafariViewController_, _SFAuthenticationSession_, or _ASWebAuthenticationSession_ depending on iOS version for the authorization request. _UIWebView_ is explicitly not supported due to usability and security reasons.
+The SDK follows the best practices set out in [OAuth 2.0 for Native Apps](https://tools.ietf.org/html/draft-ietf-oauth-native-apps-06).
 
 ## Requirements
 
-SmartcarAuth supports iOS 10 and above.
+SmartcarAuth supports iOS 13 and above.
 
-iOS 10 uses the in-app browser tab pattern (via _SFSafariViewController_), iOS 11 presents the authentication webpage in Safari using _SFAuthenticationSession_, and iOS 12 and above uses a secure embedded webview (via _ASWebAuthenticationSession_).
+Smartcar Connect is presented in a webview in your application using the Smartcar iOS SDK.
 
 ## Installation
 
@@ -33,9 +33,6 @@ var smartcarSdk: SmartcarAuth? = nil
 ```
 
 Next, you will need to configure your redirect URI. Your redirect URI must follow this format: `<custom scheme>://<hostname>`. We suggest `"sc" + clientId + "://" + hostname`. 
-
-If you are supporting iOS 10 with your application, you will also need to register your custom URL scheme (`sc<clientId>`) in your `Info.plist`:
-![Info.plist](images/infoPlist.png)
 
 Then, initiate the SmartcarAuth object in the UIViewController.
 
@@ -57,38 +54,13 @@ let smartcar = appDelegate.smartcar
 // Generate a Connect URL
 let authUrl = smartcar.authUrlBuilder().build()
 
-// If you are developing for iOS 11 and above only, you can launch Connect without passing in a viewController
-smartcar.launchAuthFlow(url: authUrl)
-
-// If you are developing for iOS 10 and above, you will need to pass in a viewController
+// Pass in the generated Connect URL and a UIViewController
 smartcar.launchAuthFlow(url: authUrl, viewController: viewController)
 ```
 
 ## Handling the Redirect
 
-For iOS 11 and above, the callback URL with the authentication code (or error) is passed back to the application by the session, and the URL is passed to the completion handler and no further action to intercept the callback is required.
-
-For iOS 10, the Connect response is returned to the app via the iOS openURL app delegate method, so you need to pipe this through to the current authorization session.
-
-```swift
-/**
-	Intercepts callback from OAuth SafariView determined by the custom URI
- */
-func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    // Close the SFSafariViewController
-    window!.rootViewController?.presentedViewController?.dismiss(animated: true , completion: nil)
-
-    // Sends the URL to the current SmartcarAuth object which will
-    // process it and then call the completion handler.
-    if let sdk = smartcarSdk {
-        sdk.handleCallback(url: url)
-    }
-
-    // Your additional URL handling (if any) goes here.
-
-    return true
-}
-```
+For iOS 13 and above, the callback URL with the authentication code (or error) is automatically passed to the completion handler and no further action to intercept the callback is required.
 
 ## SDK Reference
 

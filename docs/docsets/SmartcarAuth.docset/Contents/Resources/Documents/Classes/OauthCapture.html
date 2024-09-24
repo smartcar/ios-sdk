@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>OauthCapture Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/OauthCapture" class="dashAnchor"></a>
+    <a title="OauthCapture Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SmartcarAuth 6.0.0 Docs</a> (68% documented)</p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SmartcarAuth Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        OauthCapture Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AuthorizationError.html">AuthorizationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AuthorizationError/ErrorType.html">– ErrorType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OauthCapture.html">OauthCapture</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SCUrlBuilder.html">SCUrlBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SmartcarAuth.html">SmartcarAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VehicleInfo.html">VehicleInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SCMode.html">SCMode</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12SmartcarAuth35getOauthCaptureCompletionJavascript19jsonRPCResponseDataSS10Foundation0J0V_tF">getOauthCaptureCompletionJavascript(jsonRPCResponseData:)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>OauthCapture</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">OauthCapture</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">WKScriptMessageHandler</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">OauthCapture</span><span class="p">:</span> <span class="kt">ASWebAuthenticationPresentationContextProviding</span></code></pre>
+
+                </div>
+              </div>
+            <p>Class for the OauthCapture that will launch a webview for the specified auth URL, open an ASWebAuthenticationSession for a specified OEM, and process the redirect from Connect</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)initWithViewController:authUrl:redirectUriHost:handleCallback:"></a>
+                    <a name="//apple_ref/swift/Method/init(viewController:authUrl:redirectUriHost:handleCallback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)initWithViewController:authUrl:redirectUriHost:handleCallback:">init(viewController:<wbr>authUrl:<wbr>redirectUriHost:<wbr>handleCallback:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Constructor for OauthCapture</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">authUrl</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">redirectUriHost</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">handleCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>viewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the UIViewController responsible for presenting Connect</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>authUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the Connect URL to open</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redirectUriHost</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>host of the redirect URI that was passed to SmartcarAuth</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handleCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback function from SmartcarAuth that verifies that no error occured during the OAuth process and extracts the auth code, state string, and virtualKeyUrl upon success. Invokes the completion function with either the code or an error (and state and/or virtualKeyUrl if included).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)webView:decidePolicyForNavigationAction:decisionHandler:"></a>
+                    <a name="//apple_ref/swift/Method/webView(_:decidePolicyFor:decisionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)webView:decidePolicyForNavigationAction:decisionHandler:">webView(_:<wbr>decidePolicyFor:<wbr>decisionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Listens to changes in the navigation to determine if the redirect from Connect has happened. If so, call the handleCallback function and close the webview</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">webView</span><span class="p">(</span><span class="n">_</span> <span class="nv">webView</span><span class="p">:</span> <span class="kt">WKWebView</span><span class="p">,</span> <span class="n">decidePolicyFor</span> <span class="nv">navigationAction</span><span class="p">:</span> <span class="kt">WKNavigationAction</span><span class="p">,</span> <span class="nv">decisionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">WKNavigationActionPolicy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)launchWebView"></a>
+                    <a name="//apple_ref/swift/Method/launchWebView()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)launchWebView">launchWebView()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Launches the webview to begin the Smartcar Connect flow</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">launchWebView</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)userContentController:didReceiveScriptMessage:"></a>
+                    <a name="//apple_ref/swift/Method/userContentController(_:didReceive:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)OauthCapture(im)userContentController:didReceiveScriptMessage:">userContentController(_:<wbr>didReceive:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Recieves the SmartcarSDK message when the custom JS injected into the webview is called by Connect. Launches the ASWebAuthenticationSession for login with the OEM.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">userContentController</span><span class="p">(</span><span class="n">_</span> <span class="nv">userContentController</span><span class="p">:</span> <span class="kt">WKUserContentController</span><span class="p">,</span> <span class="n">didReceive</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">WKScriptMessage</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@SmartcarAuth@objc(cs)OauthCapture(im)presentationAnchorForWebAuthenticationSession:"></a>
+                    <a name="//apple_ref/swift/Method/presentationAnchor(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@SmartcarAuth@objc(cs)OauthCapture(im)presentationAnchorForWebAuthenticationSession:">presentationAnchor(for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a default window to act as the presentation anchor for the authentication session</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">presentationAnchor</span><span class="p">(</span><span class="k">for</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">ASWebAuthenticationSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ASPresentationAnchor</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2024 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2024-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
