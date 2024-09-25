@@ -52,7 +52,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         self.queryItems.append(contentsOf: [
             URLQueryItem(name: "client_id", value: clientId),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "mode", value: connectMode)
+            URLQueryItem(name: "mode", value: connectMode),
+            URLQueryItem(name: "sdk_platform", value: "iOS")
         ])
 
         if let redirectUri = redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
