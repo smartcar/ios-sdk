@@ -26,22 +26,16 @@
 @objcMembers public class VehicleInfo: NSObject {
     var vin: String?
     var make: String?
-    var model: String?
-    var year: NSNumber?
     
     /**
     Constructor for the VehicleInfo
     - parameters:
         - vin: Optional, the VIN of the vehicle. Defaults to nil.
         - make: Optional, the make of the vehicle. Defaults to nil.
-        - model: Optional, the model of the vehicle. Defaults to nil.
-        - year: Optional, the year of the vehicle. Defaults to nil.
 
     */
-    public init(vin: String? = nil, make: String? = nil, model: String? = nil, year: NSNumber? = nil) {
+    public init(vin: String? = nil, make: String? = nil) {
         self.vin = vin
         self.make = make
-        self.model = model
-        self.year = year
     }
 }

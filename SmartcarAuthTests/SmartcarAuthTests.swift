@@ -97,6 +97,8 @@ class SmartcarAuthTests: XCTestCase {
             expect(err?.errorDescription).to(equal("User denied access to the requested scope of permissions."))
             expect(err?.type).to(equal(.accessDenied))
             expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
         })
         
         let urlString = redirectUri + "?error=access_denied&error_description=User%20denied%20access%20to%20the%20requested%20scope%20of%20permissions."
@@ -114,13 +116,13 @@ class SmartcarAuthTests: XCTestCase {
             expect(err?.errorDescription).to(equal("The user's vehicle is not compatible."))
             expect(err?.type).to(equal(.vehicleIncompatible))
             expect(err?.vehicleInfo?.make).to(equal(self.make))
-            expect(err?.vehicleInfo?.model).to(equal("Model 3"))
             expect(err?.vehicleInfo?.vin).to(equal(self.vin))
-            expect(err?.vehicleInfo?.year).to(equal(2019))
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
         
         })
 
-        let urlString = redirectUri + "?error=vehicle_incompatible&error_description=The%20user\'s%20vehicle%20is%20not%20compatible.&make=" + make + "&model=Model%203&year=2019&vin=" + vin
+        let urlString = redirectUri + "?error=vehicle_incompatible&error_description=The%20user\'s%20vehicle%20is%20not%20compatible.&make=" + make + "&vin=" + vin
         
         let url = URL(string: urlString)!
         
@@ -135,6 +137,8 @@ class SmartcarAuthTests: XCTestCase {
             expect(err?.errorDescription).to(equal("The user's subscription is invalid."))
             expect(err?.type).to(equal(.invalidSubscription))
             expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
         })
 
         let urlString = redirectUri + "?error=invalid_subscription&error_description=The%20user\'s%20subscription%20is%20invalid."
@@ -144,6 +148,102 @@ class SmartcarAuthTests: XCTestCase {
         smartcar.handleCallback(callbackUrl: url)
     }
     
+    func testHandleCallbackNoVehicles() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+
+            expect(err?.errorDescription).to(equal("User does not have any vehicles connected to this connected services account"))
+            expect(err?.type).to(equal(.noVehicles))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
+        })
+
+        let urlString = redirectUri + "?error=no_vehicles&error_description=User%20does%20not%20have%20any%20vehicles%20connected%20to%20this%20connected%20services%20account"
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+    
+    func testHandleCallbackUserExitedFlowUserManuallyReturnedToApplication() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+
+            expect(err?.errorDescription).to(equal("The user exited Connect before granting your application access"))
+            expect(err?.type).to(equal(.userExitedFlow))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
+        })
+
+        let urlString = redirectUri + "?error=user_manually_returned_to_application&error_description=The%20user%20exited%20Connect%20before%20granting%20your%20application%20access"
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+    
+    func testHandleCallbackUserExitedFlowUserCancelled() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+
+            expect(err?.errorDescription).to(equal("User cancelled or denied login at OEM's login screen"))
+            expect(err?.type).to(equal(.userExitedFlow))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
+        })
+
+        let urlString = redirectUri + "?error=user_cancelled&error_description=User%20cancelled%20or%20denied%20login%20at%20OEM%27s%20login%20screen"
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+
+    func testHandleCallbackConfigurationError() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+
+            expect(err?.errorDescription).to(equal("There has been an error in the configuration of your application."))
+            expect(err?.type).to(equal(.configurationError))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(equal("400"))
+            expect(err?.errorMessage).to(equal("You have entered a test mode VIN. Please enter a VIN that belongs to a real vehicle."))
+        })
+
+        let urlString = redirectUri + "?error=configuration_error&error_description=There%20has%20been%20an%20error%20in%20the%20configuration%20of%20your%20application.&status_code=400&error_message=You%20have%20entered%20a%20test%20mode%20VIN.%20Please%20enter%20a%20VIN%20that%20belongs%20to%20a%20real%20vehicle."
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+
+    func testHandleCallbackServerError() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(beNil())
+            expect(state).to(beNil())
+
+            expect(err?.errorDescription).to(equal("Unexpected server error. Please try again."))
+            expect(err?.type).to(equal(.serverError))
+            expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
+        })
+
+        let urlString = redirectUri + "?error=server_error&error_description=Unexpected%20server%20error.%20Please%20try%20again."
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+
+    
     func testHandleCallbackUnrecognizedError() {
         let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
             expect(code).to(beNil())
@@ -152,6 +252,8 @@ class SmartcarAuthTests: XCTestCase {
             expect(err?.errorDescription).to(equal("I'm an unidentified error."))
             expect(err?.type).to(equal(.unknownError))
             expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
         })
 
         let urlString = redirectUri + "?error=blargh&error_description=I\'m%20an%20unidentified%20error."
@@ -169,6 +271,8 @@ class SmartcarAuthTests: XCTestCase {
             expect(err?.errorDescription).to(beNil())
             expect(err?.type).to(equal(.missingQueryParameters))
             expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
         })
 
         let urlString = redirectUri
@@ -186,6 +290,8 @@ class SmartcarAuthTests: XCTestCase {
             expect(err?.errorDescription).to(beNil())
             expect(err?.type).to(equal(.missingAuthCode))
             expect(err?.vehicleInfo).to(beNil())
+            expect(err?.statusCode).to(beNil())
+            expect(err?.errorMessage).to(beNil())
         })
 
         let urlString = redirectUri + "?test=blah"
