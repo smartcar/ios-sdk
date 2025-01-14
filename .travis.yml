@@ -36,5 +36,7 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: pod trunk push SmartcarAuth.podspec --allow-warnings
+    edge:
+          branch: v2.0.5-beta
     on:
       branch: master
