@@ -112,12 +112,6 @@ Smartcar Authentication SDK for iOS written in Swift 5.
             if let make = query.filter({$0.name == "make"}).first?.value {
                 vehicle?.make = make
             }
-            if let model = query.filter({$0.name == "model"}).first?.value {
-                vehicle?.model = model
-            }
-            if let year = query.filter({$0.name == "year"}).first?.value {
-                vehicle?.year = NSNumber(value: Int(year)!)
-            }
         } else {
             vehicle = nil
         }
@@ -133,6 +127,16 @@ Smartcar Authentication SDK for iOS written in Swift 5.
                     authorizationError = AuthorizationError(type: .invalidSubscription, errorDescription: errorDescription)
                 case "access_denied":
                     authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription)
+                case "no_vehicles":
+                    authorizationError = AuthorizationError(type: .noVehicles, errorDescription: errorDescription)
+                case "configuration_error":
+                    let statusCode = query.filter({$0.name == "status_code"}).first?.value;
+                    let errorMessage = query.filter({$0.name == "error_message"}).first?.value;
+                    authorizationError = AuthorizationError(type: .configurationError, errorDescription: errorDescription, statusCode: statusCode, errorMessage: errorMessage)
+                case "server_error":
+                    authorizationError = AuthorizationError(type: .serverError, errorDescription: errorDescription)
+                case "user_manually_returned_to_application", "user_cancelled":
+                    authorizationError = AuthorizationError(type: .userExitedFlow, errorDescription: errorDescription)
                 default:
                     authorizationError = AuthorizationError(type: .unknownError, errorDescription: errorDescription)
             }
