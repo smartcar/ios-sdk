@@ -35,6 +35,7 @@ deploy:
 
   - provider: script
     skip_cleanup: true
-    script: rvm use $TRAVIS_RUBY_VERSION && pod trunk push SmartcarAuth.podspec --allow-warnings
+    dpl_version: 1.10.16
+    script: pod trunk push SmartcarAuth.podspec --allow-warnings
     on:
       branch: master
