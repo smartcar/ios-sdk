@@ -26,6 +26,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
+  - dpl_version: 1.10.16
 
   - provider: script
     skip_cleanup: true
@@ -35,7 +36,6 @@ deploy:
 
   - provider: script
     skip_cleanup: true
-    dpl_version: 1.10.16
     script: pod trunk push SmartcarAuth.podspec --allow-warnings
     on:
       branch: master
