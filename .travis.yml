@@ -26,16 +26,16 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
-  - dpl_version: 1.10.16
-
   - provider: script
+    dpl_version: 1.10.16
     skip_cleanup: true
     script: echo -e "machine github.com\n  login $GH_TOKEN" >> ~/.netrc && git push origin v$pod_spec_tag
     on:
       branch: master
-
   - provider: script
+    dpl_version: 1.10.16
     skip_cleanup: true
     script: pod trunk push SmartcarAuth.podspec --allow-warnings
     on:
       branch: master
+      
