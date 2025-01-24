@@ -54,7 +54,7 @@ import AuthenticationServices
         
         let webviewConfiguration = WKWebViewConfiguration()
         webviewConfiguration.userContentController.add(self, name: "SmartcarSDK")
-        self.webView = WKWebView(frame: CGRect(x: 0, y:50, width: Int((viewController.view.frame.width)), height: Int((viewController.view.frame.height))), configuration: webviewConfiguration)
+        self.webView = WKWebView(frame: CGRect(x: 0, y:0, width: Int((viewController.view.frame.width)), height: Int((viewController.view.frame.height))), configuration: webviewConfiguration)
         self.webView.scrollView.contentInsetAdjustmentBehavior = .never
         self.webView.navigationDelegate = self
         
