@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		177CAA072D440FE800548C1F /* ConnectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177CAA062D440FE200548C1F /* ConnectController.swift */; };
 		278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B07A82248E2DF00474A10 /* VehicleInfo.swift */; };
 		571384A68465D9DBA4CE0F21 /* Pods_SmartcarAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8044801E941BD0B7B6F71B12 /* Pods_SmartcarAuth.framework */; };
-		94BA530D2C997C9B00A39782 /* OauthCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530C2C997C9B00A39782 /* OauthCapture.swift */; };
+		94BA530D2C997C9B00A39782 /* OAuthCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530C2C997C9B00A39782 /* OAuthCapture.swift */; };
 		94BA530F2C997D6D00A39782 /* RPCInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BA530E2C997D6D00A39782 /* RPCInterface.swift */; };
 		94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D43EB22AF067BD00F5ABAB /* SCMode.swift */; };
 		A644ADEA238861F60036CE46 /* SCUrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */; };
@@ -37,12 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		177CAA062D440FE200548C1F /* ConnectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectController.swift; sourceTree = "<group>"; };
 		278B07A82248E2DF00474A10 /* VehicleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfo.swift; sourceTree = "<group>"; };
 		41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.release.xcconfig"; sourceTree = "<group>"; };
 		8044801E941BD0B7B6F71B12 /* Pods_SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		825D4076C2B456C94011615C /* Pods_SmartcarAuthTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuthTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
-		94BA530C2C997C9B00A39782 /* OauthCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthCapture.swift; sourceTree = "<group>"; };
+		94BA530C2C997C9B00A39782 /* OAuthCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCapture.swift; sourceTree = "<group>"; };
 		94BA530E2C997D6D00A39782 /* RPCInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCInterface.swift; sourceTree = "<group>"; };
 		94D43EB22AF067BD00F5ABAB /* SCMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMode.swift; sourceTree = "<group>"; };
 		A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilder.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		F8F928831E2B2F6A009F07E5 /* SmartcarAuth */ = {
 			isa = PBXGroup;
 			children = (
+				177CAA062D440FE200548C1F /* ConnectController.swift */,
 				F85EC7701E4144A8003575F6 /* AuthorizationError.swift */,
 				F8F928851E2B2F6A009F07E5 /* Info.plist */,
 				F8F928841E2B2F6A009F07E5 /* SmartcarAuth.h */,
@@ -134,7 +137,7 @@
 				278B07A82248E2DF00474A10 /* VehicleInfo.swift */,
 				A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */,
 				94D43EB22AF067BD00F5ABAB /* SCMode.swift */,
-				94BA530C2C997C9B00A39782 /* OauthCapture.swift */,
+				94BA530C2C997C9B00A39782 /* OAuthCapture.swift */,
 				94BA530E2C997D6D00A39782 /* RPCInterface.swift */,
 			);
 			path = SmartcarAuth;
@@ -293,10 +296,20 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CwlCatchException/CwlCatchException.framework",
+				"${BUILT_PRODUCTS_DIR}/CwlCatchExceptionSupport/CwlCatchExceptionSupport.framework",
+				"${BUILT_PRODUCTS_DIR}/CwlMachBadInstructionHandler/CwlMachBadInstructionHandler.framework",
+				"${BUILT_PRODUCTS_DIR}/CwlPosixPreconditionTesting/CwlPosixPreconditionTesting.framework",
+				"${BUILT_PRODUCTS_DIR}/CwlPreconditionTesting/CwlPreconditionTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CwlCatchException.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CwlCatchExceptionSupport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CwlMachBadInstructionHandler.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CwlPosixPreconditionTesting.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CwlPreconditionTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,10 +342,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				177CAA072D440FE800548C1F /* ConnectController.swift in Sources */,
 				278B07A92248E2E000474A10 /* VehicleInfo.swift in Sources */,
 				A644ADEA238861F60036CE46 /* SCUrlBuilder.swift in Sources */,
 				94BA530F2C997D6D00A39782 /* RPCInterface.swift in Sources */,
-				94BA530D2C997C9B00A39782 /* OauthCapture.swift in Sources */,
+				94BA530D2C997C9B00A39782 /* OAuthCapture.swift in Sources */,
 				94D43EB32AF067BD00F5ABAB /* SCMode.swift in Sources */,
 				F85EC7711E4144A8003575F6 /* AuthorizationError.swift in Sources */,
 				F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */,
