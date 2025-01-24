@@ -71,6 +71,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode, mode: mode)
     }
 
+    var oauthCapture: ConnectController?
     /**
      Starts the launch of Smartcar Connect.
      
@@ -85,8 +86,8 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         let redirectUriHost = (redirectUrl?.host!)!
         
 
-        let oauthCapture = OauthCapture(viewController: viewController, authUrl: authUrl, redirectUriHost: redirectUriHost, handleCallback: handleCallback)
-        oauthCapture.launchWebView()
+        oauthCapture = ConnectController(viewController: viewController, authUrl: authUrl, redirectUriHost: redirectUriHost, handleCallback: handleCallback)
+        oauthCapture!.launchWebView()
     }
     
     /**
