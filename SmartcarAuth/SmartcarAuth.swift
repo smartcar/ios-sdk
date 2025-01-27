@@ -71,7 +71,6 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope, testMode: testMode, mode: mode)
     }
 
-    var oauthCapture: ConnectController?
     /**
      Starts the launch of Smartcar Connect.
      
@@ -84,12 +83,11 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         let redirectUrl = URL(string: redirectUri)
         let redirectUriScheme = redirectUrl?.scheme
         let redirectUriHost = (redirectUrl?.host!)!
-        
 
-        oauthCapture = ConnectController(viewController: viewController, authUrl: authUrl, redirectUriHost: redirectUriHost, handleCallback: handleCallback)
-        oauthCapture!.launchWebView()
+        let connectVC = ConnectController(authUrl: authUrl, redirectUriHost: redirectUriHost, handleCallback: handleCallback)
+        viewController.present(connectVC, animated: true)
     }
-    
+
     /**
     Authorization callback function. Verifies that no error occured during the OAuth process and extracts the auth code, state string, and virtualKeyUrl upon success. Invokes the completion function with either the code or an error (and state and/or virtualKeyUrl if included).
     - parameters:
