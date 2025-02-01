@@ -321,7 +321,7 @@ class SmartcarAuthTests: XCTestCase {
 
         smartcar.launchAuthFlow(url: authUrl, viewController: vc)
 
-        expect(vc.presentCount).to(equal(0))
+        expect(vc.presentCount).to(equal(1))
     }
 
 }

@@ -28,7 +28,7 @@ import UIKit
 
 /**
  Responsible for:
- 
+
  - Injecting JavaScript that lets Connect communicate back to the native SDK (via `SmartcarSDK.sendMessage`).
  - Responding to the JS messages (WKScriptMessageHandler).
  - Starting an ASWebAuthenticationSession for the OEM login flow.
@@ -36,10 +36,10 @@ import UIKit
  */
 @objcMembers
 public class OAuthCapture: NSObject, WKScriptMessageHandler {
-    
+
     private weak var webView: WKWebView?
     private var session: Session?
-    
+
     /**
      Creates an instance of `OAuthCapture` which:
        - Sets up the JS injection (`window.SmartcarSDK.sendMessage`) in the provided WKWebView.
@@ -48,61 +48,56 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
     public init(webView: WKWebView) {
         self.webView = webView
         super.init()
-        
+
         // Add the message handler so we can receive `window.webkit.messageHandlers.SmartcarSDK.postMessage(...)`
         webView.configuration.userContentController.add(self, name: "SmartcarSDK")
-        
+
         // Inject JS into the webview
-        let javascript = WKUserScript(
-            source: getJavascript(),
-            injectionTime: .atDocumentStart,
-            forMainFrameOnly: false
-        )
-        webView.configuration.userContentController.addUserScript(javascript)
+        injectSdkShimJavascript(webView: webView, channelName: "SmartcarSDK")
     }
-    
+
     /**
      Required delegate function to handle messages posted from JavaScript code
      (`SmartcarSDK.sendMessage`).
-     
+
      This will:
       - Parse the JSON-RPC request from JS.
       - Start the OEM login flow using ASWebAuthenticationSession.
      */
     public func userContentController(_ userContentController: WKUserContentController,
                                       didReceive message: WKScriptMessage) {
-        
+
         guard let bodyString = message.body as? String,
               let rpcObjectData = bodyString.data(using: .utf8),
               let rpcObject = try? JSONDecoder().decode(RPCRequestObject.self, from: rpcObjectData)
         else {
             return
         }
-        
+
         // OEM authorize URL
         guard let authorizeURL = URL(string: rpcObject.params.authorizeURL),
               let interceptPrefixURL = URL(string: rpcObject.params.interceptPrefix)
         else {
             return
         }
-        
+
         // Use the intercept prefix's scheme for the callbackURLScheme
         let interceptPrefixScheme = interceptPrefixURL.scheme
-        
+
         // Start an ASWebAuthenticationSession to handle the OEM login
         let authSession = ASWebAuthenticationSession(url: authorizeURL,
                                                      callbackURLScheme: interceptPrefixScheme,
                                                      completionHandler: webAuthSessionCompletion)
-        
+
         // Required for iOS 13+ to present the session
         if #available(iOS 13.0, *) {
             authSession.presentationContextProvider = self
         }
-        
+
         self.session = authSession
         self.session?.start()
     }
-    
+
     /**
      The completion handler for the ASWebAuthenticationSession.
      If successful, a success JSON-RPC response is sent back to the web context.
@@ -113,7 +108,7 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
         guard error == nil, let callback = callbackURL else {
             let canceledLoginCode = ASWebAuthenticationSessionError.canceledLogin.rawValue
             let jsonRPCError: OauthError
-            
+
             switch error?._code {
             case canceledLoginCode:
                 // The user canceled the login
@@ -122,7 +117,7 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
                 // Some other error
                 jsonRPCError = OauthError(code: -32603, message: "Internal JSONRPC error")
             }
-            
+
             let jsonRPCErrorResponse = JSONRPCErrorResponse(error: jsonRPCError)
             if let data = try? JSONEncoder().encode(jsonRPCErrorResponse),
                let webView = self.webView {
@@ -133,11 +128,11 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
             }
             return
         }
-        
+
         // If successful, return the redirect URL in a JSON-RPC success response
         let result = OauthResult(returnUri: callback.absoluteString)
         let jsonRPCResponse = JSONRPCResponse(result: result)
-        
+
         if let data = try? JSONEncoder().encode(jsonRPCResponse),
            let webView = self.webView {
             webView.evaluateJavaScript(
@@ -145,21 +140,6 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
                 completionHandler: nil
             )
         }
-    }
-    
-    /**
-     Returns a JS snippet that creates a global `SmartcarSDK` object
-     with a `sendMessage` method to pass data from JS -> iOS.
-     */
-    private func getJavascript() -> String {
-        return """
-        (() => {
-            window.SmartcarSDK = {};
-            window.SmartcarSDK.sendMessage = (rpcString) => {
-                window.webkit.messageHandlers.SmartcarSDK.postMessage(rpcString);
-            };
-        })();
-        """
     }
 }
 

@@ -1,9 +1,9 @@
 use_frameworks!
 
 target 'SmartcarAuth' do
-
+    pod 'SmartcarSDKShared', :path => './android-sdk/smartcar-auth'
     target 'SmartcarAuthTests' do
-        inherit! :search_paths
+        inherit! :complete
         pod 'Nimble'
     end
 end
