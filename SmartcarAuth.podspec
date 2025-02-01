@@ -13,6 +13,9 @@ Pod::Spec.new do |s|
   s.author           = { 'Smartcar Inc.' => 'hello@smartcar.com' }
   s.source           = { :git => 'https://github.com/smartcar/ios-sdk.git', :tag => "v#{s.version}" }
 
+
+  s.vendored_frameworks      = 'multiplatform-library-template/library/build/cocoapods/framework/MyFramework.framework'
+
   s.ios.deployment_target = '13.0'
   s.source_files = 'SmartcarAuth/**/*.swift'
   s.swift_version = '5.0'

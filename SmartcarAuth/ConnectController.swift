@@ -23,6 +23,7 @@
 import Foundation
 import WebKit
 import UIKit
+import MyFramework
 
 /**
  A view controller responsible for:
@@ -41,6 +42,7 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
 
     // An instance of `OAuthCapture` which handles JS messaging and OEM login flow.
     private var oauthCapture: OAuthCapture?
+    private var bleService: MyFramework.BLEService?
 
 
     /**
@@ -92,6 +94,14 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         // Instantiate OAuthCapture (which handles script messaging + OEM flows)
         oauthCapture = OAuthCapture(webView: webView)
         
+        // Set up BLEService
+        let webViewHandler = MyFramework.WebViewBridgeImpl(
+            webView: webView,
+            interfaceName: "SmartcarSDKBLE"
+        )
+        bleService = MyFramework.BLEService(webView: webViewHandler)
+        injectSdkShimJavascript(webView: webView, channelName: "SmartcarSDKBLE")
+        
         // Start web view
         let request = URLRequest(url: authUrl)
         webView.load(request)
@@ -120,5 +130,11 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         
         // Dismiss the ConnectController
         self.dismiss(animated: true, completion: nil)
+    }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        // Destroy BLE service
+        bleService?.dispose()
     }
 }

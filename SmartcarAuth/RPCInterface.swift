@@ -20,6 +20,8 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import WebKit
+
 struct RPCRequestObjectParams: Codable {
     var authorizeURL: String
     var interceptPrefix: String
@@ -64,4 +66,28 @@ public func getOauthCaptureCompletionJavascript(jsonRPCResponseData: Data) -> St
     return """
         dispatchEvent(new CustomEvent('SmartcarSDKResponse', { detail: JSON.parse('\(jsonRPCResponseString!)') }))
     """
+}
+
+/**
+ Returns a JS snippet that creates a global `SmartcarSDK` object
+ with a `sendMessage` method to pass data from JS -> iOS.
+ */
+public func getSdkShimJavascript(channelName: String) -> String {
+    return """
+    (() => {
+        window.\(channelName) = {};
+        window.\(channelName).sendMessage = (rpcString) => {
+            window.webkit.messageHandlers.\(channelName).postMessage(rpcString);
+        };
+    })();
+    """
+}
+
+public func injectSdkShimJavascript(webView: WKWebView, channelName: String) {
+    let javascript = WKUserScript(
+        source: getSdkShimJavascript(channelName: channelName),
+        injectionTime: .atDocumentStart,
+        forMainFrameOnly: false
+    )
+    webView.configuration.userContentController.addUserScript(javascript)
 }

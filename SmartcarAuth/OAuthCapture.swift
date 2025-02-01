@@ -53,12 +53,7 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
         webView.configuration.userContentController.add(self, name: "SmartcarSDK")
         
         // Inject JS into the webview
-        let javascript = WKUserScript(
-            source: getJavascript(),
-            injectionTime: .atDocumentStart,
-            forMainFrameOnly: false
-        )
-        webView.configuration.userContentController.addUserScript(javascript)
+        injectSdkShimJavascript(webView: webView, channelName: "SmartcarSDK")
     }
     
     /**
@@ -145,21 +140,6 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
                 completionHandler: nil
             )
         }
-    }
-    
-    /**
-     Returns a JS snippet that creates a global `SmartcarSDK` object
-     with a `sendMessage` method to pass data from JS -> iOS.
-     */
-    private func getJavascript() -> String {
-        return """
-        (() => {
-            window.SmartcarSDK = {};
-            window.SmartcarSDK.sendMessage = (rpcString) => {
-                window.webkit.messageHandlers.SmartcarSDK.postMessage(rpcString);
-            };
-        })();
-        """
     }
 }
 
