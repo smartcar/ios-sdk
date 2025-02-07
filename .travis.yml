@@ -25,25 +25,21 @@ script:
   # - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 75 --only_project_targets
 
 after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+before_deploy:
   # create tag
   - git config --global user.email "ci@smartcar.com"
   - git config --global user.name "Travis CI User"
   - export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\s*s.version' | sed "s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\(.*\)'/\1/g")
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then git tag -a v$pod_spec_tag -m "Travis Generated Tag"; fi
+  - git tag -a v$pod_spec_tag -m "Travis Generated Tag"
 
   # create archive
   - git add Frameworks
   - git archive --format=tar.gz -o release.tar.gz $(git write-tree)
 
-  - bash <(curl -s https://codecov.io/bash)
-
 deploy:
-  - provider: script
-    dpl_version: 1.10.16
-    skip_cleanup: true
-    script: echo -e "machine github.com\n  login $GH_TOKEN" >> ~/.netrc && git push origin v$pod_spec_tag
-    on:
-      branch: master
+  # releases will push the tag
   - provider: releases
     dpl_version: 1.10.16
     api_key: $GH_TOKEN
