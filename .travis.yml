@@ -46,7 +46,7 @@ deploy:
     file: "release.tar.gz"
     skip_cleanup: true
     on:
-      branch: master
+      branch: ble-support
   - provider: script
     dpl_version: 1.10.16
     skip_cleanup: true
