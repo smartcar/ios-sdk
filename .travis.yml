@@ -12,6 +12,9 @@ before_install:
   - gem install xcov
   - gem install cocoapods
 
+# override install command
+install: true
+
 script:
   - ./android-sdk/gradlew podPublishReleaseXCFramework
   - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
