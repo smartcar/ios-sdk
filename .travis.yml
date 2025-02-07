@@ -8,33 +8,33 @@ git:
   submodules: true
 
 before_install:
-
   - gem install xcov
   - gem install cocoapods
 
-# override install command
-install: true
+install:
+  - cd ./android-sdk
+  - ./gradlew generateDummyFramework podPublishReleaseXCFramework
+  - cd $TRAVIS_BUILD_DIR
+  - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
+  - pod install
 
 script:
-  - ./android-sdk/gradlew podPublishReleaseXCFramework
-  - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
   - pod lib lint --verbose --allow-warnings
-  - git add Frameworks
-  - git archive --format=tar.gz -o release.tar.gz $(git write-tree)
-
-  - ./android-sdk/gradlew generateDummyFramework
-  - pod install
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=EBFABEDC-FB85-45BE-BC9F-8C6D6A1773ED,OS=16.0' build test
   # - xcov -w SmartcarAuth.xcworkspace -s SmartcarAuth -m 75 --only_project_targets
 
+after_success:
   # create tag
   - git config --global user.email "ci@smartcar.com"
   - git config --global user.name "Travis CI User"
   - export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\s*s.version' | sed "s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\(.*\)'/\1/g")
   - if [ "$TRAVIS_BRANCH" = "master" ]; then git tag -a v$pod_spec_tag -m "Travis Generated Tag"; fi
 
-after_success:
+  # create archive
+  - git add Frameworks
+  - git archive --format=tar.gz -o release.tar.gz $(git write-tree)
+
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
