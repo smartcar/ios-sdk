@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/smartcar/ios-sdk'
   s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author           = { 'Smartcar Inc.' => 'hello@smartcar.com' }
-  s.source           = { :http => "https://github.com/smartcar/ios-sdk/releases/v#{s.version}/release.zip" }
+  s.source           = { :http => "https://github.com/smartcar/ios-sdk/releases/download/v#{s.version}/release.tar.gz" }
 
 
   s.vendored_frameworks      = 'Frameworks/*.framework', 'Frameworks/*.xcframework'

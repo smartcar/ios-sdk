@@ -12,9 +12,9 @@ before_install:
   - gem install cocoapods
 
 install:
-  - cd ./android-sdk
+  - pushd ./android-sdk
   - ./gradlew generateDummyFramework podPublishReleaseXCFramework
-  - cd $TRAVIS_BUILD_DIR
+  - popd
   - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
   - pod install
 
