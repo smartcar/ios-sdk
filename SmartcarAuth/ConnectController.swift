@@ -23,7 +23,7 @@
 import Foundation
 import WebKit
 import UIKit
-import MyFramework
+import SmartcarFramework
 
 /**
  A view controller responsible for:
@@ -42,7 +42,7 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
 
     // An instance of `OAuthCapture` which handles JS messaging and OEM login flow.
     private var oauthCapture: OAuthCapture?
-    private var bleService: MyFramework.BLEService?
+    private var bleService: SmartcarFramework.BLEService?
 
 
     /**
@@ -95,11 +95,12 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         oauthCapture = OAuthCapture(webView: webView)
         
         // Set up BLEService
-        let webViewHandler = MyFramework.WebViewBridgeImpl(
+        let webViewHandler = SmartcarFramework.WebViewBridgeImpl(
             webView: webView,
             interfaceName: "SmartcarSDKBLE"
         )
-        bleService = MyFramework.BLEService(webView: webViewHandler)
+        let contextBridge = SmartcarFramework.ContextBridgeImpl()
+        bleService = SmartcarFramework.BLEService(context: contextBridge, webView: webViewHandler)
         injectSdkShimJavascript(webView: webView, channelName: "SmartcarSDKBLE")
         
         // Start web view

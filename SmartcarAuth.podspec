@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SmartcarAuth'
-  s.version          = '6.1.4'
+  s.version          = '6.2.0-dev'
   s.summary          = 'Smartcar Authentication SDK for iOS written in Swift 5.'
 
   s.description      = <<-DESC
@@ -11,10 +11,10 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/smartcar/ios-sdk'
   s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author           = { 'Smartcar Inc.' => 'hello@smartcar.com' }
-  s.source           = { :git => 'https://github.com/smartcar/ios-sdk.git', :tag => "v#{s.version}" }
+  s.source           = { :http => "https://github.com/smartcar/ios-sdk/releases/v#{s.version}/release.zip" }
 
 
-  s.vendored_frameworks      = 'multiplatform-library-template/library/build/cocoapods/framework/MyFramework.framework'
+  s.vendored_frameworks      = 'Frameworks/*.framework', 'Frameworks/*.xcframework'
 
   s.ios.deployment_target = '13.0'
   s.source_files = 'SmartcarAuth/**/*.swift'
