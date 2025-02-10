@@ -13,9 +13,12 @@ before_install:
 
 install:
   - pushd ./android-sdk
+  # generateDummyFramework is needed for `pod install`
+  # podPublishReleaseXCFramework builds XCFramework binary which is shipped in pod release archive and used by `pod lib lint`
   - ./gradlew generateDummyFramework podPublishReleaseXCFramework
   - popd
   - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
+  # install dependencies for `xcodebuild`
   - pod install
 
 script:
