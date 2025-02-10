@@ -1,4 +1,4 @@
 [submodule "android-sdk"]
 	path = android-sdk
 	url = https://github.com/smartcar/android-sdk.git
-	branch = mpp
+	branch = master
