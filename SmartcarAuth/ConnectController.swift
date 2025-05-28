@@ -123,7 +123,15 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
     public func webView(_ webView: WKWebView,
                         decidePolicyFor navigationAction: WKNavigationAction,
                         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
+        // Intercept sc-sdk URLs and open system page
+        if let url = navigationAction.request.url, url.absoluteString.hasPrefix("sc-sdk://") {
+            // Extract the part after the scheme
+            let systemPage = String(url.absoluteString.dropFirst("sc-sdk://".count))
+            SmartcarFramework.ContextBridgeImpl().openSystemPage(page: systemPage)
+            decisionHandler(.cancel)
+            return
+        }
+
         guard let url = navigationAction.request.url,
               let host = url.host,
               host == self.redirectUriHost else {
