@@ -81,7 +81,14 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
-        
+
+        // Enable inspection for debug builds
+        #if DEBUG
+        if #available(iOS 16.4, *) {
+          webView.isInspectable = true
+        }
+        #endif
+
         // Constrain the webView to the safe area
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -137,5 +144,9 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         super.viewDidDisappear(animated)
         // Destroy BLE service
         bleService?.dispose()
+        // Tear down WebView
+        webView?.stopLoading()
+        webView?.navigationDelegate = nil
+        webView?.configuration.userContentController.removeAllScriptMessageHandlers()
     }
 }
