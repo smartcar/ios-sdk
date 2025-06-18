@@ -17,6 +17,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Foundation
+
 /**
 * A builder used for generating Smartcar Connect authorization URLs.
 * Use the built string with `SmartcarAuth.launchAuthFlow(...)

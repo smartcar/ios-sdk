@@ -20,6 +20,8 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import Foundation
+
 struct RPCRequestObjectParams: Codable {
     var authorizeURL: String
     var interceptPrefix: String

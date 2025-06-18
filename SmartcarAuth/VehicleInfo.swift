@@ -20,6 +20,8 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import Foundation
+
 /**
  VehicleInfo class is used to describe the vehicle information that may be returned via query parameters in the case of authentication failure.
  */

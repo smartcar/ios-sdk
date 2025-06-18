@@ -20,6 +20,8 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import Foundation
+
 /**
 * Error that gets created when the authorization flow exits with an error.
 */
