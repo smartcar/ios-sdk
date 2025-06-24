@@ -1,0 +1,19 @@
+- pipeline: CI
+  events:
+  - type: PUSH
+    refs:
+    - refs/heads/*
+  fail_on_prepare_env_warning: true
+  actions:
+  - action: Xcode build
+    type: NATIVE_BUILD_MAC
+    commands:
+    - pod install
+    - pod lib lint --verbose --allow-warnings
+    - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - "xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=6832C055-BF2B-4F95-9FA9-2608894D9F6C,OS=18.1' build test"
+    - ""
+    shell: BASH
+    pre_start_simulators:
+    - iPhone 16 Pro Max
+    xcode_version: 16.1.0
