@@ -8,6 +8,14 @@
   - action: Xcode build
     type: NATIVE_BUILD_MAC
     commands:
+    - brew update
+    - brew install --cask temurin@21
+    - ""
+    - pushd ./android-sdk
+    - ./gradlew generateDummyFramework podPublishReleaseXCFramework
+    - popd
+    - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
+    - ""
     - pod install
     - pod lib lint --verbose --allow-warnings
     - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO

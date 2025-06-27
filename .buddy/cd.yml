@@ -14,9 +14,18 @@
   - action: Xcode build
     type: NATIVE_BUILD_MAC
     commands:
+    - brew update
+    - brew install --cask temurin@21
+    - ""
+    - pushd ./android-sdk
+    - ./gradlew generateDummyFramework podPublishReleaseXCFramework
+    - popd
+    - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
+    - ""
     - pod install
     - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
     - ""
+    - git add Frameworks
     - git archive --format=zip -o release.zip $(git write-tree)
     - "export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\\s*s.version' | sed \"s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\\(.*\\)'/\\1/g\")"
     - ""
@@ -35,8 +44,7 @@
   - action: CocoaPods publish
     type: NATIVE_BUILD_MAC
     commands:
-    - pod trunk push SmartcarAuth.podspec --allow-warnings
-    - ""
+    - "pod trunk push SmartcarAuth.podspec --allow-warnings"
     shell: BASH
     xcode_version: 16.1.0
     vm_from_prev_action: true
