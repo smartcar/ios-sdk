@@ -1,0 +1,43 @@
+- pipeline: cd
+  name: CD
+  events:
+  - type: PUSH
+    refs:
+    - refs/heads/master
+  fail_on_prepare_env_warning: true
+  variables:
+  - key: pod_spec_tag
+    type: VAR
+    settable: RUN_ONLY
+    description: version extracted from podspec
+  actions:
+  - action: Xcode build
+    type: NATIVE_BUILD_MAC
+    commands:
+    - pod install
+    - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - ""
+    - git archive --format=zip -o release.zip $(git write-tree)
+    - "export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\\s*s.version' | sed \"s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\\(.*\\)'/\\1/g\")"
+    - ""
+    shell: BASH
+    xcode_version: 16.1.0
+  - action: GitHub Release
+    type: GIT_HUB_RELEASE
+    integration: ios_sdk_release
+    organization: smartcar
+    repository: ios-sdk
+    tag_name: v$pod_spec_tag
+    target_commitish: $BUDDY_RUN_COMMIT
+    assets:
+    - source_path: /release.zip
+      label: ""
+  - action: CocoaPods publish
+    type: NATIVE_BUILD_MAC
+    commands:
+    - pod trunk push SmartcarAuth.podspec --allow-warnings
+    - ""
+    shell: BASH
+    xcode_version: 16.1.0
+    vm_from_prev_action: true
+    vm_action_name: Xcode build

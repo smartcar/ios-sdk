@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/smartcar/ios-sdk'
   s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author           = { 'Smartcar Inc.' => 'hello@smartcar.com' }
-  s.source           = { :git => 'https://github.com/smartcar/ios-sdk.git', :tag => "v#{s.version}" }
+  s.source           = { :http => "https://github.com/smartcar/ios-sdk/releases/download/v#{s.version}/release.zip" }
 
   s.ios.deployment_target = '13.0'
   s.source_files = 'SmartcarAuth/**/*.swift'
