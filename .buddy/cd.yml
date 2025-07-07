@@ -33,13 +33,11 @@
     - source_path: /release.zip
       label: ""
   - action: CocoaPods publish
-    type: BUILD
-    docker_image_name: library/ruby
-    docker_image_tag: 3.4.1
-    execute_commands:
-    - gem install cocoapods
-    - pod trunk push SmartcarAuth.podspec --allow-root --allow-warnings
+    type: NATIVE_BUILD_MAC
+    commands:
+    - pod trunk push SmartcarAuth.podspec --allow-warnings
     - ""
-    cached_dirs:
-    - /usr/local/bundle
     shell: BASH
+    xcode_version: 16.1.0
+    vm_from_prev_action: true
+    vm_action_name: Xcode build
