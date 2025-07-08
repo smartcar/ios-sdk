@@ -6,6 +6,9 @@
     - refs/heads/master
   fail_on_prepare_env_warning: true
   variables:
+  - key: SPM_RELEASE_COMMIT
+    type: VAR
+    settable: RUN_ONLY
   - key: VERSION_TAG
     type: VAR
     settable: RUN_ONLY
@@ -48,20 +51,32 @@
     - envsubst < Package.swift.tmpl > Package.swift
     - git add Package.swift
     - git commit -m"Release version $VERSION_TAG"
-    - ""
-    - "# Push tag"
-    - git tag -a $VERSION_TAG -m "Buddy Generated Tag"
-    - git push origin $VERSION_TAG
+    - export SPM_RELEASE_COMMIT=$(git rev-parse HEAD)
     - ""
     shell: BASH
     xcode_version: 16.1.0
+  - action: Push Git Tags
+    type: BUILD 
+    docker_image_name: node
+    docker_image_tag: 20
+    execute_commands:
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/smartcar_ci_travis_04_15_2021
+    - ssh-keyscan github.com >> /root/.ssh/known_hosts
+    - git config --global user.email "ci@smartcar.com"
+    - git config --global user.name "Buddy CI User"
+    - git config remote.$BUDDY_REPO_SLUG.url || git remote add $BUDDY_REPO_SLUG $BUDDY_REPO_SSH_URL.git
+    - git tag -af $VERSION_TAG -m "Buddy Generated Tag"
+    - git push $BUDDY_REPO_SLUG $VERSION_TAG
+    shell: BASH
   - action: GitHub Release
     type: GIT_HUB_RELEASE
     integration: ios_sdk_release
     organization: smartcar
     repository: ios-sdk
     tag_name: $VERSION_TAG
-    target_commitish: $BUDDY_RUN_COMMIT
+    target_commitish: $SPM_RELEASE_COMMIT
+    release_name: $VERSION_TAG
     assets:
     - source_path: /release.zip
       label: ""
