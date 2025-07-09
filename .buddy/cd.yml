@@ -6,31 +6,81 @@
     - refs/heads/master
   fail_on_prepare_env_warning: true
   variables:
-  - key: pod_spec_tag
+  - key: SPM_RELEASE_COMMIT
+    type: VAR
+    settable: RUN_ONLY
+  - key: VERSION_TAG
     type: VAR
     settable: RUN_ONLY
     description: version extracted from podspec
+  - key: XCFRAMEWORK_CHECKSUM
+    type: VAR
+    settable: RUN_ONLY
+    description: checksum for SPM framework zip
   actions:
   - action: Xcode build
     type: NATIVE_BUILD_MAC
     commands:
+    - "# Install dependencies"
+    - brew update
+    - brew install --cask temurin@21
+    - ""
+    - "# Build shared XCFramework"
+    - pushd ./android-sdk
+    - ./gradlew generateDummyFramework podPublishReleaseXCFramework
+    - popd
+    - rm Frameworks/* && cp -r android-sdk/smartcar-auth/build/cocoapods/publish/release/SmartcarFramework.xcframework Frameworks/SmartcarFramework.xcframework
+    - ""
+    - "# Build framework zip for SPM"
+    - pushd Frameworks && zip -r ../framework.zip SmartcarFramework.xcframework && popd
+    - export XCFRAMEWORK_CHECKSUM=$(swift package compute-checksum framework.zip)
+    - ""
+    - "# Build release zip for CocoaPods"
+    - git add Frameworks
+    - git archive --format=zip -o release.zip $(git write-tree)
+    - git reset HEAD
+    - ""
+    - "# Build iOS SDK"
     - pod install
     - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
     - ""
-    - git archive --format=zip -o release.zip $(git write-tree)
-    - "export pod_spec_tag=$(cat SmartcarAuth.podspec | grep '^\\s*s.version' | sed \"s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\\(.*\\)'/\\1/g\")"
+    - "# Extract version name"
+    - "export VERSION_TAG=v$(cat SmartcarAuth.podspec | grep '^\\s*s.version' | sed \"s/[[:blank:]]*s.version[[:blank:]]*=[[:blank:]]*'\\(.*\\)'/\\1/g\")"
+    - ""
+    - "# Generate Package.swift for tag"
+    - envsubst < Package.swift.tmpl > Package.swift
+    - git add Package.swift
+    - git commit -m"Release version $VERSION_TAG"
+    - export SPM_RELEASE_COMMIT=$(git rev-parse HEAD)
     - ""
     shell: BASH
     xcode_version: 16.1.0
+  - action: Push Git Tags
+    type: BUILD 
+    docker_image_name: node
+    docker_image_tag: 20
+    execute_commands:
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/smartcar_ci_travis_04_15_2021
+    - ssh-keyscan github.com >> /root/.ssh/known_hosts
+    - git config --global user.email "ci@smartcar.com"
+    - git config --global user.name "Buddy CI User"
+    - git config remote.$BUDDY_REPO_SLUG.url || git remote add $BUDDY_REPO_SLUG $BUDDY_REPO_SSH_URL.git
+    - git tag -af $VERSION_TAG -m "Buddy Generated Tag"
+    - git push $BUDDY_REPO_SLUG $VERSION_TAG
+    shell: BASH
   - action: GitHub Release
     type: GIT_HUB_RELEASE
     integration: ios_sdk_release
     organization: smartcar
     repository: ios-sdk
-    tag_name: v$pod_spec_tag
-    target_commitish: $BUDDY_RUN_COMMIT
+    tag_name: $VERSION_TAG
+    target_commitish: $SPM_RELEASE_COMMIT
+    release_name: $VERSION_TAG
     assets:
     - source_path: /release.zip
+      label: ""
+    - source_path: /framework.zip
       label: ""
   - action: CocoaPods publish
     type: NATIVE_BUILD_MAC

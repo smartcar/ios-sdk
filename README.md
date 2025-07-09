@@ -84,6 +84,13 @@ let authUrl = smartcar.authUrlBuilder().build()
 smartcar.launchAuthFlow(url: authUrl, viewController: viewController)
 ```
 
+## Bluetooth Support
+To support OEMs that utilize Bluetooth pairing, you'll need to add an entry to Info.plist with a string value explaining to the user why your app needs Bluetooth access.
+```
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>This app requires Bluetooth access to discover and connect to vehicles.</string>
+```
+
 ## Handling the Redirect
 
 For iOS 13 and above, the callback URL with the authentication code (or error) is automatically passed to the completion handler and no further action to intercept the callback is required.
@@ -92,6 +99,20 @@ For iOS 13 and above, the callback URL with the authentication code (or error) i
 
 For detailed documentation on parameters and available methods, please refer to
 the [SDK Reference](https://smartcar.github.io/ios-sdk/).
+
+## Developing the SDK
+```
+# Clone the repository
+git clone https://github.com/smartcar/ios-sdk.git --recurse-submodules
+# Initialize Kotlin project so we can `pod install`
+pushd android-sdk && ./gradlew generateDummyFramework && popd
+# Install CocoaPods dependencies
+pod install
+```
+To consume the in-development SDK locally, add the following to your app's Podfile. Be sure to compile the SDK through Xcode with your desired device architecture selected to build the framework binaries.
+```
+pod 'SmartcarAuth', :path => '/path/to/ios-sdk'
+```
 
 ## Author
 
