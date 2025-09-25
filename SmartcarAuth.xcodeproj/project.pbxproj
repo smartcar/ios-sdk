@@ -38,17 +38,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		156DAAD386140551563DD1C4 /* Pods-SmartcarAuth-SmartcarAuthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth-SmartcarAuthTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth-SmartcarAuthTests/Pods-SmartcarAuth-SmartcarAuthTests.release.xcconfig"; sourceTree = "<group>"; };
 		177CAA062D440FE200548C1F /* ConnectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectController.swift; sourceTree = "<group>"; };
 		278B07A82248E2DF00474A10 /* VehicleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfo.swift; sourceTree = "<group>"; };
+		41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.release.xcconfig"; sourceTree = "<group>"; };
 		8044801E941BD0B7B6F71B12 /* Pods_SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth/Pods-SmartcarAuth.debug.xcconfig"; sourceTree = "<group>"; };
 		94BA530C2C997C9B00A39782 /* OAuthCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCapture.swift; sourceTree = "<group>"; };
 		94BA530E2C997D6D00A39782 /* RPCInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCInterface.swift; sourceTree = "<group>"; };
 		94D43EB22AF067BD00F5ABAB /* SCMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMode.swift; sourceTree = "<group>"; };
 		9503EABFC864ED16458283F6 /* Pods_SmartcarAuth_SmartcarAuthTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartcarAuth_SmartcarAuthTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ACC66F1F58BD53A3681F6D6 /* Pods-SmartcarAuth-SmartcarAuthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuth-SmartcarAuthTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuth-SmartcarAuthTests/Pods-SmartcarAuth-SmartcarAuthTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A644ADE9238861F60036CE46 /* SCUrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilder.swift; sourceTree = "<group>"; };
 		A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCUrlBuilderTests.swift; sourceTree = "<group>"; };
 		A69F57AA2374EAB9005971D2 /* AuthorizationErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationErrorTests.swift; sourceTree = "<group>"; };
 		A6B8653D2374EDE4008BFD7F /* VehicleInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfoTests.swift; sourceTree = "<group>"; };
+		B06E3582ED1597AA5389FE57 /* Pods-SmartcarAuthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuthTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD668AF997F2B3DDFDBE6656 /* Pods-SmartcarAuthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartcarAuthTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartcarAuthTests/Pods-SmartcarAuthTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F85ABF80208C191D00FB2F3E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F85EC7701E4144A8003575F6 /* AuthorizationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationError.swift; sourceTree = "<group>"; };
 		F8F928811E2B2F6A009F07E5 /* SmartcarAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartcarAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +99,12 @@
 		983E52F77135954D8184B267 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */,
+				41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */,
+				BD668AF997F2B3DDFDBE6656 /* Pods-SmartcarAuthTests.debug.xcconfig */,
+				B06E3582ED1597AA5389FE57 /* Pods-SmartcarAuthTests.release.xcconfig */,
+				9ACC66F1F58BD53A3681F6D6 /* Pods-SmartcarAuth-SmartcarAuthTests.debug.xcconfig */,
+				156DAAD386140551563DD1C4 /* Pods-SmartcarAuth-SmartcarAuthTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -486,6 +498,7 @@
 		};
 		F8F928961E2B2F6B009F07E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8364B99DE3988F4714D06ED1 /* Pods-SmartcarAuth.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -512,6 +525,7 @@
 		};
 		F8F928971E2B2F6B009F07E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41E81CE39269597B8418C7C0 /* Pods-SmartcarAuth.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -537,6 +551,7 @@
 		};
 		F8F928991E2B2F6B009F07E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9ACC66F1F58BD53A3681F6D6 /* Pods-SmartcarAuth-SmartcarAuthTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = KP52A6LHWC;
@@ -554,6 +569,7 @@
 		};
 		F8F9289A1E2B2F6B009F07E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156DAAD386140551563DD1C4 /* Pods-SmartcarAuth-SmartcarAuthTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = KP52A6LHWC;
