@@ -30,7 +30,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
 @objcMembers public class SmartcarAuth: NSObject {
     var clientId: String
     var redirectUri: String
-    var scope: [String]
+    var scope: [String]?
     var completionHandler: (_ code: String?, _ state: String?, _ virtualKeyUrl: String?, _ error: AuthorizationError?) -> Void
     var mode: SCMode?
     @available(*, deprecated, message: "Use mode instead")
@@ -50,7 +50,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     public init(
         clientId: String,
         redirectUri: String,
-        scope: [String],
+        scope: [String] = [],
         completionHandler: @escaping (String?, String?, String?, AuthorizationError?) -> Void,
         testMode: Bool = false,
         mode: SCMode? = nil

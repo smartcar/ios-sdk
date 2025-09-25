@@ -37,7 +37,7 @@ import Foundation
         - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.
     */
-    public init(clientId: String, redirectUri: String, scope: [String], testMode: Bool = false, mode: SCMode? = nil) {
+    public init(clientId: String, redirectUri: String, scope: [String] = [], testMode: Bool = false, mode: SCMode? = nil) {
         self.components = URLComponents()
         self.components.scheme = "https"
         self.components.host = "connect.smartcar.com"
