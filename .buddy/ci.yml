@@ -19,7 +19,7 @@
     - pod install
     - pod lib lint --verbose --allow-warnings
     - xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-    - "xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=6832C055-BF2B-4F95-9FA9-2608894D9F6C,OS=18.1' build test"
+    - "xcodebuild -workspace SmartcarAuth.xcworkspace -scheme SmartcarAuth -sdk iphonesimulator -destination 'platform=iOS Simulator,id=BA178C01-7E78-405A-9616-B14952A2D49B,OS=18.1' build test"
     - ""
     shell: BASH
     pre_start_simulators:
