@@ -37,6 +37,14 @@ class SCUrlBuilderTests: XCTestCase {
 
         expect(baseUrl).to(equal(expectedUrl))
     }
+    
+    func testSCUrlBuilderBaseUrlNoScope() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+
+        let baseUrl = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri).build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
 
     func testSCUrlBuilderBaseUrlTestMode() {
         let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=test&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"

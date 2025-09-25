@@ -40,6 +40,17 @@ class SmartcarAuthTests: XCTestCase {
         expect(builder).to(beAnInstanceOf(SCUrlBuilder.self))
     }
 
+    func testSmartcarAuthGenerateAuthUrlNoScope() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:err:))
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+        
+        let builder = smartcar.authUrlBuilder()
+        let authUrl = builder.build();
+        
+        expect(builder).to(beAnInstanceOf(SCUrlBuilder.self))
+        expect(authUrl).to(equal(expectedUrl))
+    }
+
     func testHandleCallbackSuccess() {
         func completionCheck(code: String?, state: String?, virtualKeyUrl: String?, err: AuthorizationError?) -> Void {
             expect(code).to(equal(self.code))
