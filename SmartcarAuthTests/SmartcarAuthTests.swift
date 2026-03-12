@@ -18,9 +18,10 @@ class SmartcarAuthTests: XCTestCase {
     let make = "Tesla"
     let vin = "12345678901234"
     let code = UUID().uuidString
+    let userId = UUID().uuidString
     let virtualKeyUrl = "https://www.tesla.com/_ak/smartcar.com"
 
-    func completion(code: String?, state: String?, virtualKeyUrl: String?, err: AuthorizationError?) -> Void {
+    func completion(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
     }
 
     override func setUp() {
@@ -33,7 +34,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testSmartcarAuthGenerateAuthUrl() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: completion(code:state:virtualKeyUrl:err:))
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
         
         let builder = smartcar.authUrlBuilder()
         
@@ -41,7 +42,7 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testSmartcarAuthGenerateAuthUrlNoScope() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:err:))
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
         let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
         
         let builder = smartcar.authUrlBuilder()
@@ -52,13 +53,13 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackSuccess() {
-        func completionCheck(code: String?, state: String?, virtualKeyUrl: String?, err: AuthorizationError?) -> Void {
+        func completionCheck(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
             expect(code).to(equal(self.code))
             expect(state).to(beNil())
             expect(err).to(beNil())
         }
         
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
                 expect(code).to(equal(self.code))
                 expect(state).to(beNil())
                 expect(virtualKeyUrl).to(beNil())
@@ -73,7 +74,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackSuccessWithState() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(equal(self.code))
             expect(state).to(equal(self.state))
             expect(err).to(beNil())
@@ -87,7 +88,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackSuccessWithVirtualKeyUrl() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(equal(self.code))
             expect(virtualKeyUrl).to(equal(self.virtualKeyUrl))
             expect(err).to(beNil())
@@ -99,9 +100,38 @@ class SmartcarAuthTests: XCTestCase {
         
         smartcar.handleCallback(callbackUrl: url)
     }
+
+    func testHandleCallbackSuccessWithUserId() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
+            expect(code).to(equal(self.code))
+            expect(userId).to(equal(self.userId))
+            expect(err).to(beNil())
+        })
+
+        let urlString = redirectUri + "?code=" + code + "&user_id=" + userId
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+
+    func testHandleCallbackSuccessWithLegacyCompletionHandler() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(equal(self.code))
+            expect(state).to(beNil())
+            expect(virtualKeyUrl).to(beNil())
+            expect(err).to(beNil())
+        })
+
+        let urlString = redirectUri + "?code=" + code + "&user_id=" + userId
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
     
     func testHandleCallbackAccessDenied() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
             
@@ -120,7 +150,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackVehicleIncompatible() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
             
@@ -141,7 +171,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackInvalidSubscription() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
             
@@ -160,7 +190,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackNoVehicles() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
 
@@ -179,7 +209,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackUserExitedFlowUserManuallyReturnedToApplication() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
 
@@ -198,7 +228,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackUserExitedFlowUserCancelled() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
 
@@ -217,7 +247,7 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackConfigurationError() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
 
@@ -236,7 +266,7 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackServerError() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
 
@@ -256,7 +286,7 @@ class SmartcarAuthTests: XCTestCase {
 
     
     func testHandleCallbackUnrecognizedError() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
             
@@ -275,7 +305,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackMissingQueryParameters() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
             
@@ -294,7 +324,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testHandleCallbackNoCode() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             expect(code).to(beNil())
             expect(state).to(beNil())
             
@@ -313,7 +343,7 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testLaunchAuthFlow() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
             fail("Callback should not have been called")
         })
 

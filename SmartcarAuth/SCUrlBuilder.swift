@@ -40,7 +40,7 @@ import Foundation
     public init(clientId: String, redirectUri: String, scope: [String] = [], testMode: Bool = false, mode: SCMode? = nil) {
         self.components = URLComponents()
         self.components.scheme = "https"
-        self.components.host = "connect.smartcar.com"
+        self.components.host = "connect.qa.smartcar.com"
         self.components.path = "/oauth/authorize"
         
         var connectMode = "live";
