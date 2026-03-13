@@ -40,8 +40,8 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     Constructor for the SmartcarAuth
     - parameters:
         - applicationId: The application's application ID
-        - redirectUri: The application's redirect URI. Must be a valid URI.
-        - scope: An array of authorization scopes
+        - redirectUri: Optional. The application's redirect URI. If not specified, uses default set in the Smartcar developer dashboard.
+        - scope: Optional. An array of authorization scopes. If not specified, fall backs to defaults set in the Smartcar developer dashboard.
         - completionHandler: Callback function called upon the completion of the Smartcar Connect
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
     */
