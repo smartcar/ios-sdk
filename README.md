@@ -65,7 +65,7 @@ Then, initiate the SmartcarAuth object in the UIViewController.
 ```swift
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-func completionHandler(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?,) -> Void {
+func completionHandler(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
  // Receive authorization code
 }
 
