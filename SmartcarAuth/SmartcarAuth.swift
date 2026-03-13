@@ -28,6 +28,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     - Facilitates the authorization flow to launch the flow and retrieve an authorization code
 */
 @objcMembers public class SmartcarAuth: NSObject {
+    var applicationId: String
     var clientId: String
     var redirectUri: String
     var scope: [String]?
@@ -39,14 +40,39 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     /**
     Constructor for the SmartcarAuth
     - parameters:
+        - applicationId: The application's application ID
+        - redirectUri: The application's redirect URI. Must be a valid URI.
+        - scope: An array of authorization scopes
+        - completionHandler: Callback function called upon the completion of the Smartcar Connect
+        - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
+    */
+    public init(
+        applicationId: String,
+        redirectUri: String,
+        scope: [String]? = nil,
+        completionHandler: @escaping (String?, String?, String?, String?, AuthorizationError?) -> Void,
+        mode: SCMode? = nil
+    ) {
+        self.applicationId = applicationId
+        self.clientId = applicationId
+        self.redirectUri = redirectUri
+        self.scope = scope
+        self.completionHandler = completionHandler
+        self.testMode = false
+        self.mode = mode
+    }
+
+    /**
+    Deprecated. Use `init(applicationId:redirectUri:scope:completionHandler:mode:)` instead.
+    - parameters:
         - clientId: The application's client ID
         - redirectUri: The application's redirect URI. Must be a valid URI.
         - scope: An array of authorization scopes
-        - completion: Callback function called upon the completion of the Smartcar Connect
+        - completionHandler: Callback function called upon the completion of the Smartcar Connect
         - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
-
     */
+    @available(*, deprecated, renamed: "init(applicationId:redirectUri:scope:completionHandler:mode:)")
     public init(
         clientId: String,
         redirectUri: String,
@@ -55,32 +81,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         testMode: Bool = false,
         mode: SCMode? = nil
     ) {
-        self.clientId = clientId
-        self.redirectUri = redirectUri
-        self.scope = scope
-        self.completionHandler = completionHandler
-        self.testMode = testMode
-        self.mode = mode
-    }
-
-    /**
-    Backward-compatible constructor for the SmartcarAuth.
-    - parameters:
-        - clientId: The application's client ID
-        - redirectUri: The application's redirect URI. Must be a valid URI.
-        - scope: An array of authorization scopes
-        - completion: Callback function called upon the completion of the Smartcar Connect
-        - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
-        - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
-    */
-    public init(
-        clientId: String,
-        redirectUri: String,
-        scope: [String]? = nil,
-        completionHandler: @escaping (String?, String?, String?, AuthorizationError?) -> Void,
-        testMode: Bool = false,
-        mode: SCMode? = nil
-    ) {
+        self.applicationId = clientId
         self.clientId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
@@ -97,7 +98,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     */
     public func authUrlBuilder() -> SCUrlBuilder {
         let resolvedMode = mode ?? (testMode ? .test : .live)
-        return SCUrlBuilder(applicationId: clientId, redirectUri: redirectUri, scope: scope ?? [], mode: resolvedMode)
+        return SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope ?? [], mode: resolvedMode)
     }
 
     /**

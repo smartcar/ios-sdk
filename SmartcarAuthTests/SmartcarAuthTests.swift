@@ -11,6 +11,7 @@ import XCTest
 @testable import SmartcarAuth
 
 class SmartcarAuthTests: XCTestCase {
+    let applicationId = UUID().uuidString
     let clientId = UUID().uuidString
     let redirectUri = "http://localhost.com"
     let state = UUID().uuidString
@@ -34,7 +35,7 @@ class SmartcarAuthTests: XCTestCase {
     }
     
     func testSmartcarAuthGenerateAuthUrl() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
+        let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, scope: scope, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
         
         let builder = smartcar.authUrlBuilder()
         
@@ -42,8 +43,8 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testSmartcarAuthGenerateAuthUrlNoScope() {
-        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+        let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
         
         let builder = smartcar.authUrlBuilder()
         let authUrl = builder.build();
