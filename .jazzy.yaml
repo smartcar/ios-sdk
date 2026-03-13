@@ -1,0 +1,17 @@
+module: SmartcarAuth
+module_version: 6.2.2
+author: Smartcar
+author_url: https://smartcar.com
+github_url: https://github.com/smartcar/ios-sdk
+readme: README.md
+output: docs
+theme: fullwidth
+swift_build_tool: xcodebuild
+xcodebuild_arguments:
+  - -workspace
+  - SmartcarAuth.xcworkspace
+  - -scheme
+  - SmartcarAuth
+  - -sdk
+  - iphonesimulator
+  - ONLY_ACTIVE_ARCH=NO
