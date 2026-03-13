@@ -75,7 +75,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         clientId: String,
         redirectUri: String,
         scope: [String]? = nil,
-        completionHandler: @escaping (String?, String?, String?, String?, AuthorizationError?) -> Void,
+        completionHandler: @escaping (String?, String?, String?, AuthorizationError?) -> Void,
         testMode: Bool = false,
         mode: SCMode? = nil
     ) {
@@ -88,7 +88,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         self.testMode = testMode
         self.mode = mode
     }
-    
+
     /**
      Helper method to generate a SCURLBuilder instance, which then can be used (with various setters) to build an auth URL
         See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
@@ -100,7 +100,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
 
     /**
      Starts the launch of Smartcar Connect.
-     
+
      - parameters:
         - authUrl: the authorization URL for Smartcar Connect. Use `SCURLBuilder` to generate a auth URL
         - viewController: The view controller responsible for presenting the Connect flow
@@ -122,17 +122,17 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     */
     public func handleCallback(callbackUrl: URL) {
         let authorizationError: AuthorizationError
-        
+
         let urlComp = URLComponents(url: callbackUrl, resolvingAgainstBaseURL: false)
         guard let query = urlComp?.queryItems else {
             authorizationError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil, vehicleInfo: nil)
             return self.completionHandler(nil, nil, nil, nil, authorizationError)
         }
-        
+
         let queryState = query.filter({$0.name == "state"}).first?.value!
-        
+
         let vehicle: VehicleInfo?
-        
+
         if let vin = query.filter({$0.name == "vin"}).first?.value {
             vehicle = VehicleInfo(vin: vin)
             if let make = query.filter({$0.name == "make"}).first?.value {
@@ -141,9 +141,9 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         } else {
             vehicle = nil
         }
-        
+
         let error = query.filter({$0.name == "error"}).first?.value
-        
+
         if (error != nil) {
             let errorDescription = query.filter({$0.name == "error_description"}).first?.value
             switch (error) {
@@ -179,5 +179,5 @@ Smartcar Authentication SDK for iOS written in Swift 5.
 
         return self.completionHandler(code, queryState, virtualKeyUrl, userId, nil)
     }
-    
+
 }
