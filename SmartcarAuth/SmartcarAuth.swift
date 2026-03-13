@@ -98,7 +98,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     public func authUrlBuilder() -> SCUrlBuilder {
         return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope ?? [], testMode: testMode, mode: mode)
     }
-``
+
     /**
      Starts the launch of Smartcar Connect.
      
