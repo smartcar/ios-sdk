@@ -11,6 +11,7 @@ import XCTest
 @testable import SmartcarAuth
 
 class SCUrlBuilderTests: XCTestCase {
+    let applicationId = UUID().uuidString
     let clientId = UUID().uuidString
     let redirectUri = "scTesting://exchange"
     let scope = ["read_vehicle_info", "read_odometer"]
@@ -28,6 +29,54 @@ class SCUrlBuilderTests: XCTestCase {
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testSCUrlBuilderBaseUrlApplicationId() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope).build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderBaseUrlApplicationIdNoScope() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri).build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderBaseUrlApplicationIdModeTest() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=test&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, mode: .test).build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderBaseUrlApplicationIdModeSimulated() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=simulated&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, mode: .simulated).build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderSetAllSupportedParametersApplicationId() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=simulated&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption&user=a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
+
+        let builtUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, mode: .simulated)
+            .setState(state: state)
+            .setForcePrompt(forcePrompt: true)
+            .setMakeBypass(make: make)
+            .setSingleSelect(singleSelect: true)
+            .setSingleSelectVin(vin: vin)
+            .setFlags(flags: flags)
+            .setUser(user: user)
+            .build()
+
+        expect(builtUrl).to(equal(expectedUrl))
     }
 
     func testSCUrlBuilderBaseUrl() {

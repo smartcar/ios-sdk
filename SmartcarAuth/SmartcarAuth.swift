@@ -96,7 +96,8 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         See `SCURLBuilder` for a full list of query parameters that can be set on the authorization URL
     */
     public func authUrlBuilder() -> SCUrlBuilder {
-        return SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope ?? [], testMode: testMode, mode: mode)
+        let resolvedMode = mode ?? (testMode ? .test : .live)
+        return SCUrlBuilder(applicationId: clientId, redirectUri: redirectUri, scope: scope ?? [], mode: resolvedMode)
     }
 
     /**

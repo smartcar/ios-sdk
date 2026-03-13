@@ -43,7 +43,7 @@ class SmartcarAuthTests: XCTestCase {
 
     func testSmartcarAuthGenerateAuthUrlNoScope() {
         let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
         
         let builder = smartcar.authUrlBuilder()
         let authUrl = builder.build();
