@@ -129,7 +129,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
             return self.completionHandler(nil, nil, nil, nil, authorizationError)
         }
 
-        let queryState = query.filter({$0.name == "state"}).first?.value!
+        let queryState = query.first(where: { $0.name == "state" })?.value
 
         let vehicle: VehicleInfo?
 
@@ -169,7 +169,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
             return self.completionHandler(nil, queryState, nil, nil, authorizationError)
         }
 
-        let virtualKeyUrl = query.filter({$0.name == "virtual_key_url"}).first?.value!
+        let virtualKeyUrl = query.first(where: { $0.name == "virtual_key_url" })?.value
         let userId = query.filter({$0.name == "user_id"}).first?.value
 
         guard let code = query.filter({$0.name == "code"}).first?.value else {
