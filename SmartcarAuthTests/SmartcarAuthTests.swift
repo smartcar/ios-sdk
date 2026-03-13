@@ -54,12 +54,6 @@ class SmartcarAuthTests: XCTestCase {
     }
 
     func testHandleCallbackSuccess() {
-        func completionCheck(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
-            expect(code).to(equal(self.code))
-            expect(state).to(beNil())
-            expect(err).to(beNil())
-        }
-
         let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
                 expect(code).to(equal(self.code))
                 expect(state).to(beNil())
