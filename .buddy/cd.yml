@@ -71,7 +71,7 @@
     shell: BASH
   - action: GitHub Release
     type: GIT_HUB_RELEASE
-    integration: ios_sdk_release
+    integration: github
     organization: smartcar
     repository: ios-sdk
     tag_name: $VERSION_TAG
