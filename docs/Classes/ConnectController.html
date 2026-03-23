@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AuthorizationError Class Reference</title>
+    <title>ConnectController Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/AuthorizationError" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/ConnectController" class="dashAnchor"></a>
 
-    <a title="AuthorizationError Class Reference"></a>
+    <a title="ConnectController Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -46,7 +46,7 @@
       <img class="carat" src="../img/carat.png" alt=""/>
       <a class="breadcrumb" href="../Classes.html">Classes</a>
       <img class="carat" src="../img/carat.png" alt=""/>
-      AuthorizationError Class Reference
+      ConnectController Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -106,16 +106,23 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>AuthorizationError</h1>
+            <h1>ConnectController</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">AuthorizationError</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">Error</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
+<span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConnectController</span> <span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span></code></pre>
 
                 </div>
               </div>
-            <p>Error that gets created when the authorization flow exits with an error.</p>
+            <p>A view controller responsible for:</p>
+
+<ul>
+<li>Initializing and presenting the WKWebView.</li>
+<li>Detecting redirects back to the application (via <code>webView(_:decidePolicyFor:decisionHandler:)</code>).</li>
+<li>Invoking the callback closure when the application redirect is encountered.</li>
+</ul>
 
           </div>
         </section>
@@ -127,9 +134,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC0D4TypeO"></a>
-                    <a name="//apple_ref/swift/Enum/ErrorType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC0D4TypeO">ErrorType</a>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(py)webView"></a>
+                    <a name="//apple_ref/swift/Property/webView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(py)webView">webView</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -139,13 +146,13 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
-                        <a href="../Classes/AuthorizationError/ErrorType.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ErrorType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">webView</span><span class="p">:</span> <span class="kt">WKWebView</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -155,9 +162,82 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC4typeAC0D4TypeOvp"></a>
-                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC4typeAC0D4TypeOvp">type</a>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(im)initWithAuthUrl:redirectUriHost:handleCallback:"></a>
+                    <a name="//apple_ref/swift/Method/init(authUrl:redirectUriHost:handleCallback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(im)initWithAuthUrl:redirectUriHost:handleCallback:">init(authUrl:<wbr>redirectUriHost:<wbr>handleCallback:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes the ConnectController.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">authUrl</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+            <span class="nv">redirectUriHost</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+            <span class="nv">handleCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>authUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Connect URL to open in the WKWebView.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redirectUriHost</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Host of the redirect URI that was passed to SmartcarAuth.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handleCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback function that is invoked upon redirect back to the application.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(im)viewDidLoad"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(im)viewDidLoad">viewDidLoad()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,7 +252,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Classes/AuthorizationError/ErrorType.html">ErrorType</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -182,9 +263,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC16errorDescriptionSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/errorDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC16errorDescriptionSSSgvp">errorDescription</a>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(im)webView:decidePolicyForNavigationAction:decisionHandler:"></a>
+                    <a name="//apple_ref/swift/Method/webView(_:decidePolicyFor:decisionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(im)webView:decidePolicyForNavigationAction:decisionHandler:">webView(_:<wbr>decidePolicyFor:<wbr>decisionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -192,14 +273,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>WKNavigationDelegate method: listens for navigation changes.
+If the navigation is to the redirect URI (matching <code>redirectUriHost</code>),
+call the <code>handleCallback</code> and remove the webView from the view.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">errorDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">webView</span><span class="p">(</span><span class="n">_</span> <span class="nv">webView</span><span class="p">:</span> <span class="kt">WKWebView</span><span class="p">,</span>
+                    <span class="n">decidePolicyFor</span> <span class="nv">navigationAction</span><span class="p">:</span> <span class="kt">WKNavigationAction</span><span class="p">,</span>
+                    <span class="nv">decisionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">WKNavigationActionPolicy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -209,9 +295,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC10statusCodeSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/statusCode" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC10statusCodeSSSgvp">statusCode</a>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(im)viewDidDisappear:"></a>
+                    <a name="//apple_ref/swift/Method/viewDidDisappear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(im)viewDidDisappear:">viewDidDisappear(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -226,34 +312,8 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">statusCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SmartcarAuth18AuthorizationErrorC12errorMessageSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/errorMessage" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth18AuthorizationErrorC12errorMessageSSSgvp">errorMessage</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">errorMessage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

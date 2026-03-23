@@ -58,19 +58,19 @@ First, you need to have a global SmartcarAuth object in your AppDelegate to hold
 var smartcarSdk: SmartcarAuth? = nil
 ```
 
-Next, you will need to configure your redirect URI. Your redirect URI must follow this format: `<custom scheme>://<hostname>`. We suggest `"sc" + clientId + "://" + hostname`. 
+Next, you will need to configure your redirect URI. Your redirect URI must follow this format: `<custom scheme>://<hostname>`. We suggest `"sc" + clientId + "://" + hostname`.
 
 Then, initiate the SmartcarAuth object in the UIViewController.
 
 ```swift
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-func completionHandler(code: String?, state: String?, virtualKeyUrl: String?, err: AuthorizationError?,) -> Void {
+func completionHandler(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
  // Receive authorization code
 }
 
 appDelegate.smartcar = SmartcarAuth(
-  clientId: "afb0b7d3-807f-4c61-9b04-352e91fe3134",
+  applicationId: "afb0b7d3-807f-4c61-9b04-352e91fe3134",
   redirectUri: "scafb0b7d3-807f-4c61-9b04-352e91fe3134://exchange",
   scope: ["read_vin", "read_vehicle_info", "read_odometer"],
   completionHandler: completionHandler
@@ -109,6 +109,18 @@ pushd android-sdk && ./gradlew generateDummyFramework && popd
 # Install CocoaPods dependencies
 pod install
 ```
+
+### Regenerating API docs
+
+The SDK reference site in `docs/` is generated with Jazzy.
+
+```
+gem install jazzy
+./scripts/generate-docs.sh
+```
+
+Then commit the updated `docs/` files if the public API/docs changed.
+
 To consume the in-development SDK locally, add the following to your app's Podfile. Be sure to compile the SDK through Xcode with your desired device architecture selected to build the framework binaries.
 ```
 pod 'SmartcarAuth', :path => '/path/to/ios-sdk'

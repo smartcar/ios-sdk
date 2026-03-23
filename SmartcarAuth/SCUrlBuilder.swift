@@ -31,13 +31,47 @@ import Foundation
     /**
     Constructor for SCUrlBuilder. Represents the minimum requirements for an authorization URL.
     - parameters:
+        - applicationId: The application's application ID
+        - redirectUri: Optional. The application's redirect URI. If not specified, uses default set in the Smartcar developer dashboard.
+        - scope: Optional. An array of authorization scopes. If not specified, fall backs to defaults set in the Smartcar developer dashboard.
+        - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.
+    */
+    public init(applicationId: String, redirectUri: String? = nil, scope: [String] = [], mode: SCMode? = nil) {
+        self.components = URLComponents()
+        self.components.scheme = "https"
+        self.components.host = "connect.smartcar.com"
+        self.components.path = "/oauth/authorize"
+
+        let connectMode = mode?.rawValue ?? "live"
+
+        self.queryItems.append(contentsOf: [
+            URLQueryItem(name: "application_id", value: applicationId),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "mode", value: connectMode),
+            URLQueryItem(name: "sdk_platform", value: "iOS")
+        ])
+
+        if let redirectUri = redirectUri?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            self.queryItems.append(URLQueryItem(name: "redirect_uri", value: redirectUri))
+        }
+
+        if !scope.isEmpty {
+            let scopeString = scope.joined(separator: " ")
+            self.queryItems.append(URLQueryItem(name: "scope", value: scopeString))
+        }
+    }
+
+    /**
+    Deprecated constructor for SCUrlBuilder. Use `init(applicationId:redirectUri:scope:mode:)` instead.
+    - parameters:
         - clientId: The application's client ID
-        - redirectUri: The application's redirect URI
+        - redirectUri: Optional. The application's redirect URI. If not specified, uses default set in the Smartcar developer dashboard.
         - scope: An array of authorization scopes
         - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.
     */
-    public init(clientId: String, redirectUri: String, scope: [String] = [], testMode: Bool = false, mode: SCMode? = nil) {
+    @available(*, deprecated, renamed: "init(applicationId:redirectUri:scope:mode:)")
+    public init(clientId: String, redirectUri: String? = nil, scope: [String] = [], testMode: Bool = false, mode: SCMode? = nil) {
         self.components = URLComponents()
         self.components.scheme = "https"
         self.components.host = "connect.smartcar.com"
@@ -58,7 +92,7 @@ import Foundation
             URLQueryItem(name: "sdk_platform", value: "iOS")
         ])
 
-        if let redirectUri = redirectUri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        if let redirectUri = redirectUri?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             self.queryItems.append(URLQueryItem(name: "redirect_uri", value: redirectUri))
         }
 

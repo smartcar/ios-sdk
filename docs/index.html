@@ -4,7 +4,7 @@
     <title>SmartcarAuth  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
@@ -13,71 +13,94 @@
     <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
+
+
     <a title="SmartcarAuth  Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="index.html">SmartcarAuth 6.1.4 Docs</a> (60% documented)</p>
-        <div class="header-right">
-          <form role="search" action="search.json">
-            <input type="text" placeholder="Search documentation" data-typeahead>
-          </form>
-        </div>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="index.html">SmartcarAuth Reference</a>
-        <img id="carat" src="img/carat.png" alt=""/>
-        SmartcarAuth  Reference
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          SmartcarAuth 6.2.2 Docs
+        </a>
+         (59% documented)
       </p>
-    </div>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/smartcar/ios-sdk">
+            <img class="header-icon" src="img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">SmartcarAuth</a>
+    </p>
+
     <div class="content-wrapper">
-      <nav class="sidebar">
+      <nav class="navigation">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/AuthorizationError.html">AuthorizationError</a>
+                <a class="nav-group-task-link" href="Classes/AuthorizationError.html">AuthorizationError</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/AuthorizationError/ErrorType.html">– ErrorType</a>
+                <a class="nav-group-task-link" href="Classes/AuthorizationError/ErrorType.html">– ErrorType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/OauthCapture.html">OauthCapture</a>
+                <a class="nav-group-task-link" href="Classes/ConnectController.html">ConnectController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SCUrlBuilder.html">SCUrlBuilder</a>
+                <a class="nav-group-task-link" href="Classes/OAuthCapture.html">OAuthCapture</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SmartcarAuth.html">SmartcarAuth</a>
+                <a class="nav-group-task-link" href="Classes/SCUrlBuilder.html">SCUrlBuilder</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/VehicleInfo.html">VehicleInfo</a>
+                <a class="nav-group-task-link" href="Classes/SmartcarAuth.html">SmartcarAuth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/VehicleInfo.html">VehicleInfo</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enumerations</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/SCMode.html">SCMode</a>
+                <a class="nav-group-task-link" href="Enums/SCMode.html">SCMode</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Functions.html">Functions</a>
+            <a class="nav-group-name-link" href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:12SmartcarAuth35getOauthCaptureCompletionJavascript19jsonRPCResponseDataSS10Foundation0J0V_tF">getOauthCaptureCompletionJavascript(jsonRPCResponseData:)</a>
+                <a class="nav-group-task-link" href="Functions.html#/s:12SmartcarAuth35getOauthCaptureCompletionJavascript19jsonRPCResponseDataSS10Foundation0J0V_tF">getOauthCaptureCompletionJavascript(jsonRPCResponseData:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Functions.html#/s:12SmartcarAuth20getSdkShimJavascript11channelNameS2S_tF">getSdkShimJavascript(channelName:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Functions.html#/s:12SmartcarAuth23injectSdkShimJavascript7webView11channelNameySo05WKWebH0C_SStF">injectSdkShimJavascript(webView:channelName:)</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-        <section>
-          <section class="section">
+
+        <section class="section">
+          <div class="section-content top-matter">
             
             <h1 id='smartcar-ios-auth-sdk' class='heading'>Smartcar iOS Auth SDK</h1>
 
@@ -94,10 +117,37 @@
 <p>SmartcarAuth supports iOS 13 and above.</p>
 
 <p>Smartcar Connect is presented in a webview in your application using the Smartcar iOS SDK.</p>
-<h2 id='installation' class='heading'>Installation</h2>
+<h2 id='installation-via-cocoapods' class='heading'>Installation via CocoaPods</h2>
 
 <p>SmartcarAuth is available through <a href="http://cocoapods.org">CocoaPods</a>. To install it, simply add the following line to your Podfile:</p>
 <pre class="highlight plaintext"><code>pod "SmartcarAuth"
+</code></pre>
+<h2 id='installation-via-swift-package-manager-spm' class='heading'>Installation via Swift Package Manager (SPM)</h2>
+
+<p>Alternatively, you can add the Smarcar iOS SDK to your Xcode project using Swift Package Manager.
+Option 1: Add via Xcode</p>
+
+<ol>
+<li>In Xcode, go to File → Add Packages&hellip;</li>
+<li>Enter the Smartcar SDK Git URL: <a href="https://github.com/smartcar/ios-sdk.git">https://github.com/smartcar/ios-sdk.git</a></li>
+<li>Select the latest version or specify a version range (e.g. &ldquo;Up to Next Major&rdquo; from X.X.X)</li>
+<li>Add the Smartcar product to your app target.</li>
+</ol>
+
+<p>Option 2: Add via Package.swift
+If you manage your dependencies manually using Package.swift, add the following:</p>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/smartcar/ios-sdk.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"X.X.X"</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre>
+
+<p>Then add &ldquo;Smartcar&rdquo; to your target dependencies:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"YourApp"</span><span class="p">,</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s">"Smartcar"</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </code></pre>
 <h2 id='getting-started' class='heading'>Getting Started</h2>
 
@@ -106,17 +156,17 @@
 <span class="k">var</span> <span class="nv">smartcarSdk</span><span class="p">:</span> <span class="kt">SmartcarAuth</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 </code></pre>
 
-<p>Next, you will need to configure your redirect URI. Your redirect URI must follow this format: <code>&lt;custom scheme&gt;://&lt;hostname&gt;</code>. We suggest <code>&quot;sc&quot; + clientId + &quot;://&quot; + hostname</code>. </p>
+<p>Next, you will need to configure your redirect URI. Your redirect URI must follow this format: <code>&lt;custom scheme&gt;://&lt;hostname&gt;</code>. We suggest <code>&quot;sc&quot; + clientId + &quot;://&quot; + hostname</code>.</p>
 
 <p>Then, initiate the SmartcarAuth object in the UIViewController.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">appDelegate</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="k">as!</span> <span class="kt">AppDelegate</span>
 
-<span class="kd">func</span> <span class="nf">completionHandler</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">virtualKeyUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">err</span><span class="p">:</span> <span class="kt">AuthorizationError</span><span class="p">?,)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="nf">completionHandler</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">virtualKeyUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">userId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">err</span><span class="p">:</span> <span class="kt">AuthorizationError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
  <span class="c1">// Receive authorization code</span>
 <span class="p">}</span>
 
 <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartcar</span> <span class="o">=</span> <span class="kt">SmartcarAuth</span><span class="p">(</span>
-  <span class="nv">clientId</span><span class="p">:</span> <span class="s">"afb0b7d3-807f-4c61-9b04-352e91fe3134"</span><span class="p">,</span>
+  <span class="nv">applicationId</span><span class="p">:</span> <span class="s">"afb0b7d3-807f-4c61-9b04-352e91fe3134"</span><span class="p">,</span>
   <span class="nv">redirectUri</span><span class="p">:</span> <span class="s">"scafb0b7d3-807f-4c61-9b04-352e91fe3134://exchange"</span><span class="p">,</span>
   <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="s">"read_vin"</span><span class="p">,</span> <span class="s">"read_vehicle_info"</span><span class="p">,</span> <span class="s">"read_odometer"</span><span class="p">],</span>
   <span class="nv">completionHandler</span><span class="p">:</span> <span class="n">completionHandler</span>
@@ -129,6 +179,12 @@
 <span class="c1">// Pass in the generated Connect URL and a UIViewController</span>
 <span class="n">smartcar</span><span class="o">.</span><span class="nf">launchAuthFlow</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">,</span> <span class="nv">viewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
 </code></pre>
+<h2 id='bluetooth-support' class='heading'>Bluetooth Support</h2>
+
+<p>To support OEMs that utilize Bluetooth pairing, you&rsquo;ll need to add an entry to Info.plist with a string value explaining to the user why your app needs Bluetooth access.</p>
+<pre class="highlight plaintext"><code>&lt;key&gt;NSBluetoothAlwaysUsageDescription&lt;/key&gt;
+&lt;string&gt;This app requires Bluetooth access to discover and connect to vehicles.&lt;/string&gt;
+</code></pre>
 <h2 id='handling-the-redirect' class='heading'>Handling the Redirect</h2>
 
 <p>For iOS 13 and above, the callback URL with the authentication code (or error) is automatically passed to the completion handler and no further action to intercept the callback is required.</p>
@@ -136,6 +192,26 @@
 
 <p>For detailed documentation on parameters and available methods, please refer to
 the <a href="https://smartcar.github.io/ios-sdk/">SDK Reference</a>.</p>
+<h2 id='developing-the-sdk' class='heading'>Developing the SDK</h2>
+<pre class="highlight plaintext"><code># Clone the repository
+git clone https://github.com/smartcar/ios-sdk.git --recurse-submodules
+# Initialize Kotlin project so we can `pod install`
+pushd android-sdk &amp;&amp; ./gradlew generateDummyFramework &amp;&amp; popd
+# Install CocoaPods dependencies
+pod install
+</code></pre>
+<h3 id='regenerating-api-docs' class='heading'>Regenerating API docs</h3>
+
+<p>The SDK reference site in <code>docs/</code> is generated with Jazzy.</p>
+<pre class="highlight plaintext"><code>gem install jazzy
+./scripts/generate-docs.sh
+</code></pre>
+
+<p>Then commit the updated <code>docs/</code> files if the public API/docs changed.</p>
+
+<p>To consume the in-development SDK locally, add the following to your app&rsquo;s Podfile. Be sure to compile the SDK through Xcode with your desired device architecture selected to build the framework binaries.</p>
+<pre class="highlight plaintext"><code>pod 'SmartcarAuth', :path =&gt; '/path/to/ios-sdk'
+</code></pre>
 <h2 id='author' class='heading'>Author</h2>
 
 <p>Smartcar Inc., <a href="mailto:hello@smartcar.com">hello@smartcar.com</a></p>
@@ -143,13 +219,15 @@ the <a href="https://smartcar.github.io/ios-sdk/">SDK Reference</a>.</p>
 
 <p>SmartcarAuth is available under the MIT license. See the LICENSE file for more info.</p>
 
-          </section>
+          </div>
         </section>
-        <section id="footer">
-          <p>&copy; 2025 <a class="link" href="https://github.com/smartcar/ios-sdk" target="_blank" rel="external noopener">Smartcar Inc.</a>. All rights reserved. (Last updated: 2025-01-15)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
-        </section>
+
+
       </article>
     </div>
+    <section class="footer">
+      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-03-17)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
   </body>
 </html>
