@@ -142,6 +142,7 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         
         // If the navigation is the app redirect, cancel and handle callback
         decisionHandler(.cancel)
+        print("[ENG-1545] intercepted redirect URL: \(url.absoluteString)")
         self.handleCallback(url)
         
         // Dismiss the ConnectController

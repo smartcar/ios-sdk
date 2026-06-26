@@ -130,6 +130,7 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
         }
 
         // If successful, return the redirect URL in a JSON-RPC success response
+        print("[ENG-1545] OEM callback returnUri: \(callback.absoluteString)")
         let result = OauthResult(returnUri: callback.absoluteString)
         let jsonRPCResponse = JSONRPCResponse(result: result)
 
