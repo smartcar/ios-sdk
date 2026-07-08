@@ -56,6 +56,40 @@ struct JSONRPCErrorResponse: Codable {
     var id: String = "temp"
 }
 
+// Used to peek at `method` before committing to a specific request shape.
+struct RPCMethodEnvelope: Codable {
+    var method: String
+}
+
+public struct CompleteParams: Codable {
+    public var code: String?
+    public var userId: String?
+    public var externalId: String?
+    public var error: String?
+    public var errorDescription: String?
+    public var state: String?
+    public var vin: String?
+    public var make: String?
+    public var virtualKeyUrl: String?
+}
+
+struct CompleteRequestObject: Codable {
+    var jsonrpc: String
+    var method: String
+    var params: CompleteParams
+    var id: String?
+}
+
+struct CompleteResult: Codable {
+    var acknowledged: Bool = true
+}
+
+struct CompleteResponse: Codable {
+    var jsonrpc: String = "2.0"
+    var result: CompleteResult
+    var id: String = "temp"
+}
+
 /**
  Generates a String of JS code that is to be evaluated when the Oauth capture activity is finished and we have the response to notify Connect with
  - parameters:

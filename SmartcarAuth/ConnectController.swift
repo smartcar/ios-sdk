@@ -27,7 +27,7 @@ import SmartcarFramework
 
 /**
  A view controller responsible for:
- 
+
  - Initializing and presenting the WKWebView.
  - Detecting redirects back to the application (via `webView(_:decidePolicyFor:decisionHandler:)`).
  - Invoking the callback closure when the application redirect is encountered.
@@ -37,8 +37,9 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
     public var webView: WKWebView!
 
     private var authUrl: URL
-    private var redirectUriHost: String
+    private var redirectUriHost: String?
     private var handleCallback: (URL) -> Void
+    private var onCompleteResult: (CompleteParams) -> Void
 
     // An instance of `OAuthCapture` which handles JS messaging and OEM login flow.
     private var oauthCapture: OAuthCapture?
@@ -47,18 +48,21 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
 
     /**
      Initializes the ConnectController.
-     
+
      - Parameters:
        - authUrl: The Connect URL to open in the WKWebView.
-       - redirectUriHost: Host of the redirect URI that was passed to SmartcarAuth.
+       - redirectUriHost: Host of the redirect URI that was passed to SmartcarAuth. `nil` when the flow was configured without a redirect URI (`responseType == "none"`).
        - handleCallback: Callback function that is invoked upon redirect back to the application.
+       - onCompleteResult: Callback function that is invoked when Connect signals flow completion via the `complete` RPC instead of a redirect.
      */
     public init(authUrl: URL,
-                redirectUriHost: String,
-                handleCallback: @escaping (URL) -> Void) {
+                redirectUriHost: String?,
+                handleCallback: @escaping (URL) -> Void,
+                onCompleteResult: @escaping (CompleteParams) -> Void = { _ in }) {
         self.authUrl = authUrl
         self.redirectUriHost = redirectUriHost
         self.handleCallback = handleCallback
+        self.onCompleteResult = onCompleteResult
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -99,8 +103,11 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         ])
 
         // Instantiate OAuthCapture (which handles script messaging + OEM flows)
-        oauthCapture = OAuthCapture(webView: webView)
-        
+        oauthCapture = OAuthCapture(webView: webView, onComplete: { [weak self] params in
+            self?.onCompleteResult(params)
+            self?.dismiss(animated: true, completion: nil)
+        })
+
         // Set up BLEService
         let webViewHandler = SmartcarFramework.WebViewBridgeImpl(
             webView: webView,
@@ -109,7 +116,7 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         let contextBridge = SmartcarFramework.ContextBridgeImpl()
         bleService = SmartcarFramework.BLEService(context: contextBridge, webView: webViewHandler)
         injectSdkShimJavascript(webView: webView, channelName: "SmartcarSDKBLE")
-        
+
         // Start web view
         let request = URLRequest(url: authUrl)
         webView.load(request)
@@ -132,18 +139,19 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
             return
         }
 
-        guard let url = navigationAction.request.url,
+        guard let redirectUriHost = self.redirectUriHost,
+              let url = navigationAction.request.url,
               let host = url.host,
-              host == self.redirectUriHost else {
+              host == redirectUriHost else {
             // Allow navigation in all other cases
             decisionHandler(.allow)
             return
         }
-        
+
         // If the navigation is the app redirect, cancel and handle callback
         decisionHandler(.cancel)
         self.handleCallback(url)
-        
+
         // Dismiss the ConnectController
         self.dismiss(animated: true, completion: nil)
     }

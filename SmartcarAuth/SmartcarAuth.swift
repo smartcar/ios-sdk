@@ -29,22 +29,61 @@ Smartcar Authentication SDK for iOS written in Swift 5.
 */
 @objcMembers public class SmartcarAuth: NSObject {
     var applicationId: String
-    var redirectUri: String
+    var redirectUri: String?
     var scope: [String]?
-    var completionHandler: (_ code: String?, _ state: String?, _ virtualKeyUrl: String?, _ userId: String?, _ error: AuthorizationError?) -> Void
+    var responseType: String
+    var completionHandler: (_ code: String?, _ state: String?, _ virtualKeyUrl: String?, _ userId: String?, _ externalId: String?, _ error: AuthorizationError?) -> Void
     var mode: SCMode?
     @available(*, deprecated, message: "Use mode instead")
     var testMode: Bool
+
+    private static let validResponseTypes = ["code", "none"]
 
     /**
     Constructor for the SmartcarAuth
     - parameters:
         - applicationId: The application's application ID
-        - redirectUri: Optional. The application's redirect URI. If not specified, uses default set in the Smartcar developer dashboard.
+        - redirectUri: Optional. The application's redirect URI. Required when `responseType` is `"code"`. If required but not specified, uses default set in the Smartcar developer dashboard
+        - scope: Optional. An array of authorization scopes. If not specified, fall backs to defaults set in the Smartcar developer dashboard.
+        - responseType: Optional, determines whether Connect completes the flow via redirect (`"code"`) or via the `complete` RPC (`"none"`). Defaults to `"code"`.
+        - completionHandler: Callback function called upon the completion of the Smartcar Connect
+        - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
+    */
+    public init(
+        applicationId: String,
+        redirectUri: String? = nil,
+        scope: [String]? = nil,
+        responseType: String = "code",
+        completionHandler: @escaping (String?, String?, String?, String?, String?, AuthorizationError?) -> Void,
+        mode: SCMode? = nil
+    ) {
+        precondition(
+            SmartcarAuth.validResponseTypes.contains(responseType),
+            "responseType must be one of: \(SmartcarAuth.validResponseTypes.joined(separator: ", "))"
+        )
+        precondition(
+            responseType != "code" || !(redirectUri ?? "").isEmpty,
+            "redirectUri is required when responseType is \"code\""
+        )
+        self.applicationId = applicationId
+        self.redirectUri = redirectUri
+        self.scope = scope
+        self.responseType = responseType
+        self.completionHandler = completionHandler
+        self.testMode = false
+        self.mode = mode
+    }
+
+    /**
+    Deprecated. Use `init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)` instead.
+    - parameters:
+        - applicationId: The application's application ID
+        - redirectUri: The application's redirect URI. Must be a valid URI.
         - scope: Optional. An array of authorization scopes. If not specified, fall backs to defaults set in the Smartcar developer dashboard.
         - completionHandler: Callback function called upon the completion of the Smartcar Connect
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
     */
+    @available(*, deprecated, renamed: "init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)")
     public init(
         applicationId: String,
         redirectUri: String,
@@ -55,13 +94,16 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         self.applicationId = applicationId
         self.redirectUri = redirectUri
         self.scope = scope
-        self.completionHandler = completionHandler
+        self.responseType = "code"
+        self.completionHandler = { code, state, virtualKeyUrl, userId, _, error in
+            completionHandler(code, state, virtualKeyUrl, userId, error)
+        }
         self.testMode = false
         self.mode = mode
     }
 
     /**
-    Deprecated. Use `init(applicationId:redirectUri:scope:completionHandler:mode:)` instead.
+    Deprecated. Use `init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)` instead.
     - parameters:
         - clientId: The application's client ID
         - redirectUri: The application's redirect URI. Must be a valid URI.
@@ -70,7 +112,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         - testMode: Deprecated, please use `mode` instead. Optional, launch the Smartcar auth flow in test mode when set to true. Defaults to false.
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.
     */
-    @available(*, deprecated, renamed: "init(applicationId:redirectUri:scope:completionHandler:mode:)")
+    @available(*, deprecated, renamed: "init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)")
     public init(
         clientId: String,
         redirectUri: String,
@@ -82,7 +124,8 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         self.applicationId = clientId
         self.redirectUri = redirectUri
         self.scope = scope
-        self.completionHandler = { code, state, virtualKeyUrl, _, error in
+        self.responseType = "code"
+        self.completionHandler = { code, state, virtualKeyUrl, _, _, error in
             completionHandler(code, state, virtualKeyUrl, error)
         }
         self.testMode = testMode
@@ -95,7 +138,7 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     */
     public func authUrlBuilder() -> SCUrlBuilder {
         let resolvedMode = mode ?? (testMode ? .test : .live)
-        return SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope ?? [], mode: resolvedMode)
+        return SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope ?? [], mode: resolvedMode, responseType: responseType)
     }
 
     /**
@@ -107,12 +150,74 @@ Smartcar Authentication SDK for iOS written in Swift 5.
     */
     public func launchAuthFlow(url: String, viewController: UIViewController) {
         let authUrl = URL(string: url)!
-        let redirectUrl = URL(string: redirectUri)
-        let redirectUriScheme = redirectUrl?.scheme
-        let redirectUriHost = (redirectUrl?.host!)!
+        let redirectUrl = redirectUri.flatMap { URL(string: $0) }
+        let redirectUriHost = redirectUrl?.host
 
-        let connectVC = ConnectController(authUrl: authUrl, redirectUriHost: redirectUriHost, handleCallback: handleCallback)
+        let connectVC = ConnectController(
+            authUrl: authUrl,
+            redirectUriHost: redirectUriHost,
+            handleCallback: handleCallback,
+            onCompleteResult: receiveDirectResult
+        )
         viewController.present(connectVC, animated: true)
+    }
+
+    /**
+    Builds and delivers the final `completionHandler` response, shared by both the
+    redirect callback path (`handleCallback`) and the `complete` RPC path (`receiveDirectResult`).
+    */
+    private func buildAndDeliverResponse(
+        code: String?,
+        state: String?,
+        virtualKeyUrl: String?,
+        userId: String?,
+        externalId: String?,
+        error: String?,
+        errorDescription: String?,
+        statusCode: String?,
+        errorMessage: String?,
+        vin: String?,
+        make: String?
+    ) {
+        let authorizationError: AuthorizationError
+
+        let vehicle: VehicleInfo?
+        if let vin = vin {
+            vehicle = VehicleInfo(vin: vin, make: make)
+        } else {
+            vehicle = nil
+        }
+
+        if let error = error {
+            switch error {
+            case "vehicle_incompatible":
+                authorizationError = AuthorizationError(type: .vehicleIncompatible, errorDescription: errorDescription, vehicleInfo: vehicle)
+            case "invalid_subscription":
+                authorizationError = AuthorizationError(type: .invalidSubscription, errorDescription: errorDescription)
+            case "access_denied":
+                authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription)
+            case "no_vehicles":
+                authorizationError = AuthorizationError(type: .noVehicles, errorDescription: errorDescription)
+            case "configuration_error":
+                authorizationError = AuthorizationError(type: .configurationError, errorDescription: errorDescription, statusCode: statusCode, errorMessage: errorMessage)
+            case "server_error":
+                authorizationError = AuthorizationError(type: .serverError, errorDescription: errorDescription)
+            case "user_manually_returned_to_application", "user_cancelled":
+                authorizationError = AuthorizationError(type: .userExitedFlow, errorDescription: errorDescription)
+            default:
+                authorizationError = AuthorizationError(type: .unknownError, errorDescription: errorDescription)
+            }
+            return self.completionHandler(nil, state, nil, nil, externalId, authorizationError)
+        }
+
+        // response_type=none succeeds without a code; only treat "no code" as
+        // success when the flow was configured for it.
+        if code == nil && responseType != "none" {
+            let authorizationError = AuthorizationError(type: .missingAuthCode, errorDescription: nil, vehicleInfo: nil)
+            return self.completionHandler(nil, state, nil, nil, externalId, authorizationError)
+        }
+
+        return self.completionHandler(code, state, virtualKeyUrl, userId, externalId, nil)
     }
 
     /**
@@ -121,63 +226,50 @@ Smartcar Authentication SDK for iOS written in Swift 5.
         - url: callback URL containing authorization code or an error
     */
     public func handleCallback(callbackUrl: URL) {
-        let authorizationError: AuthorizationError
-
         let urlComp = URLComponents(url: callbackUrl, resolvingAgainstBaseURL: false)
         guard let query = urlComp?.queryItems else {
-            authorizationError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil, vehicleInfo: nil)
-            return self.completionHandler(nil, nil, nil, nil, authorizationError)
+            let authorizationError = AuthorizationError(type: .missingQueryParameters, errorDescription: nil, vehicleInfo: nil)
+            return self.completionHandler(nil, nil, nil, nil, nil, authorizationError)
         }
 
-        let queryState = query.first(where: { $0.name == "state" })?.value
+        func param(_ name: String) -> String? { query.first(where: { $0.name == name })?.value }
 
-        let vehicle: VehicleInfo?
+        buildAndDeliverResponse(
+            code: param("code"),
+            state: param("state"),
+            virtualKeyUrl: param("virtual_key_url"),
+            userId: param("user_id"),
+            externalId: param("external_id"),
+            error: param("error"),
+            errorDescription: param("error_description"),
+            statusCode: param("status_code"),
+            errorMessage: param("error_message"),
+            vin: param("vin"),
+            make: param("make")
+        )
+    }
 
-        if let vin = query.filter({$0.name == "vin"}).first?.value {
-            vehicle = VehicleInfo(vin: vin)
-            if let make = query.filter({$0.name == "make"}).first?.value {
-                vehicle?.make = make
-            }
-        } else {
-            vehicle = nil
-        }
-
-        let error = query.filter({$0.name == "error"}).first?.value
-
-        if (error != nil) {
-            let errorDescription = query.filter({$0.name == "error_description"}).first?.value
-            switch (error) {
-                case "vehicle_incompatible":
-                    authorizationError = AuthorizationError(type: .vehicleIncompatible, errorDescription: errorDescription, vehicleInfo: vehicle)
-                case "invalid_subscription":
-                    authorizationError = AuthorizationError(type: .invalidSubscription, errorDescription: errorDescription)
-                case "access_denied":
-                    authorizationError = AuthorizationError(type: .accessDenied, errorDescription: errorDescription)
-                case "no_vehicles":
-                    authorizationError = AuthorizationError(type: .noVehicles, errorDescription: errorDescription)
-                case "configuration_error":
-                    let statusCode = query.filter({$0.name == "status_code"}).first?.value;
-                    let errorMessage = query.filter({$0.name == "error_message"}).first?.value;
-                    authorizationError = AuthorizationError(type: .configurationError, errorDescription: errorDescription, statusCode: statusCode, errorMessage: errorMessage)
-                case "server_error":
-                    authorizationError = AuthorizationError(type: .serverError, errorDescription: errorDescription)
-                case "user_manually_returned_to_application", "user_cancelled":
-                    authorizationError = AuthorizationError(type: .userExitedFlow, errorDescription: errorDescription)
-                default:
-                    authorizationError = AuthorizationError(type: .unknownError, errorDescription: errorDescription)
-            }
-            return self.completionHandler(nil, queryState, nil, nil, authorizationError)
-        }
-
-        let virtualKeyUrl = query.first(where: { $0.name == "virtual_key_url" })?.value
-        let userId = query.filter({$0.name == "user_id"}).first?.value
-
-        guard let code = query.filter({$0.name == "code"}).first?.value else {
-            let authorizationError = AuthorizationError(type: .missingAuthCode, errorDescription: nil, vehicleInfo: nil)
-            return self.completionHandler(nil, queryState, nil, nil, authorizationError)
-        }
-
-        return self.completionHandler(code, queryState, virtualKeyUrl, userId, nil)
+    /**
+    Receives the result of a redirect-less Smartcar Connect flow delivered over the
+    `complete` JSON-RPC message, and invokes the completion function the same way
+    `handleCallback` does for the redirect-based flow.
+    - parameters:
+        - params: the parsed `complete` RPC params
+    */
+    public func receiveDirectResult(params: CompleteParams) {
+        buildAndDeliverResponse(
+            code: params.code,
+            state: params.state,
+            virtualKeyUrl: params.virtualKeyUrl,
+            userId: params.userId,
+            externalId: params.externalId,
+            error: params.error,
+            errorDescription: params.errorDescription,
+            statusCode: nil,
+            errorMessage: nil,
+            vin: params.vin,
+            make: params.make
+        )
     }
 
 }

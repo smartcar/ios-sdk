@@ -20,6 +20,7 @@ class SmartcarAuthTests: XCTestCase {
     let vin = "12345678901234"
     let code = UUID().uuidString
     let userId = UUID().uuidString
+    let externalId = UUID().uuidString
     let virtualKeyUrl = "https://www.tesla.com/_ak/smartcar.com"
 
     func completion(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
@@ -44,7 +45,7 @@ class SmartcarAuthTests: XCTestCase {
 
     func testSmartcarAuthGenerateAuthUrlNoScope() {
         let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, completionHandler: completion(code:state:virtualKeyUrl:userId:err:))
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri
 
         let builder = smartcar.authUrlBuilder()
         let authUrl = builder.build();
@@ -363,6 +364,99 @@ class SmartcarAuthTests: XCTestCase {
         let url = URL(string: urlString)!
 
         smartcar.handleCallback(callbackUrl: url)
+    }
+
+    func testHandleCallbackDropsExternalIdForDeprecatedApplicationIdInit() {
+        let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, err in
+            expect(code).to(equal(self.code))
+            expect(userId).to(equal(self.userId))
+            expect(err).to(beNil())
+        })
+
+        let urlString = redirectUri + "?code=" + code + "&user_id=" + userId + "&external_id=" + externalId
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+
+    func testHandleCallbackDropsUserIdAndExternalIdForClientIdInit() {
+        let smartcar = SmartcarAuth(clientId: clientId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, err in
+            expect(code).to(equal(self.code))
+            expect(state).to(beNil())
+            expect(virtualKeyUrl).to(beNil())
+            expect(err).to(beNil())
+        })
+
+        let urlString = redirectUri + "?code=" + code + "&user_id=" + userId + "&external_id=" + externalId
+
+        let url = URL(string: urlString)!
+
+        smartcar.handleCallback(callbackUrl: url)
+    }
+
+    func testReceiveDirectResultSuccess() {
+        let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, externalId, err in
+            expect(code).to(equal(self.code))
+            expect(state).to(equal(self.state))
+            expect(virtualKeyUrl).to(equal(self.virtualKeyUrl))
+            expect(userId).to(equal(self.userId))
+            expect(externalId).to(equal(self.externalId))
+            expect(err).to(beNil())
+        })
+
+        smartcar.receiveDirectResult(params: CompleteParams(
+            code: code,
+            userId: userId,
+            externalId: externalId,
+            state: state,
+            virtualKeyUrl: virtualKeyUrl
+        ))
+    }
+
+    func testReceiveDirectResultError() {
+        let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, externalId, err in
+            expect(code).to(beNil())
+            expect(externalId).to(equal(self.externalId))
+
+            expect(err?.errorDescription).to(equal("User denied access to the requested scope of permissions."))
+            expect(err?.type).to(equal(.accessDenied))
+            expect(err?.vehicleInfo).to(beNil())
+        })
+
+        smartcar.receiveDirectResult(params: CompleteParams(
+            externalId: externalId,
+            error: "access_denied",
+            errorDescription: "User denied access to the requested scope of permissions."
+        ))
+    }
+
+    func testReceiveDirectResultErrorWithVehicle() {
+        let smartcar = SmartcarAuth(applicationId: applicationId, redirectUri: redirectUri, scope: scope, completionHandler: { code, state, virtualKeyUrl, userId, externalId, err in
+            expect(code).to(beNil())
+
+            expect(err?.errorDescription).to(equal("The user's vehicle is not compatible."))
+            expect(err?.type).to(equal(.vehicleIncompatible))
+            expect(err?.vehicleInfo?.make).to(equal(self.make))
+            expect(err?.vehicleInfo?.vin).to(equal(self.vin))
+        })
+
+        smartcar.receiveDirectResult(params: CompleteParams(
+            error: "vehicle_incompatible",
+            errorDescription: "The user's vehicle is not compatible.",
+            vin: vin,
+            make: make
+        ))
+    }
+
+    func testReceiveDirectResultResponseTypeNoneSuccessWithoutCode() {
+        let smartcar = SmartcarAuth(applicationId: applicationId, responseType: "none", completionHandler: { code, state, virtualKeyUrl, userId, externalId, err in
+            expect(code).to(beNil())
+            expect(externalId).to(equal(self.externalId))
+            expect(err).to(beNil())
+        })
+
+        smartcar.receiveDirectResult(params: CompleteParams(externalId: externalId))
     }
 
     func testLaunchAuthFlow() {

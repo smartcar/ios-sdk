@@ -39,14 +39,18 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
 
     private weak var webView: WKWebView?
     private var session: Session?
+    private var onComplete: ((CompleteParams) -> Void)!
 
     /**
      Creates an instance of `OAuthCapture` which:
        - Sets up the JS injection (`window.SmartcarSDK.sendMessage`) in the provided WKWebView.
        - Registers itself as the script message handler named "SmartcarSDK".
+     - parameters:
+        - onComplete: Callback invoked when Connect sends a `complete` RPC message (redirect-less flow completion).
      */
-    public init(webView: WKWebView) {
+    public init(webView: WKWebView, onComplete: @escaping (CompleteParams) -> Void) {
         self.webView = webView
+        self.onComplete = onComplete
         super.init()
 
         // Add the message handler so we can receive `window.webkit.messageHandlers.SmartcarSDK.postMessage(...)`
@@ -60,20 +64,41 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
      Required delegate function to handle messages posted from JavaScript code
      (`SmartcarSDK.sendMessage`).
 
-     This will:
-      - Parse the JSON-RPC request from JS.
-      - Start the OEM login flow using ASWebAuthenticationSession.
+     Dispatches by JSON-RPC `method`:
+      - `complete`: a redirect-less Connect flow finished; hand the result to `onComplete` and ack.
+      - `oauth`: start the OEM login flow using ASWebAuthenticationSession.
+      - anything else is dropped, matching the existing `try?`-swallows-decode-errors behavior.
      */
     public func userContentController(_ userContentController: WKUserContentController,
                                       didReceive message: WKScriptMessage) {
 
         guard let bodyString = message.body as? String,
-              let rpcObjectData = bodyString.data(using: .utf8),
-              let rpcObject = try? JSONDecoder().decode(RPCRequestObject.self, from: rpcObjectData)
+              let rpcData = bodyString.data(using: .utf8),
+              let envelope = try? JSONDecoder().decode(RPCMethodEnvelope.self, from: rpcData)
         else {
             return
         }
 
+        switch envelope.method {
+        case "complete":
+            guard let request = try? JSONDecoder().decode(CompleteRequestObject.self, from: rpcData) else { return }
+            onComplete(request.params)
+            sendCompleteAck()
+
+        case "oauth":
+            guard let rpcObject = try? JSONDecoder().decode(RPCRequestObject.self, from: rpcData) else { return }
+            startOAuthCapture(rpcObject)
+
+        default:
+            break
+        }
+    }
+
+    /**
+     Starts the OEM login flow for the given `oauth` RPC request using an
+     ASWebAuthenticationSession.
+     */
+    private func startOAuthCapture(_ rpcObject: RPCRequestObject) {
         // OEM authorize URL
         guard let authorizeURL = URL(string: rpcObject.params.authorizeURL),
               let interceptPrefixURL = URL(string: rpcObject.params.interceptPrefix)
@@ -96,6 +121,20 @@ public class OAuthCapture: NSObject, WKScriptMessageHandler {
 
         self.session = authSession
         self.session?.start()
+    }
+
+    /**
+     Sends a JSON-RPC acknowledgement back to Connect confirming the `complete`
+     message was received.
+     */
+    private func sendCompleteAck() {
+        let response = CompleteResponse(result: CompleteResult())
+        if let data = try? JSONEncoder().encode(response), let webView = self.webView {
+            webView.evaluateJavaScript(
+                getOauthCaptureCompletionJavascript(jsonRPCResponseData: data),
+                completionHandler: nil
+            )
+        }
     }
 
     /**
