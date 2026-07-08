@@ -21,9 +21,9 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          SmartcarAuth 6.3.1 Docs
+          SmartcarAuth 6.4.0 Docs
         </a>
-         (59% documented)
+         (51% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -84,6 +84,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/SCMode.html">SCMode</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/SmartcarAuthVersion.html">SmartcarAuthVersion</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -97,6 +100,14 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Functions.html#/s:12SmartcarAuth23injectSdkShimJavascript7webView11channelNameySo05WKWebH0C_SStF">injectSdkShimJavascript(webView:channelName:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CompleteParams.html">CompleteParams</a>
               </li>
             </ul>
           </li>
@@ -128,9 +139,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuthAAC13applicationId11redirectUri5scope17completionHandler4modeABSS_SSSaySSGSgySSSg_A3jA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(applicationId:redirectUri:scope:completionHandler:mode:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuthAAC13applicationId11redirectUri5scope17completionHandler4modeABSS_SSSaySSGSgySSSg_A3jA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc">init(applicationId:<wbr>redirectUri:<wbr>scope:<wbr>completionHandler:<wbr>mode:<wbr>)</a>
+                    <a name="/s:12SmartcarAuthAAC13applicationId11redirectUri5scope12responseType17completionHandler4modeABSS_SSSgSaySSGSgSSyAI_A4iA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuthAAC13applicationId11redirectUri5scope12responseType17completionHandler4modeABSS_SSSgSaySSGSgSSyAI_A4iA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc">init(applicationId:<wbr>redirectUri:<wbr>scope:<wbr>responseType:<wbr>completionHandler:<wbr>mode:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -146,6 +157,120 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">applicationId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">redirectUri</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">responseType</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"code"</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">?,</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt"><a href="../Classes/AuthorizationError.html">AuthorizationError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
+    <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/SCMode.html">SCMode</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>applicationId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The application&rsquo;s application ID</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redirectUri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional. The application&rsquo;s redirect URI. Required when <code>responseType</code> is <code>&quot;code&quot;</code>. If required but not specified, uses default set in the Smartcar developer dashboard</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>scope</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional. An array of authorization scopes. If not specified, fall backs to defaults set in the Smartcar developer dashboard.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional, determines whether Connect completes the flow via redirect (<code>&quot;code&quot;</code>) or via the <code>complete</code> RPC (<code>&quot;none&quot;</code>). Defaults to <code>&quot;code&quot;</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback function called upon the completion of the Smartcar Connect</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional, determine what mode Smartcar Connect should be launched in. Should be one of .test, .live or .simulated. If none specified, defaults to live mode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SmartcarAuthAAC13applicationId11redirectUri5scope17completionHandler4modeABSS_SSSaySSGSgySSSg_A3jA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(applicationId:redirectUri:scope:completionHandler:mode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuthAAC13applicationId11redirectUri5scope17completionHandler4modeABSS_SSSaySSGSgySSSg_A3jA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc">init(applicationId:<wbr>redirectUri:<wbr>scope:<wbr>completionHandler:<wbr>mode:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deprecated. Use <code><a href="../Classes/SmartcarAuth.html#/s:12SmartcarAuthAAC13applicationId11redirectUri5scope12responseType17completionHandler4modeABSS_SSSgSaySSGSgSSyAI_A4iA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc">init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)</a></code> instead.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"init(applicationId:redirectUri:scope:responseType:completionHandler:mode:﹚"</span><span class="p">)</span>
+<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">applicationId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">redirectUri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -179,7 +304,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Optional. The application&rsquo;s redirect URI. If not specified, uses default set in the Smartcar developer dashboard.</p>
+                                  <p>The application&rsquo;s redirect URI. Must be a valid URI.</p>
                                 </div>
                               </td>
                             </tr>
@@ -238,14 +363,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Deprecated. Use <code><a href="../Classes/SmartcarAuth.html#/s:12SmartcarAuthAAC13applicationId11redirectUri5scope17completionHandler4modeABSS_SSSaySSGSgySSSg_A3jA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc">init(applicationId:redirectUri:scope:completionHandler:mode:)</a></code> instead.</p>
+                        <p>Deprecated. Use <code><a href="../Classes/SmartcarAuth.html#/s:12SmartcarAuthAAC13applicationId11redirectUri5scope12responseType17completionHandler4modeABSS_SSSgSaySSGSgSSyAI_A4iA18AuthorizationErrorCSgtcAA6SCModeOSgtcfc">init(applicationId:redirectUri:scope:responseType:completionHandler:mode:)</a></code> instead.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"init(applicationId:redirectUri:scope:completionHandler:mode:﹚"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"init(applicationId:redirectUri:scope:responseType:completionHandler:mode:﹚"</span><span class="p">)</span>
 <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">clientId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">redirectUri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
@@ -471,6 +596,54 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SmartcarAuthAAC19receiveDirectResult6paramsyAA14CompleteParamsV_tF"></a>
+                    <a name="//apple_ref/swift/Method/receiveDirectResult(params:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuthAAC19receiveDirectResult6paramsyAA14CompleteParamsV_tF">receiveDirectResult(params:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Receives the result of a redirect-less Smartcar Connect flow delivered over the
+<code>complete</code> JSON-RPC message, and invokes the completion function the same way
+<code>handleCallback</code> does for the redirect-based flow.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">receiveDirectResult</span><span class="p">(</span><span class="nv">params</span><span class="p">:</span> <span class="kt"><a href="../Structs/CompleteParams.html">CompleteParams</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>params</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the parsed <code>complete</code> RPC params</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -479,7 +652,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-04-27)</p>
+      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-07-08)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SCMode Enumeration Reference</title>
+    <title>SmartcarAuthVersion Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Enum/SCMode" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/SmartcarAuthVersion" class="dashAnchor"></a>
 
-    <a title="SCMode Enumeration Reference"></a>
+    <a title="SmartcarAuthVersion Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -46,7 +46,7 @@
       <img class="carat" src="../img/carat.png" alt=""/>
       <a class="breadcrumb" href="../Enums.html">Enumerations</a>
       <img class="carat" src="../img/carat.png" alt=""/>
-      SCMode Enumeration Reference
+      SmartcarAuthVersion Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -117,21 +117,17 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>SCMode</h1>
+            <h1>SmartcarAuthVersion</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SCMode</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SmartcarAuthVersion</span></code></pre>
 
                 </div>
               </div>
-            <p>Enum to be used with the <code>mode</code> parameter for SmartcarAuth to determine which mode Connect will launch in</p>
-
-<ul>
-<li>live: Allows users to login with a real connected services account</li>
-<li>test: Allows users to connect to test vehicles using any credentials</li>
-<li>simulated: Allows users to connect to simulated vehicles created on the Smartcar developer dashboard</li>
-</ul>
+            <p>The current version of the SmartcarAuth SDK, sent as the <code>sdk_version</code> query
+parameter on the Connect authorization URL. Kept in sync with
+<code>SmartcarAuth.podspec</code>&lsquo;s <code>s.version</code> by <code>testVersionMatchesPodspec</code>.</p>
 
           </div>
         </section>
@@ -143,9 +139,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SmartcarAuth6SCModeO4liveyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/live" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth6SCModeO4liveyA2CmF">live</a>
+                    <a name="/s:12SmartcarAuth0aB7VersionO7currentSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/current" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuth0aB7VersionO7currentSSvpZ">current</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -160,61 +156,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">live</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SmartcarAuth6SCModeO4testyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/test" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth6SCModeO4testyA2CmF">test</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">test</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SmartcarAuth6SCModeO9simulatedyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/simulated" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SmartcarAuth6SCModeO9simulatedyA2CmF">simulated</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">simulated</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">current</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>

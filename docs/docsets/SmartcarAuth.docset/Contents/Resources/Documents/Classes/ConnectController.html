@@ -21,9 +21,9 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          SmartcarAuth 6.3.1 Docs
+          SmartcarAuth 6.4.0 Docs
         </a>
-         (59% documented)
+         (51% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -84,6 +84,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/SCMode.html">SCMode</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/SmartcarAuthVersion.html">SmartcarAuthVersion</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -97,6 +100,14 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Functions.html#/s:12SmartcarAuth23injectSdkShimJavascript7webView11channelNameySo05WKWebH0C_SStF">injectSdkShimJavascript(webView:channelName:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CompleteParams.html">CompleteParams</a>
               </li>
             </ul>
           </li>
@@ -162,9 +173,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(im)initWithAuthUrl:redirectUriHost:handleCallback:"></a>
-                    <a name="//apple_ref/swift/Method/init(authUrl:redirectUriHost:handleCallback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(im)initWithAuthUrl:redirectUriHost:handleCallback:">init(authUrl:<wbr>redirectUriHost:<wbr>handleCallback:<wbr>)</a>
+                    <a name="/s:12SmartcarAuth17ConnectControllerC7authUrl15redirectUriHost14handleCallback16onCompleteResultAC10Foundation3URLV_SSSgyAJcyAA0M6ParamsVctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(authUrl:redirectUriHost:handleCallback:onCompleteResult:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SmartcarAuth17ConnectControllerC7authUrl15redirectUriHost14handleCallback16onCompleteResultAC10Foundation3URLV_SSSgyAJcyAA0M6ParamsVctcfc">init(authUrl:<wbr>redirectUriHost:<wbr>handleCallback:<wbr>onCompleteResult:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -181,8 +192,9 @@
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
 <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">authUrl</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-            <span class="nv">redirectUriHost</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-            <span class="nv">handleCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+            <span class="nv">redirectUriHost</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
+            <span class="nv">handleCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
+            <span class="nv">onCompleteResult</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/CompleteParams.html">CompleteParams</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">})</span></code></pre>
 
                         </div>
                       </div>
@@ -210,7 +222,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Host of the redirect URI that was passed to SmartcarAuth.</p>
+                                  <p>Host of the redirect URI that was passed to SmartcarAuth. <code>nil</code> when the flow was configured without a redirect URI (<code>responseType == &quot;none&quot;</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -223,6 +235,18 @@
                               <td>
                                 <div>
                                   <p>Callback function that is invoked upon redirect back to the application.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onCompleteResult</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback function that is invoked when Connect signals flow completion via the <code>complete</code> RPC instead of a redirect.</p>
                                 </div>
                               </td>
                             </tr>
@@ -328,7 +352,7 @@ call the <code>handleCallback</code> and remove the webView from the view.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-04-27)</p>
+      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-07-08)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

@@ -112,7 +112,7 @@ pod install
 
 ### Regenerating API docs
 
-The SDK reference site in `docs/` is generated with Jazzy.
+The SDK reference site in `docs/` is generated with Jazzy, which builds the project via `xcodebuild` under the hood. Make sure you've completed the setup steps above (submodules initialized, `generateDummyFramework`, `pod install`) before running this — otherwise the build will fail with errors like a missing `Pods-SmartcarAuth.xcconfig` or a missing `SmartcarSDKShared` podspec.
 
 ```
 gem install jazzy
