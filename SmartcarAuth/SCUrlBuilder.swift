@@ -205,6 +205,8 @@ import Foundation
     }
     
     /**
+     Deprecated, please use `setExternalId(externalId:)` instead.
+
      Specify a unique identifier for the vehicle owner to track and aggregate analytics across Connect sessions for each vehicle owner
 
     - parameters:
@@ -212,9 +214,25 @@ import Foundation
     - returns:
         A reference to this object
     */
+    @available(*, deprecated, renamed: "setExternalId(externalId:)")
     public func setUser(user: String) -> SCUrlBuilder {
         if (!user.isEmpty) {
             self.queryItems.append(URLQueryItem(name: "user", value: user))
+        }
+        return self
+    }
+
+    /**
+     Specify a unique identifier for the vehicle owner to track and aggregate analytics across Connect sessions for each vehicle owner, look up connections, and receive in webhook payloads.
+
+    - parameters:
+      - externalId An optional developer-defined unique identifier for a vehicle owner.
+    - returns:
+        A reference to this object
+    */
+    public func setExternalId(externalId: String) -> SCUrlBuilder {
+        if (!externalId.isEmpty) {
+            self.queryItems.append(URLQueryItem(name: "external_id", value: externalId))
         }
         return self
     }

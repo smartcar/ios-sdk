@@ -28,5 +28,5 @@ import Foundation
  `SmartcarAuth.podspec`'s `s.version` by `testVersionMatchesPodspec`.
  */
 public enum SmartcarAuthVersion {
-    public static let current = "6.4.0"
+    public static let current = "6.5.0"
 }
