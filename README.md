@@ -65,8 +65,8 @@ Then, initiate the SmartcarAuth object in the UIViewController.
 ```swift
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-func completionHandler(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, err: AuthorizationError?) -> Void {
- // Receive authorization code
+func completionHandler(code: String?, state: String?, virtualKeyUrl: String?, userId: String?, externalId: String?, err: AuthorizationError?) -> Void {
+    // Exchange code for access token or use userId with M2M access token.
 }
 
 appDelegate.smartcar = SmartcarAuth(
@@ -84,6 +84,21 @@ let authUrl = smartcar.authUrlBuilder().build()
 smartcar.launchAuthFlow(url: authUrl, viewController: viewController)
 ```
 
+## Completing the flow without a redirect
+
+By default (`responseType: "code"`), Connect finishes the flow by redirecting to your redirect URI with an authorization code. If your application doesn't need an authorization code — for example, if you're using M2M tokens — you can pass `responseType: "none"` and omit the redirect URI. Connect then delivers the result (including any error, `state`, and `externalId`) directly to your completion handler when the flow finishes, with `code` set to `nil`.
+
+```swift
+appDelegate.smartcar = SmartcarAuth(
+  applicationId: "afb0b7d3-807f-4c61-9b04-352e91fe3134",
+  scope: ["read_vin", "read_vehicle_info", "read_odometer"],
+  responseType: "none",
+  completionHandler: completionHandler
+)
+```
+
+Note: `redirectUri` is required when `responseType` is `"code"` (the default).
+
 ## Bluetooth Support
 To support OEMs that utilize Bluetooth pairing, you'll need to add an entry to Info.plist with a string value explaining to the user why your app needs Bluetooth access.
 ```
@@ -94,6 +109,8 @@ To support OEMs that utilize Bluetooth pairing, you'll need to add an entry to I
 ## Handling the Redirect
 
 For iOS 13 and above, the callback URL with the authentication code (or error) is automatically passed to the completion handler and no further action to intercept the callback is required.
+
+When using `responseType: "none"`, there is no redirect — the completion handler is invoked directly when Connect signals that the flow is complete.
 
 ## SDK Reference
 
