@@ -28,6 +28,8 @@ import Foundation
     private var components: URLComponents
     private var queryItems: [URLQueryItem] = []
 
+    private static let validResponseTypes = ["code", "none"]
+
     /**
     Constructor for SCUrlBuilder. Represents the minimum requirements for an authorization URL.
     - parameters:
@@ -35,8 +37,14 @@ import Foundation
         - redirectUri: Optional. The application's redirect URI. If not specified, uses default set in the Smartcar developer dashboard.
         - scope: Optional. An array of authorization scopes. If not specified, fall backs to defaults set in the Smartcar developer dashboard.
         - mode: Optional, determine what mode Smartcar Connect should be launched in. Should be one of test, live or simulated. If none specified, defaults to live mode.
+        - responseType: Optional, determines whether Connect completes the flow via redirect (`"code"`) or via the `complete` RPC (`"none"`). Defaults to `"code"`.
     */
-    public init(applicationId: String, redirectUri: String? = nil, scope: [String] = [], mode: SCMode? = nil) {
+    public init(applicationId: String, redirectUri: String? = nil, scope: [String] = [], mode: SCMode? = nil, responseType: String = "code") {
+        precondition(
+            SCUrlBuilder.validResponseTypes.contains(responseType),
+            "responseType must be one of: \(SCUrlBuilder.validResponseTypes.joined(separator: ", "))"
+        )
+
         self.components = URLComponents()
         self.components.scheme = "https"
         self.components.host = "connect.smartcar.com"
@@ -46,9 +54,10 @@ import Foundation
 
         self.queryItems.append(contentsOf: [
             URLQueryItem(name: "application_id", value: applicationId),
-            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "response_type", value: responseType),
             URLQueryItem(name: "mode", value: connectMode),
-            URLQueryItem(name: "sdk_platform", value: "iOS")
+            URLQueryItem(name: "sdk_platform", value: "iOS"),
+            URLQueryItem(name: "sdk_version", value: SmartcarAuthVersion.current)
         ])
 
         if let redirectUri = redirectUri?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {

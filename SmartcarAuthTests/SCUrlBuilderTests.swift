@@ -32,7 +32,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderBaseUrlApplicationId() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
 
         let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope).build()
 
@@ -40,7 +40,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderBaseUrlApplicationIdNoScope() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri
 
         let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri).build()
 
@@ -48,7 +48,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderBaseUrlApplicationIdWithoutRedirectUri() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&scope=read_vehicle_info%20read_odometer"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&scope=read_vehicle_info%20read_odometer"
 
         let baseUrl = SCUrlBuilder(applicationId: applicationId, scope: scope).build()
 
@@ -56,7 +56,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderBaseUrlApplicationIdModeTest() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=test&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=test&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
 
         let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, mode: .test).build()
 
@@ -64,7 +64,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderBaseUrlApplicationIdModeSimulated() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=simulated&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=simulated&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
 
         let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, mode: .simulated).build()
 
@@ -72,7 +72,7 @@ class SCUrlBuilderTests: XCTestCase {
     }
 
     func testSCUrlBuilderSetAllSupportedParametersApplicationId() {
-        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=simulated&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption&user=a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=simulated&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&state=" + state + "&approval_prompt=force&make=TESLA&single_select=true&single_select_vin=12345678901234567&flags=country:DE%20flag:suboption&user=a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
 
         let builtUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, mode: .simulated)
             .setState(state: state)
@@ -86,6 +86,23 @@ class SCUrlBuilderTests: XCTestCase {
 
         expect(builtUrl).to(equal(expectedUrl))
     }
+
+    func testSCUrlBuilderResponseTypeNoneWithRedirectUri() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=none&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope, responseType: "none").build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderResponseTypeNoneWithoutRedirectUri() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=none&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&scope=read_vehicle_info%20read_odometer"
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, scope: scope, responseType: "none").build()
+
+        expect(baseUrl).to(equal(expectedUrl))
+    }
+
 
     func testSCUrlBuilderBaseUrl() {
         let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer"
