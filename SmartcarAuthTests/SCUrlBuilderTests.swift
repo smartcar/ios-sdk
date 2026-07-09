@@ -22,6 +22,7 @@ class SCUrlBuilderTests: XCTestCase {
     var testMode = false
     var connectMode = SCMode.live
     let user = "a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
+    let externalId = "a60d61bb-3f7b-49bd-b7ec-bf1d87db0e47"
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -85,6 +86,16 @@ class SCUrlBuilderTests: XCTestCase {
             .build()
 
         expect(builtUrl).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderSetExternalIdApplicationId() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?application_id=" + applicationId + "&response_type=code&mode=live&sdk_platform=iOS&sdk_version=" + SmartcarAuthVersion.current + "&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&external_id=" + externalId
+
+        let baseUrl = SCUrlBuilder(applicationId: applicationId, redirectUri: redirectUri, scope: scope)
+            .setExternalId(externalId: externalId)
+            .build()
+
+        expect(baseUrl).to(equal(expectedUrl))
     }
 
     func testSCUrlBuilderResponseTypeNoneWithRedirectUri() {
@@ -251,6 +262,16 @@ class SCUrlBuilderTests: XCTestCase {
 
         let urlWithState = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope)
             .setUser(user: user)
+            .build()
+
+        expect(urlWithState).to(equal(expectedUrl))
+    }
+
+    func testSCUrlBuilderSetExternalId() {
+        let expectedUrl = "https://connect.smartcar.com/oauth/authorize?client_id=" + clientId + "&response_type=code&mode=live&sdk_platform=iOS&redirect_uri=" + redirectUri + "&scope=read_vehicle_info%20read_odometer&external_id=" + externalId
+
+        let urlWithState = SCUrlBuilder(clientId: clientId, redirectUri: redirectUri, scope: scope)
+            .setExternalId(externalId: externalId)
             .build()
 
         expect(urlWithState).to(equal(expectedUrl))

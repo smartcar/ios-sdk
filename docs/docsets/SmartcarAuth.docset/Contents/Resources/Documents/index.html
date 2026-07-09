@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           SmartcarAuth 6.4.0 Docs
         </a>
-         (51% documented)
+         (52% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -172,8 +172,8 @@ If you manage your dependencies manually using Package.swift, add the following:
 <p>Then, initiate the SmartcarAuth object in the UIViewController.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">appDelegate</span> <span class="o">=</span> <span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="k">as!</span> <span class="kt">AppDelegate</span>
 
-<span class="kd">func</span> <span class="nf">completionHandler</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">virtualKeyUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">userId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">err</span><span class="p">:</span> <span class="kt">AuthorizationError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
- <span class="c1">// Receive authorization code</span>
+<span class="kd">func</span> <span class="nf">completionHandler</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">virtualKeyUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">userId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">externalId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">err</span><span class="p">:</span> <span class="kt">AuthorizationError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+    <span class="c1">// Exchange code for access token or use userId with M2M access token.</span>
 <span class="p">}</span>
 
 <span class="n">appDelegate</span><span class="o">.</span><span class="n">smartcar</span> <span class="o">=</span> <span class="kt">SmartcarAuth</span><span class="p">(</span>
@@ -190,6 +190,18 @@ If you manage your dependencies manually using Package.swift, add the following:
 <span class="c1">// Pass in the generated Connect URL and a UIViewController</span>
 <span class="n">smartcar</span><span class="o">.</span><span class="nf">launchAuthFlow</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">authUrl</span><span class="p">,</span> <span class="nv">viewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
 </code></pre>
+<h2 id='completing-the-flow-without-a-redirect' class='heading'>Completing the flow without a redirect</h2>
+
+<p>By default (<code>responseType: &quot;code&quot;</code>), Connect finishes the flow by redirecting to your redirect URI with an authorization code. If your application doesn&rsquo;t need an authorization code — for example, if you&rsquo;re using M2M tokens — you can pass <code>responseType: &quot;none&quot;</code> and omit the redirect URI. Connect then delivers the result (including any error, <code>state</code>, and <code>externalId</code>) directly to your completion handler when the flow finishes, with <code>code</code> set to <code>nil</code>.</p>
+<pre class="highlight swift"><code><span class="n">appDelegate</span><span class="o">.</span><span class="n">smartcar</span> <span class="o">=</span> <span class="kt">SmartcarAuth</span><span class="p">(</span>
+  <span class="nv">applicationId</span><span class="p">:</span> <span class="s">"afb0b7d3-807f-4c61-9b04-352e91fe3134"</span><span class="p">,</span>
+  <span class="nv">scope</span><span class="p">:</span> <span class="p">[</span><span class="s">"read_vin"</span><span class="p">,</span> <span class="s">"read_vehicle_info"</span><span class="p">,</span> <span class="s">"read_odometer"</span><span class="p">],</span>
+  <span class="nv">responseType</span><span class="p">:</span> <span class="s">"none"</span><span class="p">,</span>
+  <span class="nv">completionHandler</span><span class="p">:</span> <span class="n">completionHandler</span>
+<span class="p">)</span>
+</code></pre>
+
+<p>Note: <code>redirectUri</code> is required when <code>responseType</code> is <code>&quot;code&quot;</code> (the default).</p>
 <h2 id='bluetooth-support' class='heading'>Bluetooth Support</h2>
 
 <p>To support OEMs that utilize Bluetooth pairing, you&rsquo;ll need to add an entry to Info.plist with a string value explaining to the user why your app needs Bluetooth access.</p>
@@ -199,6 +211,8 @@ If you manage your dependencies manually using Package.swift, add the following:
 <h2 id='handling-the-redirect' class='heading'>Handling the Redirect</h2>
 
 <p>For iOS 13 and above, the callback URL with the authentication code (or error) is automatically passed to the completion handler and no further action to intercept the callback is required.</p>
+
+<p>When using <code>responseType: &quot;none&quot;</code>, there is no redirect — the completion handler is invoked directly when Connect signals that the flow is complete.</p>
 <h2 id='sdk-reference' class='heading'>SDK Reference</h2>
 
 <p>For detailed documentation on parameters and available methods, please refer to
@@ -213,7 +227,7 @@ pod install
 </code></pre>
 <h3 id='regenerating-api-docs' class='heading'>Regenerating API docs</h3>
 
-<p>The SDK reference site in <code>docs/</code> is generated with Jazzy.</p>
+<p>The SDK reference site in <code>docs/</code> is generated with Jazzy, which builds the project via <code>xcodebuild</code> under the hood. Make sure you&rsquo;ve completed the setup steps above (submodules initialized, <code>generateDummyFramework</code>, <code>pod install</code>) before running this — otherwise the build will fail with errors like a missing <code>Pods-SmartcarAuth.xcconfig</code> or a missing <code>SmartcarSDKShared</code> podspec.</p>
 <pre class="highlight plaintext"><code>gem install jazzy
 ./scripts/generate-docs.sh
 </code></pre>
@@ -237,7 +251,7 @@ pod install
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-07-08)</p>
+      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-07-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
