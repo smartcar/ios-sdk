@@ -27,6 +27,7 @@
 		F8F928AE1E2B2FED009F07E5 /* SmartcarAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */; };
 		AAAAAAAAAAAAAAAAAAAA0002 /* SmartcarAuthVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAAAAAAAAAA0001 /* SmartcarAuthVersion.swift */; };
 		AAAAAAAAAAAAAAAAAAAA0004 /* OAuthCaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAAAAAAAAAA0003 /* OAuthCaptureTests.swift */; };
+		AAAAAAAAAAAAAAAAAAAA0008 /* ConnectControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAAAAAAAAAA0007 /* ConnectControllerTests.swift */; };
 		AAAAAAAAAAAAAAAAAAAA0006 /* SmartcarAuthVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAAAAAAAAAA0005 /* SmartcarAuthVersionTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		F8F928A31E2B2FED009F07E5 /* SmartcarAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartcarAuth.swift; sourceTree = "<group>"; };
 		AAAAAAAAAAAAAAAAAAAA0001 /* SmartcarAuthVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartcarAuthVersion.swift; sourceTree = "<group>"; };
 		AAAAAAAAAAAAAAAAAAAA0003 /* OAuthCaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCaptureTests.swift; sourceTree = "<group>"; };
+		AAAAAAAAAAAAAAAAAAAA0007 /* ConnectControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectControllerTests.swift; sourceTree = "<group>"; };
 		AAAAAAAAAAAAAAAAAAAA0005 /* SmartcarAuthVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartcarAuthVersionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +165,7 @@
 				A6B8653D2374EDE4008BFD7F /* VehicleInfoTests.swift */,
 				A644ADEB238862810036CE46 /* SCUrlBuilderTests.swift */,
 				AAAAAAAAAAAAAAAAAAAA0003 /* OAuthCaptureTests.swift */,
+				AAAAAAAAAAAAAAAAAAAA0007 /* ConnectControllerTests.swift */,
 				AAAAAAAAAAAAAAAAAAAA0005 /* SmartcarAuthVersionTests.swift */,
 			);
 			path = SmartcarAuthTests;
@@ -378,6 +381,7 @@
 				F80C4ABD208E54AE00F8C47F /* SmartcarAuthTests.swift in Sources */,
 				A69F57AB2374EAB9005971D2 /* AuthorizationErrorTests.swift in Sources */,
 				AAAAAAAAAAAAAAAAAAAA0004 /* OAuthCaptureTests.swift in Sources */,
+				AAAAAAAAAAAAAAAAAAAA0008 /* ConnectControllerTests.swift in Sources */,
 				AAAAAAAAAAAAAAAAAAAA0006 /* SmartcarAuthVersionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

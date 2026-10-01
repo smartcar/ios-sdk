@@ -31,9 +31,10 @@ import SmartcarFramework
  - Initializing and presenting the WKWebView.
  - Detecting redirects back to the application (via `webView(_:decidePolicyFor:decisionHandler:)`).
  - Invoking the callback closure when the application redirect is encountered.
+ - Opening new-window (`target="_blank"`) links outside the web view.
  */
 @objcMembers
-public class ConnectController: UIViewController, WKNavigationDelegate {
+public class ConnectController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     public var webView: WKWebView!
 
     private var authUrl: URL
@@ -45,6 +46,10 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
     private var oauthCapture: OAuthCapture?
     private var bleService: SmartcarFramework.BLEService?
 
+    // Opens a URL outside the web view. Overridable so tests can run without a host app.
+    var openExternally: (URL) -> Void = { url in
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
 
     /**
      Initializes the ConnectController.
@@ -83,6 +88,7 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         let webviewConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webviewConfiguration)
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
 
@@ -126,6 +132,8 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
      WKNavigationDelegate method: listens for navigation changes.
      If the navigation is to the redirect URI (matching `redirectUriHost`),
      call the `handleCallback` and remove the webView from the view.
+     If the navigation is a new-window request (`target="_blank"`), open it
+     externally and leave the Connect page in place.
      */
     public func webView(_ webView: WKWebView,
                         decidePolicyFor navigationAction: WKNavigationAction,
@@ -143,6 +151,18 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
               let url = navigationAction.request.url,
               let host = url.host,
               host == redirectUriHost else {
+            // Connect uses target="_blank" links for certain operations (e.g. the Tesla
+            // virtual key "Continue to Tesla" universal link) and expects Connect to remain
+            // active underneath. WKWebView silently drops these without a new web view, so
+            // hand them to the system instead (which opens the OEM app or Safari).
+            if navigationAction.targetFrame == nil,
+               let url = navigationAction.request.url,
+               Self.isExternallyOpenable(url) {
+                openExternally(url)
+                decisionHandler(.cancel)
+                return
+            }
+
             // Allow navigation in all other cases
             decisionHandler(.allow)
             return
@@ -156,6 +176,26 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 
+    /**
+     WKUIDelegate method: called when the page asks for a new window that didn't go through
+     `decidePolicyFor` first (e.g. a user-initiated `window.open()`). There's no second screen
+     to show it in, so open the URL externally and decline to create a web view.
+     */
+    public func webView(_ webView: WKWebView,
+                        createWebViewWith configuration: WKWebViewConfiguration,
+                        for navigationAction: WKNavigationAction,
+                        windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let url = navigationAction.request.url, Self.isExternallyOpenable(url) {
+            openExternally(url)
+        }
+        return nil
+    }
+
+    private static func isExternallyOpenable(_ url: URL) -> Bool {
+        guard let scheme = url.scheme?.lowercased() else { return false }
+        return scheme == "https" || scheme == "http"
+    }
+
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Destroy BLE service
@@ -163,6 +203,7 @@ public class ConnectController: UIViewController, WKNavigationDelegate {
         // Tear down WebView
         webView?.stopLoading()
         webView?.navigationDelegate = nil
+        webView?.uiDelegate = nil
         webView?.configuration.userContentController.removeAllScriptMessageHandlers()
     }
 }
