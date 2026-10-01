@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          SmartcarAuth 6.4.0 Docs
+          SmartcarAuth 6.5.1 Docs
         </a>
          (52% documented)
       </p>
@@ -123,7 +123,7 @@
                   
                   <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
 <span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConnectController</span> <span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span></code></pre>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConnectController</span> <span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span><span class="p">,</span> <span class="kt">WKUIDelegate</span></code></pre>
 
                 </div>
               </div>
@@ -133,6 +133,7 @@
 <li>Initializing and presenting the WKWebView.</li>
 <li>Detecting redirects back to the application (via <code>webView(_:decidePolicyFor:decisionHandler:)</code>).</li>
 <li>Invoking the callback closure when the application redirect is encountered.</li>
+<li>Opening new-window (<code>target=&quot;_blank&quot;</code>) links outside the web view.</li>
 </ul>
 
           </div>
@@ -299,7 +300,9 @@
                       <div class="abstract">
                         <p>WKNavigationDelegate method: listens for navigation changes.
 If the navigation is to the redirect URI (matching <code>redirectUriHost</code>),
-call the <code>handleCallback</code> and remove the webView from the view.</p>
+call the <code>handleCallback</code> and remove the webView from the view.
+If the navigation is a new-window request (<code>target=&quot;_blank&quot;</code>), open it
+externally and leave the Connect page in place.</p>
 
                       </div>
                       <div class="declaration">
@@ -310,6 +313,39 @@ call the <code>handleCallback</code> and remove the webView from the view.</p>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">webView</span><span class="p">(</span><span class="n">_</span> <span class="nv">webView</span><span class="p">:</span> <span class="kt">WKWebView</span><span class="p">,</span>
                     <span class="n">decidePolicyFor</span> <span class="nv">navigationAction</span><span class="p">:</span> <span class="kt">WKNavigationAction</span><span class="p">,</span>
                     <span class="nv">decisionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">WKNavigationActionPolicy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@SmartcarAuth@objc(cs)ConnectController(im)webView:createWebViewWithConfiguration:forNavigationAction:windowFeatures:"></a>
+                    <a name="//apple_ref/swift/Method/webView(_:createWebViewWith:for:windowFeatures:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@SmartcarAuth@objc(cs)ConnectController(im)webView:createWebViewWithConfiguration:forNavigationAction:windowFeatures:">webView(_:<wbr>createWebViewWith:<wbr>for:<wbr>windowFeatures:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>WKUIDelegate method: called when the page asks for a new window that didn&rsquo;t go through
+<code>decidePolicyFor</code> first (e.g. a user-initiated <code>window.open()</code>). There&rsquo;s no second screen
+to show it in, so open the URL externally and decline to create a web view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">webView</span><span class="p">(</span><span class="n">_</span> <span class="nv">webView</span><span class="p">:</span> <span class="kt">WKWebView</span><span class="p">,</span>
+                    <span class="n">createWebViewWith</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt">WKWebViewConfiguration</span><span class="p">,</span>
+                    <span class="k">for</span> <span class="nv">navigationAction</span><span class="p">:</span> <span class="kt">WKNavigationAction</span><span class="p">,</span>
+                    <span class="nv">windowFeatures</span><span class="p">:</span> <span class="kt">WKWindowFeatures</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">WKWebView</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -352,7 +388,7 @@ call the <code>handleCallback</code> and remove the webView from the view.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-07-09)</p>
+      <p>&copy; 2026 <a class="link" href="https://smartcar.com" target="_blank" rel="external noopener">Smartcar</a>. All rights reserved. (Last updated: 2026-10-01)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
